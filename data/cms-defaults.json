@@ -1,0 +1,73 @@
+{
+  "brandName": "Kastriva",
+  "tagline": "INVITATION",
+  "heroEyebrow": "UNTUK HARI YANG TAK TERLUPAKAN",
+  "heroTitle": "Sebuah cerita.\nSatu undangan.",
+  "heroAccent": "Banyak kenangan.",
+  "heroBody": "Undang orang-orang terdekat dengan desain yang mencerminkan cerita Anda. Temukan tema favorit dan rasakan demonya sebelum memesan.",
+  "heroPrimary": "Temukan tema Anda",
+  "heroSecondary": "Coba demo",
+  "aboutTitle": "Undangan yang membawa cerita Anda.",
+  "aboutBody": "Kastriva Invitation membantu Anda menyiapkan undangan pernikahan dengan pilihan desain, editor pribadi, dan preview sebelum diterbitkan.",
+  "featuresTitle": "Personal, dari awal sampai hari istimewa.",
+  "features": [
+    {
+      "title": "Coba sebelum memilih",
+      "body": "Jelajahi demo tanpa akun dan pilih nuansa yang sesuai dengan cerita Anda."
+    },
+    {
+      "title": "Tulis cerita Anda",
+      "body": "Isi pasangan, acara, lokasi, dan galeri dari satu studio editor."
+    },
+    {
+      "title": "Kendalikan publikasi",
+      "body": "Draft tetap privat. Tinjau dan terbitkan setelah verifikasi pembayaran oleh admin."
+    }
+  ],
+  "collectionTitle": "Temukan desain yang terasa seperti Anda.",
+  "collectionBody": "Dari nuansa romantis hingga modern. Buka demo untuk melihat pengalaman undangan.",
+  "stepsTitle": "Dari memilih tema hingga membagikan cerita.",
+  "steps": [
+    {
+      "title": "Coba desainnya",
+      "body": "Buka katalog dan lihat demo interaktif tanpa membuat akun."
+    },
+    {
+      "title": "Isi cerita Anda",
+      "body": "Masuk, pilih tema, dan lengkapi pasangan, waktu, lokasi, serta foto."
+    },
+    {
+      "title": "Tinjau dan terbitkan",
+      "body": "Simpan draft, periksa checkout, dan ajukan verifikasi transfer. Sesudah disetujui, tinjau dan terbitkan undangan."
+    }
+  ],
+  "faqTitle": "Ada yang ingin Anda ketahui?",
+  "faqs": [
+    {
+      "question": "Bisa melihat demo sebelum membeli?",
+      "answer": "Ya. Demo dapat dibuka tanpa login. Data dalam demo bukan data pelanggan."
+    },
+    {
+      "question": "Apakah draft langsung tampil untuk tamu?",
+      "answer": "Tidak. Draft bersifat privat. Pembayaran yang disetujui juga tidak menerbitkan data otomatis; pemilik harus meninjau dan menekan Terbitkan."
+    },
+    {
+      "question": "Bagaimana pembayaran diverifikasi?",
+      "answer": "Pengelola mencocokkan transfer dengan mutasi rekening secara manual. Tombol Saya sudah transfer hanya mengajukan pemeriksaan, bukan bukti lunas."
+    },
+    {
+      "question": "Bagaimana tamu mengisi RSVP?",
+      "answer": "Setelah layanan diaktifkan dan undangan terbit, pemilik menambahkan tamu dan membagikan tautan personal. RSVP pada demo hanya simulasi."
+    }
+  ],
+  "ctaTitle": "Mari mulai dengan tema yang Anda sukai.",
+  "ctaBody": "Jelajahi desainnya. Bayangkan hari istimewanya.",
+  "ctaLabel": "Lihat koleksi tema",
+  "footerText": "Merangkai cerita. Mengundang kebahagiaan.\nUndangan digital dengan sentuhan personal.",
+  "contactEmail": "",
+  "whatsapp": "",
+  "companyUrl": "https://www.kastriva.web.id",
+  "seoTitle": "Kastriva Invitation — Undangan Digital Personal",
+  "seoDescription": "Pilih tema, coba demo tanpa login, dan siapkan undangan pernikahan Anda bersama Kastriva.",
+  "allowIndex": false
+}

@@ -1,0 +1,76 @@
+name: Verify stage 7 fix (not production approval)
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Resolve pinned dependencies (first lock must be reviewed and committed)
+        run: |
+          if [ -f package-lock.json ]; then npm ci --no-fund; else npm install --no-fund; fi
+      - name: Preserve genuinely resolved lockfile for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: package-lock-review-before-commit
+          path: package-lock.json
+      - name: Dependency advisory gate
+        run: npm audit --audit-level=high
+      - name: Install real Chromium
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Isolated demo build and actual browser smoke tests
+        run: npm run verify:release
+      - name: Diagnose local prerequisites after failure
+        if: failure()
+        continue-on-error: true
+        run: npm run diagnose:local
+      - name: Test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-code-browser-evidence
+          path: |
+            .release
+            .diagnostics
+            playwright-report
+            test-results
+  sql-isolated:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: ki_isolated_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ki_local_fixture_only
+        ports:
+          - 55432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d ki_isolated_test"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install psql client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - name: Actual PostgreSQL with minimal auth/storage fixtures (not Supabase HTTP)
+        run: node scripts/test-sql-local.mjs
+        env:
+          KI_SQL_TEST_ALLOW_CREATE: 'yes'
+      - name: SQL evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sql-local-evidence
+          path: .sql-test

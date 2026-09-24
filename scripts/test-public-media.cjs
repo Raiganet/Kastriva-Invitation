@@ -1,0 +1,15 @@
+/* Tests the actual decoder function, not a duplicate implementation. Requires installed sharp/typescript. */
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),ts=require('typescript'),sharp=require('sharp');
+const root=path.resolve(__dirname,'..'),cache=new Map();
+function load(file){file=path.resolve(file);if(cache.has(file))return cache.get(file).exports;const mod={exports:{}};cache.set(file,mod);const out=ts.transpileModule(fs.readFileSync(file,'utf8'),{compilerOptions:{target:ts.ScriptTarget.ES2022,module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText;new Function('require','module','exports',out)(name=>name.startsWith('.')?load(path.resolve(path.dirname(file),name+(path.extname(name)?'':'.ts'))):require(name),mod,mod.exports);return mod.exports;}
+(async()=>{const {renderPublicPhoto}=load(path.join(root,'lib/render-public-photo.ts'));let count=0;const run=async(label,fn)=>{await fn();count++;console.log('PASS '+label);};
+console.log('Node '+process.version+'; sharp '+sharp.versions.sharp+'; TypeScript '+ts.version);
+for(const format of ['jpeg','png','webp'])await run('decode '+format+' -> bounded WebP',async()=>{const raw=await sharp({create:{width:2400,height:1600,channels:3,background:{r:220,g:180,b:160}}})[format]().toBuffer();const out=await renderPublicPhoto(new Uint8Array(raw));const meta=await sharp(out).metadata();assert.equal(meta.format,'webp');assert.equal(meta.width,1600);assert.equal(meta.height,1067);assert.ok(out.length);});
+await run('strip EXIF/ICC metadata',async()=>{const raw=await sharp({create:{width:40,height:60,channels:3,background:'#ffffff'}}).withMetadata({density:300}).jpeg().toBuffer();assert.ok((await sharp(raw).metadata()).exif);const meta=await sharp(await renderPublicPhoto(raw)).metadata();assert.equal(meta.exif,undefined);assert.equal(meta.icc,undefined);});
+await run('small image is not enlarged',async()=>{const raw=await sharp({create:{width:20,height:10,channels:4,background:'#ffffff80'}}).png().toBuffer();const meta=await sharp(await renderPublicPhoto(raw)).metadata();assert.equal(meta.width,20);assert.equal(meta.height,10);});
+await run('reject fake JPEG with matching envelope',async()=>{await assert.rejects(()=>renderPublicPhoto(Uint8Array.from([255,216,255,...Array(100).fill(0)])));});
+await run('reject SVG rather than serving raw markup',async()=>{await assert.rejects(()=>renderPublicPhoto(new TextEncoder().encode('<svg xmlns="http://www.w3.org/2000/svg"/>')));});
+await run('reject file over 5 MB',async()=>{await assert.rejects(()=>renderPublicPhoto(new Uint8Array(5*1024*1024+1)));});
+await run('reject over 25 million decoded pixels',async()=>{const raw=await sharp({create:{width:5001,height:5000,channels:3,background:'#ffffff'}}).png().toBuffer();await assert.rejects(()=>renderPublicPhoto(raw));});
+console.log(JSON.stringify({passed:count,failed:0,limitations:'Binary decoder only; no HTTP/Storage/Next integration. Runtime versions printed above.'}));
+})().catch(e=>{console.error(e);process.exitCode=1;});

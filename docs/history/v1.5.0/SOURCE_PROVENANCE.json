@@ -1,0 +1,9 @@
+{
+  "version": "1.5.0",
+  "basis": "Kastriva-Invitation-Tahap-4-v1.4.0.zip",
+  "basis_sha256": "02fcdc413e062e806e0b085e6d761d8b576ed29264668a7b3890a20a87dfddb5",
+  "work": "Local code upgrade only; no external project changed",
+  "original_audit": "docs/AUDIT_DAN_PERUBAHAN.md",
+  "preserved_migrations": "001\u2013004",
+  "database_imported": false
+}

@@ -1,0 +1,202 @@
+{
+  "basis": "1.7.1",
+  "version": "1.7.2",
+  "changes": [
+    {
+      "path": "CHANGELOG.md",
+      "change": "modified"
+    },
+    {
+      "path": "MULAI_DI_SINI.md",
+      "change": "modified"
+    },
+    {
+      "path": "README.md",
+      "change": "modified"
+    },
+    {
+      "path": "app/api/admin/cms/route.ts",
+      "change": "modified"
+    },
+    {
+      "path": "app/api/admin/commerce/route.ts",
+      "change": "modified"
+    },
+    {
+      "path": "app/api/admin/guestbook/route.ts",
+      "change": "modified"
+    },
+    {
+      "path": "app/api/admin/orders/route.ts",
+      "change": "modified"
+    },
+    {
+      "path": "app/api/health/route.ts",
+      "change": "modified"
+    },
+    {
+      "path": "components/LogoutButton.tsx",
+      "change": "modified"
+    },
+    {
+      "path": "docs/DEPLOY_VERCEL.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/SOURCE_PROVENANCE.json",
+      "change": "modified"
+    },
+    {
+      "path": "docs/TAHAP_7_PERBAIKAN.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/TEST_REPORT.md",
+      "change": "modified"
+    },
+    {
+      "path": "docs/history/TAHAP_7_PERBAIKAN_v1.7.1.md",
+      "change": "added"
+    },
+    {
+      "path": "docs/history/TEST_REPORT_v1.7.1.md",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/baseline-unit.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/build.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/command-results.json",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/diagnose-report.json",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/diagnose.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/environment.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/media-regression.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/npm-install.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/preservation.json",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/release-report.json",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/release.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/security.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/syntax.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/typecheck-full.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/typecheck-subset-files.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/typecheck-subset-initial-harness.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/typecheck-subset.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/unit-first.log",
+      "change": "added"
+    },
+    {
+      "path": "docs/test-results/stage7fix2/unit-tests.log",
+      "change": "added"
+    },
+    {
+      "path": "e2e/public.spec.ts",
+      "change": "modified"
+    },
+    {
+      "path": "lib/auth-result.ts",
+      "change": "added"
+    },
+    {
+      "path": "lib/http.ts",
+      "change": "modified"
+    },
+    {
+      "path": "lib/logout-transport.ts",
+      "change": "added"
+    },
+    {
+      "path": "lib/server-auth.ts",
+      "change": "modified"
+    },
+    {
+      "path": "lib/supabase/client.ts",
+      "change": "modified"
+    },
+    {
+      "path": "lib/supabase/server.ts",
+      "change": "modified"
+    },
+    {
+      "path": "package.json",
+      "change": "modified"
+    },
+    {
+      "path": "proxy.ts",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/release-policy.mjs",
+      "change": "modified"
+    },
+    {
+      "path": "scripts/test-sql-local.mjs",
+      "change": "modified"
+    },
+    {
+      "path": "tests/auth-result.test.ts",
+      "change": "added"
+    },
+    {
+      "path": "tests/logout-transport.test.ts",
+      "change": "added"
+    },
+    {
+      "path": "tests/session-editor-flow.test.ts",
+      "change": "added"
+    },
+    {
+      "path": "tests/stage7.test.ts",
+      "change": "modified"
+    }
+  ]
+}

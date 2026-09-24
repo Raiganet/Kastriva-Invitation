@@ -1,0 +1,98 @@
+{
+  "brandName": [
+    1,
+    40
+  ],
+  "tagline": [
+    1,
+    40
+  ],
+  "heroEyebrow": [
+    1,
+    80
+  ],
+  "heroTitle": [
+    1,
+    160
+  ],
+  "heroAccent": [
+    1,
+    100
+  ],
+  "heroBody": [
+    1,
+    700
+  ],
+  "heroPrimary": [
+    1,
+    50
+  ],
+  "heroSecondary": [
+    1,
+    50
+  ],
+  "aboutTitle": [
+    1,
+    150
+  ],
+  "aboutBody": [
+    1,
+    1200
+  ],
+  "featuresTitle": [
+    1,
+    150
+  ],
+  "collectionTitle": [
+    1,
+    150
+  ],
+  "collectionBody": [
+    1,
+    500
+  ],
+  "stepsTitle": [
+    1,
+    150
+  ],
+  "faqTitle": [
+    1,
+    150
+  ],
+  "ctaTitle": [
+    1,
+    160
+  ],
+  "ctaBody": [
+    1,
+    500
+  ],
+  "ctaLabel": [
+    1,
+    50
+  ],
+  "footerText": [
+    1,
+    600
+  ],
+  "contactEmail": [
+    0,
+    120
+  ],
+  "whatsapp": [
+    0,
+    15
+  ],
+  "companyUrl": [
+    1,
+    200
+  ],
+  "seoTitle": [
+    10,
+    70
+  ],
+  "seoDescription": [
+    20,
+    180
+  ]
+}

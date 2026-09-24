@@ -1,0 +1,15 @@
+# Isolated, disposable local SQL fixture. This is NOT Supabase and stores no real accounts.
+services:
+  postgres:
+    image: postgres:17
+    ports:
+      - "127.0.0.1:55432:5432"
+    environment:
+      POSTGRES_DB: ki_isolated_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ki_local_fixture_only
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ki_isolated_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 20

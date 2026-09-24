@@ -1,0 +1,11 @@
+{
+  "version": "1.7.2",
+  "schema": 7,
+  "date": "2026-09-24",
+  "source": "Kastriva-Invitation-Perbaikan-Tahap-7-v1.7.1.zip",
+  "sourceSha256": "2b35be11bffb03cc3cebd1d40ab67bac93488a296064e774ef7f2f214ad11d29",
+  "sourceModified": false,
+  "databaseMigrated": false,
+  "externallyDeployed": false,
+  "buildVerified": false
+}

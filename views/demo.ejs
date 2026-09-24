@@ -1,0 +1,59 @@
+<%- include('partials/header') %>
+
+<section class="pt-24 pb-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="mb-8">
+      <a href="/templates" class="text-rose-600 hover:underline text-sm">← Kembali ke Template</a>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-10">
+      <div>
+        <span class="text-sm font-medium text-rose-500 bg-rose-50 px-3 py-1 rounded-full capitalize"><%= template.category.replace('-', ' ') %></span>
+        <h1 class="font-serif text-4xl font-bold mt-4 mb-4"><%= template.name %></h1>
+        <p class="text-gray-600 mb-6"><%= template.description %></p>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm mb-6">
+          <h3 class="font-semibold mb-3">Fitur Termasuk:</h3>
+          <div class="grid grid-cols-2 gap-2">
+            <% template.features.forEach(f => { %>
+              <div class="flex items-center gap-2 text-sm">
+                <span class="text-green-500">✓</span> <%= f %>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl p-6 shadow-sm mb-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <span class="text-sm text-gray-400">Harga</span>
+              <div class="text-3xl font-bold text-rose-600">Rp <%= template.price.toLocaleString('id-ID') %></div>
+            </div>
+          </div>
+          <a href="/order/<%= template.slug %>" class="block w-full bg-rose-600 text-white text-center py-4 rounded-xl font-semibold hover:bg-rose-700 transition text-lg">
+            Pesan Template Ini
+          </a>
+          <a href="/preview/<%= template.slug %>" target="_blank" class="block w-full bg-gray-100 text-gray-700 text-center py-3 rounded-xl font-semibold hover:bg-gray-200 transition mt-3">
+            🚀 Buka Preview Full (Simulasi Undangan Asli)
+          </a>
+        </div>
+      </div>
+
+      <div class="flex justify-center">
+        <div class="w-full max-w-sm">
+          <div class="bg-gray-900 rounded-[3rem] p-3 shadow-2xl">
+            <div class="bg-gray-800 rounded-[2.4rem] overflow-hidden">
+              <div class="bg-gray-700 h-6 flex items-center justify-center">
+                <div class="w-20 h-1.5 bg-gray-600 rounded-full"></div>
+              </div>
+              <iframe src="/preview/<%= template.slug %>?to=Nama+Tamu" class="w-full h-[600px] border-0" title="Preview"></iframe>
+            </div>
+          </div>
+          <p class="text-center text-sm text-gray-400 mt-4">Preview dalam frame mobile</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

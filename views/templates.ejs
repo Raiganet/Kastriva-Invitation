@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<section class="pt-24 pb-20">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Koleksi Template</h1>
+      <p class="text-gray-500">Temukan desain sempurna untuk momen spesial Anda</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <a href="/templates" class="px-5 py-2 rounded-full text-sm font-medium transition <%= activeCategory === 'all' ? 'bg-rose-600 text-white' : 'bg-white text-gray-600 hover:bg-rose-50' %>">Semua</a>
+      <% categories.forEach(c => { %>
+        <a href="/templates?category=<%= c %>" class="px-5 py-2 rounded-full text-sm font-medium transition capitalize <%= activeCategory === c ? 'bg-rose-600 text-white' : 'bg-white text-gray-600 hover:bg-rose-50' %>"><%= c.replace('-', ' ') %></a>
+      <% }) %>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <% templates.forEach(t => { %>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition group">
+          <a href="/demo/<%= t.slug %>">
+            <div class="h-52 flex items-center justify-center text-7xl relative overflow-hidden" style="background: linear-gradient(135deg, <%= t.colors %>)">
+              <span class="group-hover:scale-125 transition-transform duration-500"><%= t.thumbnail %></span>
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition flex items-center justify-center">
+                <span class="opacity-0 group-hover:opacity-100 bg-white text-gray-800 px-4 py-2 rounded-full text-sm font-semibold transition">Lihat Demo</span>
+              </div>
+            </div>
+          </a>
+          <div class="p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xs font-medium text-rose-500 bg-rose-50 px-2 py-1 rounded-full capitalize"><%= t.category.replace('-', ' ') %></span>
+            </div>
+            <h3 class="font-semibold text-lg mb-1"><%= t.name %></h3>
+            <p class="text-sm text-gray-500 mb-4 line-clamp-2"><%= t.description %></p>
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs text-gray-400">Mulai dari</span>
+                <div class="font-bold text-rose-600 text-lg">Rp <%= t.price.toLocaleString('id-ID') %></div>
+              </div>
+              <a href="/order/<%= t.slug %>" class="bg-rose-600 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-rose-700 transition">Pesan</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <% if (templates.length === 0) { %>
+      <div class="text-center py-20 text-gray-400">
+        <div class="text-6xl mb-4">🔍</div>
+        <p>Belum ada template untuk kategori ini.</p>
+      </div>
+    <% } %>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

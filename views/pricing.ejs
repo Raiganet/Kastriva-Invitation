@@ -1,0 +1,39 @@
+<%- include('partials/header') %>
+
+<section class="pt-24 pb-20">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h1 class="font-serif text-4xl md:text-5xl font-bold mb-4">Harga Transparan</h1>
+      <p class="text-gray-500">Pilih paket yang sesuai kebutuhan Anda. Tanpa biaya tersembunyi.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      <% const plans = [
+        { name: 'Basic', price: '75K', desc: 'Cocok untuk acara sederhana', features: ['1 Template', 'Countdown Timer', 'RSVP Online', 'Maksimal 200 tamu', 'Aktif 3 bulan'], popular: false },
+        { name: 'Premium', price: '150K', desc: 'Paling populer untuk pernikahan', features: ['Semua Template', 'Countdown + RSVP', 'Galeri Foto', 'Musik Latar', 'Love Story', 'Maksimal 1000 tamu', 'Aktif 1 tahun'], popular: true },
+        { name: 'Ultimate', price: '250K', desc: 'Untuk acara mewah & eksklusif', features: ['Semua Fitur Premium', 'Amplop Digital', 'Custom Domain', 'QR Check-in', 'Fireworks Animation', 'Unlimited tamu', 'Aktif selamanya', 'Priority Support'], popular: false }
+      ] %>
+      <% plans.forEach(p => { %>
+        <div class="bg-white rounded-2xl p-8 shadow-md hover:shadow-xl transition relative <%= p.popular ? 'ring-2 ring-rose-500 scale-105' : '' %>">
+          <% if (p.popular) { %>
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-rose-600 text-white px-4 py-1 rounded-full text-xs font-bold">POPULER</div>
+          <% } %>
+          <h3 class="font-semibold text-lg"><%= p.name %></h3>
+          <p class="text-sm text-gray-500 mb-4"><%= p.desc %></p>
+          <div class="text-4xl font-bold text-rose-600 mb-1">Rp <%= p.price %></div>
+          <p class="text-xs text-gray-400 mb-6">per undangan</p>
+          <ul class="space-y-2 mb-8">
+            <% p.features.forEach(f => { %>
+              <li class="flex items-center gap-2 text-sm"><span class="text-green-500">✓</span> <%= f %></li>
+            <% }) %>
+          </ul>
+          <a href="/templates" class="block w-full text-center py-3 rounded-xl font-semibold transition <%= p.popular ? 'bg-rose-600 text-white hover:bg-rose-700' : 'bg-gray-100 text-gray-700 hover:bg-gray-200' %>">
+            Pilih Paket
+          </a>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

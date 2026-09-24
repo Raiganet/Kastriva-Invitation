@@ -1,0 +1,1 @@
+export default function MissingInvitation(){return <main className="container workspace"><div className="empty-state"><span aria-hidden>✦</span><h1>Undangan belum tersedia.</h1><p>Tautan mungkin belum terbit, ditarik pemilik, atau masa aktifnya sudah berakhir.</p><p>Silakan hubungi pengirim undangan untuk memperoleh tautan yang benar.</p></div></main>;}

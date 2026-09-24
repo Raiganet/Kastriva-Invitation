@@ -1,0 +1,170 @@
+[
+  {
+    "slug": "elegant-rose",
+    "name": "Elegant Rose",
+    "category": "pernikahan",
+    "description": "Tema pernikahan klasik dengan nuansa bunga mawar merah muda yang elegan dan romantis.",
+    "price": 150000,
+    "thumbnail": "🌹",
+    "colors": [
+      "#D4A5A5",
+      "#F5E6E8",
+      "#8B4513"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "modern-minimalist",
+    "name": "Modern Minimalist",
+    "category": "pernikahan",
+    "description": "Desain clean dan modern dengan tipografi bold untuk pasangan yang menyukai kesederhanaan.",
+    "price": 150000,
+    "thumbnail": "✨",
+    "colors": [
+      "#2C3E50",
+      "#ECF0F1",
+      "#E74C3C"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "tropical-paradise",
+    "name": "Tropical Paradise",
+    "category": "pernikahan",
+    "description": "Nuansa tropis dengan daun monstera dan warna-warna cerah untuk pernikahan outdoor.",
+    "price": 200000,
+    "thumbnail": "🌴",
+    "colors": [
+      "#2ECC71",
+      "#F39C12",
+      "#1ABC9C"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "rustic-wood",
+    "name": "Rustic Wood",
+    "category": "pernikahan",
+    "description": "Tema rustic dengan elemen kayu dan bunga kering yang hangat dan natural.",
+    "price": 175000,
+    "thumbnail": "🪵",
+    "colors": [
+      "#8B6914",
+      "#DEB887",
+      "#556B2F"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "galaxy-night",
+    "name": "Galaxy Night",
+    "category": "pernikahan",
+    "description": "Tema malam berbintang dengan nuansa galaxy yang memukau dan dramatis.",
+    "price": 250000,
+    "thumbnail": "🌌",
+    "colors": [
+      "#0C0C2E",
+      "#6C3483",
+      "#F4D03F"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "sweet-birthday",
+    "name": "Sweet Birthday",
+    "category": "ulang-tahun",
+    "description": "Tema ulang tahun ceria dengan balon dan confetti untuk si kecil maupun dewasa.",
+    "price": 75000,
+    "thumbnail": "🎂",
+    "colors": [
+      "#FF6B6B",
+      "#4ECDC4",
+      "#FFE66D"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "aqiqah-blessing",
+    "name": "Aqiqah Blessing",
+    "category": "aqiqah",
+    "description": "Undangan aqiqah dengan nuansa islami yang lembut dan penuh berkah.",
+    "price": 75000,
+    "thumbnail": "🕌",
+    "colors": [
+      "#27AE60",
+      "#F0F3F4",
+      "#2C3E50"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "corporate-event",
+    "name": "Corporate Event",
+    "category": "acara-kantor",
+    "description": "Desain profesional untuk gathering, launching, atau acara perusahaan.",
+    "price": 200000,
+    "thumbnail": "🏢",
+    "colors": [
+      "#2C3E50",
+      "#3498DB",
+      "#ECF0F1"
+    ],
+    "features": [
+      "Sampul personal",
+      "Hitung mundur",
+      "Informasi acara",
+      "Tautan lokasi",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  }
+]

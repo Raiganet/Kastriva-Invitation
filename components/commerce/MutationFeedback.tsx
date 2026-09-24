@@ -1,0 +1,2 @@
+ 'use client';
+export default function MutationFeedback({state}:{state:{message:string;pending:boolean;busy:boolean;success:boolean;blocked?:boolean;retry:()=>Promise<void>}}){return state.message?<div className={'notice '+(state.success?'success':'')} role="status"><p>{state.message}</p>{state.pending&&<button type="button" className="button ghost small" disabled={state.busy||state.blocked} onClick={()=>void state.retry()}>{state.busy?'Memeriksa…':'Coba ulang permintaan yang sama'}</button>}</div>:null;}

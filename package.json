@@ -1,0 +1,50 @@
+{
+  "name": "kastriva-invitation",
+  "version": "1.7.3",
+  "private": true,
+  "description": "Kastriva Invitation — koreksi kontrol transaksi, retry, dan respons terlambat",
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node scripts/run-tests.mjs",
+    "check:syntax": "node scripts/check-syntax.cjs",
+    "check:env": "node scripts/check-env.mjs",
+    "check": "npm run check:env && npm test && npm run check:syntax && npm run typecheck && npm run build",
+    "prebuild": "node scripts/check-env.mjs --mode=production",
+    "predev": "node scripts/check-env.mjs --mode=development",
+    "check:supabase": "node --experimental-strip-types scripts/check-supabase.mjs",
+    "test:supabase": "node --experimental-strip-types scripts/test-supabase.mjs",
+    "test:media": "node scripts/test-public-media.cjs",
+    "check:lock": "node scripts/check-lock.mjs",
+    "check:security": "node scripts/check-security.cjs",
+    "verify:release": "node scripts/verify-release.mjs",
+    "test:e2e": "node scripts/run-e2e.mjs",
+    "test:sql:local": "node scripts/test-sql-local.mjs",
+    "diagnose": "node scripts/diagnose.mjs",
+    "diagnose:local": "node scripts/diagnose.mjs --no-network",
+    "check:installed": "node scripts/diagnose.mjs --installed-only",
+    "setup:local": "node scripts/prepare-local.mjs",
+    "setup:plan": "node scripts/prepare-local.mjs --plan"
+  },
+  "dependencies": {
+    "next": "16.3.6",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "@supabase/supabase-js": "2.117.1",
+    "@supabase/ssr": "0.12.7",
+    "server-only": "0.0.1",
+    "sharp": "0.35.4"
+  },
+  "devDependencies": {
+    "typescript": "~5.9.3",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@playwright/test": "1.63.0"
+  }
+}

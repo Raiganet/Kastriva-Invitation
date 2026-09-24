@@ -1,0 +1,21 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {assertWriteOrigin,readBoundedJson} from '../lib/request-guard.ts';import {HttpError} from '../lib/http-errors.ts';
+const origin='https://invitation.example';
+const code=(n:number)=>(e:unknown)=>e instanceof HttpError&&e.status===n;
+function req(body:BodyInit|null,headers:Record<string,string>={}){return new Request(origin+'/api/test',{method:'POST',headers:{'content-type':'application/json',...headers},body,duplex:'half'} as RequestInit);}
+test('canonical same origin allowed',()=>assert.doesNotThrow(()=>assertWriteOrigin(new Headers({origin}),origin)));
+for(const value of ['', 'null','https://evil.example','https://invitation.example.evil.invalid','http://invitation.example'])test('untrusted Origin rejected '+value,()=>assert.throws(()=>assertWriteOrigin(new Headers({origin:value}),origin),code(403)));
+test('missing Origin rejected',()=>assert.throws(()=>assertWriteOrigin(new Headers(),origin),code(403)));
+test('cross-site Fetch Metadata rejected even with allowed Origin',()=>assert.throws(()=>assertWriteOrigin(new Headers({origin,'sec-fetch-site':'cross-site'}),origin),code(403)));
+test('origin configuration must not have credentials or a path',()=>{for(const x of ['https://u:p@invitation.example','https://invitation.example/path','javascript:alert(1)'])assert.throws(()=>assertWriteOrigin(new Headers({origin}),x),code(503));});
+test('valid actual UTF-8 JSON request succeeds',async()=>assert.deepEqual(await readBoundedJson(req('{"nama":"Diky 💐"}')),{nama:'Diky 💐'}));
+test('streamed JSON reconstructs across split multibyte boundaries',async()=>{const bytes=new TextEncoder().encode('{"text":"💐"}');const stream=new ReadableStream({start(c){for(const b of bytes)c.enqueue(new Uint8Array([b]));c.close();}});assert.deepEqual(await readBoundedJson(req(stream)),{text:'💐'});});
+test('declared oversized request rejected before consuming',async()=>await assert.rejects(()=>readBoundedJson(req('{}',{'content-length':'40000'})),code(413)));
+for(const x of ['-1','NaN','1.5','90071992547409999'])test('invalid Content-Length '+x,async()=>await assert.rejects(()=>readBoundedJson(req('{}',{'content-length':x})),code(400)));
+test('lying Content-Length cannot bypass actual byte limit',async()=>await assert.rejects(()=>readBoundedJson(req('"'+'a'.repeat(90)+'"',{'content-length':'1'}),{limit:32}),code(413)));
+test('empty body fails',async()=>await assert.rejects(()=>readBoundedJson(req(null)),code(400)));
+test('non JSON content type fails',async()=>await assert.rejects(()=>readBoundedJson(req('{}',{'content-type':'text/plain'})),code(415)));
+test('invalid JSON fails',async()=>await assert.rejects(()=>readBoundedJson(req('{bad}')),code(400)));
+test('invalid UTF8 cannot be silently replaced',async()=>await assert.rejects(()=>readBoundedJson(req(new Uint8Array([123,34,120,34,58,34,255,34,125]))),code(400)));
+test('slow stream is cancelled and deadline enforced',async()=>{let cancelled=false;const stream=new ReadableStream({pull(){return new Promise(()=>{});},cancel(){cancelled=true;}});const start=Date.now();await assert.rejects(()=>readBoundedJson(req(stream),{timeoutMs:20}),code(408));assert.ok(Date.now()-start<1000);assert.equal(cancelled,true);});
+test('cancel implementation that never resolves does not hang the response',async()=>{const stream=new ReadableStream({start(c){c.enqueue(new Uint8Array(64));},cancel(){return new Promise(()=>{});}});await assert.rejects(()=>readBoundedJson(req(stream),{limit:2,timeoutMs:50}),code(413));});

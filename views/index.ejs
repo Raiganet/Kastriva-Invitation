@@ -1,0 +1,140 @@
+<%- include('partials/header') %>
+
+<section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+  <div class="absolute inset-0 bg-gradient-to-br from-rose-50 via-pink-50 to-purple-50"></div>
+  <div class="absolute inset-0 opacity-10">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-rose-300 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-300 rounded-full blur-3xl animate-pulse" style="animation-delay:1s"></div>
+    <div class="absolute top-1/2 left-1/2 w-64 h-64 bg-pink-300 rounded-full blur-3xl animate-pulse" style="animation-delay:2s"></div>
+  </div>
+  <div class="relative z-10 text-center px-4 max-w-4xl mx-auto">
+    <div class="inline-block bg-white/60 backdrop-blur-sm rounded-full px-4 py-2 mb-6">
+      <span class="text-sm font-medium text-rose-600">✨ #1 Platform Undangan Digital Indonesia</span>
+    </div>
+    <h1 class="font-serif text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+      Undangan Digital<br>
+      <span class="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-purple-600">Elegan & Berkesan</span>
+    </h1>
+    <p class="text-lg md:text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+      Ciptakan undangan digital yang memukau untuk momen spesial Anda. 
+      Dilengkapi RSVP online, countdown, galeri foto, dan musik latar.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/templates" class="bg-rose-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose-700 transition shadow-xl shadow-rose-200 hover:shadow-2xl hover:shadow-rose-300 transform hover:-translate-y-1">
+        Lihat Template →
+      </a>
+      <a href="/demo/elegant-rose" class="bg-white text-gray-700 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-50 transition shadow-lg border border-gray-200">
+        ▶ Lihat Demo
+      </a>
+    </div>
+    <div class="mt-12 flex items-center justify-center gap-8 text-sm text-gray-500">
+      <div class="text-center">
+        <div class="text-2xl font-bold text-gray-900">5,000+</div>
+        <div>Undangan Terkirim</div>
+      </div>
+      <div class="w-px h-10 bg-gray-300"></div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-gray-900">8</div>
+        <div>Template Premium</div>
+      </div>
+      <div class="w-px h-10 bg-gray-300"></div>
+      <div class="text-center">
+        <div class="text-2xl font-bold text-gray-900">4.9⭐</div>
+        <div>Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Fitur Unggulan</h2>
+      <p class="text-gray-500 max-w-xl mx-auto">Semua yang Anda butuhkan untuk undangan digital yang sempurna</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <% const features = [
+        { icon: '⏰', title: 'Countdown Timer', desc: 'Hitung mundur otomatis menuju hari bahagia Anda.' },
+        { icon: '✅', title: 'RSVP Online', desc: 'Tamu bisa konfirmasi kehadiran langsung dari undangan.' },
+        { icon: '🖼️', title: 'Galeri Foto', desc: 'Tampilkan foto-foto terbaik Anda dalam galeri yang indah.' },
+        { icon: '🎵', title: 'Musik Latar', desc: 'Tambahkan lagu romantis sebagai pengiring undangan.' },
+        { icon: '📍', title: 'Peta Lokasi', desc: 'Integrasi Google Maps untuk memudahkan tamu menemukan venue.' },
+        { icon: '💝', title: 'Amplop Digital', desc: 'Terima hadiah/angpao secara digital dengan mudah.' }
+      ] %>
+      <% features.forEach(f => { %>
+        <div class="bg-gray-50 rounded-2xl p-8 hover:bg-rose-50 transition group hover:shadow-lg">
+          <div class="text-4xl mb-4 group-hover:scale-110 transition-transform"><%= f.icon %></div>
+          <h3 class="font-semibold text-lg mb-2"><%= f.title %></h3>
+          <p class="text-gray-500 text-sm"><%= f.desc %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-gradient-to-b from-white to-rose-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Template Populer</h2>
+      <p class="text-gray-500">Pilih desain yang sesuai dengan tema acara Anda</p>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <% templates.slice(0, 4).forEach(t => { %>
+        <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition group">
+          <div class="h-48 bg-gradient-to-br flex items-center justify-center text-6xl" style="background: linear-gradient(135deg, <%= t.colors %>)">
+            <%= t.thumbnail %>
+          </div>
+          <div class="p-5">
+            <span class="text-xs font-medium text-rose-500 bg-rose-50 px-2 py-1 rounded-full"><%= t.category %></span>
+            <h3 class="font-semibold mt-2 mb-1"><%= t.name %></h3>
+            <p class="text-sm text-gray-500 mb-3 line-clamp-2"><%= t.description %></p>
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-rose-600">Rp <%= t.price.toLocaleString('id-ID') %></span>
+              <a href="/demo/<%= t.slug %>" class="text-sm text-rose-600 hover:underline font-medium">Demo →</a>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+    <div class="text-center mt-10">
+      <a href="/templates" class="inline-block bg-white border-2 border-rose-600 text-rose-600 px-8 py-3 rounded-full font-semibold hover:bg-rose-600 hover:text-white transition">
+        Lihat Semua Template
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold mb-4">Cara Kerja</h2>
+      <p class="text-gray-500">3 langkah mudah untuk undangan digital impian Anda</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <% const steps = [
+        { num: '01', title: 'Pilih Template', desc: 'Jelajahi koleksi template premium kami dan pilih yang paling sesuai.' },
+        { num: '02', title: 'Isi Data Acara', desc: 'Lengkapi informasi acara seperti nama, tanggal, lokasi, dan foto.' },
+        { num: '03', title: 'Bagikan Undangan', desc: 'Undangan siap dibagikan via WhatsApp, Instagram, atau media sosial.' }
+      ] %>
+      <% steps.forEach(s => { %>
+        <div class="text-center">
+          <div class="w-16 h-16 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4"><%= s.num %></div>
+          <h3 class="font-semibold text-lg mb-2"><%= s.title %></h3>
+          <p class="text-gray-500 text-sm"><%= s.desc %></p>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</section>
+
+<section class="py-20 bg-gradient-to-r from-rose-600 to-purple-600 text-white">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="font-serif text-3xl md:text-5xl font-bold mb-6">Siap Membuat Undangan Impian?</h2>
+    <p class="text-rose-100 text-lg mb-8">Mulai dari Rp 75.000 saja. Tanpa biaya cetak, ramah lingkungan, dan bisa dibagikan ke ribuan tamu.</p>
+    <a href="/templates" class="inline-block bg-white text-rose-600 px-10 py-4 rounded-full text-lg font-bold hover:bg-rose-50 transition shadow-xl">
+      Mulai Sekarang — Gratis Konsultasi
+    </a>
+  </div>
+</section>
+
+<%- include('partials/footer') %>

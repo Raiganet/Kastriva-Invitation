@@ -1,0 +1,4 @@
+import {apiUser,readBody,json,failure,HttpError} from '@/lib/http';
+import {parseSaleAction} from '@/lib/commerce';
+import {commerceFailure} from '@/lib/commerce-server';
+export async function POST(request:Request){try{const {db}=await apiUser(request);const {data:admin,error:ae}=await db.rpc('ki_is_admin');if(ae)throw new HttpError(503,'Status akses belum dapat diperiksa.');const x=parseSaleAction(await readBody(request),admin===true);const {data,error}=await db.rpc('ki_sale_action',{p_id:x.sale_id,p_action:x.action,p_revision:x.revision,p_request:x.request_id,p_note:x.note,p_reference:x.reference,p_received_amount:x.received_amount,p_verified:x.verified});if(error)commerceFailure(error);if(data?.id!==x.sale_id||!data?.revision)throw new HttpError(503,'Balasan status belum dapat diverifikasi.');return json({ok:true,result:data});}catch(e){return failure(e);}}

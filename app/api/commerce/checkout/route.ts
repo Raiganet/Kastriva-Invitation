@@ -1,0 +1,4 @@
+import {apiUser,readBody,json,failure,HttpError} from '@/lib/http';
+import {parseCheckout} from '@/lib/commerce';
+import {commerceFailure,requireCheckoutApp} from '@/lib/commerce-server';
+export async function POST(request:Request){try{const {db}=await apiUser(request);requireCheckoutApp();const x=parseCheckout(await readBody(request));const {data,error}=await db.rpc('ki_checkout',{p_invitation:x.invitation_id,p_draft_revision:x.draft_revision,p_theme:x.theme,p_quoted_price:x.quoted_price,p_quoted_days:x.quoted_days,p_settings_revision:x.settings_revision,p_name:x.customer_name,p_phone:x.customer_phone,p_request:x.request_id});if(error)commerceFailure(error);if(!data?.id||!data?.revision)throw new HttpError(503,'Balasan pesanan belum dapat diverifikasi.');return json({ok:true,result:data});}catch(e){return failure(e);}}

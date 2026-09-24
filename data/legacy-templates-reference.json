@@ -1,0 +1,99 @@
+{
+  "note": "Referensi kategori dan fitur yang DIKLAIM kode lama; bukan daftar fitur aktif versi baru.",
+  "templates": [
+    {
+      "slug": "elegant-rose",
+      "category": "pernikahan",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Gallery",
+        "Music",
+        "Love Story",
+        "Peta Lokasi"
+      ]
+    },
+    {
+      "slug": "modern-minimalist",
+      "category": "pernikahan",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Gallery",
+        "Music",
+        "Love Story",
+        "Peta Lokasi"
+      ]
+    },
+    {
+      "slug": "tropical-paradise",
+      "category": "pernikahan",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Gallery",
+        "Music",
+        "Love Story",
+        "Peta Lokasi",
+        "Amplop Digital"
+      ]
+    },
+    {
+      "slug": "rustic-wood",
+      "category": "pernikahan",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Gallery",
+        "Music",
+        "Peta Lokasi"
+      ]
+    },
+    {
+      "slug": "galaxy-night",
+      "category": "pernikahan",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Gallery",
+        "Music",
+        "Love Story",
+        "Peta Lokasi",
+        "Amplop Digital",
+        "Fireworks Animation"
+      ]
+    },
+    {
+      "slug": "sweet-birthday",
+      "category": "ulang-tahun",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Gallery",
+        "Music",
+        "Wish Wall"
+      ]
+    },
+    {
+      "slug": "aqiqah-blessing",
+      "category": "aqiqah",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Gallery",
+        "Doa & Harapan"
+      ]
+    },
+    {
+      "slug": "corporate-event",
+      "category": "acara-kantor",
+      "original_features": [
+        "Countdown Timer",
+        "RSVP Online",
+        "Agenda",
+        "Peta Lokasi",
+        "QR Check-in"
+      ]
+    }
+  ]
+}

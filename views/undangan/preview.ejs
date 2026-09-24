@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Undangan <%= demo.groom %> & <%= demo.bride %></title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --c1: <%= template.colors[0] %>;
+      --c2: <%= template.colors[1] %>;
+      --c3: <%= template.colors[2] %>;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--c2);
+      color: #333;
+      overflow-x: hidden;
+    }
+    .font-script { font-family: 'Great Vibes', cursive; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+
+    #cover {
+      position: fixed; inset: 0; z-index: 100;
+      background: linear-gradient(135deg, var(--c1), var(--c3));
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: white; text-align: center;
+      transition: opacity 0.8s, transform 0.8s;
+    }
+    #cover.opened { opacity: 0; pointer-events: none; transform: scale(1.1); }
+    #cover h1 { font-family: 'Great Vibes', cursive; font-size: 3rem; margin-bottom: 0.5rem; }
+    #cover .names { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin: 1rem 0; }
+    #cover .guest-label { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.3rem; }
+    #cover .guest-name { font-size: 1.1rem; font-weight: 600; margin-bottom: 2rem; }
+    #openBtn {
+      background: rgba(255,255,255,0.2); border: 2px solid white;
+      color: white; padding: 12px 32px; border-radius: 50px;
+      font-size: 1rem; cursor: pointer; backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+    #openBtn:hover { background: white; color: var(--c1); }
+
+    section { padding: 60px 20px; text-align: center; }
+    .section-title {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.5rem; color: var(--c1); margin-bottom: 1rem;
+    }
+    .divider {
+      width: 60px; height: 2px; background: var(--c1);
+      margin: 0 auto 2rem; opacity: 0.5;
+    }
+
+    #hero {
+      background: linear-gradient(180deg, var(--c1), var(--c2));
+      color: white; padding: 80px 20px;
+      min-height: 100vh; display: flex;
+      flex-direction: column; align-items: center; justify-content: center;
+    }
+    #hero .bismillah { font-size: 1.5rem; margin-bottom: 1rem; opacity: 0.9; }
+    #hero h1 { font-family: 'Great Vibes', cursive; font-size: 3.5rem; line-height: 1.2; }
+    #hero .date-badge {
+      margin-top: 2rem; background: rgba(255,255,255,0.15);
+      padding: 10px 24px; border-radius: 50px;
+      backdrop-filter: blur(10px); font-size: 0.9rem;
+    }
+
+    #countdown { background: white; }
+    .countdown-grid {
+      display: flex; justify-content: center; gap: 16px; margin-top: 1.5rem;
+    }
+    .countdown-item {
+      background: var(--c2); border-radius: 16px;
+      padding: 16px 12px; min-width: 70px;
+    }
+    .countdown-item .num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; color: var(--c1);
+    }
+    .countdown-item .label { font-size: 0.7rem; color: #888; text-transform: uppercase; }
+
+    #couple { background: var(--c2); }
+    .couple-card {
+      display: flex; flex-direction: column; align-items: center; gap: 2rem;
+    }
+    .person { text-align: center; }
+    .person .avatar {
+      width: 120px; height: 120px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--c1), var(--c3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; margin: 0 auto 1rem; color: white;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+    .person h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; }
+    .person p { color: #888; font-size: 0.85rem; }
+    .ampersand {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem; color: var(--c1);
+    }
+
+    #event { background: white; }
+    .event-card {
+      background: var(--c2); border-radius: 20px;
+      padding: 30px; margin: 1rem auto; max-width: 400px;
+      border-left: 4px solid var(--c1);
+    }
+    .event-card h4 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--c1); }
+    .event-card .detail { margin-top: 0.5rem; font-size: 0.9rem; color: #666; }
+
+    #story { background: var(--c2); }
+    .timeline { max-width: 400px; margin: 0 auto; text-align: left; }
+    .timeline-item {
+      position: relative; padding-left: 30px; margin-bottom: 2rem;
+      border-left: 2px solid var(--c1);
+    }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -6px; top: 4px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--c1);
+    }
+    .timeline-item .year { font-size: 0.75rem; color: var(--c1); font-weight: 600; }
+    .timeline-item h4 { font-family: 'Playfair Display', serif; margin: 0.2rem 0; }
+    .timeline-item p { font-size: 0.85rem; color: #666; }
+
+    #gallery { background: white; }
+    .gallery-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 8px; max-width: 400px; margin: 0 auto;
+    }
+    .gallery-item {
+      aspect-ratio: 1; background: linear-gradient(135deg, var(--c1), var(--c2));
+      border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; font-size: 1.5rem; color: white;
+    }
+
+    #rsvp { background: var(--c2); }
+    .rsvp-form { max-width: 400px; margin: 0 auto; text-align: left; }
+    .rsvp-form input, .rsvp-form select, .rsvp-form textarea {
+      width: 100%; padding: 12px 16px; border: 1px solid #ddd;
+      border-radius: 12px; margin-bottom: 12px; font-family: inherit;
+      font-size: 0.9rem; background: white;
+    }
+    .rsvp-form button {
+      width: 100%; padding: 14px; background: var(--c1);
+      color: white; border: none; border-radius: 12px;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+    }
+
+    #wishes { background: white; }
+    .wish-card {
+      background: var(--c2); border-radius: 12px;
+      padding: 16px; margin-bottom: 10px; text-align: left;
+      max-width: 400px; margin-left: auto; margin-right: auto;
+    }
+    .wish-card .name { font-weight: 600; font-size: 0.85rem; color: var(--c1); }
+    .wish-card .msg { font-size: 0.85rem; color: #666; margin-top: 4px; }
+
+    #invitation-footer {
+      background: linear-gradient(135deg, var(--c1), var(--c3));
+      color: white; padding: 40px 20px;
+    }
+    #invitation-footer h2 { font-family: 'Great Vibes', cursive; font-size: 2.5rem; }
+
+    .demo-banner {
+      background: #1a1a2e; color: #ffd700; text-align: center;
+      padding: 8px; font-size: 0.75rem; font-weight: 600;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .demo-banner a { color: #fff; text-decoration: underline; }
+
+    #musicBtn {
+      position: fixed; bottom: 20px; right: 20px; z-index: 90;
+      width: 50px; height: 50px; border-radius: 50%;
+      background: var(--c1); color: white; border: none;
+      font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      display: none;
+    }
+    #musicBtn.playing { animation: spin 3s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .particles {
+      position: fixed; inset: 0; pointer-events: none; z-index: 1;
+      overflow: hidden; display: none;
+    }
+    .particle {
+      position: absolute; width: 8px; height: 8px;
+      background: var(--c1); border-radius: 50%; opacity: 0.3;
+      animation: float 6s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      50% { opacity: 0.3; }
+      100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<% if (isDemo) { %>
+  <div class="demo-banner">
+    ⚡ MODE DEMO — Ini adalah preview template "<%= template.name %>". 
+    <a href="/order/<%= template.slug %>">Pesan Sekarang</a>
+  </div>
+<% } %>
+
+<div id="cover">
+  <p style="font-size:0.85rem; opacity:0.7; margin-bottom:1rem;">The Wedding of</p>
+  <h1><%= demo.groom %> & <%= demo.bride %></h1>
+  <div class="names"><%= demo.date %></div>
+  <p class="guest-label">Kepada Yth.</p>
+  <p class="guest-name"><%= demo.guestName %></p>
+  <button id="openBtn" onclick="openInvitation()">💌 Buka Undangan</button>
+</div>
+
+<div class="particles" id="particles"></div>
+<button id="musicBtn" onclick="toggleMusic()">🎵</button>
+
+<section id="hero">
+  <p class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+  <p style="font-size:0.9rem; opacity:0.8; margin-bottom:1rem;">Assalamu'alaikum Wr. Wb.</p>
+  <p style="font-size:0.85rem; opacity:0.7; max-width:300px; line-height:1.6;">
+    Dengan memohon rahmat dan ridho Allah SWT, kami mengundang Bapak/Ibu/Saudara/i pada acara pernikahan kami:
+  </p>
+  <h1 style="margin-top:1.5rem;"><%= demo.groom %> & <%= demo.bride %></h1>
+  <div class="date-badge">📅 <%= demo.date %> • <%= demo.time %></div>
+</section>
+
+<section id="countdown">
+  <h2 class="section-title">Menghitung Hari</h2>
+  <div class="divider"></div>
+  <div class="countdown-grid">
+    <div class="countdown-item"><div class="num" id="days">00</div><div class="label">Hari</div></div>
+    <div class="countdown-item"><div class="num" id="hours">00</div><div class="label">Jam</div></div>
+    <div class="countdown-item"><div class="num" id="minutes">00</div><div class="label">Menit</div></div>
+    <div class="countdown-item"><div class="num" id="seconds">00</div><div class="label">Detik</div></div>
+  </div>
+</section>
+
+<section id="couple">
+  <h2 class="section-title">Mempelai</h2>
+  <div class="divider"></div>
+  <div class="couple-card">
+    <div class="person">
+      <div class="avatar">🤵</div>
+      <h3><%= demo.groom %></h3>
+      <p>Putra pertama dari<br>Bpk. Abdullah & Ibu Aminah</p>
+    </div>
+    <div class="ampersand">&</div>
+    <div class="person">
+      <div class="avatar">👰</div>
+      <h3><%= demo.bride %></h3>
+      <p>Putri kedua dari<br>Bpk. Muhammad & Ibu Fatimah</p>
+    </div>
+  </div>
+</section>
+
+<section id="event">
+  <h2 class="section-title">Acara</h2>
+  <div class="divider"></div>
+  <div class="event-card">
+    <h4>💍 Akad Nikah</h4>
+    <div class="detail">
+      📅 <%= demo.date %><br>
+      ⏰ 08:00 - 10:00 WIB<br>
+      📍 <%= demo.location %>
+    </div>
+  </div>
+  <div class="event-card">
+    <h4>🎉 Resepsi</h4>
+    <div class="detail">
+      📅 <%= demo.date %><br>
+      ⏰ 11:00 - 14:00 WIB<br>
+      📍 <%= demo.location %>
+    </div>
+  </div>
+</section>
+
+<section id="story">
+  <h2 class="section-title">Love Story</h2>
+  <div class="divider"></div>
+  <div class="timeline">
+    <% demo.story.forEach(s => { %>
+      <div class="timeline-item">
+        <div class="year"><%= s.year %></div>
+        <h4><%= s.title %></h4>
+        <p><%= s.desc %></p>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section id="gallery">
+  <h2 class="section-title">Galeri</h2>
+  <div class="divider"></div>
+  <div class="gallery-grid">
+    <% demo.gallery.forEach(g => { %>
+      <div class="gallery-item"><%= g %></div>
+    <% }) %>
+  </div>
+</section>
+
+<section id="rsvp">
+  <h2 class="section-title">RSVP</h2>
+  <div class="divider"></div>
+  <p style="font-size:0.9rem; color:#666; margin-bottom:1.5rem;">Konfirmasi kehadiran Anda</p>
+  <div class="rsvp-form">
+    <input type="text" placeholder="Nama Lengkap" id="rsvpName">
+    <select id="rsvpAttendance">
+      <option value="">-- Konfirmasi Kehadiran --</option>
+      <option value="hadir">✅ Hadir</option>
+      <option value="tidak">❌ Tidak Hadir</option>
+    </select>
+    <textarea rows="3" placeholder="Ucapan & Doa..." id="rsvpMessage"></textarea>
+    <button onclick="submitRSVP()">Kirim Konfirmasi</button>
+    <p id="rsvpResult" style="text-align:center; margin-top:10px; font-size:0.85rem; color:green;"></p>
+  </div>
+</section>
+
+<section id="wishes">
+  <h2 class="section-title">Ucapan & Doa</h2>
+  <div class="divider"></div>
+  <div class="wish-card">
+    <div class="name">Budi Santoso</div>
+    <div class="msg">Selamat menempuh hidup baru! Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. 🤲</div>
+  </div>
+  <div class="wish-card">
+    <div class="name">Rina Wulandari</div>
+    <div class="msg">Happy wedding! Semoga langgeng sampai Jannah. Aamiin 💕</div>
+  </div>
+  <div class="wish-card">
+    <div class="name">Dewi Lestari</div>
+    <div class="msg">Barakallahu lakuma! Semoga selalu diberikan kebahagiaan. 🌹</div>
+  </div>
+</section>
+
+<section id="invitation-footer">
+  <h2><%= demo.groom %> & <%= demo.bride %></h2>
+  <p style="margin-top:1rem; opacity:0.8; font-size:0.9rem;">Terima kasih atas kehadiran dan doa restu Anda</p>
+  <p style="margin-top:2rem; font-size:0.75rem; opacity:0.5;">Wassalamu'alaikum Wr. Wb.</p>
+  <% if (isDemo) { %>
+    <div style="margin-top:2rem; padding:12px; background:rgba(255,255,255,0.15); border-radius:12px;">
+      <p style="font-size:0.8rem;">💌 Dibuat dengan <strong>UndanganKu</strong></p>
+      <a href="/order/<%= template.slug %>" style="display:inline-block; margin-top:8px; background:white; color:var(--c1); padding:8px 20px; border-radius:50px; text-decoration:none; font-weight:600; font-size:0.85rem;">Pesan Undangan Ini</a>
+    </div>
+  <% } %>
+</section>
+
+<script>
+  function openInvitation() {
+    document.getElementById('cover').classList.add('opened');
+    document.getElementById('musicBtn').style.display = 'flex';
+    document.getElementById('particles').style.display = 'block';
+    document.body.style.overflow = 'auto';
+    createParticles();
+  }
+  document.body.style.overflow = 'hidden';
+
+  function updateCountdown() {
+    const target = new Date('<%= demo.date %>T08:00:00').getTime();
+    const now = new Date().getTime();
+    const diff = target - now;
+    if (diff > 0) {
+      document.getElementById('days').textContent = String(Math.floor(diff / 86400000)).padStart(2, '0');
+      document.getElementById('hours').textContent = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+    }
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  function createParticles() {
+    const container = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 6 + 's';
+      p.style.animationDuration = (4 + Math.random() * 4) + 's';
+      p.style.width = p.style.height = (4 + Math.random() * 8) + 'px';
+      container.appendChild(p);
+    }
+  }
+
+  let musicPlaying = false;
+  function toggleMusic() {
+    const btn = document.getElementById('musicBtn');
+    musicPlaying = !musicPlaying;
+    btn.textContent = musicPlaying ? '🎶' : '🎵';
+    btn.classList.toggle('playing', musicPlaying);
+  }
+
+  function submitRSVP() {
+    const name = document.getElementById('rsvpName').value;
+    const att = document.getElementById('rsvpAttendance').value;
+    if (!name || !att) { alert('Mohon isi nama dan konfirmasi kehadiran'); return; }
+    document.getElementById('rsvpResult').textContent = '✅ Terima kasih, ' + name + '! Konfirmasi Anda telah tercatat.';
+    
+    const msg = document.getElementById('rsvpMessage').value;
+    if (msg) {
+      const wishes = document.getElementById('wishes');
+      const card = document.createElement('div');
+      card.className = 'wish-card';
+      card.innerHTML = '<div class="name">' + name + '</div><div class="msg">' + msg + '</div>';
+      wishes.appendChild(card);
+    }
+  }
+</script>
+</body>
+</html>

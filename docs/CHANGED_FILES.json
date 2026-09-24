@@ -1,0 +1,185 @@
+{
+  "version": "1.7.3",
+  "changed": [
+    {
+      "file": "CHANGELOG.md",
+      "change": "modified"
+    },
+    {
+      "file": "MULAI_DI_SINI.md",
+      "change": "modified"
+    },
+    {
+      "file": "README.md",
+      "change": "modified"
+    },
+    {
+      "file": "app/api/health/route.ts",
+      "change": "modified"
+    },
+    {
+      "file": "components/commerce/MutationFeedback.tsx",
+      "change": "modified"
+    },
+    {
+      "file": "components/commerce/useCommerceMutation.ts",
+      "change": "modified"
+    },
+    {
+      "file": "docs/SOURCE_PROVENANCE.json",
+      "change": "modified"
+    },
+    {
+      "file": "docs/TAHAP_7_PERBAIKAN.md",
+      "change": "modified"
+    },
+    {
+      "file": "docs/TEST_REPORT.md",
+      "change": "modified"
+    },
+    {
+      "file": "docs/UJI_TRANSAKSI_v1.7.3.md",
+      "change": "added"
+    },
+    {
+      "file": "docs/history/v1.7.2/CHANGED_FILES.json",
+      "change": "added"
+    },
+    {
+      "file": "docs/history/v1.7.2/MULAI_DI_SINI.md",
+      "change": "added"
+    },
+    {
+      "file": "docs/history/v1.7.2/OUTPUT_MANIFEST.json",
+      "change": "added"
+    },
+    {
+      "file": "docs/history/v1.7.2/README.md",
+      "change": "added"
+    },
+    {
+      "file": "docs/history/v1.7.2/SOURCE_PROVENANCE.json",
+      "change": "added"
+    },
+    {
+      "file": "docs/history/v1.7.2/TAHAP_7_PERBAIKAN.md",
+      "change": "added"
+    },
+    {
+      "file": "docs/history/v1.7.2/TEST_REPORT.md",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/baseline-syntax.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/baseline-typecheck.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/baseline-unit.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/build.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/command-results.json",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/diagnose.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/diagnostics-registry.json",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/install.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/preservation.json",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/release-report.json",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/reproduction.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/security.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/syntax.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/typecheck-commerce.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/typecheck-full.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/unit-final.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/unit-fixed-first.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/unit-fixed.log",
+      "change": "added"
+    },
+    {
+      "file": "docs/test-results/stage7fix3/verify-release.log",
+      "change": "added"
+    },
+    {
+      "file": "lib/commerce-controller.ts",
+      "change": "added"
+    },
+    {
+      "file": "lib/commerce-transport.ts",
+      "change": "modified"
+    },
+    {
+      "file": "package.json",
+      "change": "modified"
+    },
+    {
+      "file": "scripts/release-policy.mjs",
+      "change": "modified"
+    },
+    {
+      "file": "scripts/test-sql-local.mjs",
+      "change": "modified"
+    },
+    {
+      "file": "tests/commerce-controller.test.ts",
+      "change": "added"
+    },
+    {
+      "file": "tests/commerce-streams.test.ts",
+      "change": "added"
+    },
+    {
+      "file": "tests/stage4-contracts.test.ts",
+      "change": "modified"
+    },
+    {
+      "file": "tests/stage7.test.ts",
+      "change": "modified"
+    }
+  ]
+}

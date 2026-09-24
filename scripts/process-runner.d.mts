@@ -1,0 +1,1 @@
+export function runNode(args:string[],options?:{cwd?:string;env?:Record<string,string|undefined>;timeoutMs?:number;graceMs?:number;maxLogBytes?:number}):Promise<{status:number;timedOut:boolean;output:string}>;

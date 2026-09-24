@@ -1,0 +1,11 @@
+{
+  "version": "1.7.0",
+  "basis": "Kastriva-Invitation-Tahap-6-v1.6.0.zip",
+  "basis_sha256": "05be09e1adc49f15856c1b127b4dd169cae2d6823055b79331baaae480cc3b80",
+  "work": "Local source upgrade only. No external account changes or deployment.",
+  "preserved_migrations": "001\u2013006",
+  "database_imported": false,
+  "live_backend_tested": false,
+  "next_build_passed": false,
+  "release_gate_passed": false
+}
