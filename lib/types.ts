@@ -14,7 +14,10 @@ export type DraftContent = {
   venue: string; address: string; mapUrl: string; opening: string; story: string; photoPaths: string[];
   /** Optional for drafts created before stage 3. First event mirrors the legacy fields. */
   events?: InvitationEvent[];
+  music?: 'none' | 'serenade';
+  gifts?: GiftAccount[];
 };
+export type GiftAccount = { bank: string; account: string; holder: string };
 export type Invitation = {
   id: string; owner_id: string; theme_slug: string; content: DraftContent;
   revision: number; last_request_id: string; created_at: string; updated_at: string;

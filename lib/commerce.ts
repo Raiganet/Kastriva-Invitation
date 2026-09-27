@@ -1,4 +1,5 @@
 import type { DraftContent } from './types.ts';
+import {completeGift} from './invitation-extras.ts';
 import { asRecord, UUID, ValidationError, invitationEvents, parseDraft } from './domain.ts';
 export const SALE_STATES = ['awaiting_payment','awaiting_review','rejected','paid','cancelled','revoked'] as const;
 export type SaleState = typeof SALE_STATES[number];
@@ -14,7 +15,7 @@ export function requireKeys(x:Record<string,unknown>,keys:readonly string[]){if(
 function text(v:unknown,min:number,max:number,label:string){if(typeof v!=='string'||v.trim().length<min||v.trim().length>max||/[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(v))throw new ValidationError(label+' tidak valid.');return v.trim();}
 function uuid(v:unknown){if(typeof v!=='string'||!UUID.test(v))throw new ValidationError('Identitas permintaan tidak valid.');return v;}
 function int(v:unknown,min:number,max=2147483647){if(typeof v!=='number'||!Number.isSafeInteger(v)||v<min||v>max)throw new ValidationError('Angka / versi tidak valid.');return v;}
-export function readyToPublish(content:DraftContent):string[]{const errors:string[]=[];if(!content.groom.trim()||!content.bride.trim())errors.push('Lengkapi nama kedua mempelai.');for(const [i,e] of invitationEvents(content).entries()){if(!e.eventDate||!e.venue.trim()||!e.address.trim()||!e.label.trim())errors.push(`Lengkapi tanggal, nama acara, tempat, dan alamat acara ${i+1}.`);}return errors;}
+export function readyToPublish(content:DraftContent):string[]{const errors:string[]=[];if(!content.groom.trim()||!content.bride.trim())errors.push('Lengkapi nama kedua mempelai.');for(const [i,e] of invitationEvents(content).entries()){if(!e.eventDate||!e.venue.trim()||!e.address.trim()||!e.label.trim())errors.push(`Lengkapi tanggal, nama acara, tempat, dan alamat acara ${i+1}.`);}for(const [i,gift] of (content.gifts||[]).entries()){if(!completeGift(gift))errors.push(`Lengkapi bank, nomor (5–30 angka), dan pemilik rekening hadiah ${i+1}, atau hapus rekening tersebut.`);}return errors;}
 export function parseCheckout(value:unknown){const x=asRecord(value);requireKeys(x,['invitation_id','draft_revision','theme','quoted_price','quoted_days','settings_revision','customer_name','customer_phone','request_id']);const phone=text(x.customer_phone,10,15,'WhatsApp');if(!/^62\d{8,13}$/.test(phone))throw new ValidationError('WhatsApp harus berformat 628… tanpa +.');return {invitation_id:uuid(x.invitation_id),draft_revision:int(x.draft_revision,1),theme:text(x.theme,1,60,'Tema'),quoted_price:int(x.quoted_price,1),quoted_days:int(x.quoted_days,1,730),settings_revision:int(x.settings_revision,1),customer_name:text(x.customer_name,2,100,'Nama'),customer_phone:phone,request_id:uuid(x.request_id)};}
 export const SALE_ACTIONS=['submit_payment','approve','reject','cancel','revoke'] as const;
 export type SaleAction=typeof SALE_ACTIONS[number];

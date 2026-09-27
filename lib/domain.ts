@@ -42,7 +42,9 @@ export function validDate(value: string): boolean {
 }
 export function parseDraft(value: unknown, ownerId: string, editing = false): DraftContent {
   const x = asRecord(value);
-  if (Object.keys(x).some(k => !Object.hasOwn(blankContent,k) && k !== 'events')) throw new ValidationError('Kolom draft tidak dikenal.');
+  if (Object.keys(x).some(k => !Object.hasOwn(blankContent,k) && !['events','music','gifts'].includes(k))) throw new ValidationError('Kolom draft tidak dikenal.');
+  if (x.music !== undefined && x.music !== 'none' && x.music !== 'serenade') throw new ValidationError('Pilihan musik tidak dikenal.');
+  const gifts = x.gifts === undefined ? undefined : parseGifts(x.gifts);
   const eventDate = text(x.eventDate, 'Tanggal', 10);
   if (!editing && eventDate && !validDate(eventDate)) throw new ValidationError('Tanggal acara tidak valid.');
   const eventTime = text(x.eventTime, 'Jam mulai', 5), endTime = text(x.endTime, 'Jam selesai', 5);
@@ -62,9 +64,22 @@ export function parseDraft(value: unknown, ownerId: string, editing = false): Dr
     eventDate, eventTime, endTime, timezone: x.timezone as DraftContent['timezone'],
     venue: text(x.venue,'Nama tempat',200), address: text(x.address,'Alamat',500), mapUrl: editing ? text(x.mapUrl,'Lokasi',1000) : httpsUrl(x.mapUrl,'Lokasi'),
     opening: text(x.opening,'Pembuka',1000), story: text(x.story,'Cerita',4000), photoPaths, ...(events ? {events} : {}),
+    ...(x.music !== undefined ? {music:x.music as DraftContent['music']} : {}), ...(gifts ? {gifts} : {}),
   };
   if (events && EVENT_FIELDS.some(key => content[key] !== events[0][key])) throw new ValidationError('Ringkasan acara harus sesuai acara pertama.');
   return content;
+}
+
+export function parseGifts(value:unknown): NonNullable<DraftContent['gifts']> {
+ if (!Array.isArray(value) || value.length > 3) throw new ValidationError('Maksimal 3 rekening hadiah.');
+ return value.map(raw=>{
+  const row=asRecord(raw);
+  if (Object.keys(row).length!==3 || Object.keys(row).some(k=>!['bank','account','holder'].includes(k))) throw new ValidationError('Kolom rekening hadiah tidak sesuai.');
+  const bank=text(row.bank,'Bank / dompet digital',60),account=text(row.account,'Nomor rekening hadiah',30),holder=text(row.holder,'Pemilik rekening hadiah',100);
+  if (/[\u0000-\u001f\u007f]/.test(bank+holder)) throw new ValidationError('Nama bank dan pemilik rekening harus satu baris.');
+  if (!/^[0-9]{0,30}$/.test(account)) throw new ValidationError('Nomor rekening hadiah hanya boleh berisi angka, termasuk awalan nol.');
+  return {bank,account,holder};
+ });
 }
 
 export const EVENT_FIELDS = ['eventDate','eventTime','endTime','timezone','venue','address','mapUrl'] as const;

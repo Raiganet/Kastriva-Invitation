@@ -46,5 +46,5 @@ test('production save endpoint retains API guard and no automatic publish or pai
 test('UI recovery and backup are explicit, with current privacy and guide disclosures',()=>{
  const editor=read('components/DraftEditor.tsx');assert.ok(editor.includes('controller.restore()'));assert.ok(editor.includes('controller.discardRecovery()'));assert.ok(editor.includes('setAutosave(false)'));
  const privacy=read('app/privasi/page.tsx');assert.ok(privacy.includes('tidak dienkripsi'));assert.ok(privacy.includes('sessionStorage'));
- const guide=read('app/panduan/page.tsx');assert.ok(guide.includes('V1.7.0'));assert.ok(!guide.includes('Belum ada simpan otomatis'));
+ const guide=read('app/admin/panduan/page.tsx');assert.ok(guide.includes('V1.7.0'));assert.ok(!guide.includes('Belum ada simpan otomatis'));
 });
