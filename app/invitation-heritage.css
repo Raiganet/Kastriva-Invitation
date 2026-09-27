@@ -1,0 +1,48 @@
+/* Nusantara collection: original vector ornaments remain sharp on every screen. */
+.theme-islami-sakinah{--paper:#123d35;--tone:#e4ce98;--soft:#1b4b40}
+.theme-adat-sunda{--paper:#edf0e4;--tone:#44634c;--soft:#f8f7ed}
+.theme-adat-minang{--paper:#501c26;--tone:#f1cf8b;--soft:#682e34}
+.theme-adat-jawa{--paper:#f2e8d5;--tone:#775237;--soft:#fbf5e9}
+.theme-adat-bali{--paper:#f4e3d3;--tone:#8e513a;--soft:#f9eedf}
+.heritage-scenery{position:absolute;inset:0;width:100%;height:100%;color:var(--tone);z-index:-1;pointer-events:none;animation:none!important;opacity:.72}
+.theme-art:has(.heritage-scenery){background:radial-gradient(ellipse at 50% 30%,var(--soft),var(--paper) 80%)}
+.theme-art:has(.heritage-scenery):before,.theme-art:has(.heritage-scenery):after{display:none}
+.theme-art:has(.heritage-scenery) .theme-orbit,.theme-art:has(.heritage-scenery) .art-corner{display:none}
+.theme-art:has(.heritage-scenery) .art-inner{padding:24px 0 72px}
+.theme-art:has(.heritage-scenery) .art-label{background:var(--paper)}
+.theme-art.theme-adat-minang .art-names{font-variant:small-caps;letter-spacing:1px}
+.theme-art.theme-adat-sunda .art-names,.theme-art.theme-adat-bali .art-names{font-style:italic}
+.inv-heritage{background:var(--paper);color:var(--tone)}
+.inv-heritage .inv-cover,.inv-heritage .inv-content{max-width:760px;margin-inline:auto}
+.inv-heritage .inv-cover,.inv-heritage .inv-hero{background:radial-gradient(ellipse at 50% 30%,var(--soft),var(--paper) 80%)}
+.inv-heritage .inv-cover{padding:48px 30px 104px;min-height:calc(100svh - 47px)}
+.inv-heritage .cover-frame{width:100%;max-width:530px;padding:38px 30px 42px;border:0;border-radius:0;background:transparent;box-shadow:none}
+.inv-heritage .inv-atmosphere .inv-sprig,.inv-heritage .inv-orbit{display:none}
+.inv-heritage .cover-frame:before{display:none}
+.inv-heritage .cover-motif{margin-bottom:22px}
+.inv-heritage .cover-motif .theme-motif{width:92px;height:76px}
+.inv-heritage .guest-card{background:color-mix(in srgb,var(--soft) 86%,transparent);border:1px solid color-mix(in srgb,var(--tone) 24%,transparent);box-shadow:0 9px 28px #00000005;max-width:350px;margin:23px auto}
+.inv-heritage .inv-names{font-size:clamp(42px,6vw,68px);letter-spacing:-1px;font-weight:400}
+.inv-heritage .inv-hero{min-height:820px;padding:70px 44px 180px}
+.inv-heritage .inv-hero .inv-opening{max-width:470px}
+.inv-heritage .inv-section{padding:76px 42px}
+.inv-heritage .inv-section.alternate{background:color-mix(in srgb,var(--soft) 52%,var(--paper))}
+.inv-heritage .event-box{border:1px solid color-mix(in srgb,var(--tone) 30%,transparent);box-shadow:inset 0 0 0 8px var(--paper),inset 0 0 0 9px color-mix(in srgb,var(--tone) 16%,transparent);padding:44px 28px;border-radius:10px;background:var(--soft)}
+.inv-heritage .person-monogram{background:var(--soft);border:1px solid color-mix(in srgb,var(--tone) 35%,transparent)}
+.inv-heritage .photo-grid>:is(a,button){border-radius:120px 120px 8px 8px}
+.inv-heritage .cover-note{max-width:300px;margin:16px auto 0;font-size:10px;line-height:1.7}
+.inv-heritage .inv-button{border-radius:4px;min-height:46px;letter-spacing:1px}
+.inv-heritage .heritage-bismillah{font-family:Georgia,'Times New Roman',serif;font-size:24px;line-height:1.8;letter-spacing:0;margin-bottom:20px}
+.theme-islami-sakinah .event-box{border-radius:140px 140px 8px 8px;padding-top:64px}
+.theme-islami-sakinah .person-monogram{border-radius:50% 50% 6px 6px}
+.theme-adat-sunda .inv-names,.theme-adat-bali .inv-names{font-style:italic}
+.theme-adat-sunda .event-box{border-radius:100px 100px 8px 8px;padding-top:55px}
+.theme-adat-minang .inv-names{font-variant:small-caps;letter-spacing:1.5px}
+.theme-adat-minang .event-box{border-radius:0;border-style:double;border-width:4px}
+.theme-adat-jawa .person-monogram{border-radius:50%;outline:1px solid color-mix(in srgb,var(--tone) 20%,transparent);outline-offset:7px}
+.theme-adat-jawa .inv-names{letter-spacing:1px}
+.theme-adat-bali .event-box{border-radius:90px 90px 6px 6px;padding-top:54px}
+.theme-adat-bali .photo-grid>:is(a,button):nth-child(2){border-radius:8px 8px 120px 120px}
+.heritage-collection{margin:24px 0 30px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:23px 26px;border:1px solid #decead;background:#f6efdf;border-radius:14px}.heritage-collection h2{font:500 25px/1.25 Georgia,serif;margin:0 0 8px}.heritage-collection p{font-size:12px;line-height:1.8;margin:0;max-width:600px}.heritage-collection .button{flex-shrink:0}
+@media(max-width:600px){.inv-heritage .inv-cover{padding:22px 16px 100px}.inv-heritage .cover-frame{padding:30px 18px 20px}.inv-heritage .inv-names{font-size:44px}.inv-heritage .cover-motif .theme-motif{width:70px;height:58px}.inv-heritage .inv-hero{padding:65px 30px 170px;min-height:780px}.inv-heritage .inv-section{padding:65px 22px}.inv-heritage .event-box{padding-inline:22px}.inv-heritage .heritage-bismillah{font-size:23px}.heritage-collection{align-items:flex-start;flex-direction:column;padding:21px}}
+.inv-embedded.inv-heritage .inv-cover{min-height:710px;padding-inline:10px}.inv-embedded.inv-heritage .cover-frame{padding-inline:18px}.inv-embedded.inv-heritage .inv-names{font-size:38px}.inv-embedded.inv-heritage .inv-section{padding-inline:20px}

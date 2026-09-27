@@ -166,5 +166,110 @@
       "Preview sebelum pesan"
     ],
     "active": true
+  },
+  {
+    "slug": "islami-sakinah",
+    "name": "Islami Sakinah",
+    "category": "pernikahan",
+    "description": "Lengkung geometris hijau zamrud dan emas, dengan pembuka Bismillah yang teduh.",
+    "price": 200000,
+    "thumbnail": "☾",
+    "colors": [
+      "#123D35",
+      "#D6BD7F",
+      "#1B4B40"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental opsional",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "adat-sunda",
+    "name": "Adat Sunda",
+    "category": "pernikahan",
+    "description": "Nuansa hijau Priangan, sulur daun dan melati putih dalam bingkai yang lembut.",
+    "price": 200000,
+    "thumbnail": "❀",
+    "colors": [
+      "#EDF0E4",
+      "#44634C",
+      "#D8C398"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental opsional",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "adat-minang",
+    "name": "Adat Minang",
+    "category": "pernikahan",
+    "description": "Merah marun dan emas dengan siluet gonjong serta pola geometris terinspirasi songket.",
+    "price": 200000,
+    "thumbnail": "◈",
+    "colors": [
+      "#501C26",
+      "#E2BC70",
+      "#682E34"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental opsional",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "adat-jawa",
+    "name": "Adat Jawa",
+    "category": "pernikahan",
+    "description": "Krem dan cokelat sogan, ornamen terinspirasi kawung, serta siluet pendopo yang anggun.",
+    "price": 200000,
+    "thumbnail": "◇",
+    "colors": [
+      "#F2E8D5",
+      "#775237",
+      "#D5BC8E"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental opsional",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
+  },
+  {
+    "slug": "adat-bali",
+    "name": "Adat Bali",
+    "category": "pernikahan",
+    "description": "Terakota hangat dengan siluet gerbang terbelah dan bunga tropis berwarna gading.",
+    "price": 200000,
+    "thumbnail": "✿",
+    "colors": [
+      "#F4E3D3",
+      "#8E513A",
+      "#D1A56D"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental opsional",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
   }
 ]

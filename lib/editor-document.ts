@@ -8,7 +8,8 @@ export type EditorJournal = {
   document: EditorDocument; revision: number; savedDocument: EditorDocument | null;
   pending: PendingSave | null; timestamp: number;
 };
-export const WEDDING_SLUGS = ['elegant-rose','modern-minimalist','tropical-paradise','rustic-wood','galaxy-night'];
+import {WEDDING_THEME_SLUGS} from './theme-registry.ts';
+export const WEDDING_SLUGS = WEDDING_THEME_SLUGS;
 export function editableDocument(content: DraftContent, theme: string): EditorDocument {
   return {theme,content:withEvents(structuredClone(content),invitationEvents(content))};
 }

@@ -1,7 +1,8 @@
 /** CMS domain contract. Plain text only; never accepts HTML, scripts, or renderer definitions. */
 import {ValidationError,UUID} from './domain.ts';
+import {ALL_THEME_SLUGS,LEGACY_THEME_SLUGS} from './theme-registry.ts';
 export const CMS_TEXT_LIMITS={brandName:[1,40],tagline:[1,40],heroEyebrow:[1,80],heroTitle:[1,160],heroAccent:[1,100],heroBody:[1,700],heroPrimary:[1,50],heroSecondary:[1,50],aboutTitle:[1,150],aboutBody:[1,1200],featuresTitle:[1,150],collectionTitle:[1,150],collectionBody:[1,500],stepsTitle:[1,150],faqTitle:[1,150],ctaTitle:[1,160],ctaBody:[1,500],ctaLabel:[1,50],footerText:[1,600],contactEmail:[0,120],whatsapp:[0,15],companyUrl:[1,200],seoTitle:[10,70],seoDescription:[20,180]} as const;
-export const CMS_SLUGS=['elegant-rose','modern-minimalist','tropical-paradise','rustic-wood','galaxy-night','sweet-birthday','aqiqah-blessing','corporate-event'] as const;
+export const CMS_SLUGS=ALL_THEME_SLUGS;
 export type CmsTextKey=keyof typeof CMS_TEXT_LIMITS;
 export type CmsContent=Record<CmsTextKey,string>&{features:{title:string;body:string}[];steps:{title:string;body:string}[];faqs:{question:string;answer:string}[];allowIndex:boolean};
 export type CmsTheme={slug:string;name:string;description:string;price:number;active:boolean};
@@ -27,8 +28,15 @@ export function parseCmsContent(value:unknown):CmsContent{
  if(typeof x.allowIndex!=='boolean')fail('Pilihan indeks mesin pencari tidak valid.');out.allowIndex=x.allowIndex;return out;
 }
 export function parseCmsCatalog(value:unknown,complete=true):CmsTheme[]{
- if(!Array.isArray(value)||value.length>8||(complete&&value.length!==8))fail('Katalog harus berisi delapan tema yang sudah tersedia.');const seen=new Set<string>();
- return value.map(v=>{const x=object(v,['slug','name','description','price','active']);if(typeof x.slug!=='string'||!CMS_SLUGS.includes(x.slug as typeof CMS_SLUGS[number])||seen.has(x.slug))fail('Tema asing atau ganda tidak diizinkan.');seen.add(x.slug);if(typeof x.active!=='boolean')fail('Status tema harus boolean.');return{slug:x.slug,name:cmsText(x.name,1,80),description:cmsText(x.description,1,500),price:integer(x.price,1000,100000000),active:x.active};});
+ if(!Array.isArray(value)||value.length>CMS_SLUGS.length||(complete&&value.length!==CMS_SLUGS.length&&value.length!==LEGACY_THEME_SLUGS.length))fail('Katalog harus memuat seluruh tema yang tersedia.');const seen=new Set<string>();
+ const rows=value.map(v=>{const x=object(v,['slug','name','description','price','active']);if(typeof x.slug!=='string'||!CMS_SLUGS.includes(x.slug as typeof CMS_SLUGS[number])||seen.has(x.slug))fail('Tema asing atau ganda tidak diizinkan.');seen.add(x.slug);if(typeof x.active!=='boolean')fail('Status tema harus boolean.');return{slug:x.slug,name:cmsText(x.name,1,80),description:cmsText(x.description,1,500),price:integer(x.price,1000,100000000),active:x.active};});
+ if(complete&&rows.length===LEGACY_THEME_SLUGS.length&&rows.some(row=>!(LEGACY_THEME_SLUGS as readonly string[]).includes(row.slug)))fail('Salinan katalog lama harus memuat seluruh tema lama.');
+ return rows;
+}
+/** Restore old history without dropping themes added since that snapshot. Current DB prices win only for absent themes. */
+export function restoreCmsDocument(document:CmsDocument,current:CmsTheme[]):CmsDocument{
+ const restored=parseCmsDocument(document),known=new Set(restored.catalog.map(row=>row.slug));
+ return {...restored,catalog:[...restored.catalog,...parseCmsCatalog(current).filter(row=>!known.has(row.slug))]};
 }
 export function parseCmsDocument(value:unknown):CmsDocument{const x=object(value,['version','content','catalog']);if(x.version!==1)fail('Versi dokumen CMS tidak sesuai.');const result:CmsDocument={version:1,content:parseCmsContent(x.content),catalog:parseCmsCatalog(x.catalog)};if(new TextEncoder().encode(JSON.stringify(result)).byteLength>28000)fail('Dokumen CMS maksimal 28 KB.');return result;}
 export function parseCmsState(value:unknown):CmsState{const x=object(value,['revision','published_revision','updated_at','published_at','draft','live','catalog_hash','history']);const revision=integer(x.revision),published_revision=integer(x.published_revision,0);if(published_revision>revision)fail('Versi CMS tidak konsisten.');if(typeof x.catalog_hash!=='string'||!(/^[a-f0-9]{32}$/).test(x.catalog_hash))fail('Sidik katalog tidak valid.');if(!Array.isArray(x.history)||x.history.length>20)fail('Riwayat CMS tidak valid.');return{revision,published_revision,updated_at:stamp(x.updated_at),published_at:stamp(x.published_at),draft:parseCmsDocument(x.draft),live:parseCmsDocument(x.live),catalog_hash:x.catalog_hash,history:x.history.map(v=>{const h=object(v,['revision','published_at','document']);return{revision:integer(h.revision,0),published_at:stamp(h.published_at),document:parseCmsDocument(h.document)};})};}
