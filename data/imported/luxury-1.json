@@ -1,0 +1,85 @@
+{
+  "source": "LUXURY 1.json",
+  "sha256": "4c19df40f058a6b3d1e5fe8920cf0fedb23302ff98b73ec6ce74a2023c547e97",
+  "title": "LUXURY 1",
+  "version": "0.4",
+  "nodeCount": 77,
+  "widgets": {
+    "heading": 11,
+    "image": 15,
+    "text-editor": 9,
+    "button": 1,
+    "image-gallery": 2,
+    "google_maps": 1
+  },
+  "palette": {
+    "background": "#002420",
+    "accent": "#EFA947",
+    "text": "#FFFFFF"
+  },
+  "headingFont": "Great Vibes",
+  "sections": [
+    {
+      "id": "186cdadb",
+      "anchor": "undangan",
+      "animation": ""
+    },
+    {
+      "id": "a67bc47",
+      "anchor": "mempelai",
+      "animation": ""
+    },
+    {
+      "id": "44ef9d21",
+      "anchor": "acara",
+      "animation": ""
+    },
+    {
+      "id": "2bd3106e",
+      "anchor": "gallery",
+      "animation": ""
+    },
+    {
+      "id": "451b8c22",
+      "anchor": "ucapan",
+      "animation": ""
+    },
+    {
+      "id": "7c81619c",
+      "anchor": "",
+      "animation": ""
+    },
+    {
+      "id": "5e2dd748",
+      "anchor": "",
+      "animation": ""
+    }
+  ],
+  "assetUrls": [
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/BG-LS-1A-1.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/BG-LS-1A-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/BG-LS-1B-1.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/BG-LS-1B-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/BG-LS-1C-1.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/BG-LS-1C-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/COUPLE-LS-1-1.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/COUPLE-LS-1-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/GALLERY-1-1.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/GALLERY-1-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/GALLERY-1-3.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/GALLERY-1-4.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ICON-5-1.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ICON-5-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ICON-5-3.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ICON-5-4.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ICON-5-5.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ICON-5-6.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ICON-5-7.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/ORN-LS-1-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/PROKES-3-1.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/PROKES-3-2.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/PROKES-3-3.png",
+    "https://demo.ucapanspesial.com/wp-content/uploads/2021/06/PROKES-3-4.png"
+  ],
+  "unsupportedWidgets": []
+}
