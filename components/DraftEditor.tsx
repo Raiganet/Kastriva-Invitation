@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import {useRef,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {currency, invitationEvents, withEvents, safeGuest} from '@/lib/domain';
 import type {DraftContent, Invitation, InvitationEvent, Template} from '@/lib/types';
 import {weddingTemplates,getTemplate} from '@/lib/templates';
@@ -18,6 +18,7 @@ export default function DraftEditor({id,ownerId,initial,initialTheme,themeOption
   const {urls:photos,error:photoError,reload:reloadPhotos}=usePrivatePhotos(content.photoPaths);
   const [section,setSection]=useState<Section>('pasangan'),[pane,setPane]=useState<'form'|'preview'>('form');
   const [guest,setGuest]=useState('Tamu Undangan'),[uploading,setUploading]=useState(false),[uploadNote,setUploadNote]=useState(''),[fileNotice,setFileNotice]=useState('');
+  useEffect(()=>{const openSection=()=>{const key=window.location.hash.slice(1);if(tabs.some(([id])=>id===key)){setSection(key as Section);setPane('form');}};openSection();window.addEventListener('hashchange',openSection);return()=>window.removeEventListener('hashchange',openSection);},[]);
   const uploadingRef=useRef(false),importInput=useRef<HTMLInputElement>(null);
   const chosen=themeOptions.find(t=>t.slug===theme)||getTemplate(theme)||weddingTemplates[0], events=invitationEvents(content),checks=completion(content),done=checks.filter(c=>c.done).length;
   const locked=state.phase==='recovery'||state.phase==='auth';
@@ -69,7 +70,7 @@ export default function DraftEditor({id,ownerId,initial,initialTheme,themeOption
   const index=tabs.findIndex(t=>t[0]===section);
   const status=!state.online?'Offline · belum tersinkron':state.phase==='saving'?'Menyimpan…':state.phase==='conflict'?'Konflik versi':state.phase==='auth'?'Login diperlukan':state.phase==='recovery'?'Salinan lokal ditemukan':state.pending?'Hasil simpan belum pasti':state.phase==='error'?'Simpan dijeda':dirty?'Perubahan belum tersimpan':state.revision?'Tersimpan di server':'Draft baru';
   return <div className="container workspace editor-workspace">
-    <div className="workspace-heading"><div><Link className="back-link" href="/dashboard">← Dashboard</Link><span className="eyebrow">STUDIO UNDANGAN · TAHAP 3</span><h1>Rangkai hari istimewa.</h1><p>Isian dan desain terpisah. Ganti tema tanpa mengulang cerita Anda.</p></div><div className="editor-save-card"><span className={`save-indicator ${dirty||state.pending?'unsaved':''}`} role="status">{status}</span><small>{state.revision?`Versi server ${state.revision}`:'Belum ada versi server'}{state.updatedAt?` · ${new Date(state.updatedAt).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Jakarta'})} WIB`:''}</small><button className="button" onClick={()=>void controller.save()} disabled={locked||state.phase==='saving'||state.phase==='conflict'||!state.online}>{state.pending?'Coba simpan kembali':'Simpan sekarang'}</button></div></div>
+    <div className="workspace-heading"><div><Link className="back-link" href="/dashboard">← Dashboard</Link><span className="eyebrow">STUDIO UNDANGAN</span><h1>Rangkai hari istimewa.</h1><p>Isian dan desain terpisah. Ganti tema tanpa mengulang cerita Anda.</p></div><div className="editor-save-card"><span className={`save-indicator ${dirty||state.pending?'unsaved':''}`} role="status">{status}</span><small>{state.revision?`Versi server ${state.revision}`:'Belum ada versi server'}{state.updatedAt?` · ${new Date(state.updatedAt).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',timeZone:'Asia/Jakarta'})} WIB`:''}</small><button className="button" onClick={()=>void controller.save()} disabled={locked||state.phase==='saving'||state.phase==='conflict'||!state.online}>{state.pending?'Coba simpan kembali':'Simpan sekarang'}</button></div></div>
     <div className="editor-controlbar"><label className="switch-label"><input type="checkbox" checked={autosave} disabled={locked} onChange={e=>setAutosave(e.target.checked)}/><span>Simpan otomatis <strong>{autosave?'aktif':'dijeda'}</strong></span></label><span className="private-label">◇ Draft privat · belum diterbitkan</span><div className="button-row"><button className="button ghost small" onClick={exportBackup}>Unduh salinan JSON</button><button className="button ghost small" disabled={locked||!!state.pending||uploading} onClick={()=>importInput.current?.click()}>Muat salinan</button><input ref={importInput} type="file" hidden accept=".json,application/json" onChange={e=>{const file=e.target.files?.[0];e.target.value='';void importBackup(file);}}/></div></div>
     <p className="editor-hint">Autosave mengirim setelah Anda berhenti mengetik. Salinan sementara hanya pada sesi tab ini; bukan pengganti backup atau tanda sudah tersimpan di server.</p>
     {state.storageError&&<p role="alert" className="notice error">Penyimpanan sesi browser tidak tersedia. Unduh salinan JSON sebelum menutup tab dan periksa izin penyimpanan browser.</p>}
