@@ -1,6 +1,6 @@
 /** CMS domain contract. Plain text only; never accepts HTML, scripts, or renderer definitions. */
 import {ValidationError,UUID} from './domain.ts';
-import {ALL_THEME_SLUGS,LEGACY_THEME_SLUGS} from './theme-registry.ts';
+import {ALL_THEME_SLUGS,CMS_CATALOG_GENERATIONS} from './theme-registry.ts';
 export const CMS_TEXT_LIMITS={brandName:[1,40],tagline:[1,40],heroEyebrow:[1,80],heroTitle:[1,160],heroAccent:[1,100],heroBody:[1,700],heroPrimary:[1,50],heroSecondary:[1,50],aboutTitle:[1,150],aboutBody:[1,1200],featuresTitle:[1,150],collectionTitle:[1,150],collectionBody:[1,500],stepsTitle:[1,150],faqTitle:[1,150],ctaTitle:[1,160],ctaBody:[1,500],ctaLabel:[1,50],footerText:[1,600],contactEmail:[0,120],whatsapp:[0,15],companyUrl:[1,200],seoTitle:[10,70],seoDescription:[20,180]} as const;
 export const CMS_SLUGS=ALL_THEME_SLUGS;
 export type CmsTextKey=keyof typeof CMS_TEXT_LIMITS;
@@ -28,9 +28,9 @@ export function parseCmsContent(value:unknown):CmsContent{
  if(typeof x.allowIndex!=='boolean')fail('Pilihan indeks mesin pencari tidak valid.');out.allowIndex=x.allowIndex;return out;
 }
 export function parseCmsCatalog(value:unknown,complete=true):CmsTheme[]{
- if(!Array.isArray(value)||value.length>CMS_SLUGS.length||(complete&&value.length!==CMS_SLUGS.length&&value.length!==LEGACY_THEME_SLUGS.length))fail('Katalog harus memuat seluruh tema yang tersedia.');const seen=new Set<string>();
+ if(!Array.isArray(value)||value.length>CMS_SLUGS.length||(complete&&!CMS_CATALOG_GENERATIONS.some(generation=>generation.length===value.length)))fail('Katalog harus memuat seluruh tema yang tersedia.');const seen=new Set<string>();
  const rows=value.map(v=>{const x=object(v,['slug','name','description','price','active']);if(typeof x.slug!=='string'||!CMS_SLUGS.includes(x.slug as typeof CMS_SLUGS[number])||seen.has(x.slug))fail('Tema asing atau ganda tidak diizinkan.');seen.add(x.slug);if(typeof x.active!=='boolean')fail('Status tema harus boolean.');return{slug:x.slug,name:cmsText(x.name,1,80),description:cmsText(x.description,1,500),price:integer(x.price,1000,100000000),active:x.active};});
- if(complete&&rows.length===LEGACY_THEME_SLUGS.length&&rows.some(row=>!(LEGACY_THEME_SLUGS as readonly string[]).includes(row.slug)))fail('Salinan katalog lama harus memuat seluruh tema lama.');
+ if(complete){const generation=CMS_CATALOG_GENERATIONS.find(group=>group.length===rows.length);if(!generation||rows.some(row=>!generation.includes(row.slug)))fail('Salinan katalog harus memuat seluruh tema pada versi yang didukung.');}
  return rows;
 }
 /** Restore old history without dropping themes added since that snapshot. Current DB prices win only for absent themes. */

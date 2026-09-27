@@ -271,5 +271,26 @@
       "Preview sebelum pesan"
     ],
     "active": true
+  },
+  {
+    "slug": "elementor-luxury-1",
+    "name": "Luxury Emerald",
+    "category": "pernikahan",
+    "description": "Hijau zamrud, kaligrafi elegan, dan bingkai geometris emas yang merangkai kisah istimewa Anda.",
+    "price": 200000,
+    "thumbnail": "✧",
+    "colors": [
+      "#002420",
+      "#EFA947",
+      "#063831"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental opsional",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
   }
 ]

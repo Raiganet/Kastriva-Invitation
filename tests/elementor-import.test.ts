@@ -19,9 +19,9 @@ test('Malformed, incompatible and overly deep Elementor documents fail explicitl
 test('Prototype-shaped widget names remain inert report data',()=>{
  const result=inspectElementor(template([{widgetType:'__proto__'},{widgetType:'constructor'}]));assert.equal(result.widgets.__proto__,1);assert.equal(result.widgets.constructor,1);assert.equal(Object.getPrototypeOf(result.widgets),null);
 });
-test('Trial records source fingerprint and remains outside checkout and CMS catalogs',()=>{
+test('Import provenance is retained and the published renderer has the agreed catalog price',()=>{
  const report=JSON.parse(readFileSync(new URL('../data/imported/luxury-1.json',import.meta.url),'utf8'));
  assert.equal(report.source,'LUXURY 1.json');assert.match(report.sha256,/^[a-f0-9]{64}$/);assert.equal(report.nodeCount,77);assert.equal(report.sections.length,7);assert.equal(report.assetUrls.length,24);
- const catalog=JSON.parse(readFileSync(new URL('../data/templates.json',import.meta.url),'utf8'));assert.ok(!catalog.some((t:{slug:string})=>t.slug==='elementor-luxury-1'));
+ const catalog=JSON.parse(readFileSync(new URL('../data/templates.json',import.meta.url),'utf8'));const luxury=catalog.find((t:{slug:string})=>t.slug==='elementor-luxury-1');assert.equal(luxury.price,200000);assert.equal(luxury.active,true);assert.equal(luxury.category,'pernikahan');
  const route=readFileSync(new URL('../app/admin/tema/elementor/page.tsx',import.meta.url),'utf8');assert.match(route,/await requireAdmin\(\)/);
 });

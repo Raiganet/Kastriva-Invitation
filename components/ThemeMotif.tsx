@@ -1,8 +1,10 @@
 import {HeritageMotif} from './HeritageArtwork';
 import {isHeritageTheme} from '@/lib/theme-registry';
+import {LuxuryRosette} from './ElementorLuxuryArtwork';
 /** Decorative vector artwork, shared by catalog previews and invitation covers. */
 export default function ThemeMotif({slug}:{slug:string}) {
  if(isHeritageTheme(slug))return <HeritageMotif slug={slug}/>;
+ if(slug==='elementor-luxury-1')return <LuxuryRosette className="theme-motif"/>;
  const leaves=slug==='tropical-paradise'||slug==='rustic-wood';
  const rose=slug==='elegant-rose';
  return <svg className="theme-motif" viewBox="0 0 120 100" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
