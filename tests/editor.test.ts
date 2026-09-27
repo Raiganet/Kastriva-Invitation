@@ -58,4 +58,13 @@ test('incomplete date in live preview cannot crash formatting',()=>{assert.equal
 test('second event calendar uses its own date, time and timezone',()=>{const d=doc(),event={...invitationEvents(d.content)[0],eventDate:'2026-12-26',eventTime:'10:00',endTime:'12:00',timezone:'Asia/Makassar' as const};const ics=calendarFile({...d.content,...event},'second');assert.ok(ics.includes('DTSTART:20261226T020000Z'));assert.ok(ics.includes('DTEND:20261226T040000Z'));});
 test('photo reordering makes selected image cover without mutating original',()=>{const paths=['a','b','c'];assert.deepEqual(movePhoto(paths,2,0),['c','a','b']);assert.deepEqual(paths,['a','b','c']);assert.deepEqual(movePhoto(paths,-1,2),paths);});
 test('duplicate image references rejected',()=>assert.throws(()=>parseDraft({...content(),photoPaths:[`${owner}/${id}.webp`,`${owner}/${id}.webp`]},owner)));
-test('completeness checks all events, not just the first',()=>{const d=doc(),a={...invitationEvents(d.content)[0],eventDate:'2026-12-25',venue:'Gedung'},b={...a,id:'b',eventDate:''};const checks=completion(withEvents(d.content,[a,b]));assert.equal(checks.find(x=>x.label==='Nama dan tanggal setiap acara')?.done,false);assert.equal(checks.length,6);});
+test('completeness checks all events, not just the first',()=>{const d=doc(),a={...invitationEvents(d.content)[0],eventDate:'2026-12-25',venue:'Gedung'},b={...a,id:'b',eventDate:''};const checks=completion(withEvents(d.content,[a,b]));assert.equal(checks.find(x=>x.label==='Nama dan tanggal setiap acara')?.done,false);assert.equal(checks.length,7);});
+test('review separates required addresses from optional Maps for every event',()=>{
+ const a={...invitationEvents(content())[0],address:'Alamat akad',mapUrl:'https://maps.app.goo.gl/AkadExample'},b={...a,id:'resepsi',address:'',mapUrl:''};
+ const checks=completion(withEvents(content(),[a,b]));
+ assert.deepEqual(checks.find(x=>x.label==='Alamat lengkap setiap acara'),{key:'acara',label:'Alamat lengkap setiap acara',done:false,required:true});
+ assert.deepEqual(checks.find(x=>x.label==='Link Maps setiap acara'),{key:'acara',label:'Link Maps setiap acara',done:false,required:false});
+ const filled=completion(withEvents(content(),[a,{...b,address:'Alamat resepsi'}]));
+ assert.equal(filled.find(x=>x.label==='Alamat lengkap setiap acara')?.done,true);
+ assert.equal(filled.find(x=>x.label==='Link Maps setiap acara')?.done,false);
+});

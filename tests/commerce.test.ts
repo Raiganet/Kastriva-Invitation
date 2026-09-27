@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {parseCheckout,parseSaleAction,parsePublication,parseCommerceSettings,parseSlug,readyToPublish,publicationAvailable,publicPhotoIndex,parsePublicInvitation,shareUrl,canAct,SALE_STATES,SALE_ACTIONS} from '../lib/commerce.ts';
-import {blankContent} from '../lib/domain.ts';
+import {blankContent,invitationEvents,withEvents} from '../lib/domain.ts';
 import {photoMagic,validPrivatePhotoPath,MAX_PUBLIC_PHOTO_BYTES} from '../lib/public-media.ts';
 const A='11111111-1111-4111-8111-111111111111',B='22222222-2222-4222-8222-222222222222';
 const checkout={invitation_id:A,draft_revision:3,theme:'elegant-rose',quoted_price:150000,quoted_days:365,settings_revision:1,customer_name:'Andi Uji',customer_phone:'6281234567890',request_id:B};
@@ -18,6 +18,11 @@ for(const slug of ['abcd','a'.repeat(65),'admin','kastriva','undefined','Andi-Ni
 test('publishing rejects missing permission and payment fields injected by client',()=>{assert.throws(()=>parsePublication({...pub,consent:false}));assert.throws(()=>parsePublication({...pub,paid:true}));assert.throws(()=>parsePublication({...pub,publication_revision:-1}));assert.throws(()=>parsePublication({...pub,consent:'true'}));});
 test('unpublish does not ask for renewed public consent',()=>assert.equal(parsePublication({...pub,action:'unpublish',consent:false}).consent,false));
 test('publish requires complete names and every event, not optional story/photo',()=>{assert.deepEqual(readyToPublish(content),[]);assert.equal(readyToPublish({...content,groom:''}).length,1);assert.ok(readyToPublish({...content,venue:''}).length);assert.ok(readyToPublish({...content,events:[{id:'akad',label:'Akad',eventDate:'2027-01-24',eventTime:'08:00',endTime:'10:00',timezone:'Asia/Jakarta',venue:'',address:'',mapUrl:''}]}).length);});
+test('a missing optional Maps link does not block publishing a complete second event',()=>{
+ const akad={...invitationEvents(content)[0],mapUrl:'https://maps.app.goo.gl/AkadExample'},resepsi={...akad,id:'resepsi',label:'Resepsi',mapUrl:''};
+ assert.deepEqual(readyToPublish(withEvents(content,[akad,resepsi])),[]);
+ assert.equal(readyToPublish(withEvents(content,[akad,{...resepsi,address:''}])).length,1);
+});
 test('only verified admin action can approve, amount must be positive',()=>{assert.throws(()=>parseSaleAction({...action,action:'approve'},false));assert.throws(()=>parseSaleAction({...action,action:'approve'},true));assert.throws(()=>parseSaleAction({...action,action:'approve',verified:true},true));assert.equal(parseSaleAction({...action,action:'approve',verified:true,received_amount:150000},true).action,'approve');});
 test('non-approval fields cannot smuggle received amount or verification',()=>{assert.throws(()=>parseSaleAction({...action,verified:true}));assert.throws(()=>parseSaleAction({...action,received_amount:150000}));assert.throws(()=>parseSaleAction({...action,status:'paid'}));});
 test('rejections and revocations require readable reason; customer lacks admin power',()=>{for(const a of ['reject','revoke']){assert.throws(()=>parseSaleAction({...action,action:a,note:'x'},true));assert.throws(()=>parseSaleAction({...action,action:a,note:'Alasan uji'},false));assert.equal(parseSaleAction({...action,action:a,note:'Alasan uji'},true).note,'Alasan uji');}});

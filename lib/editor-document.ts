@@ -52,7 +52,8 @@ export function completion(content: DraftContent) {
     {key:'pasangan',label:'Nama kedua mempelai',done:!!content.groom.trim() && !!content.bride.trim(),required:true},
     {key:'acara',label:'Nama dan tanggal setiap acara',done:events.every(e => !!e.label.trim() && validDate(e.eventDate)),required:true},
     {key:'acara',label:'Jam dan tempat setiap acara',done:events.every(e => /^([01]\d|2[0-3]):[0-5]\d$/.test(e.eventTime) && /^([01]\d|2[0-3]):[0-5]\d$/.test(e.endTime) && e.endTime>e.eventTime && !!e.venue.trim()),required:true},
-    {key:'acara',label:'Alamat dan tautan peta',done:events.every(e => !!e.address.trim() && !!safeMapHref(e.mapUrl)),required:false},
+    {key:'acara',label:'Alamat lengkap setiap acara',done:events.every(e => !!e.address.trim()),required:true},
+    {key:'acara',label:'Link Maps setiap acara',done:events.every(e => !!safeMapHref(e.mapUrl)),required:false},
     {key:'cerita',label:'Kalimat pembuka dan cerita',done:!!content.opening.trim() && !!content.story.trim(),required:false},
     {key:'galeri',label:'Foto sampul dan galeri',done:content.photoPaths.length>0,required:false},
   ];
