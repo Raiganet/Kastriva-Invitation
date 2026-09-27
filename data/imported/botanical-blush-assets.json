@@ -1,0 +1,12 @@
+{
+  "pack": "POWER POINT WEDDING INVITATION / File Pendukung",
+  "source": "Ornamen/rose-3416596_960_720.png",
+  "sourceSha256": "ada1557dce51bf6427849cf957d8cb697cde944801ba1775fbff9cf3fb352afa",
+  "sourceBytes": 167922,
+  "output": "/images/themes/botanical-blush/peach-roses.webp",
+  "outputSha256": "19bee4670fca9225bd303785da506720bedd2c4b6be87fc7d59c8d4b0cecd201",
+  "outputBytes": 30820,
+  "width": 720,
+  "height": 488,
+  "transform": "Resize to 720px wide, WebP quality 86, preserve transparency, strip metadata"
+}

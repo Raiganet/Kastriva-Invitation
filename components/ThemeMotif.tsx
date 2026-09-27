@@ -1,8 +1,10 @@
+import {BlushRose} from './BotanicalBlushArtwork';
 import {HeritageMotif} from './HeritageArtwork';
 import {isHeritageTheme} from '@/lib/theme-registry';
 import {LuxuryRosette} from './ElementorLuxuryArtwork';
 /** Decorative vector artwork, shared by catalog previews and invitation covers. */
 export default function ThemeMotif({slug}:{slug:string}) {
+ if(slug==='botanical-blush')return <BlushRose className="theme-motif"/>;
  if(isHeritageTheme(slug))return <HeritageMotif slug={slug}/>;
  if(slug==='elementor-luxury-1')return <LuxuryRosette className="theme-motif"/>;
  const leaves=slug==='tropical-paradise'||slug==='rustic-wood';

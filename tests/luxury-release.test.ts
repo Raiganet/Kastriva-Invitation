@@ -16,12 +16,12 @@ test('Legacy CMS generations restore missing luxury metadata using current live 
   backup.content.heroTitle='Judul dalam backup';backup.catalog[0].price=155000;
   const live=current();live.catalog[13].price=215000;live.catalog[13].active=false;
   const restored=restoreCmsDocument(backup,live.catalog);
-  assert.equal(restored.catalog.length,14);assert.equal(restored.catalog[13].price,215000);assert.equal(restored.catalog[13].active,false);assert.equal(restored.catalog[0].price,155000);assert.equal(restored.content.heroTitle,backup.content.heroTitle);
+  assert.equal(restored.catalog.length,15);assert.equal(restored.catalog[13].price,215000);assert.equal(restored.catalog[13].active,false);assert.equal(restored.catalog[0].price,155000);assert.equal(restored.content.heroTitle,backup.content.heroTitle);
   assert.equal(backup.catalog.length,length);assert.deepEqual(parseCmsCatalog([...backup.catalog].reverse()),[...backup.catalog].reverse());
  }
 });
 test('A thirteen-item catalog containing Luxury but missing a prior theme is not a historical backup',()=>{
- assert.throws(()=>parseCmsCatalog(current().catalog.slice(1)));
+ assert.throws(()=>parseCmsCatalog(current().catalog.slice(1,14)));
  assert.throws(()=>parseCmsCatalog([...current().catalog.slice(0,7),current().catalog[13]]));
  assert.equal(parseCmsCatalog([current().catalog[13]],false).length,1);
 });

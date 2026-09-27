@@ -292,5 +292,26 @@
       "Preview sebelum pesan"
     ],
     "active": true
+  },
+  {
+    "slug": "botanical-blush",
+    "name": "Botanical Blush",
+    "category": "pernikahan",
+    "description": "Mawar peach, kertas krem, dan lengkung botani yang lembut untuk merangkai hari bahagia Anda.",
+    "price": 200000,
+    "thumbnail": "❀",
+    "colors": [
+      "#FFF5ED",
+      "#674A3D",
+      "#F4E6DB"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental opsional",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
   }
 ]
