@@ -1,6 +1,8 @@
 begin;
 do $$
-declare fn text;
+declare
+  fn text;
+  key text;
 begin
   if public.ki_open_wish_auto_publish_version()<>1 then raise exception 'FAIL auto publish readiness version';end if;
   if pg_catalog.has_function_privilege('anon','public.ki_open_wish_audit()','EXECUTE') then raise exception 'FAIL admin audit exposed to anon';end if;
