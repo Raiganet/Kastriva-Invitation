@@ -1,0 +1,20 @@
+{
+  "source_sha256": "47f34312f0002bdce531edb803511c480f4db78fc22ddb78a2b0f6a75f088779",
+  "source_size": [
+    1448,
+    1086
+  ],
+  "horizontal_size": [
+    930,
+    220
+  ],
+  "crest_size": [
+    485,
+    383
+  ],
+  "wordmark_size": [
+    719,
+    165
+  ],
+  "note": "Raster asset extraction from user-selected concept; icons 512 are interpolated, not new vector artwork."
+}

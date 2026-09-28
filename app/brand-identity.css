@@ -1,0 +1,55 @@
+/* Selected Classic Emblem. Scoped to branding; no invitation themes or business UI reset. */
+.brand.ki-brand {
+  display: flex;
+  align-items: center;
+  flex: 0 1 248px;
+  width: 248px;
+  min-width: 0;
+  min-height: 52px;
+  max-width: 100%;
+  gap: 12px;
+  color: #681d20;
+  border: 0;
+  background: transparent;
+  border-radius: 6px;
+}
+.ki-brand .ki-brand__horizontal {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 68px;
+  aspect-ratio: 930 / 220;
+  object-fit: contain;
+  object-position: left center;
+}
+.ki-brand .ki-brand__emblem { flex: 0 0 62px; width: 62px; height: auto; object-fit: contain; }
+.brand.ki-brand > .ki-brand__copy { display: block; min-width: 0; max-width: 100%; }
+.ki-brand .brand-name { font-family: Georgia, 'Times New Roman', serif; font-size: 25px; line-height: 1.15; letter-spacing: .3px; }
+.ki-brand .ki-brand__copy small { font-size: 8px; letter-spacing: 2.8px; color: #9b6859; }
+.brand.ki-brand--footer { width: 286px; min-height: 68px; margin-bottom: 20px; }
+.ki-brand--footer .ki-brand__horizontal { max-height: none; }
+/* Always reserve the actions' space; logo may shrink without changing its proportions. */
+.site-header .nav-actions { flex-shrink: 0; }
+@media (max-width: 1050px) {
+  .brand.ki-brand--header { flex-basis: 224px; width: 224px; }
+}
+@media (max-width: 800px) {
+  .brand.ki-brand--header { flex-basis: 204px; width: 204px; min-height: 48px; }
+  .ki-brand .brand-name { font-size: 22px; }
+  .ki-brand .ki-brand__emblem { flex-basis: 54px; width: 54px; }
+}
+@media (max-width: 520px) {
+  .brand.ki-brand--header { flex-basis: 170px; width: 170px; min-height: 44px; gap: 7px; }
+  .brand.ki-brand--footer { width: min(278px, 100%); }
+  .ki-brand .ki-brand__emblem { flex-basis: 42px; width: 42px; }
+  .ki-brand .brand-name { font-size: 19px; }
+  .ki-brand .ki-brand__copy small { font-size: 7px; letter-spacing: 1.8px; }
+}
+@media (max-width: 360px) {
+  .brand.ki-brand--header { flex-basis: 146px; width: 146px; }
+  .site-header .nav-actions { gap: 6px; }
+  .site-header .nav-actions > .button { padding-inline: 8px; gap: 4px; }
+  .site-header .nav-actions > .button > span[aria-hidden] { display: none; }
+  .ki-brand .ki-brand__emblem { flex-basis: 36px; width: 36px; }
+  .ki-brand .brand-name { font-size: 17px; }
+}

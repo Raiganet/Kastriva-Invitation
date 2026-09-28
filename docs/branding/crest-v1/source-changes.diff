@@ -1,0 +1,57 @@
+--- a/app/layout.tsx
++++ b/app/layout.tsx
+@@ -3,10 +3,12 @@
+ import SiteFooter from '@/components/SiteFooter';
+ import {publicSite} from '@/lib/cms-server';
+ import { siteUrl } from '@/lib/config';
++import { BRAND_ASSETS } from '@/lib/brand-identity';
+ import './globals.css';
+ import './invitation-cinematic.css';
+ import './invitation-heritage.css';
+ import './invitation-elementor.css';
+ import './invitation-botanical.css';
+-export const metadata: Metadata={metadataBase:new URL(siteUrl()),title:{default:'Kastriva Invitation — Undangan Digital Personal',template:'%s | Kastriva Invitation'},description:'Pilih tema, coba demo tanpa login, dan siapkan draft undangan pernikahan Anda bersama Kastriva.',robots:{index:false,follow:false},icons:{icon:'/icon.svg'}};
++import './brand-identity.css';
++export const metadata: Metadata={metadataBase:new URL(siteUrl()),title:{default:'Kastriva Invitation — Undangan Digital Personal',template:'%s | Kastriva Invitation'},description:'Pilih tema, coba demo tanpa login, dan siapkan draft undangan pernikahan Anda bersama Kastriva.',robots:{index:false,follow:false},applicationName:'Kastriva Invitation',manifest:'/manifest.webmanifest',icons:{icon:[{url:BRAND_ASSETS.favicon32,sizes:'32x32',type:'image/png'},{url:BRAND_ASSETS.favicon16,sizes:'16x16',type:'image/png'}],apple:[{url:BRAND_ASSETS.apple,sizes:'180x180',type:'image/png'}]}};
+ export default async function RootLayout({children}:{children:React.ReactNode}) {const cms=await publicSite();return <html lang="id"><body><a className="skip-link" href="#main-content">Lewati ke konten</a><SiteHeader content={cms.content}/><div id="main-content">{children}</div><SiteFooter content={cms.content}/></body></html>;}
+--- a/app/robots.ts
++++ b/app/robots.ts
+@@ -6,5 +6,5 @@
+  const s=await publicSite();
+  if(s.source!=='database'||!s.content.allowIndex)return{rules:{userAgent:'*',disallow:'/'}};
+  // Explicit marketing routes only. Robots directives are not authentication.
+- return{rules:{userAgent:'*',allow:['/$','/tema$','/tema?','/harga$','/_next/','/icon.svg'],disallow:'/'}};
++ return{rules:{userAgent:'*',allow:['/$','/tema$','/tema?','/harga$','/_next/','/brand/crest-v1/','/favicon.ico','/manifest.webmanifest'],disallow:'/'}};
+ }
+--- a/components/SiteHeader.tsx
++++ b/components/SiteHeader.tsx
+@@ -1,5 +1,6 @@
+ 'use client';
+ import Link from 'next/link';
++import BrandLogo from '@/components/BrandLogo';
+ import {useAccountNavigation} from '@/components/useAccountNavigation';
+ import type {CmsContent} from '@/lib/cms';
+ import defaults from '@/data/cms-defaults.json';
+@@ -14,7 +15,7 @@
+   if(hidden) return null;
+   const links=[['/','Beranda'],['/tema','Koleksi tema'],['/harga','Harga'],['/panduan','Panduan']];
+   return <header className="site-header"><div className="container nav-row">
+-    <Link href="/" className="brand" aria-label={content.brandName+' — Beranda'}><span className="brand-mark" aria-hidden>k<span>✦</span></span><span><strong className="brand-name" title={content.brandName}>{content.brandName}</strong><small title={content.tagline}>{content.tagline}</small></span></Link>
++    <BrandLogo brandName={content.brandName} tagline={content.tagline} placement="header"/>
+     <nav className="desktop-nav" aria-label="Navigasi utama">{links.map(([href,name])=><Link aria-current={path===href?'page':undefined} key={href} href={href}>{name}</Link>)}</nav>
+     <div className="nav-actions"><Link className="login-link" href={account.href}>{account.label}</Link><Link className="button small" href="/tema">Buat undangan <span aria-hidden>↗</span></Link><button className="menu-toggle" aria-expanded={open} aria-controls="mobile-menu" aria-label={open?'Tutup menu':'Buka menu'} onClick={()=>setOpen(!open)}>{open?'✕':'☰'}</button></div>
+   </div>{open&&<nav id="mobile-menu" className="mobile-nav" aria-label="Navigasi ponsel">{[...links,[account.href,account.label]].map(([href,name])=><Link key={href} href={href} onClick={()=>setOpen(false)}>{name}</Link>)}</nav>}</header>;
+--- a/components/SiteFooter.tsx
++++ b/components/SiteFooter.tsx
+@@ -1,9 +1,10 @@
+ 'use client';
+ import Link from 'next/link';
++import BrandLogo from '@/components/BrandLogo';
+ import { usePathname } from 'next/navigation';
+ import type {CmsContent} from '@/lib/cms';
+ import defaults from '@/data/cms-defaults.json';
+ export default function SiteFooter({content=defaults as CmsContent}:{content?:CmsContent}={}) {
+  const path=usePathname(); if(path.startsWith('/u/') || path.startsWith('/demo/')||path.endsWith('/preview'))return null;
+- return <footer className="site-footer"><div className="container footer-grid"><div><Link className="brand" href="/"><span className="brand-mark" aria-hidden>k<span>✦</span></span><span><strong className="brand-name" title={content.brandName}>{content.brandName}</strong><small title={content.tagline}>{content.tagline}</small></span></Link><p className="cms-linebreak">{content.footerText}</p></div><div><h3>Jelajahi</h3><Link href="/tema">Koleksi tema</Link><Link href="/harga">Harga tema</Link><Link href="/panduan">Panduan & status fitur</Link></div><div><h3>Hubungi Kastriva</h3><a href={content.companyUrl} target="_blank" rel="noopener noreferrer">{content.companyUrl.replace(/^https:\/\//,'')} ↗</a>{content.contactEmail&&<a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>}{content.whatsapp&&<a href={`https://wa.me/${content.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>}</div></div><div className="container footer-bottom"><span>© 2026 Kastriva. All rights reserved.</span><Link href="/privasi">Privasi & penggunaan data</Link></div></footer>;
++ return <footer className="site-footer"><div className="container footer-grid"><div><BrandLogo brandName={content.brandName} tagline={content.tagline} placement="footer"/><p className="cms-linebreak">{content.footerText}</p></div><div><h3>Jelajahi</h3><Link href="/tema">Koleksi tema</Link><Link href="/harga">Harga tema</Link><Link href="/panduan">Panduan & status fitur</Link></div><div><h3>Hubungi Kastriva</h3><a href={content.companyUrl} target="_blank" rel="noopener noreferrer">{content.companyUrl.replace(/^https:\/\//,'')} ↗</a>{content.contactEmail&&<a href={`mailto:${content.contactEmail}`}>{content.contactEmail}</a>}{content.whatsapp&&<a href={`https://wa.me/${content.whatsapp}`} target="_blank" rel="noopener noreferrer">WhatsApp</a>}</div></div><div className="container footer-bottom"><span>© 2026 Kastriva. All rights reserved.</span><Link href="/privasi">Privasi & penggunaan data</Link></div></footer>;
+ }

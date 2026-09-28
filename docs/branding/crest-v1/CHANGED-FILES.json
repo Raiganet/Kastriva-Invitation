@@ -1,0 +1,119 @@
+{
+  "base_commit": "343bba8a99787e5fb1fb6fbb03d9f316c7627262",
+  "app_version_unchanged": "1.9.0",
+  "patch": "classic-emblem-crest-v1",
+  "replaced": [
+    {
+      "path": "app/layout.tsx",
+      "before_sha256": "fa10d312a6b128827c7f26217ca2464bb12ef28944f739d7fc13625bca6a62be",
+      "after_sha256": "44b604fd86fc3cbf65fcfba4dfb63d35a3dddd6e0072832d717c7c7e68146f68"
+    },
+    {
+      "path": "app/robots.ts",
+      "before_sha256": "2fe4f56cab323daed4ee894efc49ec46af43b8dd93203ddec349ac2d2d47aee7",
+      "after_sha256": "4b6102321c357e0650a99dcfdf3d611fa8af024dcadcd4201c7f95a1b2caffad"
+    },
+    {
+      "path": "components/SiteHeader.tsx",
+      "before_sha256": "42578afb320100dada7f2de3bf425aef94c6d15a7bf0b8d1e14c53b577a90490",
+      "after_sha256": "7fc49358e08d58bd225bb70444868fd1639455f6f7eac53d75a395c01f125b3e"
+    },
+    {
+      "path": "components/SiteFooter.tsx",
+      "before_sha256": "4cc779978bbb45e419cbc2063d776c37f068e467a29ce82a5483fe1fb2a5a15f",
+      "after_sha256": "28b6d7efcc500bca0779be2adfc7891af414965fad02d57a365106e491f524b7"
+    }
+  ],
+  "added": [
+    {
+      "path": "app/brand-identity.css",
+      "sha256": "cd738dd0f1d93021c75143636203108b87520cf3ab639f763001ab5a88724ff0"
+    },
+    {
+      "path": "app/favicon.ico",
+      "sha256": "09c716a434847337687d88d1132655e02d3ec9a070c4cd29e47e360fc13a57ec"
+    },
+    {
+      "path": "app/manifest.webmanifest",
+      "sha256": "25bff73fcf0fd1ff5a98d51a555b33394fbefa7451c84e3a0e58cf3333e5e6ba"
+    },
+    {
+      "path": "components/BrandLogo.tsx",
+      "sha256": "722f732cd78f5646080c07fd5bab8848c3ec0f593bbfdb5c399fc054198c9801"
+    },
+    {
+      "path": "lib/brand-identity.ts",
+      "sha256": "769eed390ae06d52af4ce0a4a51b7c1ff32e7366466805c229b99d1f07ce0fbd"
+    },
+    {
+      "path": "tests/brand-identity.test.ts",
+      "sha256": "7883f5117ce861c93117a94abab9900346143a83739eb9a3025aa0e00adf4896"
+    },
+    {
+      "path": "public/brand/crest-v1/apple-touch-icon.png",
+      "sha256": "4a153af3ae19028b61c9c60ff459517226e2a52ceb81810e0a016b386b78b557"
+    },
+    {
+      "path": "public/brand/crest-v1/logo-horizontal.png",
+      "sha256": "31fb8db203ed43bc4afa9b4d3d6e3dee516210a01512e5cf2672603b071cdaac"
+    },
+    {
+      "path": "public/brand/crest-v1/icon-maskable-512.png",
+      "sha256": "6d3968e9db089747b4266ba1ca130edbbfb74a1bd76e73cfa52bedabbf080561"
+    },
+    {
+      "path": "public/brand/crest-v1/logo-horizontal.webp",
+      "sha256": "1947084b91c55f573e218ca0b2a302080a9c6c9fec02611968c17c828bc1a69e"
+    },
+    {
+      "path": "public/brand/crest-v1/wordmark.png",
+      "sha256": "e222c8c1f8576a9e1206c783cbee8659beb520d10c14ac0ea284a13a98edd394"
+    },
+    {
+      "path": "public/brand/crest-v1/favicon-32x32.png",
+      "sha256": "431002740dda811123fac92fd1a4036571b35b22666a41a4563b6cc956ee6f35"
+    },
+    {
+      "path": "public/brand/crest-v1/logo-stacked.png",
+      "sha256": "f34e3d17600ab24ee80b5e56dca7b2eea62911a610474a86e83a9a11969e0061"
+    },
+    {
+      "path": "public/brand/crest-v1/icon-192.png",
+      "sha256": "439f758ed11f8dc724a02198e6cb6eed60542e5ef451a43d4265cdc1e6202841"
+    },
+    {
+      "path": "public/brand/crest-v1/favicon-64x64.png",
+      "sha256": "13858007d6d6464cc59fa57c1c87a36ec5d1563b7d42a8e545d2458b3feddbef"
+    },
+    {
+      "path": "public/brand/crest-v1/emblem.png",
+      "sha256": "9ae0521248811237dd53c61f44359ae3f643a3adb246c2571d4ba46f228dc5bc"
+    },
+    {
+      "path": "public/brand/crest-v1/favicon-16x16.png",
+      "sha256": "4deadd44bc5067008a4f48d994724e35ebe5fc2abf699c8e526ccfa13f7a497a"
+    },
+    {
+      "path": "public/brand/crest-v1/favicon-48x48.png",
+      "sha256": "32218c5294e61dc33e47056d6a8b9fa12686528af40bb59bd2db389c626a65e3"
+    },
+    {
+      "path": "public/brand/crest-v1/emblem.webp",
+      "sha256": "07ac51cd7c310ed1bad5d9e411d9845deb48095a63ca1d5990c1faf82614a1ba"
+    },
+    {
+      "path": "public/brand/crest-v1/icon-512.png",
+      "sha256": "88bc079c7c44cf54d90b7a1bfa0003f5ba67e3903a7aa08f9ae4bc05cd686799"
+    },
+    {
+      "path": "public/brand/crest-v1/wordmark.webp",
+      "sha256": "2a5d64c9f7f75757ecc6ee5eef2c196a0a22a15583df7d23a2b5182890802584"
+    },
+    {
+      "path": "public/brand/crest-v1/favicon.ico",
+      "sha256": "09c716a434847337687d88d1132655e02d3ec9a070c4cd29e47e360fc13a57ec"
+    }
+  ],
+  "no_deployment": true,
+  "no_database_changes": true
+}
