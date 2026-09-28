@@ -57,7 +57,7 @@ do $$ declare t record; who uuid;begin
 end $$;
 reset role;
 set local role anon;
-do $$ declare t record; a jsonb;again jsonb;begin
+do $$ declare t record; first_ack jsonb;again jsonb;begin
  select * into t from ki_stage5_ctx;
  perform set_config('request.jwt.claim.sub','',true);perform set_config('request.jwt.claims','{"role":"anon"}',true);
  begin perform count(*) from public.ki_rsvps;raise exception 'FAIL anonymous table read';exception when insufficient_privilege then null;end;
@@ -66,14 +66,14 @@ do $$ declare t record; a jsonb;again jsonb;begin
  begin perform public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,0,gen_random_uuid(),'yes',4,'','',false);raise exception 'FAIL over capacity';exception when sqlstate '22023' then null;end;
  begin perform public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,0,gen_random_uuid(),'yes',2,'Bad'||chr(1),'Budi',true);raise exception 'FAIL control-byte bypass';exception when sqlstate '22023' then null;end;
  begin perform public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,0,gen_random_uuid(),'yes',2,repeat('💐',251),'Budi',true);raise exception 'FAIL Unicode overlength bypass';exception when sqlstate '22023' then null;end;
- a:=public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,0,t.req,'yes',2,'Selamat fixture!','Budi',true);
+ first_ack:=public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,0,t.req,'yes',2,'Selamat fixture!','Budi',true);
  again:=public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,0,t.req,'yes',2,'Selamat fixture!','Budi',true);
- if a<>again then raise exception 'FAIL guest retry changes response';end if;
- if a->'response'->>'moderation'<>'pending' then raise exception 'FAIL wish automatically approved';end if;
+ if first_ack<>again then raise exception 'FAIL guest retry changes response';end if;
+ if first_ack->'response'->>'moderation'<>'pending' then raise exception 'FAIL wish automatically approved';end if;
  if jsonb_array_length(public.ki_public_wishes('ki-stage5-only-fixture')->'items')<>0 then raise exception 'FAIL pending wish public';end if;
  begin perform public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,1,gen_random_uuid(),'yes',1,'Changed','Budi',true);raise exception 'FAIL no rate limit';exception when sqlstate 'P5004' then null;end;
  begin perform public.ki_submit_rsvp('ki-stage5-only-fixture',t.token_value,0,gen_random_uuid(),'yes',1,'Changed','Budi',true);raise exception 'FAIL stale revision';exception when sqlstate 'P5001' then null;end;
- update ki_stage5_ctx set first_result=a;
+ update ki_stage5_ctx set first_result=first_ack;
  raise notice 'PASS: bearer binding, capacity, pending moderation, same-request replay, rate and version checks';
 end $$;
 reset role;
