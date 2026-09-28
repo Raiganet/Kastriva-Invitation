@@ -14,6 +14,8 @@
     "009_heritage_themes.sql",
     "010_luxury_emerald.sql",
     "011_botanical_blush.sql",
-    "012_feature_readiness.sql"
-  ]
+    "012_feature_readiness.sql",
+    "013_public_wishes.sql"
+  ],
+  "openWishesProtocol": 1
 }

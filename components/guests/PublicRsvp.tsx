@@ -7,7 +7,7 @@ export default function PublicRsvp({slug}:{slug:string}){
  const [token,setToken]=useState<string|null>(null),[ready,setReady]=useState(false);
  useEffect(()=>{const read=()=>{setToken(tokenFromFragment(window.location.hash));setReady(true);};read();window.addEventListener('hashchange',read);return()=>window.removeEventListener('hashchange',read);},[]);
  return <><section className="inv-section guest-rsvp-section"><p className="overline">WE SAVED YOU A SEAT</p><h2>Konfirmasi kehadiran</h2>
-  {!ready?<p role="status">Memeriksa tautan tamu…</p>:token?<RsvpForm key={slug+token} slug={slug} token={token}/>:<div className="guest-rsvp-notice"><h3>Gunakan tautan khusus Anda.</h3><p>Halaman undangan ini dapat dibaca tanpa akun. Untuk memberikan konfirmasi dan ucapan, buka tautan personal yang dikirim oleh tuan rumah.</p><small>Nama pada sapaan bukan kunci akses RSVP. Hubungi pengirim bila tautan terpotong atau tidak berfungsi.</small></div>}
+  {!ready?<p role="status">Memeriksa tautan tamu…</p>:token?<RsvpForm key={slug+token} slug={slug} token={token}/>:<div className="guest-rsvp-notice"><h3>Gunakan tautan khusus Anda.</h3><p>Halaman undangan ini dapat dibaca tanpa akun. Untuk memberikan konfirmasi kehadiran, buka tautan personal yang dikirim oleh tuan rumah. Ucapan umum, bila diaktifkan pemilik, tersedia pada bagian Ucapan & doa.</p><small>Nama pada sapaan bukan kunci akses RSVP. Hubungi pengirim bila tautan terpotong atau tidak berfungsi.</small></div>}
  </section><PublicWishes slug={slug}/></>;
 }
 function RsvpForm({slug,token}:{slug:string;token:string}){
@@ -67,7 +67,7 @@ function PublicWishes({slug}:{slug:string}){
  }
  useEffect(()=>{++version.current;flight.current=false;setPage(null);void load();return()=>{++version.current;};},[slug]);
  if(page&&!page.enabled&&!error)return null;
- return <section className="inv-section alternate guest-public-wishes"><p className="overline">WARM WORDS, LASTING MEMORIES</p><h2>Doa & ucapan</h2><p>Ucapan ditampilkan dengan izin tamu dan persetujuan tuan rumah.</p>
+ return <section className="inv-section alternate guest-public-wishes"><p className="overline">WARM WORDS, LASTING MEMORIES</p><h2>Ucapan dari RSVP personal</h2><p>Ucapan ditampilkan dengan izin tamu dan persetujuan tuan rumah.</p>
   {busy&&!page&&<p role="status">Memuat ucapan…</p>}{error&&<p className="notice error" role="alert">{error}</p>}{page?.enabled&&!page.items.length&&<p>Belum ada ucapan yang ditampilkan.</p>}
   <div className="guest-wishes-grid">{page?.items.map(w=><article className="wish-card" key={w.id}><strong>{w.name}</strong><p>{w.message}</p></article>)}</div>
   <div className="button-row centered">{page?.next&&<button className="inv-button" disabled={busy} onClick={()=>load(page.next)}>Lihat ucapan lainnya</button>}<button className="inv-button outline" disabled={busy} onClick={()=>load()}>Perbarui ucapan</button></div>

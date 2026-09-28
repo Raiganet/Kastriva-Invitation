@@ -1,15 +1,13 @@
 {
-  "release": "1.8.0",
-  "basis": "Kastriva-Invitation-main.zip",
-  "basis_sha256": "233c34e2de46d82bd5517a31eed28c9c0c4bc1800aa871d63069c41579f46ae3",
-  "work_date": "2026-09-28",
-  "scope": [
-    "A02",
-    "A03",
-    "A04",
-    "A10"
-  ],
-  "external_writes": false,
-  "schema_base": 7,
-  "additional_migration": "012_feature_readiness.sql"
+  "version": "1.9.0",
+  "date": "2026-09-28",
+  "base_zip": "Kastriva-Invitation-Prioritas-1-v1.8.0.zip",
+  "base_sha256": "3069a304fcaea8c6c2cb62febcac60f76301ba66c48d97c210427b35c18cc426",
+  "verified_github_head": "40725a8c369d64d2350243c1f9e248513f808283",
+  "audio_fix_blob": "c5e6aca6bc320c26fe2e8acd3f6d90e45178a6f0",
+  "source_basis": "ZIP v1.8.0 plus audio fix checked against GitHub current commit; no external writes",
+  "preservation_file": "docs/test-results/v1.9.0/preservation.json",
+  "not_applied_to_supabase": true,
+  "new_migration": "013_public_wishes.sql",
+  "build_verified": false
 }

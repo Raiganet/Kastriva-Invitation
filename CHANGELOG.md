@@ -1,3 +1,12 @@
+# 1.9.0 — 28 September 2026
+
+- Kolom Ucapan & doa untuk tautan umum: izin, moderasi pemilik, retry identik, kode penghapusan, kuota server dan default tertutup; terpisah dari RSVP.
+- SQL 013 tambahan lima tabel RLS dan RPC terbatasi; tidak menulis ulang data atau grant modul lama.
+- Menu akun mengikuti sesi sebagai petunjuk UI, progres per undangan, sembunyikan permintaan legacy kosong.
+- Readiness dan runner SQL sampai 013; fixture browser umum, pengujian validasi/proyeksi, panduan aktif.
+- Audio TS2352 fix dari commit 40725a8 dipertahankan. Pin paket/harga/aset/migrasi 001–012 tidak berubah.
+- Full build/SQL/browser/Supabase baru belum diverifikasi penyusun. Lihat laporan aktual.
+
 # v1.8.0 — 28 September 2026: prioritas pertama audit
 
 - Basis source terbaru Diky dengan 15 tema dan musik/hadiah; bukan rollback ke source tahap lama.

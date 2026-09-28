@@ -5,17 +5,17 @@ import {CAPABILITY_DEFINITIONS} from '../lib/database-capabilities.ts';
 const config = { url: 'https://test.supabase.co', key: 'sb_publishable_TEST_ONLY' };
 const features = {contract_version:1,base_schema_version:7,diagnostics_migration:12,known_templates:15,
  capabilities:Object.fromEntries(CAPABILITY_DEFINITIONS.map(x=>[x.key,true]))};
-const healthy = [{external:{email:true},disable_signup:false},7,[{slug:'elegant-rose'}],features];
+const healthy = [{external:{email:true},disable_signup:false},7,[{slug:'elegant-rose'}],features,1];
 function mock(bodies:unknown[]=healthy,statuses=[200,200,200,200]) {
  const calls:{url:string;init?:RequestInit}[]=[];
  const fetcher=(async(input:string|URL|Request,init?:RequestInit)=>{
   const index=calls.length;calls.push({url:String(input),init});
-  return new Response(JSON.stringify(index===3&&bodies.length===3?features:bodies[index]),{status:statuses[index]??200,headers:{'Content-Type':'application/json'}});
+  return new Response(JSON.stringify(index===4?(bodies.length>4?bodies[4]:1):index===3&&bodies.length===3?features:bodies[index]),{status:statuses[index]??200,headers:{'Content-Type':'application/json'}});
  }) as typeof fetch;
  return {fetcher,calls};
 }
 test('readiness without config does not touch network',async()=>{const m=mock();const r=await probeBackend(null,m);assert.equal(r.configured,false);assert.equal(r.readyForAccountTest,false);assert.equal(r.readyForFeatureTest,false);assert.equal(m.calls.length,0);assert.equal(r.checks[0].state,'skip');});
-test('four successful probes distinguish account/feature TEST from production',async()=>{const m=mock();const r=await probeBackend(config,m);assert.equal(r.readyForAccountTest,true);assert.equal(r.readyForFeatureTest,true);assert.equal(r.checks.length,11);assert.equal(m.calls.length,4);assert.ok(!JSON.stringify(r).includes(config.key));assert.ok(!JSON.stringify(r).includes('https://test'));});
+test('five successful probes distinguish account/feature TEST from production',async()=>{const m=mock();const r=await probeBackend(config,m);assert.equal(r.readyForAccountTest,true);assert.equal(r.readyForFeatureTest,true);assert.equal(r.checks.length,12);assert.equal(m.calls.length,5);assert.ok(!JSON.stringify(r).includes(config.key));assert.ok(!JSON.stringify(r).includes('https://test'));});
 for(const i of [0,1,2,3])test(`upstream failure ${i} blocks feature readiness; only Auth/schema affect base account compatibility`,async()=>{const statuses=[200,200,200,200];statuses[i]=503;const r=await probeBackend(config,mock(healthy,statuses));assert.equal(r.readyForFeatureTest,false);assert.equal(r.readyForAccountTest,i>=2);assert.equal(r.checks[i+1].state,'fail');});
 test('missing migration has an actionable message',async()=>{const r=await probeBackend(config,mock(healthy,[200,404,200,200]));assert.match(r.checks[2].detail,/001.*002/);});
 test('invalid key is not printed in access-denied error',async()=>{const r=await probeBackend(config,mock([{token:config.key},null,null,null],[401,403,403,403]));assert.equal(r.readyForAccountTest,false);assert.ok(!JSON.stringify(r).includes(config.key));assert.match(r.checks[1].detail,/Akses ditolak/);});
@@ -33,3 +33,6 @@ test('schema 7 plus old eight-theme catalog no longer attests current features',
 test('incomplete validator capability prevents current-feature pass',async()=>{const r=await probeBackend(config,mock([healthy[0],7,healthy[2],{...features,capabilities:{...features.capabilities,invitation_extras:false}}]));assert.equal(r.readyForFeatureTest,false);assert.equal(r.checks.find(c=>c.id==='invitation_extras')!.state,'fail');});
 test('lying content type and invalid UTF8 cannot pass metadata validation',async()=>{for(const kind of ['html','invalid-utf8']){const fetcher=(async()=>new Response(kind==='html'?'{}':new Uint8Array([0xff,0xfe]),{headers:{'Content-Type':kind==='html'?'text/html':'application/json'}})) as typeof fetch;const r=await probeBackend(config,{fetcher});assert.equal(r.readyForAccountTest,false);assert.equal(r.readyForFeatureTest,false);}});
 test('metadata cancellation which never settles does not extend the deadline',async()=>{const fetcher=(async()=>new Response(new ReadableStream({start(c){c.enqueue(new Uint8Array(33000));},cancel(){return new Promise(()=>{});}}),{headers:{'Content-Type':'application/json'}})) as typeof fetch;const start=Date.now();const r=await probeBackend(config,{fetcher,timeoutMs:30});assert.equal(r.readyForFeatureTest,false);assert.ok(Date.now()-start<1000);});
+
+test('missing 013 fails feature readiness while base accounts remain testable',async()=>{const r=await probeBackend(config,mock(healthy,[200,200,200,200,404]));assert.equal(r.readyForAccountTest,true);assert.equal(r.readyForFeatureTest,false);assert.match(r.checks.find(c=>c.id==='open_wishes')!.detail,/013/);});
+test('a string or future general-wish protocol is not accepted as version 1',async()=>{for(const value of ['1',2,null,{}]){const r=await probeBackend(config,mock([...healthy.slice(0,4),value]));assert.equal(r.readyForAccountTest,true);assert.equal(r.readyForFeatureTest,false);assert.equal(r.checks.find(c=>c.id==='open_wishes')!.state,'fail');}});

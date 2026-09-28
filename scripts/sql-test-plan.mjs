@@ -18,5 +18,6 @@ export function sqlTestPlan(actualNames) {
   m(expected[11]),t('012_feature_readiness.sql'),
   // Diagnostics must be repeatable, read-only, and must keep private RPC grants intact.
   m(expected[11]),t('012_feature_readiness.sql'),t('008_011_upgrade_verify.sql'),t('011_replay_verify.sql'),
+  m(expected[12]),t('013_public_wishes.sql'),m(expected[12]),t('013_public_wishes.sql'),
  ];
 }

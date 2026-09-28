@@ -1,0 +1,452 @@
+{
+  "release": "1.8.0",
+  "changes": [
+    {
+      "path": ".github/workflows/verify.yml",
+      "status": "modified",
+      "sha256": "951d492951be294f0f7467bf8c6331e655d6ce9df42ae3c0f0054ff3d0392c8a"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "status": "modified",
+      "sha256": "032c4591dd7760b45292576b6c8d49a50e9ec41073bf07acba68e179fe72906a"
+    },
+    {
+      "path": "MULAI_DI_SINI.md",
+      "status": "modified",
+      "sha256": "cf1f0f152d348bc4d417de34759dd5013702e64ad0447512564239c617698776"
+    },
+    {
+      "path": "README.md",
+      "status": "modified",
+      "sha256": "7b4e74a98fdd1d4530db0f310c18f98188216bfcde3f4274404a56db7f79ce0c"
+    },
+    {
+      "path": "app/admin/panduan/page.tsx",
+      "status": "modified",
+      "sha256": "ac46acb96b48340bfa4a7db54f26ca786667ae72ce35e491924762216d6e9d7d"
+    },
+    {
+      "path": "app/admin/rilis/page.tsx",
+      "status": "modified",
+      "sha256": "198c68292b6fcfdb59c4767b6d5b66d22bfd53da46a051656a4ad8e85380ecb5"
+    },
+    {
+      "path": "app/api/health/route.ts",
+      "status": "modified",
+      "sha256": "3e8e97eaf4e732aef8b4692d364a55504a9b30f020d93dd234a1b5702335f8f0"
+    },
+    {
+      "path": "app/setup/page.tsx",
+      "status": "modified",
+      "sha256": "8b56c8c8af26e7ded733865d5d8f9a7b12b63a8f2fa0056751bd2acf1d8e25b2"
+    },
+    {
+      "path": "app/test-fixtures/gallery/page.tsx",
+      "status": "added",
+      "sha256": "2d1ce876253dc1b95ce5bcaee7bdc36da994ec3586205ed678064a1b8bd9beae"
+    },
+    {
+      "path": "components/BackendCheck.tsx",
+      "status": "modified",
+      "sha256": "5ca9a7823ad8890b6eb85a7a31d421500f01a5bd79c8cc72b7e39703933b1ab0"
+    },
+    {
+      "path": "data/database-contract.json",
+      "status": "added",
+      "sha256": "04d503a2e8990b0876b7e4abbbbb91964396e60dbf6453655dced56d94a558ba"
+    },
+    {
+      "path": "docs/DEPLOY_VERCEL.md",
+      "status": "modified",
+      "sha256": "77b3a5e0f640c291007e5a6dadfee335bae1336e16bdba34de99900925da392c"
+    },
+    {
+      "path": "docs/SOURCE_PROVENANCE.json",
+      "status": "modified",
+      "sha256": "998e230e4bd628ff7a9e083c2047de27b73df5dd35a0e96cc4565468f884b493"
+    },
+    {
+      "path": "docs/SUPABASE_LOCAL_SETUP.md",
+      "status": "modified",
+      "sha256": "7417db645a0d9eb5158973525e6a656b631dc3cd196843befebaaa0e21519af2"
+    },
+    {
+      "path": "docs/SUPABASE_SETUP.md",
+      "status": "modified",
+      "sha256": "b1dedbd936059d1dd82e329cb07289b6ce70b0a4dc937cc6af7fd39591d8b53f"
+    },
+    {
+      "path": "docs/TAHAP_2_PERUBAHAN.md",
+      "status": "modified",
+      "sha256": "6edcc4d1bf61e63f1f65e6175ca1d576446fbe1efd308875724d6c83708afdff"
+    },
+    {
+      "path": "docs/TAHAP_2_SUPABASE.md",
+      "status": "modified",
+      "sha256": "98e3f2475d6d28641dd0ee7e152a03c4abc1fa1560d264c3ccf015951760be0b"
+    },
+    {
+      "path": "docs/TAHAP_3_EDITOR.md",
+      "status": "modified",
+      "sha256": "1de99bd659112828b76dc6641fdb14ddbecfa6b4e7721a877ee4ecaeb726238f"
+    },
+    {
+      "path": "docs/TAHAP_4_PEMESANAN.md",
+      "status": "modified",
+      "sha256": "49572c62deec5d390c9f8fb80becbd974877b2b4de25b96c98a4d6b9dc437aea"
+    },
+    {
+      "path": "docs/TAHAP_5_TAMU_RSVP.md",
+      "status": "modified",
+      "sha256": "c71974e0412a21cec7e264913ae656af0d2577b2b00e3a2891c67acfe5cc6554"
+    },
+    {
+      "path": "docs/TAHAP_6_CMS.md",
+      "status": "modified",
+      "sha256": "618b5e53cb5e84fc248cab65998ddf375fda376f03468087935d83c63d3d7a04"
+    },
+    {
+      "path": "docs/TAHAP_7_PERBAIKAN.md",
+      "status": "modified",
+      "sha256": "abfc7fbbb9a469f46cb172ff927715a0d1dd587cca52aa7552d22702787a4eab"
+    },
+    {
+      "path": "docs/TAHAP_7_RILIS.md",
+      "status": "modified",
+      "sha256": "02008af8dd3ee86c5f94e81a3abbce8210231ee30468688f3a41bf8453334971"
+    },
+    {
+      "path": "docs/TEST_REPORT.md",
+      "status": "modified",
+      "sha256": "4d68f9f048f6714d88ec23871148b88b9ffc64bd051bb60ed5ab139dfde9c181"
+    },
+    {
+      "path": "docs/UJI_v1.8.0.md",
+      "status": "added",
+      "sha256": "5f5a623ce095405d942f1da3157bd77a8e79b694296321947401b640bf8b300b"
+    },
+    {
+      "path": "docs/UPGRADE_TAHAP_2.md",
+      "status": "modified",
+      "sha256": "1b35c6374a434995ecb20a2a5c339e17c8b8fd409a87aa29b59f44be72db9f0b"
+    },
+    {
+      "path": "docs/UPGRADE_TAHAP_3.md",
+      "status": "modified",
+      "sha256": "aca03935d0faa51e9ec953eeb0c03b1710acb481adbbdb36e70a760a75561549"
+    },
+    {
+      "path": "docs/UPGRADE_TAHAP_4.md",
+      "status": "modified",
+      "sha256": "c342888d61e777ab4487c86a593c3f3903f25515d59d4bd826cde557d18eea43"
+    },
+    {
+      "path": "docs/UPGRADE_TAHAP_5.md",
+      "status": "modified",
+      "sha256": "a4ceda84d549e3dca6d4516b8567982db06b293c0649b2524ed9e9cc3915c9fc"
+    },
+    {
+      "path": "docs/UPGRADE_TAHAP_6.md",
+      "status": "modified",
+      "sha256": "76c2efbae215469359c79f03a7e1fb7acca5ca7188bbd40399bfed298e8f6280"
+    },
+    {
+      "path": "docs/UPGRADE_TAHAP_7.md",
+      "status": "modified",
+      "sha256": "f6d411b8759890f33e83ca315bfe1ce96d645d7bb7376a592ba0d9b3f59e41ef"
+    },
+    {
+      "path": "docs/UPGRADE_v1.8.0.md",
+      "status": "added",
+      "sha256": "28b1eedbdde460a91d09dffb3afdde65fc0b54c04160cdb231d81b9219e21585"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/CHANGED_FILES.json",
+      "status": "added",
+      "sha256": "040523bd1a5660e21b28b2b04ec6a75e504c1c8a7ad977017c6d817bb079071c"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/DEPLOY_VERCEL.md",
+      "status": "added",
+      "sha256": "5e25979086f01b20f5454ca30f25104c8f8bcf8e2d2900d3cccaaf257bbc6cf8"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/MULAI_DI_SINI.md",
+      "status": "added",
+      "sha256": "688c8dd187cb6ed2622cd10bb257a74a9538f48ee7caf8e4afcd34292c8f81ac"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/OUTPUT_MANIFEST.json",
+      "status": "added",
+      "sha256": "b7302b73471c628609187ebddce993f246a46b6ac0d54fe5d87e66299e103f19"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/README.md",
+      "status": "added",
+      "sha256": "184feb1aa4b03bd0d055a80643de06e12e7f04a7229a542c18751921d1c17d9e"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/SOURCE_PROVENANCE.json",
+      "status": "added",
+      "sha256": "0740c2d004d7d293a125213aab81db13a122ad6e23c34e5e36df7d783d7e794a"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/SUPABASE_SETUP.md",
+      "status": "added",
+      "sha256": "e1f993a82c2da6f6e85977551bba4e0a80301687f5edc8e92b9b23e9d6b563dc"
+    },
+    {
+      "path": "docs/history/pre-v1.8.0/TEST_REPORT.md",
+      "status": "added",
+      "sha256": "ee035aeaeb4c033938bc09a21743fa3b0e0e74a1f3ccc275e1434338d78eb8d2"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/baseline-tests.log",
+      "status": "added",
+      "sha256": "57e8b969060dda6f2d80d99687f36db6a2d9ce26b3683d0901f952151d1149f2"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/browser-gate.log",
+      "status": "added",
+      "sha256": "0f7216603ff33509dfd5af823c3b932b423f4157673055962cdef271523097dd"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/build.log",
+      "status": "added",
+      "sha256": "5d2b87fee48303f2bd21687e5288a7766caca2e71b33bd9d54fd0ac522ef83d8"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/commands.json",
+      "status": "added",
+      "sha256": "07b8c27d0621fcc150dd11a257c727f2b7ddb6df49045afde4604336c5b67c29"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/env.log",
+      "status": "added",
+      "sha256": "26b57775cdef007e745606369fb83069744e3745e7c56a14e2952bed396c3407"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/first-tests.log",
+      "status": "added",
+      "sha256": "7d019e05dad39d2c5b36d80d5d62443cdb9de207933ae39c45754932afd64ed3"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/lock.log",
+      "status": "added",
+      "sha256": "5f4ba7e7532fe7d219509b6584141448f2d47666c4bfc6e6cdf071d1bb0490de"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/npm-ci.log",
+      "status": "added",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/preservation.json",
+      "status": "added",
+      "sha256": "30f26b4b85edc05ee7b8485c6bea206997527d26c52fb9fb70c95975c1af80cc"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/registry-probe.log",
+      "status": "added",
+      "sha256": "b2d16dcd79f2b5b25afdd04e8b17062c4ae5d0d45cea09a41961037dbfdc13f1"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/release-contract.log",
+      "status": "added",
+      "sha256": "11936a129ff9cbbabc17e8ae9b3af50723ea447be52ed2c188564324016532cf"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/release-gate-report.json",
+      "status": "added",
+      "sha256": "ae52bfc6f85cbfe3b377b852cf50b55f9b597b93eac06b6fe5a0abc2cf994750"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/release-gate.log",
+      "status": "added",
+      "sha256": "ec5e1c1d144c4aa4794e01eebfdb6c2a6d31ca44d23f8cfbedf710f637874f2e"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/scripts-syntax.log",
+      "status": "added",
+      "sha256": "e1fbc83c47457538f2a2ef4832c42472e9d1250de3837a04496eceb9cf38fa4b"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/security.log",
+      "status": "added",
+      "sha256": "fed97d2f0bfbd476ace944c9051c1501cdd0d99028ecd82ed2a9e5ea44ae6d70"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/sql-gate-report.json",
+      "status": "added",
+      "sha256": "a2cebc2a259933d29e3284a517089b3412db78b632ebc0d8f8f7312aa942d5e6"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/sql-local-opt-in.log",
+      "status": "added",
+      "sha256": "c3d8d5446bef65de5eeb4d9f991b60a916fe9e5604eb40a013d628b8b9fc7057"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/sql-no-opt-in.log",
+      "status": "added",
+      "sha256": "b1c9c6588f0f0b17b96810ce943b47941a578720668f5f3bfde149ffb789612c"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/strict-subset.log",
+      "status": "added",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/supabase-no-config.log",
+      "status": "added",
+      "sha256": "0127089ae241313efc9fa43a7b9cbc68a532f65f9671ceba51f432d033fb2fd8"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/syntax.log",
+      "status": "added",
+      "sha256": "66eb24145fce688b366505fc6ca01c7453465e425101ec5f6ed45be5abd1bc10"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/typecheck-full.log",
+      "status": "added",
+      "sha256": "f55c4d9b4a3073d0f5b115e8920e52c1ee795afa280f399bcfeae3c41de89656"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/unit-before-guide-fix.log",
+      "status": "added",
+      "sha256": "ad89f36e8704b74acc1322382cc9e158efa545625fd747e960b175840b658ba8"
+    },
+    {
+      "path": "docs/test-results/v1.8.0/unit-tests.log",
+      "status": "added",
+      "sha256": "e42a1074d201e28a6bf92ec497cf856de7c9e79943e9915fdfcbfb9a5920355b"
+    },
+    {
+      "path": "e2e/invitation-extras.spec.ts",
+      "status": "added",
+      "sha256": "3c8b6bd2431db59244130d1a364ee90e1b0c9e8edb048811f6cdd4a56325526a"
+    },
+    {
+      "path": "e2e/public.spec.ts",
+      "status": "modified",
+      "sha256": "f8f5c81a7448f5d2f4cf40d09563cb03cbfe596cfeee0eb73e840b0ecd2cf559"
+    },
+    {
+      "path": "lib/database-capabilities.ts",
+      "status": "added",
+      "sha256": "977ad0eea583c1d9a221738de4b325677a9866b507e2739929cde1d35ff17bc7"
+    },
+    {
+      "path": "lib/readiness.ts",
+      "status": "modified",
+      "sha256": "04cca4ac2c3d7aae5b47f049674fc6806409c45c2fff409a0545b30731037e1d"
+    },
+    {
+      "path": "lib/release.ts",
+      "status": "added",
+      "sha256": "2783851b9b60924a87be5cdfc98c1b9d6888b4f14f70bdb9fa33fb191f5cc788"
+    },
+    {
+      "path": "package-lock.json",
+      "status": "modified",
+      "sha256": "0778e59a332ab2691c66483a66c6e19002d79199028a9f7e718675089b4d035a"
+    },
+    {
+      "path": "package.json",
+      "status": "modified",
+      "sha256": "bd5102fc65ded0c60954d9065f0281b79c6dea907bffdf767a5d12680616b3f8"
+    },
+    {
+      "path": "scripts/check-release-contract.mjs",
+      "status": "added",
+      "sha256": "341e408ebea843fc7c2bc687dc0f179bf62635f19408162448693232c4e80616"
+    },
+    {
+      "path": "scripts/check-supabase.mjs",
+      "status": "modified",
+      "sha256": "39cc7114099944db09a86ee0b48a4f4580e7cf963d804b2ca28d4252774a635d"
+    },
+    {
+      "path": "scripts/release-policy.mjs",
+      "status": "modified",
+      "sha256": "34730a5b96fb7c567a164cc9dec132feefb42f67fb9c5bfe4398b3ac41ea92ad"
+    },
+    {
+      "path": "scripts/sql-test-plan.d.mts",
+      "status": "added",
+      "sha256": "fffe498eabc27796ea89bf2ba7ff7e8e11cd585741e12ec3ba6e1cd1d5e16423"
+    },
+    {
+      "path": "scripts/sql-test-plan.mjs",
+      "status": "added",
+      "sha256": "a27988d201180059a143a32a81566791e32ffdbb799c7434b9b8a427b5e9b220"
+    },
+    {
+      "path": "scripts/test-sql-local.mjs",
+      "status": "modified",
+      "sha256": "d1e7c1762f69c30b34ade5c0cfcdcda77eabb125d0545ed2fac05789d4f113d5"
+    },
+    {
+      "path": "supabase/diagnostics/preflight_008_011.sql",
+      "status": "added",
+      "sha256": "546ab82632c8809b0cb05b7ed15e4a07637c68c0d37e3ba2758c23219a185991"
+    },
+    {
+      "path": "supabase/migrations/012_feature_readiness.sql",
+      "status": "added",
+      "sha256": "7f5011e5d193524ffdc2568a7c4df2c40aea2e3e6cdf5bf144904b8eb8e5031f"
+    },
+    {
+      "path": "supabase/tests/008_011_upgrade_seed.sql",
+      "status": "added",
+      "sha256": "2df282384baf08daaecc6dc753dab583d8a8477621828b7e74776c3b5d83465d"
+    },
+    {
+      "path": "supabase/tests/008_011_upgrade_verify.sql",
+      "status": "added",
+      "sha256": "53430a8d7b4dfb2a46b8496f8f7cc8eb0bea73be71a1654a0ce8e4f723d8f5d3"
+    },
+    {
+      "path": "supabase/tests/011_replay_snapshot.sql",
+      "status": "added",
+      "sha256": "6947ac3d8fb1bfae9e88e6de03dd0891c7d2fb265e930dac56240f83f94b4c6d"
+    },
+    {
+      "path": "supabase/tests/011_replay_verify.sql",
+      "status": "added",
+      "sha256": "dc9ee1536cb4e8e12c7ebb9e8fb47c3bfff4dededcd7298201b01b2897f8d965"
+    },
+    {
+      "path": "supabase/tests/012_feature_readiness.sql",
+      "status": "added",
+      "sha256": "ae28d740d2ab2337860e86aa18b4eaec99d8efc8a8562c39e9178e259f597af9"
+    },
+    {
+      "path": "tests/readiness.test.ts",
+      "status": "modified",
+      "sha256": "090d967a9356827977c95fd93f05a4d120dcc371aff013bed0918866bbac2055"
+    },
+    {
+      "path": "tests/release-alignment.test.ts",
+      "status": "added",
+      "sha256": "6cd5395afcc2596005bd707e35fcef612accc1688bd64fb5fa177fe773172561"
+    },
+    {
+      "path": "tests/stage3-contracts.test.ts",
+      "status": "modified",
+      "sha256": "7d157cbca95b4d031bdad02e49973bfed804190d36fea3c5edc9cb7df166c566"
+    },
+    {
+      "path": "tests/stage6-contracts.test.ts",
+      "status": "modified",
+      "sha256": "92d619510e3c37f8b639b1af7e3a683e63e7c9ad279192cadb1f38ae00473e8f"
+    },
+    {
+      "path": "tests/stage7.test.ts",
+      "status": "modified",
+      "sha256": "1c17e6c77930512d0036728b98f56385b5b252eb0b6010db5b526dca5d33d9fa"
+    }
+  ],
+  "deleted_from_original": [],
+  "note": "Historical documents archived/labeled; source features outside audit priority1 unchanged."
+}

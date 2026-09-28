@@ -1,26 +1,10 @@
-# Mulai di sini — Kastriva Invitation v1.8.0
+# Mulai v1.9.0
 
-Simpan proyek lama sebagai cadangan. Ekstrak ke folder baru. Gunakan Node 22.x dan folder yang berisi `package.json`. Jangan membagikan `.env.local`/key/password.
+1. Simpan cadangan source. Baca `docs/UPGRADE_v1.9.0.md`.
+2. `npm ci` → `npm test` → `npm run typecheck` → `npm run build` pada Node 22.x. Hentikan bila gagal.
+3. Pertahankan environment yang benar. Tambahkan `ENABLE_PUBLIC_WISHES=false`, tanpa key baru.
+4. Setelah staging/cadangan ditinjau, pasang **013_public_wishes.sql saja** bila 001–012 sudah ada. Paket ini belum menerapkannya ke Supabase Diky.
+5. `/setup` dan `/admin/rilis`, lalu checklist `docs/UJI_v1.9.0.md`.
+6. Buka flag deployment, layanan Admin → Ucapan umum, dan penerimaan/penayangan pemilik setelah pengujian.
 
-```powershell
-npm ci
-npm test
-npm run check:release-contract
-npm run typecheck
-npm run build
-```
-
-Jangan lanjutkan jika perintah gagal. Lockfile sudah tersedia; tidak perlu membuat ulang atau mengganti semua paket menjadi `latest`.
-
-**Database tidak otomatis dimigrasikan saat build.** Jika 001–011 sudah terpasang, cukup jalankan `supabase/migrations/012_feature_readiness.sql`. Skema dasar tetap 7. Jika baru 007 atau tidak tahu posisinya, baca **`docs/UPGRADE_v1.8.0.md`** sebelum menjalankan SQL. Jangan menghapus tabel.
-
-Sesudah migrasi dan konfigurasi benar:
-
-```powershell
-npm run check:supabase
-npm run dev
-```
-
-Buka `/setup`, lalu `/admin/rilis` dengan akun admin. Koneksi akun dan kemampuan fitur harus diperiksa terpisah. Hasilnya belum membuktikan semua alur produksi lulus.
-
-Tidak ada key/flag baru atau perubahan harga/desain tema pada patch ini. Ucapan umum dan kuota media masih pekerjaan berikutnya. Laporan pengujian aktual: `docs/TEST_REPORT.md`.
+Tidak perlu mendaftarkan tamu untuk ucapan umum. RSVP personal, musik, hadiah, tema dan harga tidak diubah. Jangan membagikan secret, tautan tamu, atau kode penghapusan.

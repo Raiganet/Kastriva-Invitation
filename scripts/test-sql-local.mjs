@@ -19,7 +19,7 @@ let plan;
 try { plan=sqlTestPlan(readdirSync(root+'supabase/migrations').filter(n=>n.endsWith('.sql'))); }
 catch(error) { report('plan_failed');console.error(error.message);process.exit(1); }
 const probe=spawnSync('psql',['--version'],{env,encoding:'utf8',timeout:10000});
-if(probe.status!==0){report('psql_unavailable');console.error('FAIL: psql client not available. No database was touched. See docs/UPGRADE_v1.8.0.md.');process.exit(1);}
+if(probe.status!==0){report('psql_unavailable');console.error('FAIL: psql client not available. No database was touched. See docs/UPGRADE_v1.9.0.md.');process.exit(1);}
 for(const file of plan){
  const r=spawnSync('psql',['-X','--no-password','-v','ON_ERROR_STOP=1','--file',root+file],{env,encoding:'utf8',timeout:120000,maxBuffer:4*1024*1024});
  writeFileSync(root+'.sql-test/'+String(steps.length).padStart(2,'0')+'-'+file.split('/').at(-1)+'.log',(r.stdout||'')+(r.stderr||'')+(r.error?.message||''));

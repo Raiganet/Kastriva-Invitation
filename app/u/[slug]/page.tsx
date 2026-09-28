@@ -5,6 +5,7 @@ import {invitationShareText} from '@/lib/invitation-share';
 import {headers} from 'next/headers';
 import {publicGateway} from '@/lib/public-gateway';
 import {notFound} from 'next/navigation';
+import {publicWishesAppEnabled} from '@/lib/open-wish-server';
 import {rsvpAppEnabled} from '@/lib/guest-server';
 import InvitationView from '@/components/InvitationView';
 import {publishingAppEnabled} from '@/lib/commerce-server';
@@ -34,5 +35,5 @@ export async function generateMetadata({params}:{params:Promise<{slug:string}>})
 export default async function Published({params,searchParams}:{params:Promise<{slug:string}>;searchParams:Promise<{to?:string|string[]}>}){
  const v=await publishedInvitation((await params).slug);if(!v)notFound();
  const template=getTemplate(v.theme_slug)!;const q=await searchParams;
- return <InvitationView template={template} content={v.content} mode="public" rsvpSlug={rsvpAppEnabled()?v.slug:undefined} guest={safeGuest(q.to)} expiresAt={v.expires_at} photoUrls={Array.from({length:v.photo_count},(_,i)=>`/api/public/${v.slug}/photos/${i}?v=${v.revision}`)}/>;
+ return <InvitationView template={template} content={v.content} mode="public" rsvpSlug={rsvpAppEnabled()?v.slug:undefined} openWishesSlug={publicWishesAppEnabled()?v.slug:undefined} guest={safeGuest(q.to)} expiresAt={v.expires_at} photoUrls={Array.from({length:v.photo_count},(_,i)=>`/api/public/${v.slug}/photos/${i}?v=${v.revision}`)}/>;
 }

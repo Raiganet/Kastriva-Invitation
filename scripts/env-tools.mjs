@@ -42,8 +42,9 @@ export function validateEnvironment(env) {
   }
   if (env.ENABLE_ORDER_REQUESTS && !['true', 'false'].includes(env.ENABLE_ORDER_REQUESTS)) errors.push('ENABLE_ORDER_REQUESTS hanya true atau false.');
   if (env.ENABLE_ORDER_REQUESTS === 'true' && (!url || !key)) errors.push('Permintaan pengerjaan tidak dapat aktif tanpa konfigurasi Supabase.');
-  for(const flag of ['ENABLE_CHECKOUT','ENABLE_PUBLIC_INVITATIONS','ENABLE_RSVP']){if(env[flag]&&!['true','false'].includes(env[flag]))errors.push(flag+' hanya true atau false.');if(env[flag]==='true'&&(!url||!key))errors.push(flag+' membutuhkan konfigurasi Supabase.');}
+  for(const flag of ['ENABLE_CHECKOUT','ENABLE_PUBLIC_INVITATIONS','ENABLE_RSVP','ENABLE_PUBLIC_WISHES']){if(env[flag]&&!['true','false'].includes(env[flag]))errors.push(flag+' hanya true atau false.');if(env[flag]==='true'&&(!url||!key))errors.push(flag+' membutuhkan konfigurasi Supabase.');}
   if(env.ENABLE_RSVP==='true'&&env.ENABLE_PUBLIC_INVITATIONS!=='true')errors.push('ENABLE_RSVP membutuhkan ENABLE_PUBLIC_INVITATIONS=true.');
+  if(env.ENABLE_PUBLIC_WISHES==='true'&&env.ENABLE_PUBLIC_INVITATIONS!=='true')errors.push('ENABLE_PUBLIC_WISHES membutuhkan ENABLE_PUBLIC_INVITATIONS=true.');
   const secret=env.SUPABASE_SECRET_KEY||'';if(secret){let valid=/^sb_secret_\S{10,}$/.test(secret);try{valid ||= secret.split('.').length===3 && JSON.parse(Buffer.from(secret.split('.')[1],'base64url').toString()).role==='service_role';}catch{}if(!valid)errors.push('SUPABASE_SECRET_KEY harus server secret/service_role lengkap, bukan publishable key. Nilainya tidak dicetak.');if(!url)errors.push('Key privat harus dipasangkan dengan proyek Supabase yang sama.');}
   const rateKey=env.RATE_LIMIT_HMAC_KEY||'';
   if(rateKey && (!/^[0-9a-fA-F]{64}$/.test(rateKey)||new Set(rateKey.toLowerCase()).size<8))errors.push('RATE_LIMIT_HMAC_KEY harus 32 byte acak dalam format hex (64 karakter). Nilainya tidak dicetak.');

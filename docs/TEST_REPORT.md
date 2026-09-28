@@ -1,57 +1,57 @@
-# Hasil pengujian aktual — v1.8.0 / prioritas pertama audit
+# Hasil pemeriksaan — v1.9.0 / prioritas kedua
 
-Tanggal: 28 September 2026. Basis: **Kastriva-Invitation-main.zip** dari Diky. Runtime pemeriksaan: Node22.16.0, npm10.9.2, TypeScript global5.8.3. Pin TypeScript aplikasi tetap ~5.9.3; versi global tersebut tidak dianggap versi SDK terpasang.
+Tanggal: 28 September 2026. Basis ZIP v1.8.0 ditambah audio TS2352 fix dari GitHub `40725a8c369d64d2350243c1f9e248513f808283`; main masih pada commit tersebut ketika diperiksa kembali sebelum penyerahan. Runtime lokal Node 22.16.0, npm 10.9.2, TypeScript global 5.8.3. Pin proyek TS ~5.9.3, Next 16.3.6 dan SDK tidak diubah.
 
-## Status
+## Status sebenarnya
 
-**Perbaikan source dan pengujian fungsi/kontrak selesai. Verifikasi rilis penuh belum lulus.** Build Next.js, PostgreSQL/Supabase nyata, dan browser aplikasi belum berhasil diuji di lingkungan penyusunan ini. Tidak ada deployment, pemasangan SQL, perubahan akun, transaksi uang, pengiriman email/pesan, atau aktivasi layanan pada akun Diky.
+**Kode ucapan umum dan pembaruan navigasi telah disiapkan. Pengujian fungsi/simulasi/statis berhasil; build aplikasi baru, SQL engine, browser Next dan Supabase nyata belum terverifikasi.** Tidak ada commit, deployment, pemasangan SQL 013, aktivasi layanan, perubahan database pelanggan atau pengiriman ucapan live yang dilakukan dalam pekerjaan ini. Keberhasilan v1.8.0 yang dilaporkan Diky tidak dinyatakan sebagai kelulusan build v1.9.0.
 
-| Pemeriksaan | Hasil aktual | Batas arti |
+## Hasil yang benar-benar dijalankan
+
+| Pemeriksaan | Hasil | Batas makna |
 |---|---|---|
-| Baseline ZIP terbaru `npm test` | **686/686 lulus** | Dijalankan sebelum perubahan. |
-| Suite akhir `npm test` | **711/711 lulus**, tanpa gagal/skip | Fungsi, respons HTTP simulasi, dan kontrak source. Bukan 711 transaksi Supabase. |
-| `check:lock` | Lulus | Root metadata sesuai dan graph lock dipertahankan. Bukan audit keamanan dependensi. |
-| `check:release-contract` | Lulus | 12 migrasi, 15 renderer, rencana 30 langkah SQL. **Tidak mengeksekusi SQL**. |
-| `check:syntax` | **207 TS/TSX**, tanpa error sintaks/import lokal | Parser/transpiler TypeScript global5.8.3, bukan semantic build Next. |
-| `check:security` | 43 client roots, 167 source files; tanpa temuan pada pemeriksaan statis | Tidak menggantikan audit keamanan/bundle atau uji eksploitasi. |
-| Typecheck ketat modul baru dan tes terkait | Lulus | Root: release, database-capabilities, readiness, readiness.test, release-alignment.test; tidak mencakup React/Next/SDK. |
-| Sintaks skrip MJS | Lulus | `node --check`, bukan eksekusi SQL atau koneksi layanan. |
-| `check:env` | PASS mode demo | Konfigurasi backend kosong; bukan bukti terhubung. |
-| Probe registry npm | **Gagal EAI_AGAIN**, exit1 | DNS registry gagal di lingkungan ini. Tidak menyimpulkan laptop Diky bermasalah atau versi paket tidak tersedia. |
-| `npm ci` terbatas, tanpa install scripts/audit | **Tidak selesai; dihentikan setelah 14 detik** | Exit -9 karena pengaman timeout lokal. Tidak ada instalasi lengkap; bukan hasil build. |
-| `typecheck` seluruh aplikasi | Gagal | Definisi node/react/react-dom belum terpasang. Error lain bisa muncul sesudah pemasangan. |
-| `npm run build` | Gagal, exit127 | Prebuild demo lulus; `next: not found`. |
-| `verify:release` | STOP pada `check:installed` | Lock dan kontrak rilis lulus, paket belum terpasang. Bukan persetujuan rilis. |
-| `test:e2e` | STOP karena build demo belum ada | Test browser baru **belum dijalankan**, bukan gambar statis yang dianggap E2E. |
-| `test:sql:local` tanpa opt-in | SKIP exit2 | Tidak ada perubahan database. |
-| `test:sql:local` dengan opt-in fixture lokal | Gagal sebelum koneksi: `psql` tidak tersedia | **Tidak ada SQL yang dieksekusi pada engine**. |
-| `check:supabase` tanpa konfigurasi | SKIP exit2 | Tidak menghubungi proyek Supabase. |
-| CI GitHub, staging, Vercel, email, Storage | Tidak dijalankan | Source workflow/test bukan bukti layanan nyata telah diuji. |
+| Suite proyek sebelum penambahan tes baru | 711/711 lulus | Baseline fungsi/simulasi/statis. |
+| `npm test` akhir | **773/773 lulus**, 0 gagal/skip | 62 tes tambahan; bukan operasi database hidup. |
+| `check:syntax` | **229 TS/TSX**, tanpa error sintaks/import lokal | TypeScript global, bukan semantic typecheck SDK/React. |
+| `check:security` | **48 client roots, 187 file source**, tanpa temuan pada guard/import statis | Bukan audit independen atau bundle/pentest. |
+| `check:lock` | Lulus | Manifest/lock cocok; bukan audit keamanan dependency. |
+| `check:release-contract` | Lulus: **13 migrasi, 34 langkah, 15 renderer** | Memeriksa daftar dan keberadaan berkas; tidak menjalankan SQL. |
+| Typecheck ketat modul logika | Lulus untuk 3 entrypoint baru beserta dependensi logika yang diimpor | `open-wishes`, `customer-journey`, `account-navigation`; tidak mencakup komponen/route Next atau SDK. |
+| Chromium layout HTML statis | **28/28** tanpa overflow halaman pada 320/390/768/1440 px | Tujuh fixture; adapter TSX/hooks tiruan, bukan React/Next/hydration. |
+| `check:env` | Lulus mode demo | Tidak menguji koneksi akun. |
+| `npm ci` terbatas | Timeout exit 124, belum selesai | Tidak menghasilkan instalasi lengkap. |
+| Probe `npm view next@16.3.6 version` | Gagal exit 1, **EAI_AGAIN** | DNS registry gagal di lingkungan penyusun, bukan diagnosis laptop/Vercel Diky. |
+| Typecheck seluruh aplikasi | Gagal exit 2 | Tipe Next/React/Node/SDK tidak terpasang lengkap. Error lain tetap mungkin muncul setelah instalasi. |
+| `npm run build` | Gagal exit 127 | Prebuild demo lulus, kemudian `next: not found`. |
+| `verify:release` | STOP pada `check:installed` | Lock dan kontrak lulus, paket belum terpasang; bukan kelulusan rilis. |
+| `test:e2e` | STOP, belum ada `.next-test/BUILD_ID` | Tidak menjalankan Playwright pada aplikasi. |
+| `test:sql:local` dengan opt-in lokal | Gagal: `psql` tidak tersedia | Tidak menghubungi database apa pun. |
+| SQL 013, lima tabel/RPC baru, konkurensi, UI live/Supabase | Belum dijalankan | Checklist lokal/staging disertakan, tidak dihitung sebagai tes lulus. |
 
-Log akhir ada di `docs/test-results/v1.8.0/`. `commands.json` mencatat semua percobaan beserta exit code. `unit-before-guide-fix.log` menyimpan percobaan yang masih mengharapkan teks V1.7.0 di panduan admin. Ekspektasinya diperbarui agar mengikuti APP_VERSION, bukan menghapus tes. `unit-tests.log` adalah hasil akhir711.
+Log akhir berada pada `docs/test-results/v1.9.0/`. `command-results.json` mencatat exit code. Percobaan subset awal memakai daftar lib tanpa `DOM.Iterable`; diperbaiki sesuai konfigurasi proyek. Sesudah `npm ci` yang terputus membuat folder tipe kosong, subset dijalankan dengan typeRoots kosong agar tidak memasukkan paket yang belum terpasang. Tidak dibuat tipe tiruan React/Next untuk menamai aplikasi lulus; pemeriksaan subset tetap hanya logika murni.
 
-## Perbaikan yang diperiksa
+## Cakupan fungsi/simulasi
 
-Pemeriksaan dasar akun tetap terpisah dari fitur. RPC diagnostik yang hilang, schema/kontrak salah, validator tambahan yang belum mendukung, katalog tidak dikenal/duplikat, dan balasan tidak valid tidak dianggap fitur siap. Semua tema boleh disembunyikan tanpa dianggap migrasi hilang; peringatan katalog kosong tetap ditampilkan.
+Tes baru mencakup input nama/pesan/izin, Unicode/karakter kontrol, penolakan field RSVP/role, receipt dan pengikatannya ke undangan/ID, ACK palsu atau berlebih, salinan permintaan untuk retry, proyeksi publik/privat, larangan mengesahkan pesan tanpa izin, validasi pengaturan/admin, endpoint yang dikenal, transport HTTP tiruan untuk retry identik, label navigasi, progres tiap status pesanan, flag environment, serta kontrak source SQL/gateway.
 
-Probe menjaga batas byte/waktu, jenis JSON, UTF8, redirect, dan pembatalan. Tes memakai Response/Streams nyata pada Node dengan metadata tiruan, bukan Supabase. Typecheck subset menemukan kemungkinan nilai config null pada closure; kode memperbaikinya dengan binding konfigurasi non-null setelah pemeriksaan. Ini bukan pelemahan validasi.
+Pemeriksaan SQL secara teks memastikan guard/grant/lock/replay/kuota/default tertutup ditulis. **Ini tidak membuktikan sintaks PL/pgSQL, RLS atau operasi paralel sudah benar pada engine.** Runner SQL lokal kini memilih migration013 → test013 → ulang migration013 → test013. Test013 memuat fixture owner/B/admin, hak role, moderasi, kode salah/benar, erase/no-revival, layanan ditutup, quota, dan tidak berubahnya RSVP/nominal pesanan. Script dibatasi database `ki_isolated_test`; jangan dijalankan pada produksi.
 
-Health, ekspektasi Playwright, laporan release, dan runner SQL memakai versi package. Daftar migrasi terpusat mencegah migrasi baru dilewati diam-diam. Active README/panduan admin mengikuti 15 tema, 6 langkah editor, musik instrumental/hadiah yang sudah ada, dan migrasi tambahan.
+## Cakupan browser dan inspeksi tampilan
 
-## SQL dan browser: disiapkan tetapi belum dieksekusi
+`e2e/public-wishes.spec.ts` menambah tiga tes untuk halaman React fixture dengan HTTP interception: tanpa token/kehadiran, consent privat/default dan kode, retry identik sesudah503, serta penerimaan tertutup. Suite tersebut disiapkan tetapi belum berjalan pada runtime Next. Ia pun bukan tes Supabase jika kelak dijalankan, karena respons HTTP ditiru.
 
-012 hanya membuat RPC metadata baca-saja, fixed search_path dan grant terbatas pada fungsi tersebut; tidak mengubah base schema, data, harga, status pembayaran, izin RPC tamu, atau flag layanan. Pemeriksaan perilakunya bukan ledger tanggal migrasi dan bukan sertifikat produksi. SQL wajib diuji pada engine/staging.
+Inspeksi 28 layout menggunakan HTML hasil adapter minimal JSX, CSS asli, dan Chromium `set_content`. Tujuh fixture: ucapan terang, gelap, tertutup, moderasi dengan data, moderasi kosong, saklar admin, dan progres dua undangan. Nama/angka/status adalah **CONTOH STATIS**, bukan data pelanggan/server. Screenshot terang/gelap mobile dan moderasi desktop ditinjau. Tidak menguji klik, clipboard, sessionStorage origin aplikasi, keyboard/hydration atau penyimpanan. Kode alat reproduksi ada di `docs/testing-tools/render-v1.9.0.cjs`.
 
-Runner SQL mencakup 001–012, fixture lama sebelum perubahan grant007, data sintetis lintas upgrade, harga/tagihan/expiry/published lama, CMS draft yang belum dipublish, tema nonaktif, legacy validator, serta repeat migrasi terakhir. Fixture persistent hanya di database lokal disposable yang namanya dikunci. Skrip mendokumentasikan bukan untuk SQL Editor produksi.
+## Pelestarian dan perubahan
 
-Playwright menggunakan 15 demo dari registry, Web Audio native yang dibuat setelah gesture dan ditutup setelah pause, disclosure rekening contoh, dan galeri React sebenarnya dengan gambar PNG sintetis. Route fixture dibatasi flag test, loopback origin, backend kosong, dan bukan Vercel. Semua ini **belum lulus runtime browser dalam pekerjaan ini**. Tidak ada screenshot baru yang dipakai sebagai bukti.
+SHA-256 membandingkan **22 berkas** migrasi001–012, katalog/referensi/registry tema, aset public dan e2e audio terhadap basis. Semuanya identik; daftar ada di `preservation.json`. Semua pin dependency/devDependency dan engine sama. Hanya versi metadata aplikasi menjadi1.9.0. Base schema tetap7; protocol umum1. Harga/konten personal/database tidak diimpor atau diubah.
 
-## Pelestarian dan batas cakupan
+Runtime direktori app, components, lib, data, migrations, tests, scripts, e2e, manifest/config basis telah dicocokkan dengan Git tree HEAD sebelum modifikasi. Basis penuh tetap ZIP pengguna ditambah satu file audio, bukan klaim menyalin setiap file repository/riwayat Git. Dokumen/placeholder repository di luar ZIP bisa berbeda. Patch tidak menghapus aset atau file tambahan repository.
 
-Seluruh migrasi001–011, kedua JSON katalog/referensi, contoh environment, aset publik dan renderer undangan dipertahankan. Graph dependency lock tidak berubah selain metadata version root; tidak ada upgrade paket menjadi latest. Hash dicatat di preservation.json.
+Berkas lama tidak diubah di tempat. Output tidak memuat `.env.local`, secret operasional, node_modules, build, cache, database, atau font. String kode/bearer dalam tes adalah fixture lokal; jangan menggunakannya sebagai key operasional. Legacy Express yang tidak aktif tetap dibawa dari source; pemisahannya bukan pekerjaan rilis ini.
 
-Patch ini mengerjakan A02/A03/A04/A10 audit. Ucapan umum (A01), menu akun/progres (A06), kuota media/cleanup, CSP penuh, pemisahan legacy, dan bukti restore belum termasuk. Tidak ada klaim seluruh rekomendasi audit sudah selesai.
+## Batas rilis
 
-Keluaran tidak menyertakan node_modules, .env.local, .next/.next-test, secret nyata dari environment, font, atau backup database. Arsip source asli tidak diubah. Dokumen/source pengguna lama dipertahankan sebagai riwayat, bukan bukti hasil build versi baru.
+Default baru `ENABLE_PUBLIC_WISHES=false` dan platform/undangan tertutup. CAPTCHA, edit ucapan anonim, gabungan feed/CSV RSVP, kuota media, retensi/penghapusan semua log/backup, uji beban dan restore tidak ditambahkan. Public wish sender bukan identitas terverifikasi. Penghapusan plaintext tetap meninggalkan ID/hash/marker; replay tidak membuka kembali konten. NAT berbagi kuota, key harian berubah, bukan rate-limit bergulir presisi atau anti-DDoS penuh.
 
-Rujukan mekanisme pengujian browser: https://playwright.dev/docs/test-webserver . Rujukan tidak membuktikan test aplikasi ini sudah dijalankan.
+Sebelum aktivasi: full install/typecheck/build → SQL lokal → staging dua akun/admin/anon → alur tanpa token/moderasi/receipt/retry → check media/tema lama dan pemulihan. Jangan memakai jumlah tes untuk mengklaim seluruh platform siap produksi.

@@ -4,7 +4,7 @@ export class GuestTransportError extends Error {
  constructor(message:string,uncertain:boolean,status=0){super(message);this.name='GuestTransportError';this.uncertain=uncertain;this.status=status;}
 }
 export async function guestRequest<T>(endpoint:string,body:unknown,parse:(value:unknown)=>T,fetcher:typeof fetch=fetch):Promise<T>{
- if(!/^\/api\/(?:guestbook\/(?:manage|workspace|link)|public\/[a-z0-9-]+\/(?:guest|respond|wishes)|admin\/(?:guestbook|cms))$/.test(endpoint))throw new GuestTransportError('Endpoint tidak dikenal.',false);
+ if(!/^\/api\/(?:guestbook\/(?:manage|workspace|link)|open-wishes\/(?:manage|workspace)|public\/[a-z0-9-]+\/(?:guest|respond|wishes|open-wishes(?:\/(?:submit|withdraw))?)|admin\/(?:guestbook|cms|open-wishes))$/.test(endpoint))throw new GuestTransportError('Endpoint tidak dikenal.',false);
  try{
   const res=await fetcher(endpoint,{method:'POST',credentials:'same-origin',redirect:'error',cache:'no-store',headers:{'Content-Type':'application/json'},body:JSON.stringify(body),signal:AbortSignal.timeout(15000)});
   if(!/^application\/json(?:\s*;|$)/i.test(res.headers.get('content-type')||''))throw new GuestTransportError('Balasan tidak dikenali. Status simpan belum pasti.',true,res.status);

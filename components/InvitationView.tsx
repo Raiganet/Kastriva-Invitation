@@ -14,12 +14,13 @@ import InvitationStory from '@/components/InvitationStory';
 import {useInvitationMusic} from '@/components/useInvitationMusic';
 import InvitationNav,{type InvitationNavItem} from '@/components/InvitationNav';
 import Link from 'next/link';
+import PublicOpenWishes from '@/components/wishes/PublicOpenWishes';
 import PublicRsvp from '@/components/guests/PublicRsvp';
 import { useEffect, useId, useMemo, useState } from 'react';
 import type { DraftContent, Template } from '@/lib/types';
 import { calendarFile, countdown, eventInstant, invitationEvents, eventDateLabel } from '@/lib/domain';
 import { categories } from '@/lib/templates';
-export default function InvitationView({template,content,guest='Tamu Undangan',mode='demo',photoUrls=[],coverUrl,embedded=false,expiresAt,rsvpSlug,previewOnly=false}:{template:Template;content:DraftContent;guest?:string;mode?:'demo'|'draft'|'public';photoUrls?:string[];coverUrl?:string;embedded?:boolean;expiresAt?:string;rsvpSlug?:string;previewOnly?:boolean}) {
+export default function InvitationView({template,content,guest='Tamu Undangan',mode='demo',photoUrls=[],coverUrl,embedded=false,expiresAt,rsvpSlug,openWishesSlug,previewOnly=false}:{template:Template;content:DraftContent;guest?:string;mode?:'demo'|'draft'|'public';photoUrls?:string[];coverUrl?:string;embedded?:boolean;expiresAt?:string;rsvpSlug?:string;openWishesSlug?:string;previewOnly?:boolean}) {
  const [expired,setExpired]=useState(false);
  const [opened,setOpened]=useState(false),[opening,setOpening]=useState(false), [ticks,setTicks]=useState([0,0,0,0]);
  const [message,setMessage]=useState(''), [sample,setSample]=useState<{name:string;message:string}|null>(null);
@@ -30,7 +31,7 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
  const wedding=template.category==='pernikahan'; const names=[content.groom,content.bride].filter(Boolean).join(' & ')||'Nama pasangan';
  const target=eventInstant(content), events=invitationEvents(content);
  const uid=useId().replace(/:/g,'');const contentId='inv-content-'+uid, eventId='inv-events-'+uid;
- const heroId='inv-hero-'+uid,coupleId='inv-couple-'+uid,storyId='inv-story-'+uid,galleryId='inv-gallery-'+uid,giftId='inv-gifts-'+uid;
+ const heroId='inv-hero-'+uid,coupleId='inv-couple-'+uid,storyId='inv-story-'+uid,galleryId='inv-gallery-'+uid,giftId='inv-gifts-'+uid,wishesId='inv-wishes-'+uid;
  const hasGifts=!!content.gifts?.some(completeGift);
  const hasStory=!!content.story;
  const navigation=useMemo<InvitationNavItem[]>(()=>[
@@ -39,8 +40,9 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
   {id:eventId,label:'Acara',icon:'calendar'},
   ...(hasStory?[{id:storyId,label:'Cerita',icon:'story' as const}]:[]),
   {id:galleryId,label:'Galeri',icon:'gallery'},
+  ...(mode==='public'&&openWishesSlug?[{id:wishesId,label:'Ucapan',icon:'story' as const}]:[]),
   ...(hasGifts?[{id:giftId,label:'Hadiah',icon:'gift' as const}]:[]),
- ],[heroId,coupleId,eventId,storyId,galleryId,giftId,wedding,hasStory,hasGifts]);
+ ],[heroId,coupleId,eventId,storyId,galleryId,giftId,wedding,hasStory,hasGifts,mode,openWishesSlug,wishesId]);
  const Root=embedded?'div':'main', cover=coverUrl===undefined?photoUrls[0]:coverUrl;
  useEffect(()=>{const tick=()=>setTicks(countdown(target,Date.now()));tick();const timer=window.setInterval(tick,1000);return()=>window.clearInterval(timer);},[target]);
  useEffect(()=>{if(!opened)return;document.getElementById(contentId)?.focus();},[opened,contentId]);
@@ -72,6 +74,7 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
     {content.story&&<section id={storyId} tabIndex={-1} data-inv-section className="inv-section"><p className="overline">OUR JOURNEY</p><h2>Cerita kami</h2><InvitationStory story={content.story} cinematic={cinematic}/></section>}
     <section id={galleryId} tabIndex={-1} data-inv-section className="inv-section alternate"><p className="overline">LITTLE MOMENTS, BIG MEMORIES</p><h2>Galeri kenangan</h2>{photoUrls.length?<InvitationGallery key={photoUrls.join('|')} urls={photoUrls}/>:<><div className="photo-placeholders" aria-hidden>{['Sebuah pertemuan','Sebuah cerita','Selamanya bersama'].map(x=><div key={x}><span><ThemeMotif slug={template.slug}/></span><small>{x}</small></div>)}</div><p className="inv-caption">{mode==='demo'?'Ilustrasi posisi galeri. Foto pelanggan diunggah melalui editor.':mode==='public'?'Terima kasih telah menjadi bagian dari cerita kami.':'Belum ada foto di draft ini.'}</p></>}</section>
     {mode==='demo'&&<section className="inv-section"><p className="overline">COBA INTERAKSI</p><h2>Konfirmasi kehadiran</h2><p className="notice">Simulasi saja. Respons tidak dikirim ke server dan hilang saat halaman dimuat ulang. RSVP nyata hanya tersedia pada undangan terbit melalui tautan tamu khusus.</p><form className="rsvp-form" onSubmit={e=>{e.preventDefault();const f=new FormData(e.currentTarget);setSample({name:String(f.get('name')||''),message:String(f.get('message')||'')});setMessage('Simulasi berhasil. Tidak ada konfirmasi yang disimpan ke server.');}}><label>Nama Anda<input name="name" maxLength={100} required placeholder="Nama tamu"/></label><label>Konfirmasi<select name="attendance" required defaultValue=""><option value="" disabled>Pilih kehadiran</option><option value="hadir">Hadir</option><option value="tidak">Tidak hadir</option></select></label><label>Ucapan<textarea name="message" maxLength={500} rows={3} placeholder="Tulis harapan baik Anda"/></label><button className="inv-button" type="submit">Coba simulasi RSVP</button></form>{sample&&<div className="wish-card"><strong>{sample.name}</strong><p>{sample.message||'Terima kasih atas konfirmasi contoh Anda.'}</p><small>Contoh lokal — belum tersimpan</small></div>}</section>}
+    {mode==='public'&&openWishesSlug&&<PublicOpenWishes key={openWishesSlug} slug={openWishesSlug} id={wishesId}/>}
     {mode==='public'&&rsvpSlug&&<PublicRsvp slug={rsvpSlug}/>}
     {!!content.gifts?.length&&<InvitationGifts id={giftId} accounts={content.gifts} demo={mode==='demo'}/> }
     {message&&<p role="status" className="inv-status">{message}</p>}
