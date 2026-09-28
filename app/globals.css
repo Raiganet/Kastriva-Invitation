@@ -115,4 +115,29 @@
 .general-wishes .notice{background:color-mix(in srgb,var(--soft) 90%,var(--tone) 10%);color:var(--tone);border-color:color-mix(in srgb,var(--tone) 30%,transparent);max-width:680px;margin:18px auto;text-align:left}
 .general-wishes .wish-receipt{background:var(--soft);color:var(--tone);border-color:color-mix(in srgb,var(--tone) 30%,transparent)}
 .general-wishes .wish-receipt textarea{background:var(--soft);color:var(--tone);border:1px solid color-mix(in srgb,var(--tone) 35%,transparent);font:12px/1.6 ui-monospace,monospace;overflow-wrap:anywhere;resize:vertical;padding:12px;border-radius:8px}
+.general-wishes .wish-receipt-body{display:grid;gap:12px;margin-top:14px}
+.general-wishes .wish-receipt-lead{margin:0;line-height:1.8}
+.general-wishes .wish-receipt-actions{display:flex;flex-wrap:wrap;gap:10px}
+.general-wishes .wish-receipt-actions .inv-button{flex:1 1 160px}
+.general-wishes .wish-receipt-code{display:grid;gap:8px;font-size:12px;font-weight:600}
+.general-wishes .wish-receipt-meta{margin:0;font-size:12px;line-height:1.8;color:color-mix(in srgb,var(--tone) 82%,transparent)}
 .general-wishes .guest-checkbox input{accent-color:var(--tone)}
+@media(max-width:640px){.general-wishes .wish-receipt-actions .inv-button{flex:1 1 100%}}
+
+
+.general-wishes h3{margin-top:34px;margin-bottom:10px}
+.general-wishes .guest-wishes-grid{margin-top:28px;align-items:stretch}
+.general-wishes .guest-wishes-grid .wish-card{position:relative;padding:24px 22px 18px;border-radius:22px;background:linear-gradient(180deg,color-mix(in srgb,var(--paper) 88%,white 12%),color-mix(in srgb,var(--soft) 86%,white 14%));border:1px solid color-mix(in srgb,var(--tone) 18%,transparent);box-shadow:0 18px 38px rgba(35,31,33,.08);display:grid;gap:10px}
+.general-wishes .guest-wishes-grid .wish-card:before{content:'';position:absolute;inset:0 auto 0 0;width:4px;border-radius:22px 0 0 22px;background:color-mix(in srgb,var(--tone) 72%,white 28%)}
+.general-wishes .wish-card-mark{font-size:13px;opacity:.65;letter-spacing:1px}
+.general-wishes .guest-wishes-grid .wish-card strong{font-family:Georgia,serif;font-size:24px;font-weight:400;line-height:1.25}
+.general-wishes .guest-wishes-grid .wish-card p{font-size:14px;line-height:1.95;margin:0;color:color-mix(in srgb,var(--tone) 88%,transparent)}
+.general-wishes .guest-wishes-grid .wish-card small{font-size:11px;letter-spacing:.3px;color:color-mix(in srgb,var(--tone) 68%,transparent)}
+.wish-owner-grid .wish-owner-card{padding:22px;border-radius:20px;border:1px solid #e6d8dc;background:linear-gradient(180deg,#fff,#fcf8f9);box-shadow:var(--shadow)}
+.wish-owner-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.wish-owner-card-head small{font-size:11px;color:#74646c}
+.wish-owner-grid .wish-owner-card h3{font-family:Georgia,serif;font-size:30px;line-height:1.2;letter-spacing:-.5px;margin:0 0 12px}
+.wish-owner-grid .wish-owner-card .wish-message{font-size:14px;line-height:1.9;color:#433b41;margin:0 0 12px}
+.wish-owner-card-note{margin:0 0 14px;font-size:12px;line-height:1.8;color:#6d6168}
+.wish-list-toolbar select{min-width:190px;background:#fff}
+@media(max-width:640px){.general-wishes .guest-wishes-grid .wish-card{padding:20px 18px}.general-wishes .guest-wishes-grid .wish-card strong{font-size:21px}.wish-owner-grid .wish-owner-card h3{font-size:24px}.wish-owner-card-head{align-items:flex-start;flex-direction:column}}
