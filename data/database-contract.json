@@ -15,7 +15,10 @@
     "010_luxury_emerald.sql",
     "011_botanical_blush.sql",
     "012_feature_readiness.sql",
-    "013_public_wishes.sql"
+    "013_public_wishes.sql",
+    "014_public_wishes_auto_publish.sql",
+    "015_public_wishes_readiness.sql"
   ],
-  "openWishesProtocol": 1
+  "openWishesProtocol": 1,
+  "openWishesAutoPublishProtocol": 1
 }

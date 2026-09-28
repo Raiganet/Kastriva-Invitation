@@ -1,39 +1,46 @@
-# Kastriva Invitation — v1.9.0
+# Kastriva Invitation — v1.9.3
 
-Prioritas kedua audit: **Ucapan & doa dari tautan umum**, terpisah dari RSVP personal, disertai moderasi/penghapusan dan perbaikan menu/progres pelanggan. Basis v1.8.0 ditambah perbaikan build audio yang sama dengan commit `40725a8`. Tidak ada perubahan pin dependensi, harga, desain atau aset tema; 15 tema tetap dipertahankan.
+Production-sync patch untuk Kastriva Invitation. Fokus versi ini: **Ucapan & doa auto-publish yang tetap consent-bound**, readiness 014/015, dan pemulihan branding Classic Emblem setelah source `main` sempat kembali ke header/footer lama.
 
-**Panduan aktif: `docs/UPGRADE_v1.9.0.md`. Hasil aktual: `docs/TEST_REPORT.md`.** Paket ini bukan klaim sudah diterapkan ke Supabase/Vercel atau telah lulus seluruh tes produksi.
+## Status kontrak database
 
-## Mulai
+Skema dasar tetap **7**. Migrasi aktif yang perlu dikenal source sekarang adalah 001–015.
 
-Gunakan Node 22.x. Simpan cadangan, jangan salin node_modules/.next atau secret ke GitHub. Jalankan berurutan:
+- 013: ucapan umum terpisah dari RSVP personal.
+- 014: ucapan yang memberi izin tampil dapat otomatis dipublikasikan; default penerimaan/penayangan untuk pesanan baru dibuat ramah auto-publish.
+- 015: diagnostik read-only untuk memeriksa auto-publish/default trigger melalui `/setup` dan `/admin/rilis`.
+
+Production Supabase sudah memasang 014 dan 015. **Jangan menjalankan ulang SQL production hanya karena source ini dipush.** Untuk database baru/staging, jalankan seluruh migrasi berurutan.
+
+## Build lokal
+
+Gunakan Node 22.x:
 
 ```powershell
 npm ci
 npm test
+npm run check:lock
 npm run check:release-contract
+npm run check:security
 npm run typecheck
 npm run build
 ```
 
-## Database dan aktivasi
+`npm test`, release contract, syntax dan security bukan pengganti build Next.js atau uji browser/Supabase hidup.
 
-Jika sudah sampai 012, **hanya `supabase/migrations/013_public_wishes.sql`**. Jangan menjalankan ulang migrasi 001–012, mereset tabel atau mengubah penanda schema. Schema dasar tetap **7**; `ki_open_wish_version()` mengembalikan **1**. Uji staging dan cadangan sebelum menerapkan SQL pada layanan pelanggan.
+## Ucapan umum
 
-Tambahkan `ENABLE_PUBLIC_WISHES=false`. Setelah pengujian, untuk membuka fitur: flag tersebut dan `ENABLE_PUBLIC_INVITATIONS` true pada deployment, layanan `/admin/ucapan` terbuka, lalu pemilik mengaktifkan penerimaan/penayangan pada `/dashboard/ucapan`. Tidak ada secret baru. RSVP personal tidak perlu diaktifkan hanya untuk ucapan umum.
+Pengunjung tautan umum dapat mengirim nama + ucapan tanpa akun. Jika izin tampil dicentang, ucapan dapat muncul otomatis. Jika izin tidak dicentang, pesan tetap privat untuk pemilik undangan. Pemilik tetap dapat menyembunyikan atau menghapus isi.
 
-Tamu mengisi nama/pesan/izin pada tautan `/u/...` tanpa `#guest`. Pesan berizin menunggu moderasi; pesan tanpa izin privat. Pemilik tidak dapat menyetujui pesan tanpa izin. Tamu menyimpan kode penghapusan privat dan dapat menghapus di `/ucapan/hapus`. Jangan membagikan kode. Riwayat RSVP, harga, dan pembayaran tidak diubah oleh ucapan.
+Kode penghapusan tamu tetap privat dan tidak dikirim lewat URL.
 
-Batas versi ini: nama 80, pesan 500 unit UTF-16; 2000 kiriman termasuk marker per undangan; lima kiriman per identitas jaringan harian dengan jeda 30 detik. Bukan anti-DDoS atau CAPTCHA. Kode/sessionStorage bukan cadangan permanen; penghapusan nama/pesan bukan penghapusan semua log/backup.
+## Branding
 
-## Fitur sebelumnya tetap ada
+Header/footer menggunakan Classic Emblem `Kastriva Invitation`, favicon/app icon menggunakan aset `/public/brand/crest-v1`, dan manifest tetap aktif.
 
-15 tema (12 pernikahan/3 demo), editor enam langkah, foto privat, musik Serenade sintetis, maksimal tiga rekening hadiah, galeri modal, transfer/verifikasi manual, persetujuan publikasi, tamu/RSVP personal, CMS/harga dan pengelolaan admin. Musik bukan unggah MP3, rekening hadiah bukan pembayaran paket. Ucapan umum dan ucapan RSVP masih dua modul terpisah.
+## Catatan produksi
 
-## Pengujian
-
-`check:release-contract` memeriksa 13 migrasi/34 langkah, bukan menjalankan SQL. `verify:release` menguji kode/build/browser mode demo; tidak membuka layanan. `test:sql:local` hanya database fixture lokal, tidak menerima URL produksi. Playwright tambahan memakai HTTP mock pada halaman React fixture, bukan Supabase hidup. Jangan menyetel `KI_E2E_DEMO` di Vercel; halaman fixture harus 404 pada konfigurasi hosting normal.
-
-Header login menyesuaikan status sebagai petunjuk navigasi; akses server tetap diperiksa. Progres ditampilkan per undangan, bukan satu progres untuk semua akun. Menu baru: `/admin/ucapan`, `/dashboard/ucapan`, `/dashboard/pesanan/[id]/ucapan`, `/ucapan/hapus`.
-
-Dokumen tahap/versi lama dan laporan lamanya adalah riwayat. Startup aktif memakai `npm run dev/build/start` (Next.js). Source legacy Express masih ada dari sumber awal, jangan menjalankannya atau mencampurkan backend lama.
+- `ENABLE_PUBLIC_WISHES=true` diperlukan di deployment production.
+- RLS tetap wajib aktif; bucket `ki-media` tetap privat.
+- Auto-publish bukan anti-spam/CAPTCHA. Rate limit dan moderasi/hide/remove tetap disediakan.
+- Log/backup punya retensi provider terpisah.

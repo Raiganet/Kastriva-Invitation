@@ -1,6 +1,6 @@
 {
   "name": "kastriva-invitation",
-  "version": "1.9.0",
+  "version": "1.9.3",
   "private": true,
   "description": "Kastriva Invitation — ucapan umum terpisah dari RSVP, moderasi dan navigasi pelanggan",
   "engines": {

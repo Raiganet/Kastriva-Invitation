@@ -55,10 +55,11 @@ export async function probeBackend(config: PublicConfig | null, options: ProbeOp
     probe('/rest/v1/ki_templates?select=slug&active=eq.true&limit=100'),
     probe('/rest/v1/rpc/ki_feature_readiness', 'POST'),
     probe('/rest/v1/rpc/ki_open_wish_version', 'POST'),
+    probe('/rest/v1/rpc/ki_open_wish_auto_publish_version', 'POST'),
   ]);
   const checks: ReadinessCheck[] = [{ id: 'environment', label: 'Konfigurasi aplikasi', state: 'pass', detail: 'Konfigurasi publik tersedia. Nilai key tidak ditampilkan.' }];
-  const names = ['Layanan akun', 'Kompatibilitas skema dasar', 'Katalog yang terlihat pengunjung', 'Diagnostik fitur (012)', 'Ucapan umum (013)'];
-  const ids = ['auth', 'schema', 'catalog', 'feature_audit', 'open_wishes'];
+  const names = ['Layanan akun', 'Kompatibilitas skema dasar', 'Katalog yang terlihat pengunjung', 'Diagnostik fitur (012)', 'Ucapan umum (013)', 'Auto-publish ucapan (014/015)'];
+  const ids = ['auth', 'schema', 'catalog', 'feature_audit', 'open_wishes', 'open_wishes_auto'];
   jobs.forEach((job, index) => {
     const base = { id: ids[index], label: names[index] };
     if (job.status === 'rejected') { checks.push({ ...base, state: 'fail', detail: 'Layanan tidak merespons atau balasannya tidak valid. Periksa koneksi dan status proyek.' }); return; }
@@ -68,6 +69,7 @@ export async function probeBackend(config: PublicConfig | null, options: ProbeOp
         : index === 1 && result.status === 404 ? 'RPC dasar belum ditemukan. Pasang migrasi 001, 002, dan seterusnya secara berurutan mengikuti panduan upgrade.'
         : index === 3 && result.status === 404 ? 'RPC diagnostik belum ditemukan. Ikuti panduan sampai 012_feature_readiness.sql; schema 7 saja belum membuktikan fitur 008–011 tersedia.'
         : index === 4 && result.status === 404 ? 'Ucapan umum belum terpasang. Jalankan 013_public_wishes.sql setelah 012; tidak perlu mengulang migrasi lama.'
+        : index === 5 && result.status === 404 ? 'Auto-publish/readiness belum terpasang. Jalankan 014_public_wishes_auto_publish.sql lalu 015_public_wishes_readiness.sql.'
         : 'Pemeriksaan gagal. Periksa migrasi, Data API, dan status proyek Supabase.';
       checks.push({ ...base, state: 'fail', detail }); return;
     }
@@ -83,7 +85,8 @@ export async function probeBackend(config: PublicConfig | null, options: ProbeOp
         : 'Versi dasar database tidak cocok. Periksa urutan migrasi; jangan mengubah penanda versi secara manual.' });
     } else if (index === 2) checks.push(activeCatalogCheck(result.body));
     else if(index === 3) checks.push(...featureChecks(result.body));
-    else checks.push({...base,state:result.body===1?'pass':'fail',detail:result.body===1?'Protokol ucapan umum tersedia. Penerimaan, moderasi, privasi, dan gateway tetap perlu diuji.':'Protokol ucapan umum tidak sesuai. Periksa migrasi 013, bukan mengganti schema dasar.'});
+    else if(index===4) checks.push({...base,state:result.body===1?'pass':'fail',detail:result.body===1?'Protokol ucapan umum tersedia. Penerimaan, privasi, dan gateway tetap perlu diuji.':'Protokol ucapan umum tidak sesuai. Periksa migrasi 013, bukan mengganti schema dasar.'});
+    else checks.push({...base,state:result.body===1?'pass':'fail',detail:result.body===1?'Auto-publish berizin dan diagnostik readiness tersedia. Perilaku nyata tetap perlu diuji pada undangan publik.':'Auto-publish/readiness belum sesuai. Periksa migrasi 014 lalu 015.'});
   });
   const readyForAccountTest = ['environment', 'auth', 'schema'].every(id => checks.some(c => c.id === id && c.state === 'pass'));
   const readyForFeatureTest = readyForAccountTest && checks.some(c => c.id === 'cms_catalog_complete')
