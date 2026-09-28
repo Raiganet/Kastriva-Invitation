@@ -7,7 +7,12 @@ test('built-in music creates actual Web Audio only after opening and closes on p
   window.AudioContext=class extends Native{constructor(options?:AudioContextOptions){super(options);contexts.push(this);}};
  });
  await page.goto('/demo/galaxy-night');
- const states=()=>page.evaluate(()=>(window as Window&{__kiAudioContexts:AudioContext[]}).__kiAudioContexts.map(c=>c.state));
+ const states=()=>page.evaluate(()=>{
+  // The init script adds this property at runtime; it is not a standard Window member.
+  const contexts=(window as Window&{__kiAudioContexts?:AudioContext[]}).__kiAudioContexts;
+  if(!contexts)throw new Error('Audio test instrumentation was not initialized.');
+  return contexts.map(c=>c.state);
+ });
  expect(await states()).toEqual([]);
  await page.getByRole('button',{name:/Buka undangan/}).click();
  await expect(page.getByRole('button',{name:'Jeda musik',exact:true})).toBeVisible();
