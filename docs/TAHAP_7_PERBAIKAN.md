@@ -1,3 +1,5 @@
+> **Riwayat tahap sebelumnya.** Untuk pemasangan sekarang gunakan `UPGRADE_v1.8.0.md`: schema dasar tetap 7, fitur008–011 dan diagnostik012. Jangan memakai nomor versi atau keterangan fitur lama di bawah untuk downgrade.
+
 # Panduan Kastriva Invitation v1.7.3
 
 Tanggal paket: 24 September 2026. Basis: `Kastriva-Invitation-Perbaikan-Tahap-7-v1.7.2.zip`.

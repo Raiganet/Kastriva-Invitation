@@ -1,38 +1,57 @@
-# Kastriva Invitation — v1.7.3
+# Kastriva Invitation — v1.8.0
 
-Melanjutkan v1.7.2, **bukan proyek baru**. Patch kontrol transaksi dan retry. Skema database tetap 7.
+Melanjutkan **ZIP terbaru `Kastriva-Invitation-main.zip`** dari Diky, bukan membuat ulang proyek dan bukan kembali ke paket 1.7.3 lama. Prioritas pertama audit: selaraskan pemeriksaan database, versi aplikasi/tes, cakupan SQL/browser, dan petunjuk upgrade.
 
-**STATUS: BELUM LOLOS RILIS.** 652 tes fungsi/simulasi/kontrak lulus; instalasi lengkap, typecheck seluruh aplikasi, build Next.js, browser aplikasi, SQL, dan Supabase live belum berhasil diverifikasi di lingkungan penyusunan. Tidak ada deployment atau perubahan akun Diky.
+**Status hasil aktual ada di `docs/TEST_REPORT.md`.** Kelulusan fungsi/kontrak kode tidak sama dengan build, SQL engine, pengujian Supabase, atau persetujuan produksi. Tidak ada layanan yang dinyalakan otomatis oleh rilis ini.
 
-## Mulai
+## Mulai dari satu panduan
 
-Gunakan Node 22.x. Ekstrak ke folder baru; simpan folder lama. Salin `.env.local` Next.js lama secara lokal hanya bila benar. Jangan salin `node_modules`/`.next` atau environment Express.
+Baca **`docs/UPGRADE_v1.8.0.md`**. Gunakan Node **22.x**, folder baru, dan salin `.env.local` Next.js sebelumnya secara lokal hanya bila sudah benar. Jangan salin `node_modules`, `.next`, `.next-test`, konfigurasi Express, atau secret ke GitHub.
 
 ```powershell
 node -v
-npm run setup:local
+npm ci
+npm test
+npm run check:release-contract
+npm run typecheck
+npm run build
 ```
 
-Jika gagal, jalankan `npm run diagnose`. Baca `.diagnostics/setup-report.json` dan `.diagnostics/report.json`; periksa dan hapus data rahasia sebelum membagikan. Tidak ada lockfile buatan. Setelah npm berhasil membuat lockfile, tinjau dan simpan ke repository; gunakan `npm ci` selanjutnya.
+Jalankan berurutan; perbaiki kegagalan sebelum lanjut. `package-lock.json` **sudah tersedia**. Versi dependensi tidak diubah oleh patch ini; hanya metadata versi aplikasi pada manifest/lock menjadi 1.8.0.
 
-**Jika SQL 007 sudah terpasang, tidak ada SQL tambahan atau key baru untuk patch ini.** Tidak ada checkout, publikasi atau RSVP yang dibuka otomatis. Jangan menjalankan ulang migrasi lama.
+Otomatisasi opsional: `npm run setup:local` memasang dependensi/browser lalu menguji build demo. `npm run diagnose` membantu memeriksa kegagalan; periksa log sebelum membagikannya. Skrip tidak menjalankan SQL, deploy, atau mengaktifkan layanan.
 
-## Lingkup patch
+## Versi aplikasi bukan nomor migrasi
 
-Kontrol checkout, tindakan pembayaran, penerbitan dan pengaturan transaksi sekarang memakai controller terpisah per akun/entitas. Respons dari controller yang sudah ditutup tidak memperbarui halaman baru. Callback tampilan yang gagal tidak membatalkan konfirmasi server atau meninggalkan tombol sibuk. Jurnal retry disalin dan dibekukan; kegagalan membersihkan jurnal menahan tindakan baru.
+| Penanda | Rilis ini |
+|---|---|
+| Versi aplikasi (`package.json`) | **1.8.0** |
+| Kompatibilitas skema dasar (`ki_schema_version()`) | **Tetap 7**, bukan 12 |
+| Musik & hadiah | Migrasi **008** |
+| Tema Islami/adat, Luxury Emerald, Botanical Blush | Migrasi **009–011** |
+| Diagnostik kemampuan baca-saja | Migrasi **012_feature_readiness.sql** |
 
-Transport transaksi membatasi badan respons nyata hingga 16 KB dan waktu 20 detik untuk fetch + pembacaan. HTTP 408/429 dan balasan tidak dikenal tetap belum pasti; retry menggunakan ID/isi sama. Redirect ditolak sebelum payload dapat diikuti ke tujuan lain. Ini bukan koneksi bank otomatis, anti-DDoS atau jaminan transaksi produksi.
+Sudah sampai 011: jalankan **012 saja**. Baru sampai 007: lengkapi **008 → 009 → 010 → 011 → 012**, mengikuti urutan deploy/migrasi pada panduan. Proyek baru: 001–012. **Jangan menghapus tabel atau menjalankan ulang migrasi lama setelah versi lebih baru.** Jika posisi migrasi tidak diketahui, gunakan preflight baca-saja di panduan; angka 7 tidak cukup untuk menentukannya.
 
-## Fitur yang tetap tersedia dalam source
+`/setup` dan `/admin/rilis` memisahkan koneksi akun dari kemampuan fitur. Tema `active=false` tetap dihitung sebagai terpasang. Diagnostik menguji perilaku validator dan katalog; ia **bukan riwayat migrasi** atau bukti semua layanan sudah siap.
 
-Katalog/delapan demo; lima tema pernikahan dalam editor; akun Supabase; editor/draft/foto; checkout dan verifikasi manual; publikasi; daftar tamu/RSVP/moderasi; CMS dan ringkasan admin. Tiga tema nonpernikahan masih demo. Musik, gateway pembayaran otomatis, QR check-in, paket kuota terpisah dan retensi otomatis belum dibuat.
+## Fitur yang ada dalam source terbaru
+
+**15 tema**, terdiri dari **12 pernikahan** dan **3 demo nonpernikahan**. Editor enam langkah; draft dan foto privat; musik instrumental bawaan Serenade; maksimal tiga rekening amplop digital; galeri pembesaran; pembayaran transfer manual; publikasi terkontrol; tamu/RSVP/moderasi; CMS konten/harga; ringkasan admin.
+
+Musik bukan upload MP3 atau katalog lagu. Amplop digital pasangan bukan rekening pembayaran paket. **Ucapan umum tanpa tautan tamu personal belum ditambahkan**; itu prioritas kedua audit. RSVP personal tetap berfungsi seperti sebelumnya. Tidak ada gateway/refund otomatis, QR check-in, kuota total Storage/cleanup/retensi otomatis, atau pernyataan bahwa seluruh aplikasi setara platform referensi.
+
+## Pengujian
+
+- `npm run check:release-contract`: memeriksa daftar 12 migrasi dan rencana pengujian, **tidak menjalankan SQL**.
+- `npm run verify:release`: lock, instalasi, environment, tes, sintaks, batas browser/server, tipe, build demo, decoder, dan browser. Berhenti pada kegagalan pertama. Hasil `.release/report.json` bukan sertifikat produksi.
+- `npm run test:sql:local`: hanya database lokal kosong yang sengaja disiapkan. Runner mencakup 001–012; fixture lama dijalankan sebelum 007 mengubah hak akses; fixture upgrade memeriksa pelestarian harga, tagihan, expiry, CMS, dan tema nonaktif. Lihat panduan sebelum menjalankan.
+- Playwright memakai registry 15 demo, pemeriksaan versi yang sama dengan health, musik native Web Audio, amplop contoh, dan galeri fixture. Bukan data pelanggan atau tes Supabase.
+
+**Jangan menyetel `KI_E2E_DEMO` di Vercel.** Route fixture galeri hanya dapat dibuka oleh build demo loopback dengan backend kosong. Jalur tersebut memberi 404 di konfigurasi hosting normal.
 
 ## Dokumen aktif
 
-- `docs/TAHAP_7_PERBAIKAN.md`: pemasangan v1.7.3 dan batas fitur.
-- `docs/UJI_TRANSAKSI_v1.7.3.md`: skenario browser staging setelah build berhasil.
-- `docs/TEST_REPORT.md`: hasil aktual, termasuk pengujian yang gagal/belum berjalan.
-- `docs/TAHAP_7_RILIS.md`: konfigurasi dan upgrade skema 7 bila belum terpasang.
-- `docs/BACKUP_ROLLBACK.md`: cadangan dan batas pemulihan.
+`docs/UPGRADE_v1.8.0.md` adalah petunjuk pemasangan; `docs/UJI_v1.8.0.md` adalah checklist; `docs/TEST_REPORT.md` adalah hasil aktual. Dokumen sebelumnya tetap disimpan sebagai riwayat. Bila nomor migrasi atau klaim fitur bertentangan, ikuti dokumen aktif ini, bukan petunjuk downgrade pada riwayat.
 
-Semua riwayat tahap lama tetap ada sebagai riwayat, bukan bukti hasil v1.7.3. Jangan membuka data/uang pelanggan sampai instalasi, build, SQL terisolasi, dua akun dan alur staging benar-benar lulus.
+Startup aktif hanya `npm run dev/build/start` untuk Next.js. Berkas Express/SQLite lama masih terdapat pada source yang dikirim; jangan menjalankan `server.js`, `db.js`, atau mencampur backend lama. Pemisahan arsip legacy belum termasuk prioritas pertama ini.

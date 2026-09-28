@@ -1,4 +1,4 @@
-name: Verify stage 7 fix (not production approval)
+name: Verify current release (not production approval)
 on:
   push:
   pull_request:
@@ -13,14 +13,15 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Resolve pinned dependencies (first lock must be reviewed and committed)
+      - name: Install committed dependency lock
         run: |
-          if [ -f package-lock.json ]; then npm ci --no-fund; else npm install --no-fund; fi
-      - name: Preserve genuinely resolved lockfile for review
+          npm run check:release-contract
+          npm ci --no-fund
+      - name: Preserve dependency lock used by this run
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: package-lock-review-before-commit
+          name: dependency-lock-used
           path: package-lock.json
       - name: Dependency advisory gate
         run: npm audit --audit-level=high
@@ -64,7 +65,7 @@ jobs:
           node-version: '22'
       - name: Install psql client
         run: sudo apt-get update && sudo apt-get install -y postgresql-client
-      - name: Actual PostgreSQL with minimal auth/storage fixtures (not Supabase HTTP)
+      - name: SQL 001-012 and upgrade fixtures (local PostgreSQL, not Supabase HTTP)
         run: node scripts/test-sql-local.mjs
         env:
           KI_SQL_TEST_ALLOW_CREATE: 'yes'

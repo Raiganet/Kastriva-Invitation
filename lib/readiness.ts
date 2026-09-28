@@ -1,7 +1,8 @@
-/** Read-only Supabase probes. No service key, customer data or tokens enter the report. */
+/** Read-only probes: separate base account compatibility from current feature support. */
+import { BASE_SCHEMA_VERSION, activeCatalogCheck, featureChecks } from './database-capabilities.ts';
 export type CheckState = 'pass' | 'warn' | 'fail' | 'skip';
 export type ReadinessCheck = { id: string; label: string; state: CheckState; detail: string };
-export type ReadinessReport = { checkedAt: string; configured: boolean; readyForAccountTest: boolean; checks: ReadinessCheck[] };
+export type ReadinessReport = { checkedAt: string; configured: boolean; readyForAccountTest: boolean; readyForFeatureTest: boolean; checks: ReadinessCheck[] };
 export type PublicConfig = { url: string; key: string };
 type ProbeOptions = { fetcher?: typeof fetch; timeoutMs?: number };
 export function backendHeaders(key: string): Record<string, string> {
@@ -9,56 +10,62 @@ export function backendHeaders(key: string): Record<string, string> {
 }
 export async function probeBackend(config: PublicConfig | null, options: ProbeOptions = {}): Promise<ReadinessReport> {
   const checkedAt = new Date().toISOString();
-  if (!config) return { checkedAt, configured: false, readyForAccountTest: false, checks: [
+  if (!config) return { checkedAt, configured: false, readyForAccountTest: false, readyForFeatureTest: false, checks: [
     { id: 'environment', label: 'Konfigurasi aplikasi', state: 'skip', detail: 'Mode demo. Isi URL dan publishable key Supabase lalu restart/redeploy.' },
   ] };
+  const connection: PublicConfig = config;
   const fetcher = options.fetcher ?? fetch;
   async function probe(path: string, method = 'GET'): Promise<{ ok: boolean; status: number; body: unknown }> {
-    const controller = new AbortController();
-    let timer: ReturnType<typeof setTimeout> | undefined;
+    const controller = new AbortController(); let timer: ReturnType<typeof setTimeout> | undefined;
+    let reader: ReadableStreamDefaultReader<Uint8Array> | undefined;
     try {
       return await Promise.race([
         (async () => {
-          const response = await fetcher(config!.url.replace(/\/$/, '') + path, {
-            method, headers: backendHeaders(config!.key), cache: 'no-store', redirect: 'error',
+          const response = await fetcher(connection.url.replace(/\/$/, '') + path, {
+            method, headers: backendHeaders(connection.key), cache: 'no-store', redirect: 'error',
             signal: controller.signal, ...(method === 'POST' ? { body: '{}' } : {}),
           });
-          let body: unknown = null;
-          // These endpoints return small metadata, never rows containing personal data.
-          const reader = response.body?.getReader();
-          if (reader) {
-            const chunks: Uint8Array[] = []; let size = 0;
-            while (true) {
-              const part = await reader.read(); if (part.done) break;
-              size += part.value.length;
-              if (size > 32768) { await reader.cancel(); throw new Error('PROBE_RESPONSE_TOO_LARGE'); }
-              chunks.push(part.value);
-            }
-            const bytes = new Uint8Array(size); let offset = 0;
-            for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
-            try { body = JSON.parse(new TextDecoder().decode(bytes)); } catch { /* Classified below. */ }
+          if (response.redirected) throw new Error('REDIRECT');
+          if (!/^application\/json(?:\s*;|$)/i.test(response.headers.get('content-type') || '')) throw new Error('NOT_JSON');
+          reader = response.body?.getReader();
+          if (!reader) throw new Error('EMPTY_BODY');
+          const chunks: Uint8Array[] = []; let size = 0;
+          while (true) {
+            const part = await reader.read(); if (part.done) break;
+            size += part.value.length;
+            if (size > 32768) throw new Error('PROBE_RESPONSE_TOO_LARGE');
+            chunks.push(part.value);
           }
+          const bytes = new Uint8Array(size); let offset = 0;
+          for (const chunk of chunks) { bytes.set(chunk, offset); offset += chunk.length; }
+          const body: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
           return { ok: response.ok, status: response.status, body };
         })(),
         new Promise<never>((_, reject) => { timer = setTimeout(() => { controller.abort(); reject(new Error('TIMEOUT')); }, options.timeoutMs ?? 8000); }),
       ]);
-    } finally { if (timer) clearTimeout(timer); controller.abort(); }
+    } finally {
+      if (timer) clearTimeout(timer); controller.abort();
+      // A broken upstream cancel promise must not hold the response open.
+      if (reader) void reader.cancel().catch(() => {});
+    }
   }
   const jobs = await Promise.allSettled([
     probe('/auth/v1/settings'),
     probe('/rest/v1/rpc/ki_schema_version', 'POST'),
-    probe('/rest/v1/ki_templates?select=slug&active=eq.true&limit=8'),
+    probe('/rest/v1/ki_templates?select=slug&active=eq.true&limit=100'),
+    probe('/rest/v1/rpc/ki_feature_readiness', 'POST'),
   ]);
   const checks: ReadinessCheck[] = [{ id: 'environment', label: 'Konfigurasi aplikasi', state: 'pass', detail: 'Konfigurasi publik tersedia. Nilai key tidak ditampilkan.' }];
-  const names = ['Layanan akun', 'Migrasi tahap 7', 'Katalog di database'];
-  const ids = ['auth', 'schema', 'catalog'];
+  const names = ['Layanan akun', 'Kompatibilitas skema dasar', 'Katalog yang terlihat pengunjung', 'Diagnostik fitur (012)'];
+  const ids = ['auth', 'schema', 'catalog', 'feature_audit'];
   jobs.forEach((job, index) => {
     const base = { id: ids[index], label: names[index] };
     if (job.status === 'rejected') { checks.push({ ...base, state: 'fail', detail: 'Layanan tidak merespons atau balasannya tidak valid. Periksa koneksi dan status proyek.' }); return; }
     const result = job.value;
     if (!result.ok) {
-      const detail = [401, 403].includes(result.status) ? 'Akses ditolak. Periksa pasangan URL/key dan izin database; jangan memakai service-role key.'
-        : index === 1 && result.status === 404 ? 'RPC tahap 7 belum ditemukan. Jalankan migrasi 001, 002, 003, 004, 005, 006, kemudian 007 dan coba kembali.'
+      const detail = [401, 403].includes(result.status) ? 'Akses ditolak. Periksa pasangan URL/key dan izin database; jangan memakai service-role key pada konfigurasi publik.'
+        : index === 1 && result.status === 404 ? 'RPC dasar belum ditemukan. Pasang migrasi 001, 002, dan seterusnya secara berurutan mengikuti panduan upgrade.'
+        : index === 3 && result.status === 404 ? 'RPC diagnostik belum ditemukan. Ikuti panduan sampai 012_feature_readiness.sql; schema 7 saja belum membuktikan fitur 008–011 tersedia.'
         : 'Pemeriksaan gagal. Periksa migrasi, Data API, dan status proyek Supabase.';
       checks.push({ ...base, state: 'fail', detail }); return;
     }
@@ -69,16 +76,14 @@ export async function probeBackend(config: PublicConfig | null, options: ProbeOp
         ? 'Provider email dan pendaftaran terbuka. Pengiriman email tetap perlu diuji langsung.'
         : 'Auth merespons, tetapi provider email atau pendaftaran perlu diperiksa di Authentication.' });
     } else if (index === 1) {
-      checks.push({ ...base, state: result.body === 7 ? 'pass' : 'fail', detail: result.body === 7
-        ? 'RPC melaporkan schema versi 7. Ini bukan audit lengkap RLS atau Storage.'
-        : 'Versi database tidak cocok dengan kode tahap 7. Periksa urutan migrasi.' });
-    } else {
-      const slugs = Array.isArray(result.body) ? result.body.map(row => row && typeof row === 'object' && 'slug' in row ? row.slug : null) : [];
-      const valid = slugs.length > 0 && slugs.every(slug => typeof slug === 'string' && /^[a-z0-9-]{1,60}$/.test(slug));
-      checks.push({ ...base, state: valid ? 'pass' : 'fail', detail: valid
-        ? `${slugs.length} tema aktif berhasil dibaca. Harga checkout dibaca kembali dari database; harga di editor adalah referensi katalog.`
-        : 'Tidak ada tema aktif yang dapat diverifikasi. Periksa seed katalog dan kebijakan SELECT.' });
-    }
+      checks.push({ ...base, state: result.body === BASE_SCHEMA_VERSION ? 'pass' : 'fail', detail: result.body === BASE_SCHEMA_VERSION
+        ? 'Kontrak dasar schema 7 cocok. Dukungan musik/hadiah dan tema terbaru diperiksa terpisah di bawah.'
+        : 'Versi dasar database tidak cocok. Periksa urutan migrasi; jangan mengubah penanda versi secara manual.' });
+    } else if (index === 2) checks.push(activeCatalogCheck(result.body));
+    else checks.push(...featureChecks(result.body));
   });
-  return { checkedAt, configured: true, readyForAccountTest: checks.every(check => check.state === 'pass'), checks };
+  const readyForAccountTest = ['environment', 'auth', 'schema'].every(id => checks.some(c => c.id === id && c.state === 'pass'));
+  const readyForFeatureTest = readyForAccountTest && checks.some(c => c.id === 'cms_catalog_complete')
+    && checks.every(c => c.state === 'pass' || (c.id === 'catalog' && c.state === 'warn'));
+  return { checkedAt, configured: true, readyForAccountTest, readyForFeatureTest, checks };
 }

@@ -1,3 +1,5 @@
+> **Riwayat tahap sebelumnya.** Untuk pemasangan sekarang gunakan `UPGRADE_v1.8.0.md`: schema dasar tetap 7, fitur008–011 dan diagnostik012. Jangan memakai nomor versi atau keterangan fitur lama di bawah untuk downgrade.
+
 # Kastriva Invitation — Tahap 5 / v1.5.0
 
 Tanggal: 24 September 2026. Basis: `Kastriva-Invitation-Tahap-4-v1.4.0.zip`.

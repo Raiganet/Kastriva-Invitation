@@ -1,3 +1,5 @@
+> **Riwayat tahap sebelumnya.** Untuk pemasangan sekarang gunakan `UPGRADE_v1.8.0.md`: schema dasar tetap 7, fitur008–011 dan diagnostik012. Jangan memakai nomor versi atau keterangan fitur lama di bawah untuk downgrade.
+
 > **Riwayat tahap 2, bukan instruksi upgrade terbaru.** Untuk v1.3.0 gunakan `TAHAP_3_EDITOR.md` dan `TEST_REPORT.md`.
 
 # Perubahan tahap 2 / v1.2.0

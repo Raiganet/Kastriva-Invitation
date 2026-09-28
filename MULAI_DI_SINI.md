@@ -1,11 +1,26 @@
-# Mulai dari versi ini — v1.7.3
+# Mulai di sini — Kastriva Invitation v1.8.0
 
-1. Ekstrak ZIP ke folder baru dan simpan versi lama sebagai cadangan.
-2. Buka PowerShell pada folder yang berisi `package.json`. Gunakan Node 22.x.
-3. Salin `.env.local` Next.js lama secara lokal bila sudah benar. Jangan menyalin node_modules, .next, atau konfigurasi Express.
-4. Jalankan `npm run setup:local`. Skrip tidak melakukan deployment atau menjalankan SQL.
-5. Jika berhenti, jalankan `npm run diagnose` lalu periksa ringkasan `.diagnostics`.
+Simpan proyek lama sebagai cadangan. Ekstrak ke folder baru. Gunakan Node 22.x dan folder yang berisi `package.json`. Jangan membagikan `.env.local`/key/password.
 
-**Tidak perlu SQL atau key baru jika sudah pada skema 7.** Jangan mengaktifkan transaksi pelanggan dahulu. Build Next.js belum berhasil diverifikasi penyusun.
+```powershell
+npm ci
+npm test
+npm run check:release-contract
+npm run typecheck
+npm run build
+```
 
-Petunjuk terperinci: `docs/TAHAP_7_PERBAIKAN.md`. Hasil aktual: `docs/TEST_REPORT.md`.
+Jangan lanjutkan jika perintah gagal. Lockfile sudah tersedia; tidak perlu membuat ulang atau mengganti semua paket menjadi `latest`.
+
+**Database tidak otomatis dimigrasikan saat build.** Jika 001–011 sudah terpasang, cukup jalankan `supabase/migrations/012_feature_readiness.sql`. Skema dasar tetap 7. Jika baru 007 atau tidak tahu posisinya, baca **`docs/UPGRADE_v1.8.0.md`** sebelum menjalankan SQL. Jangan menghapus tabel.
+
+Sesudah migrasi dan konfigurasi benar:
+
+```powershell
+npm run check:supabase
+npm run dev
+```
+
+Buka `/setup`, lalu `/admin/rilis` dengan akun admin. Koneksi akun dan kemampuan fitur harus diperiksa terpisah. Hasilnya belum membuktikan semua alur produksi lulus.
+
+Tidak ada key/flag baru atau perubahan harga/desain tema pada patch ini. Ucapan umum dan kuota media masih pekerjaan berikutnya. Laporan pengujian aktual: `docs/TEST_REPORT.md`.

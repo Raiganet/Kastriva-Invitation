@@ -1,17 +1,9 @@
-> **Patch v1.7.2:** ikuti `TAHAP_7_PERBAIKAN.md` untuk instalasi dan diagnostik terbaru. Patch tidak menambah SQL setelah 007. Dokumen berikut menjelaskan tahap 7 dasar.
+# Deployment — v1.8.0
 
-# Deployment v1.7.0
+Panduan utama: **UPGRADE_v1.8.0.md**. Target Node 22.x, framework Next.js, folder root yang berisi package.json. Instalasi `npm ci` dari lockfile; build `npm run build`; output bawaan Next.js. Jangan menjalankan `server.js` legacy.
 
-**Jangan deploy untuk pelanggan sebelum gerbang pada TAHAP_7_RILIS.md lulus.** ZIP dan source workflow bukan bukti deployment berhasil.
+Jangan menyetel **KI_E2E_DEMO** pada Vercel. `verify:release` membangun fixture `.next-test` untuk pengujian lokal, bukan output website pelanggan. Tidak ada versi dependensi/key/flag layanan baru pada patch ini.
 
-Gunakan Node 22.x, root folder yang berisi package.json, framework Next.js, build `npm run build` (bukan verify:release), serta output default Next.js. Commit lockfile asli setelah npm install/ci terverifikasi. Jangan set KI_E2E_DEMO pada hosting; gerbang demo memakai .next-test yang berbeda dari .next produksi.
+Gunakan origin NEXT_PUBLIC_SITE_URL sesuai deployment. Secret Supabase dan HMAC tetap hanya server; lingkungan Preview sebaiknya memakai staging terpisah. Jangan membagikan secret dalam log/artifact atau mengaktifkan layanan pelanggan hanya karena satu indikator hijau.
 
-Gunakan database Invitation staging untuk Preview, dengan origin aplikasi, template email, dan pengaturan Auth yang sesuai. Jangan memakai secret produksi pada job pull request atau mencoba pembayaran dengan uang pelanggan.
-
-Secret server adalah SUPABASE_SECRET_KEY dan RATE_LIMIT_HMAC_KEY. Browser memakai NEXT_PUBLIC_SUPABASE_URL dan NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY. NEXT_PUBLIC_SITE_URL harus origin HTTPS deployment yang benar. Password database bukan public key.
-
-Sebelum upgrade 007 pada layanan aktif, gunakan jendela pemeliharaan; kode 1.6 tidak kompatibel dengan grant baru. Baca BACKUP_ROLLBACK.md dan pertahankan bucket foto privat. Flag fitur tetap false sampai pengujian berhasil; aktivasi juga harus sesuai dengan flag database.
-
-Periksa /setup dengan skema 7, /admin/sistem, dan /admin/rilis. Jalankan checklist dua akun dengan data fixture sebelum membuka layanan. Hasil verify:release yang lolos hanya menunjukkan gerbang demo; staging/produksi tetap perlu build dan uji dengan konfigurasi tujuannya.
-
-Gateway publik bergantung pada identitas tepercaya Vercel; jangan menyetel VERCEL=1 secara manual di hosting lain. Origin yang digunakan browser harus sama dengan origin resmi. Reverse proxy atau alias domain harus diuji, bukan diterima otomatis. Periksa paket dan biaya hosting yang mengizinkan penggunaan bisnis saat peluncuran.
+Sebelum migrasi tema baru 009–011, kode yang memahami 15 tema perlu tersedia; ikuti jendela upgrade di panduan. Jika 011 sudah ada, cukup 012. Periksa `/setup`, `/admin/rilis`, lalu alur dua akun, CMS, pembayaran/publikasi/RSVP. Indikator aplikasi tidak menggantikan hasil build dan pengujian live.

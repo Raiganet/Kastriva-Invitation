@@ -1,3 +1,5 @@
+> **Riwayat tahap sebelumnya.** Untuk pemasangan sekarang gunakan `UPGRADE_v1.8.0.md`: schema dasar tetap 7, fitur008–011 dan diagnostik012. Jangan memakai nomor versi atau keterangan fitur lama di bawah untuk downgrade.
+
 > **Dokumen tahap sebelumnya.** Untuk pemasangan v1.5.0 gunakan `TAHAP_5_TAMU_RSVP.md`: skema 5, migrasi 005 setelah 004, dan aktivasi RSVP terpisah. Jangan mengikuti nomor versi lama untuk downgrade.
 
 # Kastriva Invitation — Tahap 4 / v1.4.0

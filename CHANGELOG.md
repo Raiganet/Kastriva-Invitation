@@ -1,3 +1,15 @@
+# v1.8.0 — 28 September 2026: prioritas pertama audit
+
+- Basis source terbaru Diky dengan 15 tema dan musik/hadiah; bukan rollback ke source tahap lama.
+- Pisahkan pemeriksaan akun (schema dasar7) dan kemampuan terbaru; tambah RPC baca-saja melalui 012_feature_readiness.sql. Tema nonaktif tidak dianggap hilang.
+- Versi health, Playwright, dan laporan rilis mengikuti package.json. Lockfile hanya diperbarui metadata versi root, pin dependensi tetap.
+- Runner PostgreSQL mencakup 001–012, pengujian upgrade dengan data sintetis, serta repeat migrasi terakhir. Validasi daftar migrasi mencegah file baru dilewati.
+- Browser smoke mengikuti registry 15 tema, menambah interaksi musik/hadiah dan galeri fixture lokal yang tertutup pada deployment normal.
+- README, petunjuk Supabase/deploy, dan checklist diperbarui. Ucapan umum dan kuota media belum termasuk.
+- Hasil aktual/ketidakberhasilan instalasi, build, SQL, dan browser dicatat di docs/TEST_REPORT.md; tidak dianggap lulus dari source saja.
+
+---
+
 # Changelog
 
 ## 1.7.3 — 24 September 2026

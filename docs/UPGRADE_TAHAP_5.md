@@ -1,3 +1,5 @@
+> **Riwayat tahap sebelumnya.** Untuk pemasangan sekarang gunakan `UPGRADE_v1.8.0.md`: schema dasar tetap 7, fitur008–011 dan diagnostik012. Jangan memakai nomor versi atau keterangan fitur lama di bawah untuk downgrade.
+
 # Upgrade v1.4.0 → v1.5.0
 
 1. Cadangkan source dan database; ekstrak ke folder baru. Gunakan konfigurasi Next.js proyek yang sama.

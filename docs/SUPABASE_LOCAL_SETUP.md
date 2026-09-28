@@ -1,3 +1,5 @@
+> **Catatan pemasangan terdahulu dari source pengguna.** Ini bukan laporan pengujian v1.8.0 dan bukan pernyataan keadaan database saat ini. Untuk upgrade gunakan `UPGRADE_v1.8.0.md`; jangan memakai jumlah tema/migrasi di catatan lama untuk mereset proyek.
+
 # Koneksi Supabase lokal
 
 Proyek: **Kastriva-Invitation**, ref `gtuwpqnhezbexrcsjeaj`.

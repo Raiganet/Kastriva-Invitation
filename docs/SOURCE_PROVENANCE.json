@@ -1,11 +1,15 @@
 {
-  "version": "1.7.3",
-  "schema": 7,
-  "date": "2026-09-24",
-  "source": "Kastriva-Invitation-Perbaikan-Tahap-7-v1.7.2.zip",
-  "sourceSha256": "7266c9fd3685357c9b144fbde74fadcf8bc78e7bdf99a3257885eb3c00a13b59",
-  "sourceModified": false,
-  "databaseMigrated": false,
-  "externallyDeployed": false,
-  "buildVerified": false
+  "release": "1.8.0",
+  "basis": "Kastriva-Invitation-main.zip",
+  "basis_sha256": "233c34e2de46d82bd5517a31eed28c9c0c4bc1800aa871d63069c41579f46ae3",
+  "work_date": "2026-09-28",
+  "scope": [
+    "A02",
+    "A03",
+    "A04",
+    "A10"
+  ],
+  "external_writes": false,
+  "schema_base": 7,
+  "additional_migration": "012_feature_readiness.sql"
 }

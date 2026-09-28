@@ -1,3 +1,5 @@
+> **Riwayat tahap sebelumnya.** Untuk pemasangan sekarang gunakan `UPGRADE_v1.8.0.md`: schema dasar tetap 7, fitur008–011 dan diagnostik012. Jangan memakai nomor versi atau keterangan fitur lama di bawah untuk downgrade.
+
 # Upgrade v1.5.0 → v1.6.0
 
 Gunakan `TAHAP_6_CMS.md` sebagai panduan aktif. Folder source baru, Node22, environment Next.js sebelumnya, install → test → syntax → typecheck → build. Tidak ada dependensi/key/flag baru. Backup proyek Invitation yang sama; **006 saja** jika001–005 sudah terpasang. Jangan re-run001–005 setelah006.

@@ -1,0 +1,22 @@
+/** Keep every numbered migration explicitly covered; reject unreviewed new files. */
+import contract from '../data/database-contract.json' with {type:'json'};
+export function sqlTestPlan(actualNames) {
+ const expected=[...contract.migrations];
+ if(!Array.isArray(actualNames)||actualNames.length!==expected.length
+   || [...actualNames].sort().some((name,index)=>name!==expected[index])) {
+  throw new Error('Migration files differ from data/database-contract.json. Update the reviewed plan; no database was touched.');
+ }
+ const m=name=>'supabase/migrations/'+name, t=name=>'supabase/tests/'+name;
+ return [t('local-bootstrap.sql'),...expected.slice(0,6).map(m),
+  ...['003_editor_validation.sql','004_commerce_integration.sql','005_guestbook_integration.sql','006_cms_integration.sql'].map(t),
+  m(expected[6]),t('007_release_integration.sql'),m(expected[6]),t('007_release_integration.sql'),
+  t('008_011_upgrade_seed.sql'),
+  ...expected.slice(7,11).map(m),
+  t('008_011_upgrade_verify.sql'),
+  // Re-run ONLY the latest theme migration before diagnostics, never downgrade 009/010.
+  t('011_replay_snapshot.sql'),m(expected[10]),t('011_replay_verify.sql'),
+  m(expected[11]),t('012_feature_readiness.sql'),
+  // Diagnostics must be repeatable, read-only, and must keep private RPC grants intact.
+  m(expected[11]),t('012_feature_readiness.sql'),t('008_011_upgrade_verify.sql'),t('011_replay_verify.sql'),
+ ];
+}

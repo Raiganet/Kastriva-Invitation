@@ -1,0 +1,19 @@
+{
+  "baseSchemaVersion": 7,
+  "capabilityProtocol": 1,
+  "diagnosticsMigration": 12,
+  "migrations": [
+    "001_foundation.sql",
+    "002_account_readiness.sql",
+    "003_editor_events.sql",
+    "004_commerce_publication.sql",
+    "005_guestbook_rsvp.sql",
+    "006_cms_operations.sql",
+    "007_release_hardening.sql",
+    "008_invitation_extras.sql",
+    "009_heritage_themes.sql",
+    "010_luxury_emerald.sql",
+    "011_botanical_blush.sql",
+    "012_feature_readiness.sql"
+  ]
+}

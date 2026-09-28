@@ -9,7 +9,8 @@ else {
   else {
     console.log('Kastriva Invitation — pemeriksaan koneksi baca-saja');
     for (const check of report.checks) console.log(`[${check.state.toUpperCase()}] ${check.label}: ${check.detail}`);
-    console.log(report.readyForAccountTest ? 'Koneksi dasar siap untuk UJI AKUN. Email, isolasi data, dan Storage belum dibuktikan oleh pemeriksaan ini.' : 'Belum siap untuk uji akun. Selesaikan pemeriksaan di atas.');
+    console.log(report.readyForAccountTest ? 'Koneksi dasar siap untuk UJI AKUN; email dan isolasi data belum dibuktikan.' : 'Koneksi dasar belum siap untuk uji akun.');
+    console.log(report.readyForFeatureTest ? 'Kemampuan fitur terbaru terdeteksi. Lanjutkan uji staging; bukan persetujuan produksi.' : 'Fitur terbaru belum lengkap/terverifikasi. Lihat pemeriksaan 008–012.');
   }
-  process.exitCode = report.readyForAccountTest ? 0 : report.configured ? 1 : 2;
+  process.exitCode = report.readyForFeatureTest ? 0 : report.configured ? 1 : 2;
 }

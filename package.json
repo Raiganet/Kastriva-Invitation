@@ -1,8 +1,8 @@
 {
   "name": "kastriva-invitation",
-  "version": "1.7.3",
+  "version": "1.8.0",
   "private": true,
-  "description": "Kastriva Invitation — koreksi kontrol transaksi, retry, dan respons terlambat",
+  "description": "Kastriva Invitation \u2014 penyelarasan capability database, migrasi, dan pengujian rilis",
   "engines": {
     "node": "22.x"
   },
@@ -29,7 +29,8 @@
     "diagnose:local": "node scripts/diagnose.mjs --no-network",
     "check:installed": "node scripts/diagnose.mjs --installed-only",
     "setup:local": "node scripts/prepare-local.mjs",
-    "setup:plan": "node scripts/prepare-local.mjs --plan"
+    "setup:plan": "node scripts/prepare-local.mjs --plan",
+    "check:release-contract": "node scripts/check-release-contract.mjs"
   },
   "dependencies": {
     "next": "16.3.6",
