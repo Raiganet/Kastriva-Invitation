@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 // Actual React/Next fixture with intercepted HTTP. NOT Supabase integration or bank transactions.
 const slug='ki-general-wishes-fixture';
 const feed=(accepting=true)=>({ok:true,result:{accepting,showing:true,items:[],next:null}});
-test('general link shows independent form; receipt, consent and moderation are explicit',async({page})=>{
+test('general link shows independent form; receipt and consent are explicit',async({page})=>{
  await page.route(`**/api/public/${slug}/open-wishes`,route=>route.fulfill({json:feed()}));
  let sent:Record<string,unknown>|undefined;
  await page.route(`**/api/public/${slug}/open-wishes/submit`,async route=>{
@@ -22,8 +22,9 @@ test('general link shows independent form; receipt, consent and moderation are e
  expect(sent).not.toHaveProperty('attendance');expect(sent).not.toHaveProperty('token');
  expect(sent?.receipt).toMatch(/^[a-f0-9]{64}$/);
  await page.getByText('Simpan kode penghapusan ucapan Anda',{exact:true}).click();
+ await page.getByRole('button',{name:'Tampilkan kode',exact:true}).click();
  await expect(page.getByLabel('Kode penghapusan privat')).toHaveValue(`${slug}.${sent?.id}.${sent?.receipt}`);
- await expect(page.locator('.wish-card')).toHaveCount(0); // not automatically published
+ await expect(page.locator('.wish-card')).toHaveCount(0); // consent=false remains private
  await expect(page.getByLabel('Nama Anda')).toHaveValue('');
 });
 test('uncertain response retries the same ID, receipt and text',async({page})=>{
