@@ -313,5 +313,27 @@
       "Preview sebelum pesan"
     ],
     "active": true
+  },
+  {
+    "slug": "aurora-modern",
+    "name": "Aurora Modern",
+    "category": "pernikahan",
+    "description": "Desain modern glassmorphism dengan animasi aurora borealis, gradasi dinamis, dan musik latar romantis.",
+    "price": 250000,
+    "thumbnail": "🌌",
+    "colors": [
+      "#0B0F1A",
+      "#6366F1",
+      "#EC4899"
+    ],
+    "features": [
+      "Sampul personal",
+      "Musik instrumental otomatis",
+      "Animasi aurora & partikel",
+      "Amplop digital",
+      "Lokasi per acara",
+      "Preview sebelum pesan"
+    ],
+    "active": true
   }
 ]

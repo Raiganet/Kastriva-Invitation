@@ -1,0 +1,676 @@
+/* Aurora Modern — glassmorphism, animated gradients, floating particles, modern typography */
+
+@keyframes aurora-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float-up {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: .6; }
+  100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, .3), 0 0 60px rgba(236, 72, 153, .15); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, .5), 0 0 80px rgba(236, 72, 153, .3); }
+}
+
+@keyframes slide-in-up {
+  from { transform: translateY(60px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fade-scale-in {
+  from { transform: scale(.85); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.theme-aurora-modern {
+  --paper: #0f0b1a;
+  --tone: #e8e0f0;
+  --soft: #1a1230;
+  --accent-1: #8b5cf6;
+  --accent-2: #ec4899;
+  --accent-3: #06b6d4;
+  --glass-bg: rgba(255, 255, 255, .06);
+  --glass-border: rgba(255, 255, 255, .12);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, .4);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--paper);
+  color: var(--tone);
+}
+
+.invitation.theme-aurora-modern {
+  background: linear-gradient(-45deg, #0f0b1a, #1a103a, #0d1f2d, #1f0a2e);
+  background-size: 400% 400%;
+  animation: aurora-shift 15s ease infinite;
+}
+
+/* Glass card base */
+.theme-aurora-modern .glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  box-shadow: var(--glass-shadow);
+}
+
+/* Cover section */
+.theme-aurora-modern .inv-cover {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 24px;
+}
+
+.theme-aurora-modern .cover-frame {
+  position: relative;
+  z-index: 2;
+  max-width: 520px;
+  width: 100%;
+  padding: 48px 32px;
+  text-align: center;
+  animation: fade-scale-in 1.2s cubic-bezier(.22, 1, .36, 1) both;
+}
+
+.theme-aurora-modern .cover-frame::before {
+  display: none;
+}
+
+/* Floating orbs background */
+.aurora-orbs {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: .5;
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+
+.aurora-orb:nth-child(1) {
+  width: 300px; height: 300px;
+  background: var(--accent-1);
+  top: 10%; left: -5%;
+  animation-delay: 0s;
+}
+
+.aurora-orb:nth-child(2) {
+  width: 250px; height: 250px;
+  background: var(--accent-2);
+  top: 60%; right: -8%;
+  animation-delay: 1.5s;
+}
+
+.aurora-orb:nth-child(3) {
+  width: 200px; height: 200px;
+  background: var(--accent-3);
+  bottom: 5%; left: 30%;
+  animation-delay: 3s;
+}
+
+/* Particles */
+.aurora-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.aurora-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, .6);
+  border-radius: 50%;
+  animation: float-up linear infinite;
+}
+
+.aurora-particle:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+.aurora-particle:nth-child(2) { left: 25%; animation-duration: 12s; animation-delay: 2s; width: 3px; height: 3px; }
+.aurora-particle:nth-child(3) { left: 40%; animation-duration: 10s; animation-delay: 4s; }
+.aurora-particle:nth-child(4) { left: 55%; animation-duration: 14s; animation-delay: 1s; width: 5px; height: 5px; }
+.aurora-particle:nth-child(5) { left: 70%; animation-duration: 9s; animation-delay: 3s; }
+.aurora-particle:nth-child(6) { left: 85%; animation-duration: 11s; animation-delay: 5s; width: 3px; height: 3px; }
+.aurora-particle:nth-child(7) { left: 15%; animation-duration: 13s; animation-delay: 6s; }
+.aurora-particle:nth-child(8) { left: 60%; animation-duration: 7s; animation-delay: 2.5s; width: 6px; height: 6px; }
+
+/* Names & Typography */
+.theme-aurora-modern .inv-names {
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-block: 20px;
+  background: linear-gradient(135deg, #fff 0%, var(--accent-1) 50%, var(--accent-2) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+.theme-aurora-modern .inv-names-layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.theme-aurora-modern .inv-name-first,
+.theme-aurora-modern .inv-name-second {
+  font-weight: 200;
+}
+
+.theme-aurora-modern .inv-name-join {
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: var(--accent-2);
+  -webkit-text-fill-color: var(--accent-2);
+  margin: 8px 0;
+  opacity: .8;
+}
+
+.theme-aurora-modern .inv-name-join::before,
+.theme-aurora-modern .inv-name-join::after {
+  display: none;
+}
+
+.theme-aurora-modern .overline {
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .5);
+  margin-bottom: 16px;
+}
+
+.theme-aurora-modern .inv-rule {
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-1), var(--accent-2), transparent);
+  margin: 20px auto;
+  border: none;
+}
+
+/* Guest card */
+.theme-aurora-modern .guest-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 28px auto;
+  max-width: 340px;
+  text-align: center;
+  animation: slide-in-up .8s cubic-bezier(.22, 1, .36, 1) .3s both;
+}
+
+.theme-aurora-modern .guest-card small {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .45);
+}
+
+.theme-aurora-modern .guest-card strong {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  color: #fff;
+  margin-top: 6px;
+}
+
+.theme-aurora-modern .guest-card > span {
+  color: rgba(255, 255, 255, .6);
+  font-size: 13px;
+}
+
+/* Buttons */
+.theme-aurora-modern .inv-button {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: #fff;
+  border: none;
+  border-radius: 50px;
+  padding: 14px 36px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  min-height: 50px;
+  cursor: pointer;
+  transition: all .3s cubic-bezier(.22, 1, .36, 1);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, .4);
+  animation: slide-in-up .8s cubic-bezier(.22, 1, .36, 1) .5s both;
+}
+
+.theme-aurora-modern .inv-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, .6);
+}
+
+.theme-aurora-modern .inv-button.outline {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--tone);
+  box-shadow: none;
+}
+
+.theme-aurora-modern .inv-button.outline:hover {
+  background: var(--glass-bg);
+  border-color: var(--accent-1);
+}
+
+.theme-aurora-modern .cover-note {
+  color: rgba(255, 255, 255, .5);
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+/* Toolbar */
+.theme-aurora-modern .inv-toolbar {
+  background: rgba(15, 11, 26, .85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--tone);
+}
+
+/* Hero */
+.theme-aurora-modern .inv-hero {
+  position: relative;
+  min-height: 100svh;
+  padding: 100px 24px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.theme-aurora-modern .inv-hero .inv-opening {
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 2;
+  color: rgba(255, 255, 255, .7);
+  margin-top: 24px;
+}
+
+/* Sections */
+.theme-aurora-modern .inv-section {
+  position: relative;
+  padding: 80px 24px;
+  max-width: 680px;
+  margin-inline: auto;
+}
+
+.theme-aurora-modern .inv-section.alternate {
+  background: rgba(255, 255, 255, .02);
+  border-radius: 32px;
+  margin-block: 20px;
+}
+
+.theme-aurora-modern .inv-section h2 {
+  font-size: clamp(28px, 5vw, 42px);
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg, #fff, var(--accent-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.theme-aurora-modern .inv-section h2::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+/* Couple grid */
+.theme-aurora-modern .couple-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin-top: 40px;
+}
+
+.theme-aurora-modern .couple-grid h3 {
+  font-size: 28px;
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.theme-aurora-modern .person-monogram {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42px;
+  font-weight: 200;
+  color: var(--accent-1);
+  margin: 0 auto 16px;
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.theme-aurora-modern .couple-and {
+  font-size: 32px;
+  font-weight: 200;
+  color: var(--accent-2);
+  text-align: center;
+  margin: 8px 0;
+}
+
+/* Event box */
+.theme-aurora-modern .event-box {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 32px 24px;
+  margin-bottom: 20px;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.theme-aurora-modern .event-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(139, 92, 246, .2);
+}
+
+.theme-aurora-modern .event-box::before {
+  display: none;
+}
+
+.theme-aurora-modern .event-box h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.theme-aurora-modern .event-box h4 {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .65);
+  line-height: 1.6;
+}
+
+/* Countdown */
+.theme-aurora-modern .countdown {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 32px 0;
+}
+
+.theme-aurora-modern .countdown > div {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 16px 12px;
+  min-width: 72px;
+  text-align: center;
+  transition: transform .3s ease;
+}
+
+.theme-aurora-modern .countdown > div:hover {
+  transform: scale(1.08);
+}
+
+.theme-aurora-modern .countdown strong {
+  display: block;
+  font-size: 32px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.theme-aurora-modern .countdown small {
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .4);
+  margin-top: 4px;
+  display: block;
+}
+
+/* Gallery / Photos */
+.theme-aurora-modern .photo-placeholders > div {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+}
+
+.theme-aurora-modern .photo-grid img,
+.theme-aurora-modern .photo-grid > :is(a, button) {
+  border-radius: 16px;
+  transition: transform .4s cubic-bezier(.22, 1, .36, 1);
+}
+
+.theme-aurora-modern .photo-grid img:hover {
+  transform: scale(1.03);
+}
+
+/* Story */
+.theme-aurora-modern .story-text {
+  font-size: 14px !important;
+  line-height: 2 !important;
+  color: rgba(255, 255, 255, .7);
+}
+
+/* Closing */
+.theme-aurora-modern .inv-closing {
+  background: linear-gradient(180deg, transparent, rgba(139, 92, 246, .08));
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.theme-aurora-modern .inv-closing h2 {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  font-size: 32px;
+}
+
+/* RSVP form */
+.theme-aurora-modern .rsvp-form input,
+.theme-aurora-modern .rsvp-form textarea,
+.theme-aurora-modern .rsvp-form select {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  color: #fff;
+  padding: 12px 16px;
+  font-size: 14px;
+  transition: border-color .3s ease, box-shadow .3s ease;
+}
+
+.theme-aurora-modern .rsvp-form input:focus,
+.theme-aurora-modern .rsvp-form textarea:focus,
+.theme-aurora-modern .rsvp-form select:focus {
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, .2);
+  outline: none;
+}
+
+/* Bottom nav */
+.theme-aurora-modern .inv-bottom-nav {
+  background: rgba(15, 11, 26, .9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  width: min(420px, calc(100% - 32px));
+  box-shadow: 0 8px 32px rgba(0, 0, 0, .5);
+}
+
+.theme-aurora-modern .inv-bottom-nav button {
+  border-radius: 12px;
+  transition: all .2s ease;
+}
+
+.theme-aurora-modern .inv-bottom-nav button[aria-current] {
+  background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  color: #fff;
+}
+
+/* Music control */
+.theme-aurora-modern .inv-music {
+  right: max(16px, calc((100vw - 560px) / 2 + 16px));
+}
+
+/* Artwork / Theme card preview */
+.theme-art.theme-aurora-modern {
+  min-height: 420px;
+  background: linear-gradient(-45deg, #0f0b1a, #1a103a, #0d1f2d);
+  background-size: 400% 400%;
+  animation: aurora-shift 8s ease infinite;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.theme-art.theme-aurora-modern::before {
+  border-color: var(--glass-border);
+  border-radius: 16px;
+  inset: 12px;
+}
+
+.theme-art.theme-aurora-modern .art-inner {
+  padding: 32px 20px 40px;
+}
+
+.theme-art.theme-aurora-modern .art-symbol {
+  margin-bottom: 16px;
+}
+
+.theme-art.theme-aurora-modern .art-names {
+  font-size: 42px;
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #fff, var(--accent-1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.theme-art.theme-aurora-modern .art-label {
+  color: rgba(255, 255, 255, .5);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* Embedded mode adjustments */
+.theme-aurora-modern.inv-embedded .inv-cover {
+  min-height: 600px;
+  padding: 24px 16px;
+}
+
+.theme-aurora-modern.inv-embedded .cover-frame {
+  padding: 32px 20px;
+}
+
+.theme-aurora-modern.inv-embedded .inv-hero {
+  min-height: 600px;
+  padding: 60px 20px;
+}
+
+.theme-aurora-modern.inv-embedded .inv-section {
+  padding: 50px 16px;
+}
+
+/* Scroll reveal animations */
+.theme-aurora-modern [data-reveal] {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .8s cubic-bezier(.22, 1, .36, 1);
+}
+
+.theme-aurora-modern [data-reveal].revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .theme-aurora-modern .inv-cover { padding: 16px; }
+  .theme-aurora-modern .cover-frame { padding: 32px 20px; }
+  .theme-aurora-modern .inv-hero { padding: 70px 16px 60px; }
+  .theme-aurora-modern .inv-section { padding: 60px 16px; }
+  .theme-aurora-modern .countdown > div { min-width: 60px; padding: 12px 8px; }
+  .theme-aurora-modern .countdown strong { font-size: 26px; }
+  .theme-aurora-modern .event-box { padding: 24px 16px; }
+  .theme-aurora-modern .person-monogram { width: 90px; height: 90px; font-size: 32px; }
+  .aurora-orb { filter: blur(60px); }
+  .aurora-orb:nth-child(1) { width: 200px; height: 200px; }
+  .aurora-orb:nth-child(2) { width: 180px; height: 180px; }
+  .aurora-orb:nth-child(3) { width: 150px; height: 150px; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .theme-aurora-modern,
+  .theme-aurora-modern .inv-names,
+  .aurora-orb,
+  .aurora-particle,
+  .theme-art.theme-aurora-modern {
+    animation: none !important;
+  }
+  .theme-aurora-modern [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Print */
+@media print {
+  .theme-aurora-modern .inv-music,
+  .aurora-particles,
+  .aurora-orbs { display: none; }
+  .theme-aurora-modern { background: #fff; color: #000; }
+}
