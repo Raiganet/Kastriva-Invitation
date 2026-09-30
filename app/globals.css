@@ -141,3 +141,21 @@
 .wish-owner-card-note{margin:0 0 14px;font-size:12px;line-height:1.8;color:#6d6168}
 .wish-list-toolbar select{min-width:190px;background:#fff}
 @media(max-width:640px){.general-wishes .guest-wishes-grid .wish-card{padding:20px 18px}.general-wishes .guest-wishes-grid .wish-card strong{font-size:21px}.wish-owner-grid .wish-owner-card h3{font-size:24px}.wish-owner-card-head{align-items:flex-start;flex-direction:column}}
+
+/* Premium music selector shared by all invitation themes. */
+.music-picker{margin:18px 0 26px;padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#fff,#fbf7f8);box-shadow:var(--shadow)}
+.music-picker-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
+.music-picker-heading h3{margin:0 0 7px;font:500 21px/1.3 Georgia,serif}.music-picker-heading p{margin:0;max-width:520px;font-size:12px;line-height:1.8}
+.music-selection-card{display:flex;gap:15px;align-items:center;padding:15px;border:1px solid #eadde1;border-radius:14px;background:#fff;margin-top:12px}
+.music-selection-card strong{display:block;font-size:14px}.music-selection-card small{display:block;color:var(--brand);font-size:10px;letter-spacing:.8px;margin-top:2px}.music-selection-card p{margin:5px 0 0;font-size:11px;line-height:1.7}
+.music-selection-icon{display:flex;align-items:center;justify-content:center;gap:3px;width:48px;height:48px;flex:0 0 48px;border-radius:50%;background:#f3e8ed;color:var(--brand)}
+.music-selection-icon i{width:3px;height:10px;border-radius:2px;background:currentColor;transform-origin:center}.music-selection-icon i:nth-child(2){height:18px}.music-selection-icon i:nth-child(3){height:14px}.music-selection-icon i:nth-child(4){height:7px}
+.music-selection-icon.is-playing i{animation:ki-music-preview .85s ease-in-out infinite alternate}.music-selection-icon.is-playing i:nth-child(2){animation-delay:.15s}.music-selection-icon.is-playing i:nth-child(3){animation-delay:.3s}.music-selection-icon.is-playing i:nth-child(4){animation-delay:.45s}
+@keyframes ki-music-preview{to{transform:scaleY(.42)}}
+@media(max-width:640px){.music-picker{padding:18px 14px}.music-picker-heading{flex-direction:column}.music-picker-heading .button{width:100%}.music-selection-card{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.music-selection-icon.is-playing i{animation:none}}
+
+
+/* Premium catalog marker for Aurora Luxe Motion. */
+.premium-theme-badge{display:inline-flex;align-items:center;gap:7px;margin-bottom:12px;padding:6px 10px;border:1px solid color-mix(in srgb,var(--brand) 24%,transparent);border-radius:999px;background:linear-gradient(135deg,#fff8,#f2e5ec);color:var(--brand);font-size:9px;font-weight:800;letter-spacing:1.5px;box-shadow:0 8px 22px #68384910}
+.premium-theme-badge:before{content:'✦';font-size:11px}

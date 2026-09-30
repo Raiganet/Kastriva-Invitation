@@ -316,9 +316,9 @@
   },
   {
     "slug": "aurora-modern",
-    "name": "Aurora Modern",
+    "name": "Aurora Luxe Motion",
     "category": "pernikahan",
-    "description": "Desain modern glassmorphism dengan animasi aurora borealis, gradasi dinamis, dan musik latar romantis.",
+    "description": "Tema premium modern dengan glassmorphism, aurora berlapis, orbit cahaya, partikel sinematik, transisi halus, dan koleksi musik instrumental.",
     "price": 250000,
     "thumbnail": "🌌",
     "colors": [
@@ -327,9 +327,10 @@
       "#EC4899"
     ],
     "features": [
-      "Sampul personal",
-      "Musik instrumental otomatis",
-      "Animasi aurora & partikel",
+      "Sampul glassmorphism premium",
+      "Animasi aurora, orbit & partikel",
+      "8 pilihan musik instrumental",
+      "Motion section & micro-interaction",
       "Amplop digital",
       "Lokasi per acara",
       "Preview sebelum pesan"

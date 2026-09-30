@@ -101,3 +101,5 @@
 @keyframes music-pulse { to{transform:scaleY(.5)} }
 @media(prefers-reduced-motion:reduce) { .inv-cinematic .cinematic-photo,.music-bars i { animation:none!important; } }
 @media print { .inv-music { display:none; } }
+.music-track-label{position:absolute;right:62px;top:50%;transform:translateY(-50%);max-width:160px;padding:7px 10px;border:1px solid var(--tone);border-radius:16px;background:var(--soft);color:var(--tone);font-size:9px;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;box-shadow:0 4px 18px #0002;pointer-events:none}
+@media(max-width:520px){.music-track-label{display:none}}

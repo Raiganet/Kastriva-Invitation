@@ -11,7 +11,8 @@ export const CAPABILITY_DEFINITIONS = [
   { key: 'heritage_themes', label: 'Tema Islami & adat (009)', fix: 'Periksa 009_heritage_themes.sql; jangan menjalankan ulang migrasi lama setelah versi lebih baru.' },
   { key: 'luxury_theme', label: 'Luxury Emerald (010)', fix: 'Periksa 010_luxury_emerald.sql dan keberadaan tema di katalog database.' },
   { key: 'botanical_theme', label: 'Botanical Blush (011)', fix: 'Periksa 011_botanical_blush.sql dan keberadaan tema di katalog database.' },
-  { key: 'cms_catalog_complete', label: 'CMS dan registry 15 tema', fix: 'Periksa katalog, validator CMS, dan dokumen draft/published. Tema nonaktif tetap dihitung; jangan mereset harga.' },
+  { key: 'aurora_premium_music', label: 'Aurora Luxe Motion & koleksi musik (016)', fix: 'Periksa 016_aurora_premium_music.sql, katalog Aurora, dan validator pilihan musik.' },
+  { key: 'cms_catalog_complete', label: 'CMS dan registry 16 tema', fix: 'Periksa katalog, validator CMS, dan dokumen draft/published. Tema nonaktif tetap dihitung; jangan mereset harga.' },
 ] as const;
 type CapabilityKey = typeof CAPABILITY_DEFINITIONS[number]['key'];
 export type FeatureReadiness = {
@@ -39,7 +40,7 @@ export function featureChecks(raw: unknown): ReadinessCheck[] {
   const data = parseFeatureReadiness(raw);
   const checks: ReadinessCheck[] = [{ id: 'feature_audit', label: 'Diagnostik fitur (012)', state: data ? 'pass' : 'fail',
     detail: data ? 'Kontrak diagnostik terbaca. Kemampuan diuji secara baca-saja; ini bukan catatan seluruh migrasi pernah dijalankan.'
-      : 'Diagnostik belum tersedia atau balasannya tidak sesuai. Ikuti panduan upgrade sampai 012_feature_readiness.sql; jangan menganggap skema dasar 7 sudah mencakup semua fitur.' }];
+      : 'Diagnostik belum tersedia atau balasannya tidak sesuai. Ikuti panduan upgrade sampai 016_aurora_premium_music.sql; jangan menganggap skema dasar 7 sudah mencakup semua fitur.' }];
   for (const {key,label,fix} of CAPABILITY_DEFINITIONS) {
     const ok = data?.capabilities[key] === true && (key !== 'cms_catalog_complete' || data.known_templates === ALL_THEME_SLUGS.length);
     checks.push({ id: key, label, state: ok ? 'pass' : 'fail', detail: ok

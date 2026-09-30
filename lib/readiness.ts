@@ -67,7 +67,7 @@ export async function probeBackend(config: PublicConfig | null, options: ProbeOp
     if (!result.ok) {
       const detail = [401, 403].includes(result.status) ? 'Akses ditolak. Periksa pasangan URL/key dan izin database; jangan memakai service-role key pada konfigurasi publik.'
         : index === 1 && result.status === 404 ? 'RPC dasar belum ditemukan. Pasang migrasi 001, 002, dan seterusnya secara berurutan mengikuti panduan upgrade.'
-        : index === 3 && result.status === 404 ? 'RPC diagnostik belum ditemukan. Ikuti panduan sampai 012_feature_readiness.sql; schema 7 saja belum membuktikan fitur 008–011 tersedia.'
+        : index === 3 && result.status === 404 ? 'RPC diagnostik belum ditemukan. Ikuti panduan sampai 016_aurora_premium_music.sql; schema 7 saja belum membuktikan fitur premium terbaru tersedia.'
         : index === 4 && result.status === 404 ? 'Ucapan umum belum terpasang. Jalankan 013_public_wishes.sql setelah 012; tidak perlu mengulang migrasi lama.'
         : index === 5 && result.status === 404 ? 'Auto-publish/readiness belum terpasang. Jalankan 014_public_wishes_auto_publish.sql lalu 015_public_wishes_readiness.sql.'
         : 'Pemeriksaan gagal. Periksa migrasi, Data API, dan status proyek Supabase.';

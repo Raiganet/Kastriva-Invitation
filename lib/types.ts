@@ -7,6 +7,8 @@ export type InvitationEvent = {
   timezone: 'Asia/Jakarta' | 'Asia/Makassar' | 'Asia/Jayapura';
   venue: string; address: string; mapUrl: string;
 };
+import type {InvitationMusic} from './music-library';
+
 export type DraftContent = {
   groom: string; bride: string; groomParents: string; brideParents: string;
   eventDate: string; eventTime: string; endTime: string;
@@ -14,7 +16,7 @@ export type DraftContent = {
   venue: string; address: string; mapUrl: string; opening: string; story: string; photoPaths: string[];
   /** Optional for drafts created before stage 3. First event mirrors the legacy fields. */
   events?: InvitationEvent[];
-  music?: 'none' | 'serenade';
+  music?: InvitationMusic;
   gifts?: GiftAccount[];
 };
 export type GiftAccount = { bank: string; account: string; holder: string };

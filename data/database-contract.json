@@ -1,7 +1,7 @@
 {
   "baseSchemaVersion": 7,
   "capabilityProtocol": 1,
-  "diagnosticsMigration": 12,
+  "diagnosticsMigration": 16,
   "migrations": [
     "001_foundation.sql",
     "002_account_readiness.sql",
@@ -17,7 +17,8 @@
     "012_feature_readiness.sql",
     "013_public_wishes.sql",
     "014_public_wishes_auto_publish.sql",
-    "015_public_wishes_readiness.sql"
+    "015_public_wishes_readiness.sql",
+    "016_aurora_premium_music.sql"
   ],
   "openWishesProtocol": 1,
   "openWishesAutoPublishProtocol": 1

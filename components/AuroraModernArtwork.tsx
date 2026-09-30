@@ -1,82 +1,12 @@
 'use client';
+import type {CSSProperties} from 'react';
 
-/**
- * Aurora Modern Artwork
- * Komponen visual untuk tema aurora-modern dengan animasi partikel dan orbs.
- * Digunakan di catalog card, editor preview, dan renderer publik.
- */
-export default function AuroraModernArtwork({
-  slug,
-  portrait = false,
-  photo,
-  names,
-}: {
-  slug: string;
-  portrait?: boolean;
-  photo?: string;
-  names?: string;
-}) {
-  if (slug !== 'aurora-modern') return null;
-
-  // Untuk catalog card / ThemeCard
-  if (!portrait) {
-    return (
-      <div className="aurora-art-preview" aria-hidden="true">
-        <div className="aurora-art-orb aurora-art-orb-1" />
-        <div className="aurora-art-orb aurora-art-orb-2" />
-        <div className="aurora-art-orb aurora-art-orb-3" />
-        <span className="aurora-art-icon">✦</span>
-      </div>
-    );
-  }
-
-  // Untuk cover undangan (portrait mode)
-  return (
-    <div className="aurora-scene" aria-hidden="true">
-      {/* Animated gradient orbs */}
-      <div className="aurora-orbs">
-        <div className="aurora-orb orb-1" />
-        <div className="aurora-orb orb-2" />
-        <div className="aurora-orb orb-3" />
-        <div className="aurora-orb orb-4" />
-      </div>
-
-      {/* Floating particles */}
-      <div className="aurora-particles">
-        {Array.from({ length: 18 }).map((_, i) => (
-          <span
-            key={i}
-            className="aurora-particle"
-            style={{
-              left: `${(i * 5.5 + 2) % 96}%`,
-              animationDelay: `${(i * 0.7) % 8}s`,
-              animationDuration: `${10 + (i % 5) * 2}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Glass frame for photo/initials */}
-      <div className="aurora-glass-frame">
-        {photo ? (
-          <img
-            src={photo}
-            alt={names || 'Pengantin'}
-            className="aurora-portrait-photo"
-            width={320}
-            height={320}
-          />
-        ) : (
-          <div className="aurora-initials">
-            {names
-              ? names
-                  .split('&')
-                  .map((n) => n.trim().charAt(0))
-                  .join('')
-              : '♥'}
-          </div>
-        )}
-      </div>
-    </div>
-  );
+export default function AuroraModernArtwork({slug,mode='preview',photo,names}:{
+  slug:string;mode?:'preview'|'ambient'|'portrait';photo?:string;names?:string;
+}){
+ if(slug!=='aurora-modern')return null;
+ if(mode==='preview')return <div className="aurora-art-preview" aria-hidden="true"><span className="aurora-preview-ribbon ribbon-a"/><span className="aurora-preview-ribbon ribbon-b"/><span className="aurora-preview-orbit orbit-a"/><span className="aurora-preview-orbit orbit-b"/><span className="aurora-preview-star">✦</span></div>;
+ if(mode==='ambient')return <div className="aurora-ambient" aria-hidden="true"><div className="aurora-ribbons"><span/><span/><span/></div><div className="aurora-orbs"><i/><i/><i/><i/></div><div className="aurora-particles">{Array.from({length:22},(_,i)=><b key={i} style={{'--x':`${(i*37)%97}%`,'--delay':`${(i%9)*-.9}s`,'--duration':`${8+(i%7)*1.35}s`,'--size':`${2+(i%4)}px`} as CSSProperties}/>)}</div><span className="aurora-grid"/></div>;
+ const initials=(names||'A & S').split('&').map(v=>v.trim().slice(0,1)).filter(Boolean).join(' · ');
+ return <div className="aurora-portrait-stage" aria-hidden="true"><span className="aurora-orbit-ring ring-one"/><span className="aurora-orbit-ring ring-two"/><span className="aurora-orbit-ring ring-three"/><div className="aurora-photo-shell">{photo?<img src={photo} alt="" referrerPolicy="no-referrer"/>:<div className="aurora-initials">{initials||'A · S'}</div>}<span className="aurora-photo-glint"/></div><small>PREMIUM MOTION</small></div>;
 }

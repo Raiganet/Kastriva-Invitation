@@ -7,6 +7,7 @@ export default function ThemeMotif({slug}:{slug:string}) {
  if(slug==='botanical-blush')return <BlushRose className="theme-motif"/>;
  if(isHeritageTheme(slug))return <HeritageMotif slug={slug}/>;
  if(slug==='elementor-luxury-1')return <LuxuryRosette className="theme-motif"/>;
+ if(slug==='aurora-modern')return <svg className="theme-motif" viewBox="0 0 120 100" fill="none" stroke="currentColor" strokeWidth="1.2" aria-hidden="true"><ellipse cx="60" cy="50" rx="39" ry="18" transform="rotate(-18 60 50)"/><ellipse cx="60" cy="50" rx="27" ry="39" transform="rotate(32 60 50)" strokeDasharray="3 5"/><circle cx="60" cy="50" r="9" fill="currentColor" fillOpacity=".08"/><path d="m60 34 3 10 10 3-10 3-3 10-3-10-10-3 10-3Zm31-17 2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/></svg>;
  const leaves=slug==='tropical-paradise'||slug==='rustic-wood';
  const rose=slug==='elegant-rose';
  return <svg className="theme-motif" viewBox="0 0 120 100" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">

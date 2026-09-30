@@ -1,4 +1,5 @@
 import type { DraftContent, InvitationEvent } from './types.ts';
+import {isInvitationMusic} from './music-library.ts';
 export const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 export const ORDER_STATUSES = ['new', 'contacted', 'processing', 'cancelled'] as const;
 export const STATUS_LABEL: Record<string, string> = { new: 'Permintaan baru', contacted: 'Sudah dihubungi', processing: 'Sedang disiapkan', cancelled: 'Dibatalkan' };
@@ -43,7 +44,7 @@ export function validDate(value: string): boolean {
 export function parseDraft(value: unknown, ownerId: string, editing = false): DraftContent {
   const x = asRecord(value);
   if (Object.keys(x).some(k => !Object.hasOwn(blankContent,k) && !['events','music','gifts'].includes(k))) throw new ValidationError('Kolom draft tidak dikenal.');
-  if (x.music !== undefined && x.music !== 'none' && x.music !== 'serenade') throw new ValidationError('Pilihan musik tidak dikenal.');
+  if (x.music !== undefined && !isInvitationMusic(x.music)) throw new ValidationError('Pilihan musik tidak dikenal.');
   const gifts = x.gifts === undefined ? undefined : parseGifts(x.gifts);
   const eventDate = text(x.eventDate, 'Tanggal', 10);
   if (!editing && eventDate && !validDate(eventDate)) throw new ValidationError('Tanggal acara tidak valid.');

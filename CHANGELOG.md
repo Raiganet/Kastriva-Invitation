@@ -1,3 +1,11 @@
+# v1.10.0 — Aurora Luxe Motion & Music Library
+
+- Menambahkan tema premium modern `aurora-modern` dengan glassmorphism, aurora ribbons, orbit, partikel, reveal motion, hover/micro-interaction, dan reduced-motion fallback.
+- Menambahkan 8 musik instrumental sintetis bawaan yang diputar via Web Audio setelah interaksi pengguna.
+- Menambahkan pemilih musik premium di editor dengan preview/stop.
+- Menambah migrasi 016 untuk katalog 16 tema dan validator musik tanpa mengubah pesanan/publikasi pelanggan lama.
+- Menambah readiness/test contract untuk katalog 16 tema.
+
 # 1.9.0 — 28 September 2026
 
 - Kolom Ucapan & doa untuk tautan umum: izin, moderasi pemilik, retry identik, kode penghapusan, kuota server dan default tertutup; terpisah dari RSVP.
