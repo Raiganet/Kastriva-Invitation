@@ -15,10 +15,11 @@ test('built-in music creates actual Web Audio only after opening and closes on p
  });
  expect(await states()).toEqual([]);
  await page.getByRole('button',{name:/Buka undangan/}).click();
- await expect(page.getByRole('button',{name:'Jeda musik',exact:true})).toBeVisible();
+ const pause=page.getByRole('button',{name:/^Jeda /});
+ await expect(pause).toBeVisible();
  await expect.poll(states).toContain('running');
- await page.getByRole('button',{name:'Jeda musik',exact:true}).click();
- await expect(page.getByRole('button',{name:'Putar musik',exact:true})).toHaveAttribute('aria-pressed','false');
+ await pause.click();
+ await expect(page.getByRole('button',{name:/^Putar /})).toHaveAttribute('aria-pressed','false');
  await expect.poll(states).toEqual(['closed']);
 });
 test('gift disclosure uses only the labelled demo account',async({page})=>{
