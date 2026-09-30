@@ -8,7 +8,6 @@ test('built-in music creates actual Web Audio only after opening and closes on p
  });
  await page.goto('/demo/galaxy-night');
  const states=()=>page.evaluate(()=>{
-  // The init script adds this property at runtime; it is not a standard Window member.
   const contexts=(window as Window&{__kiAudioContexts?:AudioContext[]}).__kiAudioContexts;
   if(!contexts)throw new Error('Audio test instrumentation was not initialized.');
   return contexts.map(c=>c.state);
