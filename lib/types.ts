@@ -17,6 +17,8 @@ export type DraftContent = {
   /** Optional for drafts created before stage 3. First event mirrors the legacy fields. */
   events?: InvitationEvent[];
   music?: InvitationMusic;
+  /** Per-invitation music loudness, 0-100. Drafts created before v1.10.1 omit this field. */
+  musicVolume?: number;
   gifts?: GiftAccount[];
 };
 export type GiftAccount = { bank: string; account: string; holder: string };

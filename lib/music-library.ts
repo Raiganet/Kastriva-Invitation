@@ -11,6 +11,7 @@ export const MUSIC_TRACKS = [
 
 export type MusicTrackKey = typeof MUSIC_TRACKS[number]['id'];
 export type InvitationMusic = 'none' | MusicTrackKey;
+export const DEFAULT_MUSIC_VOLUME = 75;
 export const MUSIC_TRACK_IDS: readonly InvitationMusic[] = ['none',...MUSIC_TRACKS.map(track=>track.id)];
 
 export function isInvitationMusic(value:unknown):value is InvitationMusic {

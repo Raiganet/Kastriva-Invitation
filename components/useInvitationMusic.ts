@@ -1,6 +1,6 @@
 'use client';
 import {useCallback,useEffect,useRef,useState} from 'react';
-import {musicLabel,type InvitationMusic,type MusicTrackKey} from '@/lib/music-library';
+import {DEFAULT_MUSIC_VOLUME,musicLabel,type InvitationMusic,type MusicTrackKey} from '@/lib/music-library';
 
 type SynthConfig={
  bpm:number; chords:readonly (readonly number[])[]; pattern:readonly number[]; waveform:OscillatorType;
@@ -20,13 +20,15 @@ const ARP_NORMAL=[0,1,2,3,2,1,3,2] as const;
 
 function midiHz(midi:number){return 440*2**((midi-69)/12);}
 
-export function useInvitationMusic(track:InvitationMusic,active=true){
- const context=useRef<AudioContext|null>(null),timer=useRef<number|null>(null),generation=useRef(0);
+export function useInvitationMusic(track:InvitationMusic,active=true,volumePercent=DEFAULT_MUSIC_VOLUME){
+ const context=useRef<AudioContext|null>(null),masterGain=useRef<GainNode|null>(null),timer=useRef<number|null>(null),generation=useRef(0);
+ const volume=Math.max(0,Math.min(100,Number.isFinite(volumePercent)?Math.round(volumePercent):DEFAULT_MUSIC_VOLUME));
+ const gainFor=(id:InvitationMusic)=>id==='none'?0:TRACKS[id].volume*(volume/50);
  const [playing,setPlaying]=useState(false),[error,setError]=useState('');
  const stop=useCallback(()=>{
   generation.current++;
   if(timer.current!==null){window.clearInterval(timer.current);timer.current=null;}
-  const old=context.current;context.current=null;
+  const old=context.current;context.current=null;masterGain.current=null;
   if(old&&old.state!=='closed')void old.close().catch(()=>{});
   setPlaying(false);
  },[]);
@@ -38,7 +40,7 @@ export function useInvitationMusic(track:InvitationMusic,active=true){
    audio=new AudioContext();context.current=audio;await audio.resume();
    if(token!==generation.current||context.current!==audio)return;
    if(audio.state!=='running')throw new Error('Audio not running');
-   const master=audio.createGain();master.gain.value=config.volume;
+   const master=audio.createGain();master.gain.value=gainFor(track);masterGain.current=master;
    const filter=audio.createBiquadFilter();filter.type='lowpass';filter.frequency.value=config.filter;filter.Q.value=.5;
    filter.connect(master);master.connect(audio.destination);
    let step=0,next=audio.currentTime+.06;
@@ -66,7 +68,8 @@ export function useInvitationMusic(track:InvitationMusic,active=true){
    if(token!==generation.current)return;
    stop();setError('Musik belum dapat diputar. Ketuk tombol musik untuk mencoba lagi.');
   }
- },[active,track,stop]);
+ },[active,track,stop,volume]);
+ useEffect(()=>{const audio=context.current,node=masterGain.current;if(!audio||!node||audio.state==='closed')return;node.gain.cancelScheduledValues(audio.currentTime);node.gain.setTargetAtTime(gainFor(track),audio.currentTime,.05);},[track,volume]);
  useEffect(()=>{stop();},[track,active,stop]);
  useEffect(()=>{return stop;},[stop]);
  useEffect(()=>{const hide=()=>{if(document.hidden)stop();};document.addEventListener('visibilitychange',hide);return()=>document.removeEventListener('visibilitychange',hide);},[stop]);

@@ -43,8 +43,9 @@ export function validDate(value: string): boolean {
 }
 export function parseDraft(value: unknown, ownerId: string, editing = false): DraftContent {
   const x = asRecord(value);
-  if (Object.keys(x).some(k => !Object.hasOwn(blankContent,k) && !['events','music','gifts'].includes(k))) throw new ValidationError('Kolom draft tidak dikenal.');
+  if (Object.keys(x).some(k => !Object.hasOwn(blankContent,k) && !['events','music','musicVolume','gifts'].includes(k))) throw new ValidationError('Kolom draft tidak dikenal.');
   if (x.music !== undefined && !isInvitationMusic(x.music)) throw new ValidationError('Pilihan musik tidak dikenal.');
+  if (x.musicVolume !== undefined && (typeof x.musicVolume !== 'number' || !Number.isSafeInteger(x.musicVolume) || x.musicVolume < 0 || x.musicVolume > 100)) throw new ValidationError('Volume musik harus 0 sampai 100 persen.');
   const gifts = x.gifts === undefined ? undefined : parseGifts(x.gifts);
   const eventDate = text(x.eventDate, 'Tanggal', 10);
   if (!editing && eventDate && !validDate(eventDate)) throw new ValidationError('Tanggal acara tidak valid.');
@@ -65,7 +66,7 @@ export function parseDraft(value: unknown, ownerId: string, editing = false): Dr
     eventDate, eventTime, endTime, timezone: x.timezone as DraftContent['timezone'],
     venue: text(x.venue,'Nama tempat',200), address: text(x.address,'Alamat',500), mapUrl: editing ? text(x.mapUrl,'Lokasi',1000) : httpsUrl(x.mapUrl,'Lokasi'),
     opening: text(x.opening,'Pembuka',1000), story: text(x.story,'Cerita',4000), photoPaths, ...(events ? {events} : {}),
-    ...(x.music !== undefined ? {music:x.music as DraftContent['music']} : {}), ...(gifts ? {gifts} : {}),
+    ...(x.music !== undefined ? {music:x.music as DraftContent['music']} : {}), ...(x.musicVolume !== undefined ? {musicVolume:x.musicVolume as number} : {}), ...(gifts ? {gifts} : {}),
   };
   if (events && EVENT_FIELDS.some(key => content[key] !== events[0][key])) throw new ValidationError('Ringkasan acara harus sesuai acara pertama.');
   return content;

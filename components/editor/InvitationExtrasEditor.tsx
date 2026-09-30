@@ -1,17 +1,18 @@
 'use client';
 import type {DraftContent,GiftAccount} from '@/lib/types';
-import {MUSIC_TRACKS,musicTrack,type InvitationMusic} from '@/lib/music-library';
+import {DEFAULT_MUSIC_VOLUME,MUSIC_TRACKS,musicTrack,type InvitationMusic} from '@/lib/music-library';
 import {useInvitationMusic} from '@/components/useInvitationMusic';
 
 export default function InvitationExtrasEditor({content,onChange}:{content:DraftContent;onChange:(next:DraftContent)=>void}){
- const gifts=content.gifts||[],selected=(content.music||'none') as InvitationMusic,preview=useInvitationMusic(selected,true),meta=musicTrack(selected);
+ const gifts=content.gifts||[],selected=(content.music||'none') as InvitationMusic,volume=content.musicVolume??DEFAULT_MUSIC_VOLUME,preview=useInvitationMusic(selected,true,volume),meta=musicTrack(selected);
  function changeGift(index:number,key:keyof GiftAccount,value:string){onChange({...content,gifts:gifts.map((row,i)=>i===index?{...row,[key]:value}:row)});}
  return <>
   <h2>Musik & tanda kasih.</h2>
   <section className="music-picker" aria-label="Pilihan musik undangan">
    <div className="music-picker-heading"><div><span className="eyebrow">MUSIC COLLECTION</span><h3>Pilih suasana undangan</h3><p>8 komposisi instrumental original Kastriva. Tidak memakai lagu pihak ketiga dan baru diputar setelah interaksi pengguna.</p></div>{selected!=='none'&&<button className="button ghost small" type="button" onClick={preview.toggle}>{preview.playing?'Hentikan preview':'▶ Preview musik'}</button>}</div>
-   <label>Musik latar<select value={selected} onChange={e=>onChange({...content,music:e.target.value as InvitationMusic})}><option value="none">Tanpa musik</option>{MUSIC_TRACKS.map(track=><option value={track.id} key={track.id}>{track.name} — {track.mood}</option>)}</select></label>
+   <label>Musik latar<select value={selected} onChange={e=>onChange({...content,music:e.target.value as InvitationMusic,musicVolume:content.musicVolume??DEFAULT_MUSIC_VOLUME})}><option value="none">Tanpa musik</option>{MUSIC_TRACKS.map(track=><option value={track.id} key={track.id}>{track.name} — {track.mood}</option>)}</select></label>
    {meta&&<div className="music-selection-card"><span className={preview.playing?'music-selection-icon is-playing':'music-selection-icon'} aria-hidden><i/><i/><i/><i/></span><div><strong>{meta.name}</strong><small>{meta.mood}</small><p>{meta.detail}</p></div></div>}
+   {selected!=='none'&&<label className="music-volume-control"><span>Volume musik <strong>{volume}%</strong></span><input aria-label="Volume musik" type="range" min={0} max={100} step={5} value={volume} onChange={e=>onChange({...content,musicVolume:Number(e.target.value)})}/><small>0% senyap · 100% maksimal. Perubahan terdengar langsung saat preview musik sedang berjalan.</small></label>}
    {preview.error&&<p className="notice error" role="status">{preview.error}</p>}
   </section>
   <p className="editor-tip">Musik diputar setelah tamu menekan <strong>Buka undangan</strong>, dapat dijeda kapan saja, dan otomatis berhenti saat tab tidak aktif.</p>

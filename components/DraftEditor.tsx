@@ -69,7 +69,7 @@ export default function DraftEditor({id,ownerId,initial,initialTheme,themeOption
       setAutosave(false);controller.edit(next);controller.resumeAfterEdit();setFileNotice('Salinan dimuat ke formulir, belum disimpan ke server. Periksa lalu tekan Simpan sekarang.');
     }catch(error){setFileNotice(error instanceof Error?error.message:'Salinan JSON tidak dapat dibaca.');}
   }
-  const field=(key:Exclude<keyof DraftContent,'photoPaths'|'events'|'timezone'|'gifts'|'music'>,label:string,max=200)=><label>{label}<input value={content[key]} maxLength={max} onChange={e=>update(key,e.target.value)} autoComplete="off"/></label>;
+  const field=(key:Exclude<keyof DraftContent,'photoPaths'|'events'|'timezone'|'gifts'|'music'|'musicVolume'>,label:string,max=200)=><label>{label}<input value={content[key]} maxLength={max} onChange={e=>update(key,e.target.value)} autoComplete="off"/></label>;
   const index=tabs.findIndex(t=>t[0]===section);
   const status=!state.online?'Offline · belum tersinkron':state.phase==='saving'?'Menyimpan…':state.phase==='conflict'?'Konflik versi':state.phase==='auth'?'Login diperlukan':state.phase==='recovery'?'Salinan lokal ditemukan':state.pending?'Hasil simpan belum pasti':state.phase==='error'?'Simpan dijeda':dirty?'Perubahan belum tersimpan':state.revision?'Tersimpan di server':'Draft baru';
   return <div className="container workspace editor-workspace">

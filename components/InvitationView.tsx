@@ -21,6 +21,7 @@ import { useEffect, useId, useMemo, useState } from 'react';
 import type { DraftContent, Template } from '@/lib/types';
 import { calendarFile, countdown, eventInstant, invitationEvents, eventDateLabel } from '@/lib/domain';
 import { categories } from '@/lib/templates';
+import {DEFAULT_MUSIC_VOLUME} from '@/lib/music-library';
 export default function InvitationView({template,content,guest='Tamu Undangan',mode='demo',photoUrls=[],coverUrl,embedded=false,expiresAt,rsvpSlug,openWishesSlug,previewOnly=false}:{template:Template;content:DraftContent;guest?:string;mode?:'demo'|'draft'|'public';photoUrls?:string[];coverUrl?:string;embedded?:boolean;expiresAt?:string;rsvpSlug?:string;openWishesSlug?:string;previewOnly?:boolean}) {
  const [expired,setExpired]=useState(false);
  const [opened,setOpened]=useState(false),[opening,setOpening]=useState(false), [ticks,setTicks]=useState([0,0,0,0]);
@@ -29,7 +30,7 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
   const importedLuxury=template.slug==='elementor-luxury-1';
  const botanicalBlush=template.slug==='botanical-blush';
  const auroraModern=template.slug==='aurora-modern';
- const music=useInvitationMusic(content.music||'none',!expired);
+ const music=useInvitationMusic(content.music||'none',!expired,content.musicVolume??DEFAULT_MUSIC_VOLUME);
  const wedding=template.category==='pernikahan'; const names=[content.groom,content.bride].filter(Boolean).join(' & ')||'Nama pasangan';
  const target=eventInstant(content), events=invitationEvents(content);
  const uid=useId().replace(/:/g,'');const contentId='inv-content-'+uid, eventId='inv-events-'+uid;
