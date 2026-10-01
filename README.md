@@ -1,12 +1,3 @@
-# Kastriva Invitation — Premium Theme Stage 5
+# Kastriva Invitation — Stage 5 CI compatibility fix
 
-Final collision-safe refinement after Stage 4.
-
-Fixes:
-- removes card pseudo-element collision,
-- no section background-image override,
-- replaces unsupported CSS arithmetic with JS-provided inverse variables,
-- pointerout reset only when leaving the invitation root,
-- retains depth, divider, gift, form, nav and gallery polish.
-
-No SQL or data-contract changes.
+Patch ini hanya memperbarui test Stage 4 yang sudah kedaluwarsa agar mengikuti arsitektur collision-safe Stage 5. Tidak mengubah CSS/renderer/database production.

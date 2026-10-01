@@ -16,13 +16,17 @@ test('stage4 pointer depth is fine-pointer and reduced-motion aware',()=>{
  assert.ok(css.includes('@media(hover:hover) and (pointer:fine)'));
  assert.ok(css.includes('@media(prefers-reduced-motion:reduce)'));
 });
-test('stage4 enhances depth cards without changing content contracts',()=>{
- for(const term of ['pm-depth-card','--pm-card-x','--pm-card-y','--pm-ambient-x','--pm-ambient-y'])assert.ok(boot.includes(term)||css.includes(term),term);
+test('stage4/stage5 keeps depth classes and ambient motion without content-contract changes',()=>{
+ for(const term of ['pm-depth-card','--pm-ambient-x','--pm-ambient-y'])assert.ok(boot.includes(term)||css.includes(term),term);
+ assert.ok(boot.includes('--pm-ambient-inverse-x'));
+ assert.ok(boot.includes('--pm-ambient-inverse-y'));
 });
-test('stage4 covers dividers, gifts, wishes, forms, nav and gallery',()=>{
- for(const term of ['pm-divider-draw','gift-disclosure[open]','.general-wishes .wish-card',':focus-within','.inv-bottom-nav button[aria-current]','.gallery-control'])assert.ok(css.includes(term),term);
+test('stage4/stage5 covers dividers, gifts, forms, nav and gallery with collision-safe depth',()=>{
+ for(const term of ['pm-divider-draw','gift-disclosure[open]',':focus-within','.inv-bottom-nav button[aria-current]','.gallery-control'])assert.ok(css.includes(term),term);
+ assert.ok(!css.includes('.pm-depth-card::before'));
+ assert.ok(!css.includes('.pm-depth-card::after'));
 });
-test('stage4 contains no external asset dependency',()=>{
+test('stage4/stage5 contains no external asset dependency',()=>{
  assert.ok(!/https?:\/\//.test(css));
  assert.ok(!/javascript:/i.test(css));
 });
