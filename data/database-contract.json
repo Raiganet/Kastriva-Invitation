@@ -19,7 +19,8 @@
     "014_public_wishes_auto_publish.sql",
     "015_public_wishes_readiness.sql",
     "016_aurora_premium_music.sql",
-    "017_music_volume.sql"
+    "017_music_volume.sql",
+    "018_imported_music.sql"
   ],
   "openWishesProtocol": 1,
   "openWishesAutoPublishProtocol": 1

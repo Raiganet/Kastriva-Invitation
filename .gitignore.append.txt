@@ -1,0 +1,7 @@
+
+# Local music-identification environment/reports
+tools/import_music/.venv/
+tools/import_music/.bin/
+tools/import_music/__pycache__/
+tools/import_music/output/nama-benar/
+tools/import_music/output/*.json

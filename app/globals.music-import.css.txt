@@ -1,0 +1,1 @@
+.music-selection-card .music-source-badge{display:inline-flex;margin-top:6px;padding:3px 7px;border:1px solid #eadde1;border-radius:999px;font-size:9px;letter-spacing:.8px;color:var(--brand);background:#fff8}
