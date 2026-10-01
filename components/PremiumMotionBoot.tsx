@@ -107,38 +107,32 @@ export default function PremiumMotionBoot(){
 
   const pointerMove=(event:PointerEvent)=>{
    if(reduced.matches||!fine.matches)return;
-   const target=event.target as Element|null;
-   const root=target?.closest?.('.invitation.inv-premium-motion') as HTMLElement|null;
+   const root=(event.target as Element|null)?.closest?.('.invitation.inv-premium-motion') as HTMLElement|null;
    if(!root)return;
-   const card=target?.closest?.('.pm-depth-card') as HTMLElement|null;
    if(pointerFrame)cancelAnimationFrame(pointerFrame);
    pointerFrame=requestAnimationFrame(()=>{
     pointerFrame=0;
     const rr=root.getBoundingClientRect();
-    if(rr.width&&rr.height){
-     const nx=(event.clientX-rr.left)/rr.width-.5;
-     const ny=(event.clientY-rr.top)/rr.height-.5;
-     root.style.setProperty('--pm-ambient-x',`${Math.max(-10,Math.min(10,nx*12)).toFixed(2)}px`);
-     root.style.setProperty('--pm-ambient-y',`${Math.max(-8,Math.min(8,ny*10)).toFixed(2)}px`);
-     root.style.setProperty('--pm-pointer-x',`${Math.max(0,Math.min(100,(nx+.5)*100)).toFixed(1)}%`);
-     root.style.setProperty('--pm-pointer-y',`${Math.max(0,Math.min(100,(ny+.5)*100)).toFixed(1)}%`);
-    }
-    if(card){
-     const cr=card.getBoundingClientRect();
-     if(cr.width&&cr.height){
-      card.style.setProperty('--pm-card-x',`${Math.max(0,Math.min(100,(event.clientX-cr.left)/cr.width*100)).toFixed(1)}%`);
-      card.style.setProperty('--pm-card-y',`${Math.max(0,Math.min(100,(event.clientY-cr.top)/cr.height*100)).toFixed(1)}%`);
-     }
-    }
+    if(!rr.width||!rr.height)return;
+    const nx=(event.clientX-rr.left)/rr.width-.5;
+    const ny=(event.clientY-rr.top)/rr.height-.5;
+    const x=Math.max(-10,Math.min(10,nx*12));
+    const y=Math.max(-8,Math.min(8,ny*10));
+    root.style.setProperty('--pm-ambient-x',`${x.toFixed(2)}px`);
+    root.style.setProperty('--pm-ambient-y',`${y.toFixed(2)}px`);
+    root.style.setProperty('--pm-ambient-inverse-x',`${(-x*.35).toFixed(2)}px`);
+    root.style.setProperty('--pm-ambient-inverse-y',`${(-y*.35).toFixed(2)}px`);
    });
   };
-  const pointerLeave=(event:PointerEvent)=>{
-   const root=(event.target as Element|null)?.closest?.('.invitation.inv-premium-motion') as HTMLElement|null;
-   if(!root)return;
-   root.style.setProperty('--pm-ambient-x','0px');
-   root.style.setProperty('--pm-ambient-y','0px');
-   root.style.setProperty('--pm-pointer-x','50%');
-   root.style.setProperty('--pm-pointer-y','50%');
+
+  const pointerOut=(event:PointerEvent)=>{
+   const from=(event.target as Element|null)?.closest?.('.invitation.inv-premium-motion') as HTMLElement|null;
+   const to=(event.relatedTarget as Element|null)?.closest?.('.invitation.inv-premium-motion') as HTMLElement|null;
+   if(!from||from===to)return;
+   from.style.setProperty('--pm-ambient-x','0px');
+   from.style.setProperty('--pm-ambient-y','0px');
+   from.style.setProperty('--pm-ambient-inverse-x','0px');
+   from.style.setProperty('--pm-ambient-inverse-y','0px');
   };
 
   rebuildObserver();
@@ -147,14 +141,14 @@ export default function PremiumMotionBoot(){
   mutations.observe(document.body,{childList:true,subtree:true});
   reduced.addEventListener('change',preferenceChanged);
   document.addEventListener('pointermove',pointerMove,{passive:true});
-  document.addEventListener('pointerout',pointerLeave,{passive:true});
+  document.addEventListener('pointerout',pointerOut,{passive:true});
   return()=>{
    if(frame)window.cancelAnimationFrame(frame);
    if(pointerFrame)window.cancelAnimationFrame(pointerFrame);
    observer?.disconnect();mutations?.disconnect();
    reduced.removeEventListener('change',preferenceChanged);
    document.removeEventListener('pointermove',pointerMove);
-   document.removeEventListener('pointerout',pointerLeave);
+   document.removeEventListener('pointerout',pointerOut);
   };
  },[]);
  return null;

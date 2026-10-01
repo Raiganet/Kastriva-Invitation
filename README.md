@@ -1,13 +1,12 @@
-# Kastriva Invitation — Premium Theme Stage 4
+# Kastriva Invitation — Premium Theme Stage 5
 
-Stage 4 adds depth and interaction on top of Stage 1–3:
-- pointer-reactive card light,
-- subtle atmosphere parallax,
-- section dividers,
-- gift/details reveal,
-- wishes micro-interaction,
-- focus-depth forms,
-- nav icon transition,
-- gallery control polish.
+Final collision-safe refinement after Stage 4.
 
-No SQL/database changes.
+Fixes:
+- removes card pseudo-element collision,
+- no section background-image override,
+- replaces unsupported CSS arithmetic with JS-provided inverse variables,
+- pointerout reset only when leaving the invitation root,
+- retains depth, divider, gift, form, nav and gallery polish.
+
+No SQL or data-contract changes.
