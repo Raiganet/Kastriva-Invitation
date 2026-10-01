@@ -1,4 +1,4 @@
-import {IMPORTED_MUSIC_TRACKS} from './imported-music.generated';
+import {IMPORTED_MUSIC_TRACKS} from './imported-music.generated.ts';
 
 export const ORIGINAL_MUSIC_TRACKS = [
   {id:'serenade',name:'Serenade',artist:'Kastriva',mood:'Lembut & romantis',detail:'Arpeggio hangat untuk pembuka yang klasik.',kind:'synth',group:'original'},
