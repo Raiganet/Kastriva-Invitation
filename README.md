@@ -1,14 +1,13 @@
-# Kastriva Invitation — Premium Theme Stage 3
+# Kastriva Invitation — Premium Theme Stage 4
 
-Patch ini melanjutkan Stage 1 + Stage 2 yang sudah ada di `main`.
+Stage 4 adds depth and interaction on top of Stage 1–3:
+- pointer-reactive card light,
+- subtle atmosphere parallax,
+- section dividers,
+- gift/details reveal,
+- wishes micro-interaction,
+- focus-depth forms,
+- nav icon transition,
+- gallery control polish.
 
-Fokus Stage 3:
-- fine-tuning tipografi per tema,
-- treatment overline/kicker,
-- guest card composition,
-- divider judul,
-- active bottom-nav,
-- music-control polish,
-- section rhythm desktop/mobile.
-
-Tidak ada migrasi SQL, perubahan database, atau perubahan kontrak data.
+No SQL/database changes.
