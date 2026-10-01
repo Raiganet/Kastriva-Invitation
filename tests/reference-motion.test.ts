@@ -27,5 +27,7 @@ test('reference layer has floral/media ambience plus mobile and reduced-motion s
  for(const term of ["rm-floral-breathe","rm-photo-breathe","@media(max-width:600px)","@media(prefers-reduced-motion:reduce)"])assert.ok(css.includes(term),term);
 });
 test('reference layer does not fetch or embed the source website/assets',()=>{
- assert.ok(!/wevitation\\.com|https?:\\/\\//i.test(css));
+ assert.ok(!css.includes('wevitation.com'));
+ assert.ok(!css.includes('http://'));
+ assert.ok(!css.includes('https://'));
 });
