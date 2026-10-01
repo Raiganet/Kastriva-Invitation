@@ -1,0 +1,195 @@
+/* Kastriva Premium Motion Design System — Stage 1
+   Shared motion only. Theme identity remains owned by each theme stylesheet. */
+.inv-premium-motion{
+ --pm-ease:cubic-bezier(.16,1,.3,1);
+ --pm-ease-soft:cubic-bezier(.22,.61,.36,1);
+ --pm-fast:340ms;
+ --pm-mid:760ms;
+ --pm-slow:1050ms;
+ --pm-lift:5px;
+ --pm-scale:1.009;
+ --pm-shadow:0 22px 54px color-mix(in srgb,var(--tone) 13%,transparent);
+ --pm-glow:color-mix(in srgb,var(--tone) 22%,transparent);
+}
+
+/* PowerPoint-like section transitions, but kept subtle and readable. */
+.inv-premium-motion .pm-section{
+ will-change:opacity,transform,filter;
+ transition:opacity var(--pm-mid) var(--pm-ease),transform var(--pm-mid) var(--pm-ease),filter var(--pm-mid) var(--pm-ease);
+}
+.inv-premium-motion .pm-section.pm-rise{--pm-x:0px;--pm-y:34px;--pm-start-scale:.988}
+.inv-premium-motion .pm-section.pm-left{--pm-x:-34px;--pm-y:15px;--pm-start-scale:.992}
+.inv-premium-motion .pm-section.pm-right{--pm-x:34px;--pm-y:15px;--pm-start-scale:.992}
+.inv-premium-motion .pm-section.pm-scale{--pm-x:0px;--pm-y:18px;--pm-start-scale:.965}
+.inv-premium-motion .pm-section.inv-reveal-pending{
+ opacity:0;
+ filter:blur(9px) saturate(.94);
+ transform:translate3d(var(--pm-x,0),var(--pm-y,28px),0) scale(var(--pm-start-scale,.985));
+}
+.inv-premium-motion .pm-section.inv-revealed{
+ opacity:1;
+ filter:none;
+ transform:translate3d(0,0,0) scale(1);
+}
+.inv-premium-motion .pm-section.inv-reveal-pending:focus-within{opacity:1;filter:none;transform:none}
+
+/* Headline hierarchy enters independently so each section feels composed. */
+.inv-premium-motion .pm-section.inv-revealed>.overline{
+ animation:pm-kicker-in 620ms var(--pm-ease) 40ms backwards;
+}
+.inv-premium-motion .pm-section.inv-revealed>h2{
+ animation:pm-heading-in 880ms var(--pm-ease) 80ms backwards;
+}
+.inv-premium-motion .pm-section.inv-revealed>.inv-caption,
+.inv-premium-motion .pm-section.inv-revealed>.muted{
+ animation:pm-copy-in 720ms var(--pm-ease-soft) 150ms backwards;
+}
+
+/* Cards/items reveal in a stagger, similar to object-by-object presentation animation. */
+.inv-premium-motion .pm-section.inv-revealed .pm-stagger{
+ animation:pm-stagger-in 760ms var(--pm-ease) calc(95ms + (var(--pm-order,0) * 72ms)) backwards;
+}
+
+/* Premium hover foundation. Uses individual translate/scale so existing theme transforms survive. */
+.inv-premium-motion .pm-interactive{
+ backface-visibility:hidden;
+ transition:translate var(--pm-fast) var(--pm-ease),scale var(--pm-fast) var(--pm-ease),box-shadow var(--pm-fast) ease,border-color var(--pm-fast) ease,filter var(--pm-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){
+ .inv-premium-motion .pm-interactive:hover{
+  translate:0 calc(var(--pm-lift) * -1);
+  scale:var(--pm-scale);
+  filter:saturate(1.045) brightness(1.012);
+ }
+ .inv-premium-motion :is(.event-box,.wish-card,.gift-disclosure,.inv-location,.couple-grid>div).pm-interactive:hover{
+  box-shadow:var(--pm-shadow);
+ }
+ .inv-premium-motion .countdown>div.pm-interactive:hover{box-shadow:0 14px 32px var(--pm-glow)}
+ .inv-premium-motion .guest-card.pm-interactive:hover{box-shadow:0 20px 48px var(--pm-glow)}
+}
+
+/* Buttons get a light sweep instead of only changing color. */
+.inv-premium-motion .inv-button{
+ position:relative;
+ isolation:isolate;
+ overflow:hidden;
+ transition:translate var(--pm-fast) var(--pm-ease),scale var(--pm-fast) var(--pm-ease),box-shadow var(--pm-fast) ease,filter var(--pm-fast) ease,background var(--pm-fast) ease,border-color var(--pm-fast) ease;
+}
+.inv-premium-motion .inv-button::after{
+ content:"";
+ position:absolute;
+ z-index:2;
+ top:-160%;
+ left:-55%;
+ width:30%;
+ height:420%;
+ pointer-events:none;
+ opacity:0;
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);
+ transform:rotate(18deg) translateX(-260%);
+ transition:transform 760ms var(--pm-ease),opacity 180ms ease;
+}
+.inv-premium-motion .inv-button>*{position:relative;z-index:3}
+@media(hover:hover) and (pointer:fine){
+ .inv-premium-motion .inv-button:hover{translate:0 -3px;scale:1.012;filter:saturate(1.05)}
+ .inv-premium-motion .inv-button:hover::after{opacity:1;transform:rotate(18deg) translateX(650%)}
+}
+.inv-premium-motion .inv-button:active{translate:0 0;scale:.985}
+
+/* Gallery feels less static without changing each theme's shape. */
+.inv-premium-motion .photo-grid>:is(a,button),
+.inv-premium-motion .gallery-photo{transform-origin:center;perspective:900px}
+.inv-premium-motion .photo-grid img,
+.inv-premium-motion .gallery-photo img{transition:transform 680ms var(--pm-ease),filter 520ms ease}
+@media(hover:hover) and (pointer:fine){
+ .inv-premium-motion .photo-grid>:is(a,button):hover img,
+ .inv-premium-motion .gallery-photo:hover img{transform:scale(1.055);filter:saturate(1.08) contrast(1.015)}
+ .inv-premium-motion .gallery-photo-hint{transition:translate var(--pm-fast) var(--pm-ease),opacity var(--pm-fast) ease}
+ .inv-premium-motion .gallery-photo:hover .gallery-photo-hint{translate:0 -4px}
+}
+
+/* Forms and location controls receive micro-interactions, not distracting movement. */
+.inv-premium-motion .rsvp-form :is(input,textarea,select),
+.inv-premium-motion .general-wishes :is(input,textarea,select){
+ transition:border-color var(--pm-fast) ease,box-shadow var(--pm-fast) ease,translate var(--pm-fast) var(--pm-ease),background var(--pm-fast) ease;
+}
+.inv-premium-motion .rsvp-form :is(input,textarea,select):focus,
+.inv-premium-motion .general-wishes :is(input,textarea,select):focus{
+ translate:0 -1px;
+ box-shadow:0 10px 26px color-mix(in srgb,var(--tone) 11%,transparent);
+}
+.inv-premium-motion .inv-location .location-symbol{transition:translate var(--pm-fast) var(--pm-ease),scale var(--pm-fast) var(--pm-ease),filter var(--pm-fast) ease}
+@media(hover:hover) and (pointer:fine){
+ .inv-premium-motion .inv-location:hover .location-symbol{translate:0 -4px;scale:1.05;filter:drop-shadow(0 8px 12px var(--pm-glow))}
+}
+
+/* Floating controls enter like presentation controls, then stay calm. */
+.inv-premium-motion .pm-floating-control{animation:pm-dock-in 680ms var(--pm-ease) backwards}
+.inv-premium-motion .inv-bottom-nav button,
+.inv-premium-motion .music-toggle{
+ transition:translate var(--pm-fast) var(--pm-ease),scale var(--pm-fast) var(--pm-ease),background var(--pm-fast) ease,color var(--pm-fast) ease,box-shadow var(--pm-fast) ease;
+}
+@media(hover:hover) and (pointer:fine){
+ .inv-premium-motion .inv-bottom-nav button:hover{translate:0 -3px;scale:1.045}
+ .inv-premium-motion .music-toggle:hover{translate:0 -3px;scale:1.035}
+}
+
+/* Opening the invitation gets more depth while preserving each theme's cover. */
+.inv-premium-motion .cover-frame{transition:opacity 620ms ease,transform 720ms var(--pm-ease),filter 620ms ease,box-shadow 620ms ease}
+.inv-premium-motion .inv-cover.is-opening .cover-frame{filter:blur(8px) saturate(1.08);transform:translateY(-28px) scale(1.055)}
+.inv-premium-motion .inv-cover.is-opening .inv-atmosphere{transform:scale(1.045);filter:blur(2px)}
+.inv-premium-motion .inv-atmosphere{transition:opacity 620ms ease,transform 900ms var(--pm-ease),filter 620ms ease}
+
+/* Theme motion profiles: same system, different intensity. */
+.theme-modern-minimalist.inv-premium-motion{--pm-lift:3px;--pm-scale:1.004;--pm-mid:650ms}
+.theme-rustic-wood.inv-premium-motion{--pm-lift:4px;--pm-scale:1.006}
+.theme-galaxy-night.inv-premium-motion,
+.theme-aurora-modern.inv-premium-motion{--pm-lift:7px;--pm-scale:1.013;--pm-shadow:0 25px 64px color-mix(in srgb,var(--tone) 18%,transparent)}
+.theme-elegant-rose.inv-premium-motion,
+.theme-botanical-blush.inv-premium-motion{--pm-lift:5px;--pm-scale:1.01}
+
+@keyframes pm-kicker-in{
+ from{opacity:0;translate:0 12px;letter-spacing:.55em;filter:blur(5px)}
+ to{opacity:1;translate:0 0;filter:none}
+}
+@keyframes pm-heading-in{
+ from{opacity:0;translate:0 22px;scale:.975;filter:blur(7px)}
+ to{opacity:1;translate:0 0;scale:1;filter:none}
+}
+@keyframes pm-copy-in{
+ from{opacity:0;translate:0 14px;filter:blur(4px)}
+ to{opacity:1;translate:0 0;filter:none}
+}
+@keyframes pm-stagger-in{
+ from{opacity:0;translate:0 22px;scale:.972;filter:blur(6px)}
+ to{opacity:1;translate:0 0;scale:1;filter:none}
+}
+@keyframes pm-dock-in{
+ from{opacity:0;translate:0 22px;scale:.94;filter:blur(6px)}
+ to{opacity:1;translate:0 0;scale:1;filter:none}
+}
+
+@media(max-width:600px){
+ .inv-premium-motion{--pm-lift:3px;--pm-scale:1.005;--pm-mid:680ms}
+ .inv-premium-motion .pm-section.pm-left,
+ .inv-premium-motion .pm-section.pm-right{--pm-x:0px;--pm-y:22px}
+ .inv-premium-motion .pm-section.inv-reveal-pending{filter:blur(5px)}
+ .inv-premium-motion .pm-section.inv-revealed .pm-stagger{animation-duration:620ms;animation-delay:calc(60ms + (var(--pm-order,0) * 48ms))}
+}
+
+@media(prefers-reduced-motion:reduce){
+ .inv-premium-motion *,
+ .inv-premium-motion *::before,
+ .inv-premium-motion *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+ .inv-premium-motion .pm-section.inv-reveal-pending{opacity:1!important;filter:none!important;transform:none!important}
+ .inv-premium-motion .pm-interactive,
+ .inv-premium-motion .inv-button,
+ .inv-premium-motion .inv-bottom-nav button,
+ .inv-premium-motion .music-toggle{translate:none!important;scale:none!important}
+ .inv-premium-motion .inv-cover.is-opening .cover-frame{opacity:1!important;filter:none!important;transform:none!important}
+}
+
+@media print{
+ .inv-premium-motion .pm-section.inv-reveal-pending{opacity:1!important;filter:none!important;transform:none!important}
+ .inv-premium-motion .pm-floating-control{display:none!important}
+}
