@@ -13,6 +13,7 @@ import './invitation-botanical.css';
 import './invitation-aurora.css';
 import './invitation-premium-motion.css';
 import './invitation-theme-premium.css';
+import './invitation-theme-polish.css';
 import './brand-identity.css';
 export const metadata: Metadata={metadataBase:new URL(siteUrl()),title:{default:'Kastriva Invitation — Undangan Digital Personal',template:'%s | Kastriva Invitation'},description:'Pilih tema, coba demo tanpa login, dan siapkan draft undangan pernikahan Anda bersama Kastriva.',robots:{index:false,follow:false},applicationName:'Kastriva Invitation',manifest:'/manifest.webmanifest',icons:{icon:[{url:BRAND_ASSETS.favicon32,sizes:'32x32',type:'image/png'},{url:BRAND_ASSETS.favicon16,sizes:'16x16',type:'image/png'}],apple:[{url:BRAND_ASSETS.apple,sizes:'180x180',type:'image/png'}]}};
 export default async function RootLayout({children}:{children:React.ReactNode}) {const cms=await publicSite();return <html lang="id"><body><PremiumMotionBoot/><a className="skip-link" href="#main-content">Lewati ke konten</a><SiteHeader content={cms.content}/><div id="main-content">{children}</div><SiteFooter content={cms.content}/></body></html>;}

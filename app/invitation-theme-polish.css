@@ -1,0 +1,566 @@
+/* Kastriva Invitation — Premium Theme Polish / Stage 3
+   Fine-tuning per theme: typography, composition, section identity, nav and music control.
+   Loaded after Stage 1 motion + Stage 2 premium theme layer. */
+
+.invitation.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-title-weight:400;
+ --pt-overline-bg:color-mix(in srgb,var(--pt-card) 74%,transparent);
+ --pt-overline-border:var(--pt-line);
+ --pt-nav-active:var(--pt-accent);
+ --pt-nav-active-ink:#fff;
+ --pt-section-width:720px;
+}
+.invitation.inv-premium-motion .inv-section{
+ width:min(var(--pt-section-width),calc(100% - 28px));
+ position:relative;
+ isolation:isolate;
+}
+.invitation.inv-premium-motion .inv-section>.overline{
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ min-height:30px;
+ padding:7px 13px;
+ border:1px solid var(--pt-overline-border);
+ border-radius:999px;
+ background:var(--pt-overline-bg);
+ backdrop-filter:blur(9px);
+ letter-spacing:.28em;
+ line-height:1.15;
+}
+.invitation.inv-premium-motion .inv-section>h2{
+ font-family:var(--pt-title-font);
+ font-weight:var(--pt-title-weight);
+ text-wrap:balance;
+ max-width:620px;
+ margin-inline:auto;
+}
+.invitation.inv-premium-motion .inv-section>h2::after{
+ transform-origin:center;
+}
+.invitation.inv-premium-motion .guest-card{
+ border:1px solid var(--pt-line);
+ box-shadow:0 18px 50px color-mix(in srgb,var(--tone) 9%,transparent);
+}
+.invitation.inv-premium-motion .event-box h3{
+ text-wrap:balance;
+ line-height:1.22;
+}
+.invitation.inv-premium-motion .story-text{
+ max-width:620px;
+ margin-inline:auto;
+}
+.invitation.inv-premium-motion .inv-bottom-nav button[aria-current]{
+ background:var(--pt-nav-active);
+ color:var(--pt-nav-active-ink);
+ box-shadow:0 10px 28px color-mix(in srgb,var(--pt-nav-active) 28%,transparent);
+}
+.invitation.inv-premium-motion .music-toggle[aria-pressed=true]{
+ box-shadow:0 13px 34px color-mix(in srgb,var(--pt-accent) 28%,transparent);
+}
+.invitation.inv-premium-motion .inv-closing{
+ position:relative;
+ overflow:hidden;
+}
+.invitation.inv-premium-motion .inv-closing::before{
+ content:"";
+ position:absolute;
+ left:50%;
+ top:20px;
+ width:70px;
+ height:1px;
+ translate:-50% 0;
+ background:linear-gradient(90deg,transparent,var(--pt-accent),transparent);
+ opacity:.75;
+}
+
+/* 01 Elegant Rose — couture romance */
+.theme-elegant-rose.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#a9556f;
+}
+.theme-elegant-rose .inv-section>.overline{
+ color:#95546b;
+ background:#fff8fae6;
+ border-color:#bd718733;
+}
+.theme-elegant-rose .inv-section>h2{
+ font-style:italic;
+ letter-spacing:-.025em;
+}
+.theme-elegant-rose .inv-section>h2::after{
+ width:74px;
+ height:1px;
+ background:linear-gradient(90deg,transparent,#b7657f,#d4a66f,#b7657f,transparent);
+}
+.theme-elegant-rose .guest-card{
+ background:linear-gradient(145deg,#fffafaeb,#f9e8eddb);
+ border-radius:28px;
+}
+.theme-elegant-rose .story-text::first-letter{
+ float:left;
+ font:italic 52px/.82 Georgia,serif;
+ color:#b05e78;
+ padding:7px 9px 0 0;
+}
+.theme-elegant-rose .inv-closing h2{font-style:italic}
+
+/* 02 Modern Minimalist — editorial grid */
+.theme-modern-minimalist.inv-premium-motion{
+ --pt-title-font:Arial,Helvetica,sans-serif;
+ --pt-title-weight:700;
+ --pt-nav-active:#27333d;
+ --pt-section-width:760px;
+}
+.theme-modern-minimalist .inv-section{text-align:left}
+.theme-modern-minimalist .inv-section>.overline{
+ border-radius:0;
+ padding-inline:0;
+ border-width:0 0 1px;
+ background:transparent;
+ color:#dc664f;
+ letter-spacing:.32em;
+}
+.theme-modern-minimalist .inv-section>h2{
+ margin-inline:0;
+ text-transform:uppercase;
+ letter-spacing:-.045em;
+ font-size:clamp(30px,4.5vw,50px);
+}
+.theme-modern-minimalist .inv-section>h2::after{
+ margin-left:0;
+ width:92px;
+ height:4px;
+ border-radius:0;
+ background:linear-gradient(90deg,#27333d 0 64%,#dc664f 64%);
+ box-shadow:none;
+}
+.theme-modern-minimalist .guest-card{
+ border-radius:0;
+ border-left:4px solid #dc664f;
+ background:#ffffffdb;
+ text-align:left;
+}
+.theme-modern-minimalist .inv-closing{text-align:left}
+
+/* 03 Tropical Paradise — resort botanical */
+.theme-tropical-paradise.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#24795b;
+}
+.theme-tropical-paradise .inv-section>.overline{
+ color:#276c52;
+ background:#f5faefe8;
+ border-color:#4c8a6230;
+}
+.theme-tropical-paradise .inv-section>h2{font-style:italic}
+.theme-tropical-paradise .inv-section>h2::after{
+ width:84px;
+ height:3px;
+ border-radius:100%;
+ background:linear-gradient(90deg,transparent,#2f7f5e,#d69a49,transparent);
+}
+.theme-tropical-paradise .guest-card{
+ background:linear-gradient(145deg,#f9fff1e6,#edf8e7d9);
+ border-radius:32px 60px 32px 60px;
+}
+.theme-tropical-paradise .story-text::first-letter{
+ font:italic 50px/.86 Georgia,serif;
+ color:#2f7c5d;
+ float:left;
+ padding:6px 9px 0 0;
+}
+
+/* 04 Rustic Wood — handcrafted letterpress */
+.theme-rustic-wood.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#76583b;
+}
+.theme-rustic-wood .inv-section>.overline{
+ border-radius:2px;
+ border-style:dashed;
+ color:#6e5138;
+ background:#efe2cae6;
+ text-transform:uppercase;
+}
+.theme-rustic-wood .inv-section>h2{
+ font-variant:small-caps;
+ letter-spacing:.035em;
+}
+.theme-rustic-wood .inv-section>h2::after{
+ width:100px;
+ height:1px;
+ background:repeating-linear-gradient(90deg,#795b3d 0 7px,transparent 7px 11px);
+ box-shadow:none;
+}
+.theme-rustic-wood .guest-card{
+ border-radius:4px;
+ background:repeating-linear-gradient(0deg,#72523806 0 1px,transparent 1px 7px),#f1e5d2e8;
+}
+.theme-rustic-wood .story-text{font-family:Georgia,serif}
+
+/* 05 Galaxy Night — cinematic celestial */
+.theme-galaxy-night.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#d7bd78;
+ --pt-nav-active-ink:#11122a;
+}
+.theme-galaxy-night .inv-section>.overline{
+ color:#f0d98f;
+ background:#17152db5;
+ border-color:#e8cf8540;
+ box-shadow:0 0 26px #9b6bd42c;
+}
+.theme-galaxy-night .inv-section>h2{
+ background:linear-gradient(90deg,#fff4ce,#d8c18a,#b48ed8,#fff4ce);
+ background-size:220% auto;
+ background-clip:text;
+ -webkit-background-clip:text;
+ color:transparent;
+ -webkit-text-fill-color:transparent;
+}
+.theme-galaxy-night .inv-section>h2::after{
+ content:"✦";
+ width:auto;height:auto;
+ background:none;
+ color:#f0d68a;
+ -webkit-text-fill-color:#f0d68a;
+ font-size:14px;
+ box-shadow:none;
+}
+.theme-galaxy-night .guest-card{
+ background:linear-gradient(145deg,#211b3ac7,#0d1028d4);
+ border-color:#e3cb8235;
+}
+.theme-galaxy-night .story-text{color:#ddd5eb}
+
+/* 06 Sweet Birthday — playful luxury */
+.theme-sweet-birthday.inv-premium-motion{
+ --pt-title-font:Arial,Helvetica,sans-serif;
+ --pt-title-weight:800;
+ --pt-nav-active:#ec6689;
+}
+.theme-sweet-birthday .inv-section>.overline{
+ color:#d95079;
+ background:#fff9f5e8;
+ border-color:#f077962f;
+}
+.theme-sweet-birthday .inv-section>h2{
+ letter-spacing:-.04em;
+ color:#5c4250;
+}
+.theme-sweet-birthday .inv-section>h2::after{
+ width:86px;height:6px;border-radius:999px;
+ background:linear-gradient(90deg,#f66b91 0 33%,#ffd667 33% 66%,#58c9c0 66%);
+ box-shadow:none;
+}
+.theme-sweet-birthday .guest-card{
+ background:#fffaf7e9;
+ border-radius:28px;
+}
+.theme-sweet-birthday .inv-bottom-nav button[aria-current]{
+ background:linear-gradient(135deg,#ef658b,#f3a965);
+}
+
+/* 07 Aqiqah Blessing — calm sacred mint */
+.theme-aqiqah-blessing.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#2d7d5a;
+}
+.theme-aqiqah-blessing .inv-section>.overline{
+ color:#2c7354;
+ background:#f8fbf5e6;
+ border-color:#4d896b2f;
+}
+.theme-aqiqah-blessing .inv-section>h2::after{
+ content:"☾";
+ width:auto;height:auto;
+ background:none;
+ color:#b89a58;
+ font-size:20px;
+ box-shadow:none;
+}
+.theme-aqiqah-blessing .guest-card{
+ background:#fafff7e8;
+ border-radius:80px 80px 24px 24px;
+}
+
+/* 08 Corporate Event — executive presentation */
+.theme-corporate-event.inv-premium-motion{
+ --pt-title-font:Arial,Helvetica,sans-serif;
+ --pt-title-weight:700;
+ --pt-nav-active:#1f6798;
+ --pt-section-width:780px;
+}
+.theme-corporate-event .inv-section{text-align:left}
+.theme-corporate-event .inv-section>.overline{
+ border-radius:7px;
+ color:#1e628f;
+ background:#f8fbfdeb;
+ letter-spacing:.24em;
+}
+.theme-corporate-event .inv-section>h2{
+ margin-inline:0;
+ letter-spacing:-.04em;
+}
+.theme-corporate-event .inv-section>h2::after{
+ margin-left:0;
+ width:72px;height:4px;border-radius:2px;
+ background:linear-gradient(90deg,#1f6798,#45a5da);
+}
+.theme-corporate-event .guest-card{
+ border-radius:14px;
+ background:#fbfdffe8;
+ text-align:left;
+}
+
+/* 09 Islami Sakinah — emerald geometry */
+.theme-islami-sakinah.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#c8ab69;
+ --pt-nav-active-ink:#123d35;
+}
+.theme-islami-sakinah .inv-section>.overline{
+ color:#e2c982;
+ background:#16483dc7;
+ border-color:#d2b9773d;
+}
+.theme-islami-sakinah .inv-section>h2::after{
+ content:"✦";
+ width:auto;height:auto;
+ background:none;
+ color:#d7bd77;
+ font-size:13px;
+ box-shadow:0 0 20px #d7bd7735;
+}
+.theme-islami-sakinah .guest-card{
+ border-color:#d6bd7f39;
+ background:#16483dcc;
+ border-radius:110px 110px 26px 26px;
+}
+
+/* 10 Adat Sunda — Priangan editorial */
+.theme-adat-sunda.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#58745d;
+}
+.theme-adat-sunda .inv-section>.overline{
+ color:#57705b;
+ background:#f1f3eae5;
+ border-color:#627c6530;
+}
+.theme-adat-sunda .inv-section>h2{font-style:italic}
+.theme-adat-sunda .inv-section>h2::after{
+ content:"❀";
+ width:auto;height:auto;
+ background:none;
+ color:#a68d61;
+ font-size:18px;
+ box-shadow:none;
+}
+.theme-adat-sunda .guest-card{
+ background:#f2f4ece8;
+ border-radius:42px 18px 42px 18px;
+}
+
+/* 11 Adat Minang — ceremonial jewel */
+.theme-adat-minang.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#ddb96d;
+ --pt-nav-active-ink:#4d1a25;
+}
+.theme-adat-minang .inv-section>.overline{
+ color:#f0cc7e;
+ background:#5d2430d9;
+ border-color:#e0bb7044;
+ border-radius:7px;
+}
+.theme-adat-minang .inv-section>h2{
+ letter-spacing:.015em;
+}
+.theme-adat-minang .inv-section>h2::after{
+ content:"◆";
+ width:auto;height:auto;
+ background:none;
+ color:#ddb86a;
+ font-size:13px;
+ box-shadow:none;
+}
+.theme-adat-minang .guest-card{
+ background:linear-gradient(145deg,#692b38e7,#4c1924e7);
+ border-color:#dfbb6d40;
+ clip-path:polygon(0 9%,8% 0,92% 0,100% 9%,100% 100%,0 100%);
+}
+
+/* 12 Adat Jawa — museum-like sogan */
+.theme-adat-jawa.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#795537;
+}
+.theme-adat-jawa .inv-section>.overline{
+ color:#735137;
+ background:#f2e6d4e8;
+ border-color:#78553731;
+ font-variant:small-caps;
+}
+.theme-adat-jawa .inv-section>h2{
+ letter-spacing:.01em;
+}
+.theme-adat-jawa .inv-section>h2::after{
+ content:"◇";
+ width:auto;height:auto;
+ background:none;
+ color:#9c7950;
+ font-size:18px;
+ box-shadow:none;
+}
+.theme-adat-jawa .guest-card{
+ background:radial-gradient(circle at 12px 12px,#7b583312 0 2px,transparent 2.5px) 0 0/24px 24px,#f1e4d0e8;
+ border-radius:18px;
+}
+
+/* 13 Adat Bali — terracotta ceremonial resort */
+.theme-adat-bali.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#96543d;
+}
+.theme-adat-bali .inv-section>.overline{
+ color:#8f503a;
+ background:#f8e8dae8;
+ border-color:#95553d31;
+}
+.theme-adat-bali .inv-section>h2::after{
+ content:"✦";
+ width:auto;height:auto;
+ background:none;
+ color:#c18d58;
+ font-size:16px;
+ box-shadow:none;
+}
+.theme-adat-bali .guest-card{
+ background:#faeadde8;
+ border-radius:55% 45% 24px 24px/22% 22% 24px 24px;
+}
+
+/* 14 Luxury Emerald — high jewelry typography */
+.theme-elementor-luxury-1.inv-premium-motion{
+ --pt-title-font:"Luxury Script",Georgia,serif;
+ --pt-title-weight:400;
+ --pt-nav-active:#efa947;
+ --pt-nav-active-ink:#002420;
+}
+.theme-elementor-luxury-1 .inv-section>.overline{
+ color:#f0c97e;
+ background:#07342ee0;
+ border-color:#e8a9453d;
+ font-family:Arial,sans-serif;
+}
+.theme-elementor-luxury-1 .inv-section>h2{
+ font-size:clamp(40px,6vw,58px);
+ letter-spacing:0;
+}
+.theme-elementor-luxury-1 .guest-card{
+ background:#002a25e5;
+ border-color:#e9ab4838;
+}
+
+/* 15 Botanical Blush — floral magazine */
+.theme-botanical-blush.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#b5725a;
+}
+.theme-botanical-blush .inv-section>.overline{
+ color:#a86b55;
+ background:#fff8f1ea;
+ border-color:#b7765a30;
+}
+.theme-botanical-blush .inv-section>h2{
+ font-style:italic;
+}
+.theme-botanical-blush .inv-section>h2::after{
+ content:"❀";
+ width:auto;height:auto;
+ background:none;
+ color:#c99072;
+ font-size:18px;
+ box-shadow:none;
+}
+.theme-botanical-blush .guest-card{
+ background:#fff8f1e8;
+ border-radius:36px;
+}
+.theme-botanical-blush .story-text::first-letter{
+ float:left;
+ font:italic 50px/.85 Georgia,serif;
+ color:#b8755b;
+ padding:7px 9px 0 0;
+}
+
+/* 16 Aurora Luxe Motion — futuristic editorial */
+.theme-aurora-modern.inv-premium-motion{
+ --pt-title-font:Georgia,"Times New Roman",serif;
+ --pt-nav-active:#8b5cf6;
+}
+.theme-aurora-modern .inv-section>.overline{
+ color:#cbd8ff;
+ background:#10152ab8;
+ border-color:#ffffff20;
+ box-shadow:0 0 24px #8b5cf622;
+}
+.theme-aurora-modern .inv-section>h2{
+ background:linear-gradient(90deg,#fff,#b9c7ff,#77e5ff,#e9b7ff,#fff);
+ background-size:220% auto;
+ background-clip:text;
+ -webkit-background-clip:text;
+ color:transparent;
+ -webkit-text-fill-color:transparent;
+}
+.theme-aurora-modern .guest-card{
+ background:linear-gradient(145deg,#15182dcc,#0c1428cc);
+ border-color:#ffffff1f;
+}
+.theme-aurora-modern .inv-bottom-nav button[aria-current]{
+ background:linear-gradient(135deg,#7d58eb,#ce4d9a 55%,#20b7d5);
+ color:#fff;
+}
+.theme-aurora-modern .music-toggle[aria-pressed=true]{
+ background:linear-gradient(135deg,#7956e8,#c84d98);
+}
+
+/* Fine section rhythm on large screens */
+@media(min-width:760px){
+ .invitation.inv-premium-motion .inv-section{padding-top:82px;padding-bottom:82px}
+ .theme-modern-minimalist .inv-section,
+ .theme-corporate-event .inv-section{padding-inline:42px}
+ .theme-galaxy-night .inv-section,
+ .theme-aurora-modern .inv-section{padding-top:92px;padding-bottom:92px}
+}
+
+/* Mobile keeps art direction but reduces ornamental weight. */
+@media(max-width:600px){
+ .invitation.inv-premium-motion .inv-section>.overline{
+  min-height:27px;
+  padding:6px 10px;
+  letter-spacing:.21em;
+ }
+ .invitation.inv-premium-motion .inv-section>h2{max-width:95%}
+ .theme-modern-minimalist .inv-section,
+ .theme-corporate-event .inv-section{text-align:center}
+ .theme-modern-minimalist .inv-section>h2,
+ .theme-corporate-event .inv-section>h2{margin-inline:auto}
+ .theme-modern-minimalist .inv-section>h2::after,
+ .theme-corporate-event .inv-section>h2::after{margin-left:auto}
+ .theme-modern-minimalist .guest-card,
+ .theme-corporate-event .guest-card{text-align:center}
+}
+
+/* Accessibility remains authoritative. */
+@media(prefers-reduced-motion:reduce){
+ .invitation.inv-premium-motion .inv-section>h2,
+ .invitation.inv-premium-motion .inv-section>.overline,
+ .invitation.inv-premium-motion .guest-card{
+  animation:none!important;
+  transition:none!important;
+ }
+}
