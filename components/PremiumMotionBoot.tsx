@@ -8,20 +8,27 @@ const STAGGER_SELECTOR=[
   '.photo-grid>:is(a,button)',
   '.photo-placeholders>div',
   '.wish-card',
+  '.general-wishes .wish-card',
   '.gift-disclosure',
+  '.gift-account',
   '.countdown>div',
   '.inv-location',
+  '.inv-timeline>li',
+  '.story-text',
+  '.rsvp-form',
 ].join(',');
 const INTERACTIVE_SELECTOR=[
   '.event-box',
   '.couple-grid>div',
   '.wish-card',
   '.gift-disclosure',
+  '.gift-account',
   '.inv-location',
   '.countdown>div',
   '.guest-card',
   '.photo-grid>:is(a,button)',
   '.photo-placeholders>div',
+  '.inv-timeline>li',
 ].join(',');
 const DEPTH_SELECTOR=[
   '.event-box',
@@ -47,6 +54,16 @@ export default function PremiumMotionBoot(){
    section.classList.add('inv-revealed','pm-section-live');
   };
 
+  const restartDigit=(node:Node)=>{
+   const element=(node.nodeType===Node.TEXT_NODE?node.parentElement:node) as HTMLElement|null;
+   const digit=element?.closest?.('.countdown strong') as HTMLElement|null;
+   if(!digit)return;
+   digit.classList.remove('rm-digit-flip');
+   // Force a reflow so a changed countdown value replays the 3D flip.
+   void digit.offsetWidth;
+   digit.classList.add('rm-digit-flip');
+  };
+
   const rebuildObserver=()=>{
    observer?.disconnect();observer=null;
    if(reduced.matches||!('IntersectionObserver' in window))return;
@@ -60,7 +77,7 @@ export default function PremiumMotionBoot(){
   };
 
   const enhanceRoot=(root:HTMLElement)=>{
-   root.classList.add('inv-premium-motion');
+   root.classList.add('inv-premium-motion','inv-reference-motion');
    const sections=Array.from(root.querySelectorAll<HTMLElement>(SECTION_SELECTOR));
    sections.forEach((section,index)=>{
     section.classList.add('pm-section');
@@ -92,6 +109,7 @@ export default function PremiumMotionBoot(){
    root.querySelectorAll<HTMLElement>(INTERACTIVE_SELECTOR).forEach(item=>item.classList.add('pm-interactive'));
    root.querySelectorAll<HTMLElement>(DEPTH_SELECTOR).forEach(item=>item.classList.add('pm-depth-card'));
    root.querySelectorAll<HTMLElement>('.inv-bottom-nav,.inv-music').forEach(item=>item.classList.add('pm-floating-control'));
+   root.querySelectorAll<HTMLElement>('.countdown strong').forEach(item=>item.classList.add('rm-digit-flip'));
   };
 
   const scan=()=>document.querySelectorAll<HTMLElement>('.invitation').forEach(enhanceRoot);
@@ -137,8 +155,15 @@ export default function PremiumMotionBoot(){
 
   rebuildObserver();
   schedule();
-  mutations=new MutationObserver(schedule);
-  mutations.observe(document.body,{childList:true,subtree:true});
+  mutations=new MutationObserver(records=>{
+   schedule();
+   if(reduced.matches)return;
+   for(const record of records){
+    if(record.type==='characterData')restartDigit(record.target);
+    else for(const node of Array.from(record.addedNodes))restartDigit(node);
+   }
+  });
+  mutations.observe(document.body,{childList:true,subtree:true,characterData:true});
   reduced.addEventListener('change',preferenceChanged);
   document.addEventListener('pointermove',pointerMove,{passive:true});
   document.addEventListener('pointerout',pointerOut,{passive:true});

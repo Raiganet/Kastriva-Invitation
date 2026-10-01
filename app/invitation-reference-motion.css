@@ -1,0 +1,223 @@
+/* Kastriva Invitation — Reference Motion layer
+   Recreates the interaction rhythm observed in the supplied Elegant Rose reference
+   with original Kastriva CSS/JS: dominant fade-up scroll reveals, fade-down cover
+   details, zoom-in closing, a pulsing open button and flip-style countdown digits. */
+
+.invitation.inv-reference-motion{
+ --rm-ease:cubic-bezier(.16,1,.3,1);
+ --rm-soft:cubic-bezier(.22,.61,.36,1);
+}
+
+/* AOS-like rhythm: the supplied reference uses fade-up for most of its sections. */
+.invitation.inv-reference-motion .pm-section.pm-rise,
+.invitation.inv-reference-motion .pm-section.pm-left,
+.invitation.inv-reference-motion .pm-section.pm-right,
+.invitation.inv-reference-motion .pm-section.pm-scale{
+ --pm-x:0px;
+ --pm-y:30px;
+ --pm-start-scale:.992;
+}
+.invitation.inv-reference-motion .pm-section.inv-reveal-pending{
+ opacity:0;
+ transform:translate3d(0,30px,0) scale(.992);
+ filter:blur(6px);
+}
+.invitation.inv-reference-motion .pm-section.inv-revealed{
+ opacity:1;
+ transform:none;
+ filter:none;
+}
+
+/* The closing card in the reference zooms in instead of sliding upward. */
+.invitation.inv-reference-motion .inv-closing.inv-reveal-pending{
+ transform:scale(.88);
+ filter:blur(8px);
+}
+.invitation.inv-reference-motion .inv-closing.inv-revealed{
+ animation:rm-closing-zoom 820ms var(--rm-ease) both;
+}
+
+/* Cover enters as one large zoomed composition, similar to the fullscreen opening card. */
+.invitation.inv-reference-motion .inv-cover:not(.is-opening) .cover-frame{
+ animation:rm-cover-zoom 880ms var(--rm-ease) both;
+}
+.invitation.inv-reference-motion .inv-cover.is-opening .cover-frame{
+ animation:none;
+}
+.invitation.inv-reference-motion .inv-cover .guest-card{
+ animation:rm-fade-down 760ms var(--rm-ease) 220ms backwards;
+}
+.invitation.inv-reference-motion .inv-cover .cover-frame>p:not(.overline):not(.cover-note):not(.heritage-bismillah){
+ animation:rm-fade-down 720ms var(--rm-ease) 150ms backwards;
+}
+
+/* The reference continuously pulses its “Buka Undangan” CTA. Keep it subtler here. */
+.invitation.inv-reference-motion .inv-cover .inv-button{
+ animation:rm-open-pulse 2s ease-in-out 900ms infinite;
+ transform-origin:center bottom;
+}
+.invitation.inv-reference-motion .inv-cover.is-opening .inv-button{
+ animation:none;
+}
+
+/* Content appears immediately after the cover leaves, then scroll reveals take over. */
+.invitation.inv-reference-motion .inv-content{
+ animation:rm-content-enter 720ms var(--rm-ease) both;
+}
+
+/* Story/timeline and gallery objects arrive one-by-one like the reference AOS choreography. */
+.invitation.inv-reference-motion .pm-section.inv-revealed .pm-stagger{
+ animation:rm-object-up 720ms var(--rm-ease) calc(65ms + (var(--pm-order,0) * 62ms)) backwards;
+}
+.invitation.inv-reference-motion .inv-timeline>li{
+ transform-origin:50% 100%;
+}
+.invitation.inv-reference-motion .story-text{
+ will-change:opacity,transform;
+}
+
+/* FlipDown-like countdown without a third-party dependency. JS replays this class on text changes. */
+.invitation.inv-reference-motion .countdown>div{
+ perspective:700px;
+ transform-style:preserve-3d;
+}
+.invitation.inv-reference-motion .countdown>div::before{
+ content:"";
+ position:absolute;
+ z-index:2;
+ left:10px;
+ right:10px;
+ top:50%;
+ height:1px;
+ background:color-mix(in srgb,var(--tone) 16%,transparent);
+ pointer-events:none;
+ opacity:.65;
+}
+.invitation.inv-reference-motion .countdown strong{
+ display:block;
+ transform-origin:50% 50%;
+ backface-visibility:hidden;
+}
+.invitation.inv-reference-motion .countdown strong.rm-digit-flip{
+ animation:rm-digit-flip 560ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+/* Gallery and media get gentle movement rather than a static wall. */
+@media(prefers-reduced-motion:no-preference){
+ .invitation.inv-reference-motion .cover-photo,
+ .invitation.inv-reference-motion .cinematic-photo{
+  animation:rm-photo-breathe 12s ease-in-out infinite alternate;
+  transform-origin:center;
+ }
+ .theme-elegant-rose.inv-reference-motion .inv-sprig{
+  opacity:.2;
+  animation:rm-floral-breathe 6.5s ease-in-out infinite alternate;
+ }
+ .theme-elegant-rose.inv-reference-motion .sprig-right{animation-delay:-2.3s}
+ .theme-elegant-rose.inv-reference-motion .cover-motif{
+  animation:rm-motif-float 5.5s ease-in-out infinite alternate;
+ }
+}
+
+/* Bottom navigation arrives like a compact mobile dock. */
+.invitation.inv-reference-motion .inv-bottom-nav{
+ animation:rm-nav-up 620ms var(--rm-ease) both;
+}
+.invitation.inv-reference-motion .inv-music{
+ animation:rm-nav-up 680ms var(--rm-ease) 80ms backwards;
+}
+
+/* Hover is intentionally quiet; the reference relies more on entrance choreography. */
+@media(hover:hover) and (pointer:fine){
+ .invitation.inv-reference-motion .gallery-photo:hover img{
+  transform:scale(1.06);
+ }
+ .invitation.inv-reference-motion .inv-bottom-nav button:hover{
+  translate:0 -4px;
+ }
+}
+
+/* Mobile keeps the same motion language with shorter travel and blur. */
+@media(max-width:600px){
+ .invitation.inv-reference-motion .pm-section.inv-reveal-pending{
+  transform:translate3d(0,20px,0) scale(.995);
+  filter:blur(4px);
+ }
+ .invitation.inv-reference-motion .pm-section.inv-revealed .pm-stagger{
+  animation-duration:600ms;
+  animation-delay:calc(45ms + (var(--pm-order,0) * 46ms));
+ }
+ .invitation.inv-reference-motion .countdown>div::before{left:7px;right:7px}
+}
+
+/* Accessibility is stronger than visual fidelity. */
+@media(prefers-reduced-motion:reduce){
+ .invitation.inv-reference-motion *,
+ .invitation.inv-reference-motion *::before,
+ .invitation.inv-reference-motion *::after{
+  animation:none!important;
+  transition-duration:.001ms!important;
+ }
+ .invitation.inv-reference-motion .pm-section.inv-reveal-pending{
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+ }
+ .invitation.inv-reference-motion .countdown>div::before{display:none}
+}
+
+@media print{
+ .invitation.inv-reference-motion .pm-section.inv-reveal-pending{
+  opacity:1!important;
+  transform:none!important;
+  filter:none!important;
+ }
+}
+
+@keyframes rm-cover-zoom{
+ from{opacity:0;scale:.84;filter:blur(12px)}
+ 60%{opacity:1;scale:1.025;filter:blur(1px)}
+ to{opacity:1;scale:1;filter:none}
+}
+@keyframes rm-fade-down{
+ from{opacity:0;translate:0 -24px;filter:blur(6px)}
+ to{opacity:1;translate:0 0;filter:none}
+}
+@keyframes rm-content-enter{
+ from{opacity:0;scale:.988;filter:blur(8px)}
+ to{opacity:1;scale:1;filter:none}
+}
+@keyframes rm-object-up{
+ from{opacity:0;translate:0 24px;scale:.985;filter:blur(5px)}
+ to{opacity:1;translate:0 0;scale:1;filter:none}
+}
+@keyframes rm-closing-zoom{
+ from{opacity:0;scale:.84;filter:blur(9px)}
+ 70%{opacity:1;scale:1.018;filter:none}
+ to{opacity:1;scale:1}
+}
+@keyframes rm-open-pulse{
+ 0%,100%{scale:1;box-shadow:0 10px 28px color-mix(in srgb,var(--tone) 12%,transparent)}
+ 50%{scale:1.045;box-shadow:0 18px 42px color-mix(in srgb,var(--tone) 20%,transparent)}
+}
+@keyframes rm-digit-flip{
+ 0%{opacity:.15;transform:rotateX(-84deg) translateY(-5px);filter:blur(3px)}
+ 58%{opacity:1;transform:rotateX(8deg) translateY(0);filter:none}
+ 100%{opacity:1;transform:rotateX(0)}
+}
+@keyframes rm-photo-breathe{
+ from{transform:scale(1.015)}
+ to{transform:scale(1.065)}
+}
+@keyframes rm-floral-breathe{
+ from{scale:.96;rotate:-2deg;filter:drop-shadow(0 7px 13px color-mix(in srgb,var(--tone) 9%,transparent))}
+ to{scale:1.045;rotate:2deg;filter:drop-shadow(0 14px 24px color-mix(in srgb,var(--tone) 16%,transparent))}
+}
+@keyframes rm-motif-float{
+ from{scale:.97;rotate:-2deg}
+ to{scale:1.035;rotate:2deg}
+}
+@keyframes rm-nav-up{
+ from{opacity:0;translate:0 24px;scale:.94;filter:blur(6px)}
+ to{opacity:1;translate:0 0;scale:1;filter:none}
+}
