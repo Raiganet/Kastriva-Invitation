@@ -1,0 +1,246 @@
+/* Elegant Rose — reference-inspired composition
+   Original Kastriva implementation. No third-party theme assets/code are embedded. */
+
+.theme-elegant-rose.inv-reference-motion{
+ --er-wine:#5a2028;
+ --er-wine-deep:#3d1118;
+ --er-gold:#d7954b;
+ --er-rose:#d79aaa;
+ --er-paper:#fff8f8;
+ --er-paper-soft:#fff0f2;
+}
+
+/* Cover: rounded stationery card, gold line and floral clusters like a physical invitation. */
+.theme-elegant-rose .inv-cover{padding-inline:clamp(18px,5vw,44px)}
+.theme-elegant-rose .inv-cover .cover-frame{
+ max-width:540px;
+ text-align:left;
+ border-radius:28px!important;
+ padding:clamp(42px,7vw,72px) clamp(28px,6vw,58px);
+ background:
+  radial-gradient(circle at 96% 1%,#d89baa55 0 6%,transparent 6.5%),
+  radial-gradient(circle at 92% 5%,#b85f7838 0 4%,transparent 4.5%),
+  linear-gradient(150deg,#fffafaee,#fff0f3e9);
+ border:1px solid #8b3f5138;
+ box-shadow:0 34px 100px #5b202525;
+ overflow:visible;
+}
+.theme-elegant-rose .inv-cover .cover-frame::before{
+ inset:14px;
+ border:2px solid color-mix(in srgb,var(--er-gold) 72%,transparent);
+ border-radius:20px!important;
+}
+.theme-elegant-rose .inv-cover .cover-frame::after{
+ content:"";
+ position:absolute;
+ width:145px;height:145px;
+ right:-25px;top:-32px;
+ pointer-events:none;
+ background:
+  radial-gradient(ellipse at 72% 24%,#d894a7 0 9%,transparent 10%),
+  radial-gradient(ellipse at 54% 38%,#f1c1cb 0 10%,transparent 11%),
+  radial-gradient(ellipse at 84% 47%,#b96179 0 8%,transparent 9%),
+  radial-gradient(ellipse at 57% 67%,#8d304b 0 6%,transparent 7%),
+  linear-gradient(128deg,transparent 45%,#9a6d3b99 46% 48%,transparent 49%);
+ filter:drop-shadow(0 13px 18px #5c29351b);
+ transform:rotate(8deg);
+}
+.theme-elegant-rose .inv-cover .cover-motif{
+ position:absolute;
+ right:-2px;bottom:8px;
+ width:90px;height:90px;
+ margin:0;
+ color:var(--er-gold);
+ opacity:.45;
+ transform:rotate(265deg);
+}
+.theme-elegant-rose .inv-cover .overline{letter-spacing:.18em;color:var(--er-wine);font-weight:700}
+.theme-elegant-rose .inv-cover .inv-names-layout{justify-items:start;text-align:left}
+.theme-elegant-rose .inv-cover .inv-names{font-size:clamp(44px,8vw,72px);color:var(--er-wine)}
+.theme-elegant-rose .inv-cover .inv-rule{margin-inline:0;background:var(--er-gold)}
+.theme-elegant-rose .inv-cover .guest-card{margin-inline:0;text-align:left;max-width:330px;background:#fff9f8d9;border-color:#8a3d5030;border-radius:10px}
+.theme-elegant-rose .inv-cover .inv-button{background:var(--er-wine);border-color:var(--er-wine);box-shadow:0 14px 38px #5c202b2c}
+.theme-elegant-rose .inv-cover .cover-note{margin-left:0!important;text-align:left}
+
+/* Couple stack: circular portraits with floral frame, bride then groom, matching the reference rhythm. */
+.theme-elegant-rose .elegant-couple-stack{
+ max-width:520px;
+ margin:42px auto 0;
+ padding:48px 28px;
+ position:relative;
+ background:linear-gradient(180deg,#fff0f2,#fff9f8);
+ border:1px solid #8b3d5124;
+ border-radius:18px;
+ box-shadow:0 30px 80px #6b293421;
+ overflow:visible;
+}
+.theme-elegant-rose .elegant-couple-stack::before,
+.theme-elegant-rose .elegant-couple-stack::after{
+ content:"";
+ position:absolute;
+ width:125px;height:125px;
+ pointer-events:none;
+ background:
+  radial-gradient(ellipse at 25% 25%,#d89aab 0 12%,transparent 13%),
+  radial-gradient(ellipse at 47% 18%,#f0c2cc 0 11%,transparent 12%),
+  radial-gradient(ellipse at 55% 48%,#a74762 0 9%,transparent 10%),
+  linear-gradient(36deg,transparent 46%,#a27b4e7c 47% 49%,transparent 50%);
+ opacity:.78;
+}
+.theme-elegant-rose .elegant-couple-stack::before{right:-22px;top:-25px;rotate:20deg}
+.theme-elegant-rose .elegant-couple-stack::after{left:-22px;bottom:-25px;rotate:198deg}
+.theme-elegant-rose .elegant-couple-person{position:relative;z-index:1;text-align:center}
+.theme-elegant-rose .elegant-couple-person h3{margin:22px 0 8px;font-size:clamp(30px,5vw,40px);font-style:italic;color:var(--er-wine)}
+.theme-elegant-rose .elegant-couple-person p{max-width:390px;margin:0 auto;line-height:1.85}
+.theme-elegant-rose .elegant-portrait-frame{
+ position:relative;
+ width:176px;height:176px;
+ margin:0 auto;
+ border-radius:50%;
+ padding:7px;
+ border:3px solid var(--er-wine);
+ background:#fff;
+ box-shadow:0 18px 50px #57202a2b,0 0 0 7px #fff5f5,0 0 0 8px #d8a05d65;
+}
+.theme-elegant-rose .elegant-portrait-frame img,
+.theme-elegant-rose .elegant-portrait-fallback{
+ width:100%;height:100%;border-radius:50%;display:grid;place-items:center;object-fit:cover;
+}
+.theme-elegant-rose .elegant-portrait-fallback{background:linear-gradient(145deg,#f7dce2,#fff7f6);font:italic 64px Georgia,serif;color:var(--er-wine)}
+.theme-elegant-rose .elegant-portrait-flower{
+ position:absolute;z-index:3;width:64px;height:64px;pointer-events:none;
+ background:
+  radial-gradient(ellipse at 35% 30%,#d794a7 0 15%,transparent 16%),
+  radial-gradient(ellipse at 55% 35%,#f1bdc9 0 14%,transparent 15%),
+  radial-gradient(ellipse at 48% 58%,#a64b62 0 11%,transparent 12%),
+  linear-gradient(45deg,transparent 45%,#9b774b99 46% 49%,transparent 50%);
+}
+.theme-elegant-rose .elegant-flower-top{right:-26px;top:-18px;rotate:24deg}
+.theme-elegant-rose .elegant-flower-bottom{left:-26px;bottom:-18px;rotate:204deg}
+.theme-elegant-rose .elegant-couple-and{
+ position:relative;z-index:1;
+ font:italic clamp(70px,13vw,112px)/.9 Georgia,serif;
+ color:var(--er-gold);
+ margin:-6px 0 4px;
+ text-shadow:0 10px 30px #a66a3120;
+}
+
+/* Love story: connected heart timeline with image cards and soft white fade. */
+.theme-elegant-rose .elegant-story-timeline{max-width:620px;margin:38px auto 0;padding:0;list-style:none;position:relative}
+.theme-elegant-rose .elegant-story-timeline::before{content:"";position:absolute;left:18px;top:16px;bottom:16px;width:2px;background:linear-gradient(var(--er-gold),#dba0ae,var(--er-gold));opacity:.72}
+.theme-elegant-rose .elegant-story-timeline>li{position:relative;padding:0 0 36px 56px;text-align:left}
+.theme-elegant-rose .elegant-story-timeline>li:last-child{padding-bottom:0}
+.theme-elegant-rose .elegant-story-dot{
+ position:absolute;left:5px;top:22px;
+ width:28px;height:28px;border-radius:50%;
+ display:grid;place-items:center;
+ background:var(--er-gold);color:#fff6ec;
+ box-shadow:0 0 0 7px #fff2f2,0 8px 20px #7a3d4728;
+ font-size:11px;
+}
+.theme-elegant-rose .elegant-story-card{
+ border:1px solid #8e40522b;
+ border-radius:17px;
+ overflow:hidden;
+ background:#fff;
+ box-shadow:0 20px 55px #63303a1c;
+}
+.theme-elegant-rose .elegant-story-photo,
+.theme-elegant-rose .elegant-story-placeholder{height:175px;position:relative;overflow:hidden;background:linear-gradient(135deg,#ead5d9,#fff1f2)}
+.theme-elegant-rose .elegant-story-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.theme-elegant-rose .elegant-story-photo>span{position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#fff)}
+.theme-elegant-rose .elegant-story-placeholder{display:grid;place-items:center;font:48px Georgia,serif;color:#b85f78}
+.theme-elegant-rose .elegant-story-copy{padding:20px 22px 24px}
+.theme-elegant-rose .elegant-story-copy .timeline-year{display:inline-flex;padding:4px 9px;border-radius:999px;background:#f8e7ea;color:var(--er-wine);font-size:10px;letter-spacing:.1em}
+.theme-elegant-rose .elegant-story-copy h3{font-size:24px;margin:12px 0 8px;color:var(--er-wine)}
+.theme-elegant-rose .elegant-story-copy p{white-space:pre-line;line-height:1.9;margin:0}
+@media(hover:hover) and (pointer:fine){
+ .theme-elegant-rose .elegant-story-card:hover .elegant-story-photo img{transform:scale(1.05)}
+}
+
+/* Gallery: thumbnail navigation + large fade stage, inspired by the supplied reference. */
+.theme-elegant-rose .elegant-gallery{max-width:680px;margin:34px auto 0}
+.theme-elegant-rose .elegant-gallery-stage{position:relative;padding:8px;background:#fff;border:1px solid #8e405225;border-radius:20px;box-shadow:0 26px 70px #5d26311c}
+.theme-elegant-rose .elegant-gallery-main{position:relative;display:block;width:100%;padding:0;border:0;border-radius:14px;overflow:hidden;background:#f4e8e9;cursor:zoom-in}
+.theme-elegant-rose .elegant-gallery-main img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;animation:er-gallery-in .65s cubic-bezier(.16,1,.3,1)}
+.theme-elegant-rose .elegant-gallery-shade{position:absolute;inset:58% 0 0;background:linear-gradient(transparent,#2810149e);pointer-events:none}
+.theme-elegant-rose .elegant-gallery-count{position:absolute;left:16px;bottom:14px;color:#fff;font-size:10px;letter-spacing:.14em}
+.theme-elegant-rose .elegant-gallery-arrow{
+ position:absolute;z-index:4;top:50%;translate:0 -50%;
+ width:42px;height:42px;border:1px solid #ffffff7a;border-radius:50%;
+ background:#4a1b23c9;color:#fff;display:grid;place-items:center;
+ box-shadow:0 10px 24px #3510183d;
+}
+.theme-elegant-rose .elegant-gallery-prev{left:18px}
+.theme-elegant-rose .elegant-gallery-next{right:18px}
+.theme-elegant-rose .elegant-gallery-thumbs{display:flex;gap:10px;overflow-x:auto;padding:14px 2px 4px;scrollbar-width:thin;scroll-snap-type:x proximity}
+.theme-elegant-rose .elegant-gallery-thumb{
+ flex:0 0 70px;width:70px;height:70px;padding:3px;border:1px solid #8e405228;border-radius:10px;background:#fff;overflow:hidden;scroll-snap-align:start;opacity:.62;
+ transition:opacity .25s ease,border-color .25s ease,transform .25s ease;
+}
+.theme-elegant-rose .elegant-gallery-thumb img{width:100%;height:100%;object-fit:cover;border-radius:7px}
+.theme-elegant-rose .elegant-gallery-thumb.is-active{opacity:1;border:3px solid var(--er-wine);transform:translateY(-2px)}
+.theme-elegant-rose .elegant-gallery-main .gallery-photo-hint{background:#3b161cc7}
+
+/* Closing becomes a floral thank-you card. */
+.theme-elegant-rose .inv-closing{
+ max-width:680px;
+ margin:70px auto 120px;
+ padding:70px 32px;
+ position:relative;
+ border:1px solid #8e40522c;
+ border-radius:22px;
+ background:linear-gradient(145deg,#fff,#fff0f2);
+ box-shadow:0 32px 85px #60263120;
+ overflow:visible;
+}
+.theme-elegant-rose .inv-closing::after{
+ content:"";
+ position:absolute;right:-20px;top:-24px;width:120px;height:120px;
+ background:
+  radial-gradient(ellipse at 35% 30%,#dc9caf 0 14%,transparent 15%),
+  radial-gradient(ellipse at 55% 34%,#f0c1cb 0 13%,transparent 14%),
+  radial-gradient(ellipse at 50% 58%,#a84c64 0 10%,transparent 11%),
+  linear-gradient(45deg,transparent 46%,#9c774b99 47% 49%,transparent 50%);
+ transform:rotate(20deg);
+ pointer-events:none;
+}
+.theme-elegant-rose .inv-closing h2{color:var(--er-wine);font-size:clamp(38px,7vw,58px)}
+
+/* Existing empty gallery placeholders receive a carousel-card feel in demos without uploaded photos. */
+.theme-elegant-rose .photo-placeholders{grid-template-columns:1.5fr repeat(2,.75fr);align-items:stretch;max-width:680px}
+.theme-elegant-rose .photo-placeholders>div{border-radius:18px!important;min-height:200px;background:linear-gradient(145deg,#fff,#f9e8ec)}
+.theme-elegant-rose .photo-placeholders>div:first-child{min-height:300px}
+
+@media(prefers-reduced-motion:no-preference){
+ .theme-elegant-rose .elegant-portrait-flower{animation:er-flower-float 5.5s ease-in-out infinite alternate}
+ .theme-elegant-rose .elegant-flower-bottom{animation-delay:-2.1s}
+ .theme-elegant-rose .elegant-story-dot{animation:er-heart-breathe 3.4s ease-in-out infinite}
+}
+
+@media(max-width:600px){
+ .theme-elegant-rose .inv-cover .cover-frame{padding:48px 25px 42px;border-radius:22px!important}
+ .theme-elegant-rose .inv-cover .cover-frame::after{width:115px;height:115px;right:-20px;top:-24px}
+ .theme-elegant-rose .elegant-couple-stack{padding:42px 18px;margin-top:32px}
+ .theme-elegant-rose .elegant-portrait-frame{width:154px;height:154px}
+ .theme-elegant-rose .elegant-story-timeline::before{left:14px}
+ .theme-elegant-rose .elegant-story-timeline>li{padding-left:46px}
+ .theme-elegant-rose .elegant-story-dot{left:1px}
+ .theme-elegant-rose .elegant-story-photo,.theme-elegant-rose .elegant-story-placeholder{height:145px}
+ .theme-elegant-rose .elegant-gallery-arrow{width:38px;height:38px}
+ .theme-elegant-rose .elegant-gallery-prev{left:13px}.theme-elegant-rose .elegant-gallery-next{right:13px}
+ .theme-elegant-rose .elegant-gallery-thumb{flex-basis:62px;width:62px;height:62px}
+ .theme-elegant-rose .inv-closing{margin-inline:16px;padding:60px 23px}
+ .theme-elegant-rose .photo-placeholders{grid-template-columns:1fr 1fr}
+ .theme-elegant-rose .photo-placeholders>div:first-child{grid-column:1/-1;min-height:240px}
+}
+
+@media(prefers-reduced-motion:reduce){
+ .theme-elegant-rose .elegant-gallery-main img,
+ .theme-elegant-rose .elegant-portrait-flower,
+ .theme-elegant-rose .elegant-story-dot{animation:none!important}
+}
+
+@keyframes er-gallery-in{from{opacity:.25;scale:1.02;filter:blur(4px)}to{opacity:1;scale:1;filter:none}}
+@keyframes er-flower-float{from{translate:0 -2px;rotate:-2deg}to{translate:2px 4px;rotate:3deg}}
+@keyframes er-heart-breathe{0%,100%{scale:1}50%{scale:1.09;box-shadow:0 0 0 9px #fff2f2,0 10px 25px #7a3d4733}}
