@@ -1,28 +1,22 @@
-import {storyChapters} from '@/lib/invitation-extras';
+import {elegantStoryChapters,storyChapters} from '@/lib/invitation-extras';
 
 type StoryVariant='default'|'elegant-rose';
-
-function splitChapter(text:string,index:number){
- const lines=text.split(/\n+/).map(line=>line.trim()).filter(Boolean);
- if(lines.length>1&&lines[0].length<=90)return {title:lines[0],body:lines.slice(1).join('\n')};
- return {title:`Bab ${String(index+1).padStart(2,'0')}`,body:text};
-}
 
 export default function InvitationStory({
  story,cinematic,variant='default',photos=[],
 }:{story:string;cinematic:boolean;variant?:StoryVariant;photos?:string[]}) {
  if(variant==='elegant-rose'){
-  const chapters=storyChapters(story);
+  const chapters=elegantStoryChapters(story),storyPhotos=photos.filter(Boolean);
   return <ol className="inv-timeline elegant-story-timeline">{chapters.map((chapter,i)=>{
-   const copy=splitChapter(chapter.text,i),photo=photos.length?photos[i%photos.length]:undefined;
+   const photo=storyPhotos[i];
    return <li key={i}>
-    <span className="timeline-dot elegant-story-dot" aria-hidden="true">♥</span>
+    <span className="timeline-dot elegant-story-dot" aria-hidden="true">â™¥</span>
     <article className="elegant-story-card">
-     {photo?<div className="elegant-story-photo"><img src={photo} alt="" loading="lazy" referrerPolicy="no-referrer"/><span aria-hidden="true"/></div>:<div className="elegant-story-placeholder" aria-hidden="true"><span>♥</span></div>}
+     {photo?<div className="elegant-story-photo"><img src={photo} alt="" loading="lazy" referrerPolicy="no-referrer"/><span aria-hidden="true"/></div>:<div className="elegant-story-placeholder" aria-hidden="true"><span>â™¥</span></div>}
      <div className="elegant-story-copy">
       <span className="timeline-year">{chapter.label}</span>
-      <h3>{copy.title}</h3>
-      <p>{copy.body}</p>
+      <h3>{chapter.title}</h3>
+      {chapter.body&&<p>{chapter.body}</p>}
      </div>
     </article>
    </li>;
