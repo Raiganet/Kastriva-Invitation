@@ -1,0 +1,168 @@
+/* Elegant Rose ornaments — Kastriva Invitation
+   Uses ornament images supplied by the project owner.
+   Loaded after invitation-elegant-reference.css so these rules only polish the Elegant Rose theme. */
+
+/* Keep artwork behind actual cover content. */
+.theme-elegant-rose .inv-cover .cover-frame{
+  isolation:isolate;
+}
+.theme-elegant-rose .inv-cover .cover-frame > *{
+  position:relative;
+  z-index:2;
+}
+
+/* Replace the synthetic top-right floral cluster with the supplied rose artwork. */
+.theme-elegant-rose .inv-cover .cover-frame::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  width:clamp(150px,34vw,220px);
+  height:clamp(115px,26vw,165px);
+  right:clamp(-64px,-9vw,-34px);
+  top:clamp(-62px,-8vw,-30px);
+  pointer-events:none;
+  background:url('/ornaments/elegant-rose/rose-cluster.png') center/contain no-repeat;
+  opacity:.74;
+  filter:saturate(.72) sepia(.08) drop-shadow(0 14px 20px #5c293524);
+  transform:rotate(8deg);
+}
+
+/* Gold floral separator below section titles. Uses alpha-mask so it follows Elegant Rose gold. */
+.theme-elegant-rose .inv-section > h2::after{
+  content:"";
+  display:block;
+  width:clamp(78px,20vw,118px);
+  height:38px;
+  margin:12px auto 2px;
+  background:var(--er-gold,#d7954b);
+  -webkit-mask:url('/ornaments/elegant-rose/floral-divider-mask.png') center/contain no-repeat;
+  mask:url('/ornaments/elegant-rose/floral-divider-mask.png') center/contain no-repeat;
+  opacity:.72;
+  pointer-events:none;
+}
+
+/* Supplied roses replace the generated radial-gradient flowers around the couple card. */
+.theme-elegant-rose .elegant-couple-stack::before,
+.theme-elegant-rose .elegant-couple-stack::after{
+  content:"";
+  position:absolute;
+  width:clamp(128px,30vw,178px);
+  height:clamp(96px,23vw,134px);
+  pointer-events:none;
+  background:url('/ornaments/elegant-rose/rose-cluster.png') center/contain no-repeat;
+  opacity:.66;
+  filter:saturate(.72) sepia(.08) drop-shadow(0 12px 18px #5c293520);
+}
+.theme-elegant-rose .elegant-couple-stack::before{
+  right:-48px;
+  top:-43px;
+  transform:rotate(13deg);
+}
+.theme-elegant-rose .elegant-couple-stack::after{
+  left:-48px;
+  bottom:-43px;
+  transform:rotate(193deg);
+}
+
+/* Small gold filigree details help the closing card feel less empty without hiding the copy. */
+.theme-elegant-rose .inv-closing{
+  isolation:isolate;
+}
+.theme-elegant-rose .inv-closing > *{
+  position:relative;
+  z-index:2;
+}
+.theme-elegant-rose .inv-closing::before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  left:-22px;
+  bottom:-22px;
+  width:150px;
+  height:150px;
+  background:var(--er-gold,#d7954b);
+  -webkit-mask:url('/ornaments/elegant-rose/filigree-corner-mask.png') left bottom/contain no-repeat;
+  mask:url('/ornaments/elegant-rose/filigree-corner-mask.png') left bottom/contain no-repeat;
+  opacity:.34;
+  transform:rotate(180deg);
+  pointer-events:none;
+}
+.theme-elegant-rose .inv-closing::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  right:-40px;
+  top:-38px;
+  width:180px;
+  height:135px;
+  background:url('/ornaments/elegant-rose/rose-cluster.png') center/contain no-repeat;
+  opacity:.64;
+  filter:saturate(.7) sepia(.08) drop-shadow(0 12px 18px #5c29351e);
+  transform:rotate(10deg);
+  pointer-events:none;
+}
+
+/* Keep gallery and story elegant: tiny ornament on cards, not on every photo. */
+.theme-elegant-rose .elegant-story-card,
+.theme-elegant-rose .elegant-gallery-stage{
+  position:relative;
+}
+.theme-elegant-rose .elegant-story-card::after{
+  content:"";
+  position:absolute;
+  right:12px;
+  bottom:8px;
+  width:54px;
+  height:34px;
+  background:var(--er-gold,#d7954b);
+  -webkit-mask:url('/ornaments/elegant-rose/floral-divider-mask.png') center/contain no-repeat;
+  mask:url('/ornaments/elegant-rose/floral-divider-mask.png') center/contain no-repeat;
+  opacity:.16;
+  pointer-events:none;
+}
+
+@media(max-width:600px){
+  .theme-elegant-rose .inv-cover .cover-frame::after{
+    width:145px;
+    height:110px;
+    right:-42px;
+    top:-36px;
+    opacity:.68;
+  }
+  .theme-elegant-rose .elegant-couple-stack::before,
+  .theme-elegant-rose .elegant-couple-stack::after{
+    width:128px;
+    height:96px;
+  }
+  .theme-elegant-rose .elegant-couple-stack::before{right:-34px;top:-30px}
+  .theme-elegant-rose .elegant-couple-stack::after{left:-34px;bottom:-30px}
+  .theme-elegant-rose .inv-closing::before{
+    width:112px;
+    height:112px;
+    left:-13px;
+    bottom:-13px;
+  }
+  .theme-elegant-rose .inv-closing::after{
+    width:140px;
+    height:105px;
+    right:-30px;
+    top:-27px;
+  }
+}
+
+@media(prefers-reduced-motion:no-preference){
+  .theme-elegant-rose .inv-cover .cover-frame::after,
+  .theme-elegant-rose .inv-closing::after{
+    animation:er-ornament-drift 6.5s ease-in-out infinite alternate;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .theme-elegant-rose .inv-cover .cover-frame::after,
+  .theme-elegant-rose .inv-closing::after{
+    animation:none!important;
+  }
+}
+@keyframes er-ornament-drift{
+  from{translate:0 -1px}
+  to{translate:2px 5px}
+}
