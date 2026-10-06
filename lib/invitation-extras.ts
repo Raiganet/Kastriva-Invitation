@@ -7,7 +7,7 @@ export function completeGift(gift:GiftAccount):boolean {
 /** Blank lines delimit chapters; a year is shown only when supplied by the author. */
 export function storyChapters(story:string) {
  return story.trim().split(/\n\s*\n/).filter(Boolean).map((paragraph,index)=>{
-  const match=/^(\d{4})\s*(?:[â€”â€“-]\s*|\n)([\s\S]+)$/.exec(paragraph.trim());
+  const match=/^(\d{4})\s*(?:[\u2014\u2013-]\s*|\n)([\s\S]+)$/.exec(paragraph.trim());
   return {label:match?.[1]||String(index+1).padStart(2,'0'),text:match?.[2]||paragraph.trim()};
  });
 }
@@ -43,6 +43,9 @@ function plainElegantChapters(story:string):ElegantStoryChapter[] {
  * Elegant Rose accepts normal plain-text stories and Markdown-style headings.
  * A top-level heading such as "## Kisah Kami" is treated as a section label,
  * not as its own timeline chapter. Heading markers are never rendered to guests.
+ *
+ * Unicode punctuation is expressed with \u escapes in source so this file remains
+ * ASCII-safe when patched from Windows PowerShell 5.1.
  */
 export function elegantStoryChapters(story:string):ElegantStoryChapter[] {
  const source=story.replace(/\r\n?/g,'\n').trim();
@@ -99,7 +102,7 @@ export function elegantStoryChapters(story:string):ElegantStoryChapter[] {
   let label=String(displayIndex+1).padStart(2,'0');
   let title=heading||`Bab ${String(displayIndex+1).padStart(2,'0')}`;
 
-  const yearTitle=/^(\d{4})\s*(?:[â€”â€“-]\s*|[:|]\s*)(.+)$/.exec(title);
+  const yearTitle=/^(\d{4})\s*(?:[\u2014\u2013-]|:|\|)\s*(.+)$/.exec(title);
   if(yearTitle){
    label=yearTitle[1];
    title=cleanMarkdownHeading(yearTitle[2]);

@@ -21,7 +21,7 @@ Dengan restu keluarga, kami memilih melangkah bersama.`);
 });
 
 test('Elegant Rose preserves explicit years from Markdown headings',()=>{
- const chapters=elegantStoryChapters(`### 2022 â€” Pertemuan pertama
+ const chapters=elegantStoryChapters(`### 2022 \u2014 Pertemuan pertama
 Berawal dari sebuah pertemuan.
 
 ### 2026 - Hari yang dinanti
@@ -32,10 +32,10 @@ Kami membagikan kebahagiaan bersama.`);
 });
 
 test('Elegant Rose remains compatible with existing plain-text year chapters',()=>{
- const chapters=elegantStoryChapters(`2022 â€” Pertemuan pertama
+ const chapters=elegantStoryChapters(`2022 \u2014 Pertemuan pertama
 Berawal dari pertemuan sederhana.
 
-2025 â€” Menetapkan langkah
+2025 \u2014 Menetapkan langkah
 Dengan restu keluarga, kami melangkah bersama.`);
 
  assert.equal(chapters.length,2);
