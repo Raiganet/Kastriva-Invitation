@@ -1,0 +1,640 @@
+/* Modern Minimalist â€” reference-inspired composition
+   Original Kastriva implementation based on observed motion/layout patterns.
+   No third-party source code, fonts, images, or remote theme assets are embedded. */
+
+.theme-modern-minimalist{
+  --mm-ink:#22313f;
+  --mm-ink-soft:#4c5d69;
+  --mm-paper:#f7f9fa;
+  --mm-card:rgba(255,255,255,.84);
+  --mm-card-strong:rgba(255,255,255,.94);
+  --mm-line:rgba(34,49,63,.16);
+  --mm-blue:#5e7fa3;
+  --mm-blue-soft:#dce7f0;
+  --mm-coral:#df6b57;
+  --mm-shadow:0 28px 72px rgba(36,52,66,.14);
+}
+
+/* Reference-inspired fixed background language, translated into geometric Kastriva artwork. */
+.theme-modern-minimalist{
+  background:
+    radial-gradient(circle at 9% 6%,rgba(94,127,163,.13),transparent 30%),
+    radial-gradient(circle at 92% 92%,rgba(223,107,87,.09),transparent 28%),
+    linear-gradient(180deg,#f8fafb,#eef3f6 50%,#f8fafb);
+}
+
+.theme-modern-minimalist .inv-cover,
+.theme-modern-minimalist .inv-hero{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  background:
+    linear-gradient(115deg,transparent 0 24%,rgba(94,127,163,.08) 24.2% 24.6%,transparent 24.8%),
+    linear-gradient(70deg,transparent 0 72%,rgba(223,107,87,.07) 72.2% 72.6%,transparent 72.8%),
+    radial-gradient(circle at 18% 18%,rgba(94,127,163,.12),transparent 26%),
+    linear-gradient(160deg,#fafcfd,#eef3f6);
+}
+
+.theme-modern-minimalist .inv-cover::before,
+.theme-modern-minimalist .inv-hero::before,
+.theme-modern-minimalist .inv-cover::after,
+.theme-modern-minimalist .inv-hero::after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  z-index:-1;
+  border:1px solid rgba(34,49,63,.11);
+  border-radius:48% 52% 44% 56%;
+}
+
+.theme-modern-minimalist .inv-cover::before,
+.theme-modern-minimalist .inv-hero::before{
+  width:min(72vw,720px);
+  height:min(72vw,720px);
+  left:-28vw;
+  top:-20vw;
+  transform:rotate(24deg);
+}
+
+.theme-modern-minimalist .inv-cover::after,
+.theme-modern-minimalist .inv-hero::after{
+  width:min(62vw,620px);
+  height:min(62vw,620px);
+  right:-24vw;
+  bottom:-24vw;
+  transform:rotate(-18deg);
+  border-color:rgba(223,107,87,.12);
+}
+
+/* Keep the shared motif, but make it an abstract editorial watermark. */
+.theme-modern-minimalist .inv-sprig{
+  opacity:.08;
+  color:var(--mm-blue);
+}
+.theme-modern-minimalist .sprig-left{left:-38px;bottom:7%;transform:rotate(-12deg) scale(1.35)}
+.theme-modern-minimalist .sprig-right{right:-35px;top:8%;transform:rotate(18deg) scale(1.2)}
+.theme-modern-minimalist .inv-orbit{
+  inset:7% 8%;
+  border-radius:46% 54% 48% 52%;
+  border-color:rgba(34,49,63,.08);
+  transform:rotate(-5deg);
+}
+
+/* Cover: zoom-in presentation, translucent card, restrained typography. */
+.theme-modern-minimalist .cover-frame{
+  max-width:560px;
+  min-height:min(720px,calc(100vh - 130px));
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center!important;
+  padding:clamp(46px,7vw,78px) clamp(28px,6vw,62px)!important;
+  border:1px solid var(--mm-line)!important;
+  border-left:1px solid var(--mm-line)!important;
+  border-radius:30px!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.91),rgba(246,249,251,.77))!important;
+  backdrop-filter:blur(18px) saturate(130%);
+  box-shadow:var(--mm-shadow)!important;
+}
+
+.theme-modern-minimalist .cover-frame::before{
+  display:block!important;
+  inset:14px!important;
+  width:auto!important;
+  height:auto!important;
+  border:1px solid rgba(34,49,63,.10)!important;
+  border-radius:22px!important;
+  background:none!important;
+}
+
+.theme-modern-minimalist .cover-motif{
+  width:72px;
+  height:60px;
+  margin:0 auto 22px;
+  color:var(--mm-blue);
+  opacity:.68;
+}
+
+.theme-modern-minimalist .cover-frame .overline{
+  margin-bottom:16px;
+  color:var(--mm-ink-soft);
+  letter-spacing:.30em;
+}
+
+.theme-modern-minimalist .cover-frame .inv-names-layout{
+  justify-items:center;
+  text-align:center;
+}
+
+.theme-modern-minimalist .cover-frame .inv-names{
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-style:normal;
+  font-size:clamp(44px,8vw,76px);
+  font-weight:800;
+  line-height:.98;
+  letter-spacing:-.06em;
+  color:var(--mm-ink);
+  text-transform:uppercase;
+  text-shadow:none;
+}
+
+.theme-modern-minimalist .cover-frame .inv-rule{
+  width:64px;
+  height:4px;
+  margin:24px auto;
+  background:linear-gradient(90deg,var(--mm-ink) 0 70%,var(--mm-coral) 70%);
+}
+
+.theme-modern-minimalist .cover-frame .guest-card{
+  width:min(100%,360px);
+  margin:26px auto 0;
+  padding:18px 20px;
+  text-align:center;
+  background:rgba(255,255,255,.76);
+  border:1px solid rgba(34,49,63,.13);
+  border-radius:18px;
+  box-shadow:0 14px 36px rgba(34,49,63,.08);
+}
+
+.theme-modern-minimalist .inv-button{
+  border-radius:999px;
+  background:var(--mm-ink);
+  border-color:var(--mm-ink);
+  color:#fff;
+  box-shadow:0 12px 30px rgba(34,49,63,.18);
+}
+.theme-modern-minimalist .inv-button.outline{
+  background:rgba(255,255,255,.72);
+  color:var(--mm-ink);
+  border-color:rgba(34,49,63,.28);
+}
+
+/* Main content uses large translucent cards and generous vertical rhythm. */
+.theme-modern-minimalist .inv-content{
+  padding-top:1px;
+}
+
+.theme-modern-minimalist .inv-section{
+  width:min(760px,calc(100% - 32px))!important;
+  margin:86px auto!important;
+  padding:clamp(58px,7vw,86px) clamp(24px,6vw,58px)!important;
+  text-align:center!important;
+  border:1px solid var(--mm-line);
+  border-radius:30px;
+  background:var(--mm-card);
+  backdrop-filter:blur(14px) saturate(120%);
+  box-shadow:var(--mm-shadow);
+  overflow:hidden;
+}
+
+.theme-modern-minimalist .inv-section.alternate{
+  background:linear-gradient(150deg,rgba(255,255,255,.90),rgba(228,237,244,.78));
+  border-block:1px solid var(--mm-line);
+}
+
+.theme-modern-minimalist .inv-section>.overline{
+  display:inline-flex;
+  margin-inline:auto;
+  padding:7px 13px!important;
+  border:1px solid rgba(34,49,63,.14)!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.72)!important;
+  color:var(--mm-blue)!important;
+  letter-spacing:.28em!important;
+}
+
+.theme-modern-minimalist .inv-section>h2{
+  margin-inline:auto!important;
+  font-family:Arial,Helvetica,sans-serif!important;
+  font-style:normal!important;
+  font-weight:800!important;
+  font-size:clamp(34px,5vw,52px)!important;
+  line-height:1.02;
+  letter-spacing:-.055em!important;
+  text-transform:uppercase;
+  color:var(--mm-ink);
+}
+
+.theme-modern-minimalist .inv-section>h2::after{
+  content:""!important;
+  display:block!important;
+  width:82px!important;
+  height:4px!important;
+  margin:18px auto 0!important;
+  border-radius:0!important;
+  background:linear-gradient(90deg,var(--mm-ink) 0 68%,var(--mm-coral) 68%)!important;
+  box-shadow:none!important;
+}
+
+/* Couple: strong circular portraits/monograms like a printed profile card. */
+.theme-modern-minimalist .couple-grid{
+  max-width:620px;
+  margin:38px auto 0;
+  gap:26px;
+  align-items:center;
+}
+
+.theme-modern-minimalist .couple-grid>div{
+  padding:34px 24px;
+  border:1px solid var(--mm-line);
+  border-radius:24px!important;
+  background:rgba(255,255,255,.72);
+  box-shadow:0 16px 42px rgba(34,49,63,.09);
+}
+
+.theme-modern-minimalist .person-monogram{
+  width:132px;
+  height:132px;
+  margin:0 auto 22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  border:7px solid var(--mm-blue);
+  background:linear-gradient(145deg,#fff,#e9f0f5);
+  box-shadow:0 16px 40px rgba(34,49,63,.18),0 0 0 5px #fff;
+  font:700 50px/1 Arial,Helvetica,sans-serif;
+  color:var(--mm-ink);
+}
+
+.theme-modern-minimalist .couple-grid h3{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:26px;
+  font-weight:800;
+  letter-spacing:-.04em;
+  color:var(--mm-ink);
+}
+
+.theme-modern-minimalist .couple-grid p{color:var(--mm-ink-soft)}
+.theme-modern-minimalist .couple-and{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:42px;
+  font-weight:300;
+  color:var(--mm-coral);
+}
+
+/* Countdown and event cards echo a clean dashboard, not the floral Elegant Rose. */
+.theme-modern-minimalist .countdown{
+  max-width:520px;
+  margin:36px auto 0;
+  gap:10px;
+}
+.theme-modern-minimalist .countdown>div{
+  min-width:0;
+  border:1px solid var(--mm-line);
+  border-radius:16px;
+  background:rgba(255,255,255,.82);
+  box-shadow:0 10px 24px rgba(34,49,63,.07);
+}
+.theme-modern-minimalist .countdown strong{
+  font-family:Arial,Helvetica,sans-serif;
+  font-weight:800;
+  color:var(--mm-ink);
+}
+
+.theme-modern-minimalist .event-box{
+  border-radius:24px!important;
+  border:1px solid var(--mm-line)!important;
+  background:var(--mm-card-strong)!important;
+  box-shadow:0 18px 48px rgba(34,49,63,.10);
+}
+.theme-modern-minimalist .event-box h3{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:28px;
+  font-weight:800;
+  letter-spacing:-.04em;
+  color:var(--mm-ink);
+}
+.theme-modern-minimalist .event-sequence{
+  color:var(--mm-coral);
+  letter-spacing:.18em;
+}
+
+/* Modern story: alternating editorial cards with one-use photos. */
+.theme-modern-minimalist .modern-story-list{
+  max-width:650px;
+  margin:42px auto 0;
+  padding:0;
+  list-style:none;
+  position:relative;
+}
+.theme-modern-minimalist .modern-story-list::before{
+  content:"";
+  position:absolute;
+  left:24px;
+  top:22px;
+  bottom:22px;
+  width:1px;
+  background:linear-gradient(var(--mm-blue),rgba(34,49,63,.12),var(--mm-coral));
+}
+.theme-modern-minimalist .modern-story-list>li{
+  position:relative;
+  padding:0 0 32px 68px;
+  text-align:left;
+}
+.theme-modern-minimalist .modern-story-list>li:last-child{padding-bottom:0}
+.theme-modern-minimalist .modern-story-marker{
+  position:absolute;
+  left:7px;
+  top:21px;
+  width:36px;
+  height:36px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--mm-ink);
+  color:#fff;
+  border:5px solid #f5f8fa;
+  box-shadow:0 8px 22px rgba(34,49,63,.20);
+  font:700 10px/1 Arial,Helvetica,sans-serif;
+  letter-spacing:.06em;
+}
+.theme-modern-minimalist .modern-story-card{
+  overflow:hidden;
+  border:1px solid var(--mm-line);
+  border-radius:22px;
+  background:rgba(255,255,255,.88);
+  box-shadow:0 18px 48px rgba(34,49,63,.10);
+}
+.theme-modern-minimalist .modern-story-media,
+.theme-modern-minimalist .modern-story-placeholder{
+  height:190px;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(135deg,rgba(94,127,163,.18),rgba(255,255,255,.82)),
+    repeating-linear-gradient(45deg,transparent 0 18px,rgba(34,49,63,.035) 18px 19px);
+}
+.theme-modern-minimalist .modern-story-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:saturate(.82) contrast(.98);
+  transition:transform .8s cubic-bezier(.16,1,.3,1);
+}
+.theme-modern-minimalist .modern-story-media::after{
+  content:"";
+  position:absolute;
+  inset:55% 0 0;
+  background:linear-gradient(transparent,rgba(255,255,255,.90));
+}
+.theme-modern-minimalist .modern-story-placeholder{
+  display:grid;
+  place-items:center;
+}
+.theme-modern-minimalist .modern-story-placeholder::before,
+.theme-modern-minimalist .modern-story-placeholder::after{
+  content:"";
+  position:absolute;
+  width:92px;
+  height:92px;
+  border:1px solid rgba(34,49,63,.17);
+  border-radius:50%;
+}
+.theme-modern-minimalist .modern-story-placeholder::before{transform:translateX(-24px)}
+.theme-modern-minimalist .modern-story-placeholder::after{transform:translateX(24px)}
+.theme-modern-minimalist .modern-story-copy{padding:22px 24px 26px}
+.theme-modern-minimalist .modern-story-copy small{
+  display:inline-flex;
+  padding:5px 9px;
+  border-radius:999px;
+  background:var(--mm-blue-soft);
+  color:var(--mm-ink);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.12em;
+}
+.theme-modern-minimalist .modern-story-copy h3{
+  margin:12px 0 8px;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-.035em;
+  color:var(--mm-ink);
+}
+.theme-modern-minimalist .modern-story-copy p{
+  margin:0;
+  white-space:pre-line;
+  color:var(--mm-ink-soft);
+  line-height:1.85;
+}
+
+/* Gallery: one editorial hero tile plus compact supporting tiles. */
+.theme-modern-minimalist .photo-grid{
+  max-width:690px;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+.theme-modern-minimalist .photo-grid>:is(a,button){
+  min-height:210px;
+  padding:0!important;
+  overflow:hidden;
+  border:1px solid var(--mm-line)!important;
+  border-radius:20px!important;
+  background:#fff!important;
+  box-shadow:0 16px 42px rgba(34,49,63,.10)!important;
+}
+.theme-modern-minimalist .photo-grid>:is(a,button):first-child{
+  grid-column:1/-1;
+}
+.theme-modern-minimalist .photo-grid>:is(a,button):first-child img{
+  aspect-ratio:16/9;
+}
+.theme-modern-minimalist .photo-grid img{
+  width:100%;
+  height:100%;
+  aspect-ratio:4/3;
+  object-fit:cover;
+  border-radius:0!important;
+  filter:saturate(.88);
+}
+.theme-modern-minimalist .gallery-photo-hint{
+  background:rgba(34,49,63,.78);
+  color:#fff;
+}
+
+/* Empty gallery should still look intentional. */
+.theme-modern-minimalist .photo-placeholders{
+  max-width:690px;
+  grid-template-columns:1.35fr 1fr 1fr;
+  gap:14px;
+}
+.theme-modern-minimalist .photo-placeholders>div{
+  min-height:190px;
+  aspect-ratio:auto;
+  border-radius:20px!important;
+  background:
+    linear-gradient(145deg,rgba(255,255,255,.92),rgba(222,232,240,.72));
+  border:1px solid var(--mm-line);
+  box-shadow:0 14px 36px rgba(34,49,63,.08);
+}
+.theme-modern-minimalist .photo-placeholders>div:first-child{min-height:270px}
+.theme-modern-minimalist .photo-placeholders .theme-motif{color:var(--mm-blue)}
+
+/* Closing: one final translucent card, in the same rhythm as the reference. */
+.theme-modern-minimalist .inv-closing{
+  max-width:700px;
+  margin:86px auto 130px;
+  padding:72px 32px;
+  border:1px solid var(--mm-line);
+  border-radius:30px;
+  background:rgba(255,255,255,.88);
+  color:var(--mm-ink);
+  box-shadow:var(--mm-shadow);
+  backdrop-filter:blur(14px);
+}
+.theme-modern-minimalist .inv-closing::before{
+  width:96px!important;
+  height:4px!important;
+  top:28px!important;
+  background:linear-gradient(90deg,var(--mm-ink) 0 72%,var(--mm-coral) 72%)!important;
+}
+.theme-modern-minimalist .inv-closing p,
+.theme-modern-minimalist .inv-closing small{color:var(--mm-ink-soft);opacity:1}
+.theme-modern-minimalist .inv-closing h2{
+  font-family:Arial,Helvetica,sans-serif;
+  font-size:clamp(38px,7vw,62px);
+  font-weight:800;
+  letter-spacing:-.055em;
+  color:var(--mm-ink);
+}
+
+/* Floating controls become compact frosted UI. */
+.theme-modern-minimalist .inv-bottom-nav{
+  background:rgba(248,250,251,.90);
+  border-color:rgba(34,49,63,.14);
+  border-radius:20px;
+  box-shadow:0 18px 50px rgba(34,49,63,.16);
+  backdrop-filter:blur(20px) saturate(130%);
+}
+.theme-modern-minimalist .inv-bottom-nav button{
+  border-radius:14px;
+}
+.theme-modern-minimalist .inv-bottom-nav button[aria-current]{
+  background:var(--mm-ink);
+  color:#fff;
+}
+.theme-modern-minimalist .music-toggle{
+  background:rgba(248,250,251,.92);
+  color:var(--mm-ink);
+  border-color:rgba(34,49,63,.22);
+}
+
+/* Motion choreography inferred from the supplied reference, reimplemented with Kastriva CSS. */
+@media(prefers-reduced-motion:no-preference){
+  .theme-modern-minimalist.inv-reference-motion .cover-frame{
+    animation:mm-cover-zoom .9s cubic-bezier(.16,1,.3,1) both;
+  }
+  .theme-modern-minimalist.inv-reference-motion .cover-frame>.overline,
+  .theme-modern-minimalist.inv-reference-motion .cover-frame>.inv-names-layout{
+    animation:mm-fade-up .8s cubic-bezier(.16,1,.3,1) .08s both;
+  }
+  .theme-modern-minimalist.inv-reference-motion .cover-frame>.inv-rule,
+  .theme-modern-minimalist.inv-reference-motion .cover-frame>.guest-card,
+  .theme-modern-minimalist.inv-reference-motion .cover-frame>.inv-button{
+    animation:mm-fade-down .8s cubic-bezier(.16,1,.3,1) .18s both;
+  }
+  .theme-modern-minimalist .inv-section.inv-reveal-pending{
+    opacity:0;
+    transform:translateY(28px) scale(.988);
+    filter:blur(5px);
+  }
+  .theme-modern-minimalist .inv-section.inv-revealed{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+  .theme-modern-minimalist .modern-story-card:hover .modern-story-media img{
+    transform:scale(1.045);
+  }
+  .theme-modern-minimalist .inv-sprig{
+    animation:mm-watermark-drift 8s ease-in-out infinite alternate;
+  }
+  .theme-modern-minimalist .sprig-right{animation-delay:-3s}
+}
+
+@keyframes mm-cover-zoom{
+  from{opacity:0;transform:scale(.91);filter:blur(9px)}
+  70%{opacity:1;transform:scale(1.012);filter:blur(1px)}
+  to{opacity:1;transform:scale(1);filter:none}
+}
+@keyframes mm-fade-up{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:none}
+}
+@keyframes mm-fade-down{
+  from{opacity:0;transform:translateY(-18px)}
+  to{opacity:1;transform:none}
+}
+@keyframes mm-watermark-drift{
+  from{translate:0 -3px;rotate:-1deg}
+  to{translate:3px 6px;rotate:2deg}
+}
+
+@media(max-width:600px){
+  .theme-modern-minimalist .cover-frame{
+    min-height:calc(100vh - 145px);
+    padding:44px 22px!important;
+    border-radius:24px!important;
+  }
+  .theme-modern-minimalist .cover-frame::before{border-radius:17px!important}
+  .theme-modern-minimalist .cover-frame .inv-names{font-size:clamp(42px,15vw,66px)}
+  .theme-modern-minimalist .inv-section{
+    width:calc(100% - 24px)!important;
+    margin:54px auto!important;
+    padding:50px 18px!important;
+    border-radius:24px;
+  }
+  .theme-modern-minimalist .couple-grid{
+    grid-template-columns:1fr;
+  }
+  .theme-modern-minimalist .couple-and{margin:-10px 0}
+  .theme-modern-minimalist .person-monogram{width:116px;height:116px;font-size:44px}
+  .theme-modern-minimalist .modern-story-list::before{left:17px}
+  .theme-modern-minimalist .modern-story-list>li{padding-left:50px}
+  .theme-modern-minimalist .modern-story-marker{left:0;width:34px;height:34px}
+  .theme-modern-minimalist .modern-story-media,
+  .theme-modern-minimalist .modern-story-placeholder{height:158px}
+  .theme-modern-minimalist .photo-grid{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .theme-modern-minimalist .photo-grid>:is(a,button){min-height:150px}
+  .theme-modern-minimalist .photo-placeholders{
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+  }
+  .theme-modern-minimalist .photo-placeholders>div:first-child{
+    grid-column:1/-1;
+    min-height:220px;
+  }
+  .theme-modern-minimalist .photo-placeholders>div{min-height:145px}
+  .theme-modern-minimalist .inv-closing{
+    margin:54px 12px 118px;
+    padding:62px 22px;
+    border-radius:24px;
+  }
+}
+
+@media(max-width:380px){
+  .theme-modern-minimalist .photo-grid,
+  .theme-modern-minimalist .photo-placeholders{
+    grid-template-columns:1fr;
+  }
+  .theme-modern-minimalist .photo-grid>:is(a,button):first-child,
+  .theme-modern-minimalist .photo-placeholders>div:first-child{grid-column:auto}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .theme-modern-minimalist *,
+  .theme-modern-minimalist *::before,
+  .theme-modern-minimalist *::after{
+    animation:none!important;
+    transition-duration:.001ms!important;
+  }
+  .theme-modern-minimalist .inv-section.inv-reveal-pending{
+    opacity:1!important;
+    transform:none!important;
+    filter:none!important;
+  }
+}
