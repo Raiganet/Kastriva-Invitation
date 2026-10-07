@@ -2036,3 +2036,623 @@
 }
 
 /* === MM2 TYPOGRAPHY ORNAMENT OVERRIDES END === */
+
+
+/* === MODERN MINIMALIST FINAL TYPOGRAPHY START === */
+
+/*
+  FINAL OVERRIDE
+  Target sesuai komponen asli:
+  .inv-names
+  .inv-names-layout
+  .inv-name-first
+  .inv-name-join
+  .inv-name-second
+*/
+
+.theme-modern-minimalist{
+  --mm-final-display:var(--font-mm-display), Georgia, serif;
+  --mm-final-body:var(--font-mm-body), Arial, sans-serif;
+  --mm-final-ink:#263743;
+  --mm-final-muted:#657784;
+  --mm-final-blue:#718fa9;
+  --mm-final-coral:#d87967;
+  --mm-final-line:rgba(78,103,120,.26);
+  --mm-final-gold:rgba(190,157,110,.55);
+
+  font-family:var(--mm-final-body);
+}
+
+
+/* ==================================================
+   FONT UMUM
+   ================================================== */
+
+.theme-modern-minimalist :is(
+  p,
+  small,
+  button,
+  input,
+  textarea,
+  select,
+  .overline,
+  .event-sequence,
+  .timeline-year
+){
+  font-family:var(--mm-final-body);
+}
+
+
+/* ==================================================
+   NAMA PENGANTIN — FIX UTAMA
+   ================================================== */
+
+.theme-modern-minimalist .inv-names{
+  width:100% !important;
+  max-width:520px !important;
+
+  margin:18px auto 16px !important;
+
+  padding:0 14px !important;
+
+  font-family:var(--mm-final-display) !important;
+
+  font-style:normal !important;
+  font-weight:600 !important;
+
+  font-size:clamp(38px,4.4vw,56px) !important;
+
+  line-height:.92 !important;
+
+  letter-spacing:-.035em !important;
+
+  text-transform:none !important;
+
+  color:var(--mm-final-ink) !important;
+
+  text-align:center !important;
+
+  text-shadow:none !important;
+
+  overflow-wrap:normal !important;
+  word-break:normal !important;
+  hyphens:none !important;
+
+  text-wrap:balance;
+}
+
+
+/* layout pasangan */
+
+.theme-modern-minimalist .inv-names-layout{
+  display:grid !important;
+
+  grid-template-columns:1fr !important;
+
+  justify-items:center !important;
+  align-items:center !important;
+
+  width:100% !important;
+
+  gap:7px !important;
+
+  text-align:center !important;
+}
+
+
+/* nama pertama dan kedua */
+
+.theme-modern-minimalist .inv-name-first,
+.theme-modern-minimalist .inv-name-second{
+  display:block !important;
+
+  justify-self:center !important;
+
+  width:auto !important;
+  max-width:12ch !important;
+
+  margin:0 auto !important;
+
+  text-align:center !important;
+
+  white-space:normal !important;
+
+  overflow-wrap:normal !important;
+  word-break:normal !important;
+  hyphens:none !important;
+
+  text-wrap:balance;
+
+  font-family:var(--mm-final-display) !important;
+
+  font-style:normal !important;
+  font-weight:600 !important;
+
+  line-height:.92 !important;
+
+  letter-spacing:-.035em !important;
+}
+
+
+/* simbol & */
+
+.theme-modern-minimalist .inv-name-join{
+  position:relative;
+
+  justify-self:center !important;
+
+  display:flex !important;
+
+  align-items:center;
+  justify-content:center;
+
+  width:96px !important;
+
+  margin:2px auto 3px !important;
+
+  font-family:var(--mm-final-display) !important;
+
+  font-size:31px !important;
+  font-weight:500 !important;
+
+  line-height:1 !important;
+
+  color:var(--mm-final-coral) !important;
+}
+
+
+/* garis samping simbol & */
+
+.theme-modern-minimalist .inv-name-join::before,
+.theme-modern-minimalist .inv-name-join::after{
+  content:"" !important;
+
+  display:block !important;
+
+  width:26px !important;
+  height:1px !important;
+
+  margin:0 9px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      var(--mm-final-line)
+    ) !important;
+}
+
+
+.theme-modern-minimalist .inv-name-join::after{
+  background:
+    linear-gradient(
+      90deg,
+      var(--mm-final-line),
+      transparent
+    ) !important;
+}
+
+
+/* ==================================================
+   HERO SETELAH UNDANGAN DIBUKA
+   ================================================== */
+
+.theme-modern-minimalist .inv-hero .inv-names{
+  font-size:clamp(36px,4.2vw,52px) !important;
+
+  max-width:500px !important;
+
+  margin-block:18px !important;
+}
+
+
+/* ==================================================
+   COVER
+   ================================================== */
+
+.theme-modern-minimalist .cover-frame{
+  max-width:600px !important;
+
+  padding:
+    clamp(48px,6vw,70px)
+    clamp(30px,5vw,54px) !important;
+}
+
+
+/* beri area nama lebih lega */
+
+.theme-modern-minimalist .cover-frame .inv-names-layout{
+  max-width:490px !important;
+
+  margin-inline:auto !important;
+}
+
+
+/* ==================================================
+   FOTO COVER
+   ================================================== */
+
+.theme-modern-minimalist .cover-frame .cover-photo{
+  width:132px !important;
+
+  height:168px !important;
+
+  object-fit:cover;
+
+  margin:0 auto 22px !important;
+
+  border-radius:18px !important;
+
+  box-shadow:
+    0 14px 34px rgba(38,55,67,.14) !important;
+}
+
+
+/* ==================================================
+   JUDUL SECTION
+   ================================================== */
+
+.theme-modern-minimalist .inv-section>h2,
+.theme-modern-minimalist .inv-closing h2,
+.theme-modern-minimalist .event-box h3,
+.theme-modern-minimalist .couple-grid h3,
+.theme-modern-minimalist .modern-story-copy h3{
+  font-family:var(--mm-final-display) !important;
+
+  text-transform:none !important;
+
+  letter-spacing:-.025em !important;
+
+  font-weight:600 !important;
+}
+
+
+.theme-modern-minimalist .inv-section>h2{
+  font-size:clamp(32px,4.2vw,48px) !important;
+}
+
+
+/* ==================================================
+   MONOGRAM PASANGAN
+   ================================================== */
+
+.theme-modern-minimalist .person-monogram{
+  font-family:var(--mm-final-display) !important;
+
+  font-weight:600 !important;
+
+  font-size:48px !important;
+}
+
+
+/* ==================================================
+   ORNAMEN 4 SUDUT — COVER
+   ================================================== */
+
+.theme-modern-minimalist .cover-frame{
+  background:
+
+    /* top left */
+    radial-gradient(
+      circle at 25px 25px,
+      var(--mm-final-gold) 0 3px,
+      transparent 3.5px
+    ),
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) 22px 22px / 68px 1px no-repeat,
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) 22px 22px / 1px 68px no-repeat,
+
+
+    /* top right */
+    radial-gradient(
+      circle at calc(100% - 25px) 25px,
+      var(--mm-final-gold) 0 3px,
+      transparent 3.5px
+    ),
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) calc(100% - 22px) 22px / 68px 1px no-repeat,
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) calc(100% - 22px) 22px / 1px 68px no-repeat,
+
+
+    /* bottom left */
+    radial-gradient(
+      circle at 25px calc(100% - 25px),
+      var(--mm-final-gold) 0 3px,
+      transparent 3.5px
+    ),
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) 22px calc(100% - 22px) / 68px 1px no-repeat,
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) 22px calc(100% - 22px) / 1px 68px no-repeat,
+
+
+    /* bottom right */
+    radial-gradient(
+      circle at calc(100% - 25px) calc(100% - 25px),
+      var(--mm-final-gold) 0 3px,
+      transparent 3.5px
+    ),
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) calc(100% - 22px) calc(100% - 22px) / 68px 1px no-repeat,
+
+    linear-gradient(
+      var(--mm-final-line),
+      var(--mm-final-line)
+    ) calc(100% - 22px) calc(100% - 22px) / 1px 68px no-repeat,
+
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.95),
+      rgba(238,244,248,.86)
+    ) !important;
+}
+
+
+/* ==================================================
+   ORNAMEN 4 SUDUT — SECTION
+   ================================================== */
+
+.theme-modern-minimalist .inv-section{
+  background:
+
+    radial-gradient(
+      circle at 22px 22px,
+      rgba(190,157,110,.38) 0 2.5px,
+      transparent 3px
+    ),
+
+    radial-gradient(
+      circle at calc(100% - 22px) 22px,
+      rgba(190,157,110,.38) 0 2.5px,
+      transparent 3px
+    ),
+
+    radial-gradient(
+      circle at 22px calc(100% - 22px),
+      rgba(190,157,110,.38) 0 2.5px,
+      transparent 3px
+    ),
+
+    radial-gradient(
+      circle at calc(100% - 22px) calc(100% - 22px),
+      rgba(190,157,110,.38) 0 2.5px,
+      transparent 3px
+    ),
+
+    linear-gradient(
+      rgba(113,143,169,.24),
+      rgba(113,143,169,.24)
+    ) 18px 18px / 48px 1px no-repeat,
+
+    linear-gradient(
+      rgba(113,143,169,.24),
+      rgba(113,143,169,.24)
+    ) 18px 18px / 1px 48px no-repeat,
+
+    linear-gradient(
+      rgba(216,121,103,.22),
+      rgba(216,121,103,.22)
+    ) calc(100% - 18px) calc(100% - 18px) / 48px 1px no-repeat,
+
+    linear-gradient(
+      rgba(216,121,103,.22),
+      rgba(216,121,103,.22)
+    ) calc(100% - 18px) calc(100% - 18px) / 1px 48px no-repeat,
+
+    rgba(255,255,255,.87) !important;
+}
+
+
+/* ==================================================
+   CLOSING ORNAMENT
+   ================================================== */
+
+.theme-modern-minimalist .inv-closing{
+  background:
+
+    radial-gradient(
+      circle at 24px 24px,
+      rgba(190,157,110,.44) 0 3px,
+      transparent 3.5px
+    ),
+
+    radial-gradient(
+      circle at calc(100% - 24px) 24px,
+      rgba(190,157,110,.44) 0 3px,
+      transparent 3.5px
+    ),
+
+    radial-gradient(
+      circle at 24px calc(100% - 24px),
+      rgba(190,157,110,.44) 0 3px,
+      transparent 3.5px
+    ),
+
+    radial-gradient(
+      circle at calc(100% - 24px) calc(100% - 24px),
+      rgba(190,157,110,.44) 0 3px,
+      transparent 3.5px
+    ),
+
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.96),
+      rgba(231,239,244,.88)
+    ) !important;
+}
+
+
+/* ==================================================
+   MOBILE
+   ================================================== */
+
+@media(max-width:600px){
+
+  .theme-modern-minimalist .cover-frame{
+    padding:42px 20px !important;
+  }
+
+  .theme-modern-minimalist .cover-frame .cover-photo{
+    width:112px !important;
+    height:142px !important;
+  }
+
+  .theme-modern-minimalist .inv-names,
+  .theme-modern-minimalist .inv-hero .inv-names{
+
+    font-size:clamp(
+      31px,
+      9vw,
+      42px
+    ) !important;
+
+    max-width:340px !important;
+
+    padding-inline:8px !important;
+  }
+
+
+  .theme-modern-minimalist .inv-name-first,
+  .theme-modern-minimalist .inv-name-second{
+
+    max-width:11ch !important;
+
+    line-height:.95 !important;
+  }
+
+
+  .theme-modern-minimalist .inv-name-join{
+
+    width:82px !important;
+
+    font-size:27px !important;
+  }
+
+
+  .theme-modern-minimalist .inv-name-join::before,
+  .theme-modern-minimalist .inv-name-join::after{
+
+    width:20px !important;
+
+    margin-inline:7px !important;
+  }
+
+
+  .theme-modern-minimalist .inv-section>h2{
+
+    font-size:clamp(
+      29px,
+      8vw,
+      39px
+    ) !important;
+  }
+}
+
+
+/* extra small */
+
+@media(max-width:380px){
+
+  .theme-modern-minimalist .inv-names,
+  .theme-modern-minimalist .inv-hero .inv-names{
+
+    font-size:30px !important;
+
+    max-width:300px !important;
+  }
+}
+
+
+/* ==================================================
+   MOTION
+   ================================================== */
+
+@media(prefers-reduced-motion:no-preference){
+
+  .theme-modern-minimalist .inv-name-first{
+    animation:mm-final-name-left .8s cubic-bezier(.16,1,.3,1) both;
+  }
+
+
+  .theme-modern-minimalist .inv-name-join{
+    animation:mm-final-ampersand .65s ease .10s both;
+  }
+
+
+  .theme-modern-minimalist .inv-name-second{
+    animation:mm-final-name-right .8s cubic-bezier(.16,1,.3,1) .14s both;
+  }
+}
+
+
+@keyframes mm-final-name-left{
+
+  from{
+    opacity:0;
+    transform:translateX(-18px);
+    filter:blur(3px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+
+
+@keyframes mm-final-name-right{
+
+  from{
+    opacity:0;
+    transform:translateX(18px);
+    filter:blur(3px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+
+
+@keyframes mm-final-ampersand{
+
+  from{
+    opacity:0;
+    transform:scale(.75);
+  }
+
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+
+/* === MODERN MINIMALIST FINAL TYPOGRAPHY END === */
