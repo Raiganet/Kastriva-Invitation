@@ -1765,3 +1765,274 @@
 }
 
 /* === END MODERN MINIMALIST LIVING STAGE 2 === */
+
+/* === MM2 TYPOGRAPHY ORNAMENT OVERRIDES START === */
+
+:root{
+  --mm2-font-display:var(--font-mm-display), Georgia, serif;
+  --mm2-font-body:var(--font-mm-body), Inter, Arial, sans-serif;
+  --mm2-ink:#3f2a33;
+  --mm2-ink-soft:#6d5560;
+  --mm2-accent:#9a6c78;
+  --mm2-accent-soft:rgba(154,108,120,.16);
+  --mm2-ornament-line:rgba(154,108,120,.45);
+  --mm2-ornament-glow:rgba(215,191,198,.22);
+}
+
+/* base font */
+:where([class^="mm2-"], [class*=" mm2-"]){
+  font-family:var(--mm2-font-body);
+  color:var(--mm2-ink);
+}
+
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  h1,h2,h3,
+  .mm2-display,
+  .mm2-title,
+  .mm2-heading,
+  .mm2-couple-name,
+  .mm2-main-name,
+  .mm2-hero-name,
+  .mm2-cover-name,
+  .mm2-section-title,
+  .mm2-story-title,
+  .mm2-gallery-title
+){
+  font-family:var(--mm2-font-display);
+  color:var(--mm2-ink);
+  letter-spacing:-.02em;
+  line-height:.94;
+  text-wrap:balance;
+}
+
+/* body text lebih halus */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  p,small,span,label,button,input,textarea,select
+){
+  font-family:var(--mm2-font-body);
+}
+
+/* nama pengantin dibuat lebih proporsional */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .mm2-couple-name,
+  .mm2-main-name,
+  .mm2-hero-name,
+  .mm2-cover-name
+){
+  font-size:clamp(2.15rem, 7vw, 4.35rem) !important;
+  line-height:.92 !important;
+  font-weight:600;
+  max-width:10ch;
+  margin-inline:auto;
+  text-align:center;
+  word-break:break-word;
+  text-wrap:balance;
+}
+
+/* kalau ada 2 nama terpisah */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .mm2-couple-stack,
+  .mm2-name-stack,
+  .mm2-cover-stack,
+  .mm2-couple-wrap
+){
+  display:grid;
+  justify-items:center;
+  gap:.4rem;
+}
+
+/* simbol & */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .mm2-ampersand,
+  .ampersand
+){
+  font-family:var(--mm2-font-display);
+  font-size:clamp(1.6rem, 4.4vw, 2.8rem) !important;
+  line-height:1;
+  font-weight:700;
+  color:var(--mm2-accent);
+  margin:.15rem 0 .1rem;
+}
+
+/* judul section */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .mm2-section-title,
+  .mm2-story-title,
+  .mm2-gallery-title,
+  .mm2-event-title
+){
+  font-size:clamp(1.55rem, 4.4vw, 2.35rem);
+  line-height:1.02;
+}
+
+/* kicker / label */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .mm2-kicker,
+  .mm2-eyebrow,
+  .mm2-overline
+){
+  font-family:var(--mm2-font-body);
+  letter-spacing:.24em;
+  text-transform:uppercase;
+  font-size:.72rem;
+  font-weight:700;
+  color:var(--mm2-ink-soft);
+}
+
+/* card / shell utama */
+:where([class^="mm2-"], [class*=" mm2-"]):is(
+  [class*="card"],
+  [class*="panel"],
+  [class*="frame"],
+  [class*="shell"]
+){
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+}
+
+/* ornamen 4 sudut */
+:where([class^="mm2-"], [class*=" mm2-"]):is(
+  [class*="card"],
+  [class*="panel"],
+  [class*="frame"],
+  [class*="shell"]
+)::before{
+  content:"";
+  position:absolute;
+  inset:14px;
+  pointer-events:none;
+  border-radius:inherit;
+  background:
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) 18px 18px / 52px 1px no-repeat,
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) 18px 18px / 1px 52px no-repeat,
+
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) calc(100% - 18px) 18px / 52px 1px no-repeat,
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) calc(100% - 18px) 18px / 1px 52px no-repeat,
+
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) 18px calc(100% - 18px) / 52px 1px no-repeat,
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) 18px calc(100% - 18px) / 1px 52px no-repeat,
+
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) calc(100% - 18px) calc(100% - 18px) / 52px 1px no-repeat,
+    linear-gradient(var(--mm2-ornament-line),var(--mm2-ornament-line)) calc(100% - 18px) calc(100% - 18px) / 1px 52px no-repeat;
+  opacity:.95;
+  animation:mm2-corner-float 8.5s ease-in-out infinite;
+}
+
+:where([class^="mm2-"], [class*=" mm2-"]):is(
+  [class*="card"],
+  [class*="panel"],
+  [class*="frame"],
+  [class*="shell"]
+)::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 26px 26px, rgba(154,108,120,.18) 0 4px, transparent 4.6px),
+    radial-gradient(circle at calc(100% - 26px) 26px, rgba(154,108,120,.18) 0 4px, transparent 4.6px),
+    radial-gradient(circle at 26px calc(100% - 26px), rgba(154,108,120,.18) 0 4px, transparent 4.6px),
+    radial-gradient(circle at calc(100% - 26px) calc(100% - 26px), rgba(154,108,120,.18) 0 4px, transparent 4.6px),
+
+    radial-gradient(circle at 42px 42px, var(--mm2-ornament-glow) 0 16px, transparent 16.5px),
+    radial-gradient(circle at calc(100% - 42px) 42px, var(--mm2-ornament-glow) 0 16px, transparent 16.5px),
+    radial-gradient(circle at 42px calc(100% - 42px), var(--mm2-ornament-glow) 0 16px, transparent 16.5px),
+    radial-gradient(circle at calc(100% - 42px) calc(100% - 42px), var(--mm2-ornament-glow) 0 16px, transparent 16.5px);
+  opacity:.9;
+}
+
+/* hero / cover lebih rapi */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .mm2-hero,
+  .mm2-cover,
+  .mm2-opening,
+  .mm2-cover-card
+){
+  animation:mm2-soft-reveal .8s ease both;
+}
+
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .mm2-hero-subtitle,
+  .mm2-cover-subtitle,
+  .mm2-caption
+){
+  max-width:28ch;
+  margin-inline:auto;
+  text-align:center;
+  line-height:1.65;
+  color:var(--mm2-ink-soft);
+}
+
+/* tombol lebih hidup */
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .button,
+  .mm2-button,
+  .mm2-cta
+){
+  border-radius:999px;
+  transition:transform .25s ease, box-shadow .25s ease, background-color .25s ease, color .25s ease;
+}
+
+:where([class^="mm2-"], [class*=" mm2-"]) :is(
+  .button,
+  .mm2-button,
+  .mm2-cta
+):hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 24px rgba(80,47,60,.12);
+}
+
+/* gambar / galeri lebih clean */
+:where([class^="mm2-"], [class*=" mm2-"]) img{
+  border-radius:22px;
+}
+
+/* spacing mobile */
+@media (max-width: 640px){
+  :where([class^="mm2-"], [class*=" mm2-"]) :is(
+    .mm2-couple-name,
+    .mm2-main-name,
+    .mm2-hero-name,
+    .mm2-cover-name
+  ){
+    font-size:clamp(2rem, 9vw, 3.2rem) !important;
+    max-width:9ch;
+  }
+
+  :where([class^="mm2-"], [class*=" mm2-"]):is(
+    [class*="card"],
+    [class*="panel"],
+    [class*="frame"],
+    [class*="shell"]
+  )::before{
+    inset:10px;
+  }
+}
+
+/* animasi */
+@keyframes mm2-soft-reveal{
+  from{
+    opacity:0;
+    transform:translateY(14px) scale(.985);
+    filter:blur(4px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+    filter:none;
+  }
+}
+
+@keyframes mm2-corner-float{
+  0%,100%{
+    transform:translateY(0);
+    opacity:.92;
+  }
+  50%{
+    transform:translateY(-3px);
+    opacity:1;
+  }
+}
+
+/* === MM2 TYPOGRAPHY ORNAMENT OVERRIDES END === */
