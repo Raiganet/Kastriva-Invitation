@@ -73,10 +73,13 @@ export default function PremiumMotionBoot(){
      reveal(entry.target as HTMLElement);
      observer?.unobserve(entry.target);
     }
-   },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+   },{threshold:0,rootMargin:'0px 0px -32px 0px'});
   };
 
   const enhanceRoot=(root:HTMLElement)=>{
+   // Streaming can expose server HTML before InvitationView has hydrated.
+   // Its effect signals when imperative decoration is safe for this root.
+   if(root.dataset.invHydrated!=='true')return;
    root.classList.add('inv-premium-motion','inv-reference-motion');
    const sections=Array.from(root.querySelectorAll<HTMLElement>(SECTION_SELECTOR));
    sections.forEach((section,index)=>{
@@ -123,6 +126,12 @@ export default function PremiumMotionBoot(){
    schedule();
   };
 
+  // Keyboard navigation must never land in a visually hidden section.
+  const focusSection=(event:FocusEvent)=>{
+   const section=(event.target as Element|null)?.closest?.('.invitation .inv-reveal-pending') as HTMLElement|null;
+   if(section){reveal(section);observer?.unobserve(section);}
+  };
+
   const pointerMove=(event:PointerEvent)=>{
    if(reduced.matches||!fine.matches)return;
    const root=(event.target as Element|null)?.closest?.('.invitation.inv-premium-motion') as HTMLElement|null;
@@ -155,8 +164,12 @@ export default function PremiumMotionBoot(){
 
   rebuildObserver();
   schedule();
+  document.addEventListener('invitation:ready',schedule);
   mutations=new MutationObserver(records=>{
-   schedule();
+   // Countdown text changes every second. Only new element trees need enhancement.
+   if(records.some(record=>record.type==='childList'&&Array.from(record.addedNodes).some(node=>
+    node instanceof Element&&(node.closest('.invitation')||node.querySelector('.invitation'))
+   )))schedule();
    if(reduced.matches)return;
    for(const record of records){
     if(record.type==='characterData')restartDigit(record.target);
@@ -167,6 +180,7 @@ export default function PremiumMotionBoot(){
   reduced.addEventListener('change',preferenceChanged);
   document.addEventListener('pointermove',pointerMove,{passive:true});
   document.addEventListener('pointerout',pointerOut,{passive:true});
+  document.addEventListener('focusin',focusSection);
   return()=>{
    if(frame)window.cancelAnimationFrame(frame);
    if(pointerFrame)window.cancelAnimationFrame(pointerFrame);
@@ -174,6 +188,8 @@ export default function PremiumMotionBoot(){
    reduced.removeEventListener('change',preferenceChanged);
    document.removeEventListener('pointermove',pointerMove);
    document.removeEventListener('pointerout',pointerOut);
+   document.removeEventListener('focusin',focusSection);
+   document.removeEventListener('invitation:ready',schedule);
   };
  },[]);
  return null;

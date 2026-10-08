@@ -20,6 +20,7 @@ import './invitation-reference-motion.css';
 import './invitation-elegant-reference.css';
 import './invitation-elegant-ornaments.css';
 import './invitation-modern-reference.css';
+import './invitation-refinement.css';
 import './brand-identity.css';
 const modernDisplayFont = Cormorant_Garamond({
   subsets: ['latin'],
