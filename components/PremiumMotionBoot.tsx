@@ -144,7 +144,7 @@ export default function PremiumMotionBoot(){
 
    root.querySelectorAll<HTMLElement>(INTERACTIVE_SELECTOR).forEach(item=>item.classList.add('pm-interactive'));
    root.querySelectorAll<HTMLElement>(DEPTH_SELECTOR).forEach(item=>item.classList.add('pm-depth-card'));
-   root.querySelectorAll<HTMLElement>('.inv-bottom-nav,.inv-music').forEach(item=>item.classList.add('pm-floating-control'));
+   root.querySelectorAll<HTMLElement>('.inv-controls,.inv-embedded .inv-music').forEach(item=>item.classList.add('pm-floating-control'));
    root.querySelectorAll<HTMLElement>('.countdown:not([data-inv-countdown]) strong').forEach(item=>item.classList.add('rm-digit-flip'));
   };
 

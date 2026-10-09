@@ -9,7 +9,7 @@ import ThemeMotif from '@/components/ThemeMotif';
 import InvitationAtmosphere from '@/components/InvitationAtmosphere';
 import InvitationOrnaments, {InvitationDivider} from '@/components/InvitationOrnaments';
 import InvitationNames from '@/components/InvitationNames';
-import InvitationAutoScroll from '@/components/InvitationAutoScroll';
+import InvitationControls from '@/components/InvitationControls';
 import InvitationCoverPanels,{invitationOpeningStyle} from '@/components/InvitationCoverPanels';
 import InvitationDemoWishes from '@/components/InvitationDemoWishes';
 import InvitationPortrait from '@/components/InvitationPortrait';
@@ -22,7 +22,7 @@ import InvitationGifts from '@/components/InvitationGifts';
 import {completeGift} from '@/lib/invitation-extras';
 import InvitationStory from '@/components/InvitationStory';
 import {useInvitationMusic} from '@/components/useInvitationMusic';
-import InvitationNav,{type InvitationNavItem} from '@/components/InvitationNav';
+import type {InvitationNavItem} from '@/components/InvitationNav';
 import Link from 'next/link';
 import PublicOpenWishes from '@/components/wishes/PublicOpenWishes';
 import PublicRsvp from '@/components/guests/PublicRsvp';
@@ -124,8 +124,6 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
     <InvitationClosing slug={template.slug} names={names} date={date} eventDate={content.eventDate} wedding={wedding} showThemeLink={mode==='demo'&&wedding&&!previewOnly}/>
   </div>}
   </div>
-  {opened&&content.music&&content.music!=='none'&&<div className="inv-music"><button type="button" className="music-toggle" onClick={music.toggle} aria-label={music.playing?`Jeda ${music.label}`:`Putar ${music.label}`} aria-pressed={music.playing} title={music.label}><span className="music-bars" aria-hidden="true"><i/><i/><i/></span><span>{music.playing?'Jeda':'Musik'}</span></button><small className="music-track-label">{music.label}</small>{music.error&&<p role="status">{music.error}</p>}</div>}
-  {opened&&!embedded&&<InvitationAutoScroll contentId={contentId}/>}
-  {opened&&!embedded&&<InvitationNav items={navigation}/>}
+  {opened&&<InvitationControls contentId={contentId} items={navigation} embedded={embedded} music={content.music&&content.music!=='none'?music:undefined}/>}
  </Root>;
 }

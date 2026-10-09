@@ -1,5 +1,5 @@
 'use client';
-import {useEffect,useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 
 export type InvitationNavItem={id:string;label:string;icon:'home'|'couple'|'calendar'|'story'|'gallery'|'gift'};
 function NavIcon({name}:{name:InvitationNavItem['icon']}){
@@ -7,6 +7,7 @@ function NavIcon({name}:{name:InvitationNavItem['icon']}){
  return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><path d={paths[name]}/></svg>;
 }
 export default function InvitationNav({items}:{items:InvitationNavItem[]}){
+ const navRef=useRef<HTMLElement|null>(null);
  const [active,setActive]=useState(items[0]?.id);
  useEffect(()=>{
   let frame=0;
@@ -15,6 +16,26 @@ export default function InvitationNav({items}:{items:InvitationNavItem[]}){
   update();window.addEventListener('scroll',schedule,{passive:true});window.addEventListener('resize',schedule);
   return()=>{window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);window.cancelAnimationFrame(frame);};
  },[items]);
- function go(id:string){const section=document.getElementById(id);if(!section)return;section.focus({preventScroll:true});section.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth',block:'start'});}
- return <nav className="inv-bottom-nav" aria-label="Bagian undangan">{items.map(item=><button type="button" key={item.id} aria-current={active===item.id?'location':undefined} onClick={()=>go(item.id)}><NavIcon name={item.icon}/><span>{item.label}</span></button>)}</nav>;
+ useEffect(()=>{
+  const nav=navRef.current;if(!nav)return;
+  const revealActive=()=>{
+   const selected=nav.querySelector<HTMLButtonElement>('button[aria-current]');if(!selected)return;
+   const rail=nav.getBoundingClientRect(),tab=selected.getBoundingClientRect();
+   if(tab.left>=rail.left+6&&tab.right<=rail.right-6)return;
+   // Move only the horizontal rail, never the invitation's reading position.
+   nav.scrollTo({left:nav.scrollLeft+tab.left-rail.left-(nav.clientWidth-tab.width)/2,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+  };
+  revealActive();
+  const resize=new ResizeObserver(revealActive);resize.observe(nav);
+  return()=>resize.disconnect();
+ },[active]);
+ function go(id:string){
+  const section=document.getElementById(id);if(!section)return;
+  section.focus({preventScroll:true});
+  // Global page padding and invitation margins otherwise add up on short screens.
+  const toolbar=section.closest('.invitation')?.querySelector('.inv-toolbar');
+  const inset=Math.max(0,toolbar?.getBoundingClientRect().bottom??0)+24;
+  window.scrollTo({top:window.scrollY+section.getBoundingClientRect().top-inset,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+ }
+ return <nav ref={navRef} className="inv-bottom-nav" aria-label="Bagian undangan">{items.map(item=><button type="button" key={item.id} aria-controls={item.id} aria-current={active===item.id?'location':undefined} onClick={()=>go(item.id)}><NavIcon name={item.icon}/><span>{item.label}</span></button>)}</nav>;
 }

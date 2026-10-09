@@ -1,0 +1,62 @@
+/* A single, theme-colored reading dock with a horizontally scrollable chapter rail. */
+.invitation.inv-refined .inv-controls {
+  position: fixed;
+  z-index: 36;
+  left: 50%;
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  width: min(480px, calc(100% - 24px));
+  padding: 6px;
+  border: 1px solid var(--finish-line);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--soft) 97%, transparent);
+  color: var(--tone);
+  box-shadow: 0 10px 36px color-mix(in srgb, var(--tone) 18%, transparent);
+  backdrop-filter: blur(12px);
+}
+.invitation.inv-refined .inv-playback-controls { display: flex; align-items: stretch; gap: 6px; padding: 0 2px 5px; }
+.invitation.inv-refined .inv-controls :is(.inv-auto-scroll, .inv-music) { position: relative; inset: auto; z-index: auto; flex: 1; min-width: 0; margin: 0; padding: 0; animation: none; transform: none; }
+.invitation.inv-refined .inv-controls .inv-music { border-left: 1px solid var(--finish-line); padding-left: 6px; }
+.invitation.inv-refined .inv-controls :is(.inv-auto-scroll button, .music-toggle) {
+  display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 9px;
+  width: 100%; min-width: 0; min-height: 44px; padding: 6px 10px;
+  border: 0; border-radius: 12px; background: transparent; color: var(--tone);
+  box-shadow: none; font: 500 11px/1.4 var(--font-mm-body), Arial, sans-serif;
+  animation: none; transform: none; translate: none; scale: 1;
+}
+.invitation.inv-refined .inv-controls .inv-auto-scroll svg { flex: 0 0 18px; }
+.invitation.inv-refined .inv-controls .music-bars { flex-shrink: 0; }
+.invitation.inv-refined .inv-controls .music-caption { display: block; min-width: 0; text-align: left; }
+.invitation.inv-refined .inv-controls .music-track-label { display: block; position: static; transform: none; max-width: 160px; margin-top: 2px; padding: 0; border: 0; border-radius: 0; background: none; color: inherit; box-shadow: none; font-size: 9px; line-height: 1.4; opacity: .72; }
+.invitation.inv-refined .inv-controls .inv-music > p { bottom: calc(100% + 12px); right: 0; width: min(300px, calc(100vw - 44px)); margin: 0; border-radius: 12px; box-shadow: 0 8px 24px #0002; text-align: left; overflow-wrap: anywhere; }
+.invitation.inv-refined .inv-controls .inv-bottom-nav {
+  position: static; inset: auto; transform: none;
+  display: flex; width: 100%; max-width: none; min-width: 0; gap: 4px;
+  padding: 6px 2px 2px; border: 0; border-top: 1px solid var(--finish-line); border-radius: 0;
+  background: none; box-shadow: none; backdrop-filter: none; animation: none; transition: none;
+  overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain;
+  scroll-padding-inline: 6px; scrollbar-width: thin; scrollbar-color: var(--finish-line) transparent;
+}
+.invitation.inv-refined .inv-controls .inv-bottom-nav button { flex: 1 0 56px; min-width: 56px; min-height: 52px; padding: 6px 4px; border-radius: 12px; font-size: 10px; gap: 4px; box-shadow: none; transform: none; translate: none; scale: 1; }
+.invitation.inv-refined .inv-controls .inv-bottom-nav svg { width: 19px; height: 19px; }
+.invitation.inv-refined .inv-controls button:focus-visible { outline: 2px solid var(--tone); outline-offset: -3px; }
+.invitation.inv-refined .inv-controls .inv-bottom-nav button[aria-current]:focus-visible { outline-color: var(--soft); }
+.invitation.inv-refined:not(.inv-embedded) .inv-content { padding-bottom: calc(160px + env(safe-area-inset-bottom)); }
+html:has(.inv-controls) { scroll-padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
+.invitation.inv-refined:has(input:focus, textarea:focus, select:focus, [contenteditable=true]:focus, dialog[open]) .inv-controls { visibility: hidden; pointer-events: none; }
+@media (hover: hover) and (pointer: fine) {
+  .invitation.inv-refined .inv-controls :is(.inv-auto-scroll button, .music-toggle):hover { background: color-mix(in srgb, var(--tone) 8%, transparent); }
+}
+@media (max-width: 600px) {
+  .invitation.inv-refined .inv-controls { width: calc(100% - 20px); max-width: 480px; }
+  .invitation.inv-refined .inv-stationery :is(input, select, textarea) { font-size: 16px; }
+}
+@media (max-height: 500px) {
+  .invitation.inv-refined .inv-controls { bottom: calc(6px + env(safe-area-inset-bottom)); }
+  .invitation.inv-refined .inv-controls .inv-bottom-nav button { min-height: 44px; gap: 2px; font-size: 9px; }
+  .invitation.inv-refined .inv-controls .inv-bottom-nav svg { width: 16px; height: 16px; }
+}
+@media print {
+  .invitation.inv-refined .inv-controls { display: none; }
+  .invitation.inv-refined:not(.inv-embedded) .inv-content { padding-bottom: 0; }
+}
