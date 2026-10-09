@@ -42,6 +42,13 @@ for (const slug of ALL_THEME_SLUGS) {
     expect((await download).suggestedFilename()).toBe('undangan-kastriva.ics');
     await nav.getByRole('button', {name: 'Galeri', exact: true}).click();
     await expect(page.getByRole('heading', {name: 'Galeri kenangan', exact: true})).toBeInViewport();
+    await expect(page.locator('.elegant-gallery-main img').last()).toHaveCSS('object-fit','contain');
+    const closing=page.locator('.inv-closing');
+    await closing.evaluate(element=>element.scrollIntoView({block:'start',behavior:'instant'}));
+    await expect(closing.locator('.inv-closing-seal')).toHaveCSS('opacity','1');
+    await expect(closing.getByRole('heading')).toBeVisible();
+    await expect(closing.locator('time')).not.toBeEmpty();
+    expect(await fits()).toBe(true);
     expect(errors).toEqual([]);
   });
 }

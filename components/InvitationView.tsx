@@ -14,6 +14,7 @@ import InvitationCoverPanels,{invitationOpeningStyle} from '@/components/Invitat
 import InvitationDemoWishes from '@/components/InvitationDemoWishes';
 import InvitationPortrait from '@/components/InvitationPortrait';
 import InvitationGallery from '@/components/InvitationGallery';
+import InvitationClosing from '@/components/InvitationClosing';
 import InvitationLocation from '@/components/InvitationLocation';
 import InvitationGifts from '@/components/InvitationGifts';
 import {completeGift} from '@/lib/invitation-extras';
@@ -118,7 +119,7 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
     {mode==='public'&&rsvpSlug&&<PublicRsvp slug={rsvpSlug}/>}
     {!!content.gifts?.length&&<InvitationGifts id={giftId} accounts={content.gifts} demo={mode==='demo'}/> }
     {message&&<p role="status" className="inv-status">{message}</p>}
-    <section className="inv-closing"><InvitationOrnaments slug={template.slug}/><InvitationDivider slug={template.slug}/><p>Merupakan kebahagiaan bagi kami<br/>apabila Anda berkenan hadir.</p><h2>{names}</h2><small>Made with care · Kastriva Invitation</small>{mode==='demo'&&wedding&&!previewOnly&&<div><Link className="inv-button" href={`/order/${template.slug}`}>Gunakan tema ini ↗</Link></div>}</section>
+    <InvitationClosing slug={template.slug} names={names} date={date} eventDate={content.eventDate} wedding={wedding} showThemeLink={mode==='demo'&&wedding&&!previewOnly}/>
   </div>}
   </div>
   {opened&&content.music&&content.music!=='none'&&<div className="inv-music"><button type="button" className="music-toggle" onClick={music.toggle} aria-label={music.playing?`Jeda ${music.label}`:`Putar ${music.label}`} aria-pressed={music.playing} title={music.label}><span className="music-bars" aria-hidden="true"><i/><i/><i/></span><span>{music.playing?'Jeda':'Musik'}</span></button><small className="music-track-label">{music.label}</small>{music.error&&<p role="status">{music.error}</p>}</div>}
