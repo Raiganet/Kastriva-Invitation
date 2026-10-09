@@ -102,6 +102,11 @@ test('gallery edition supports touch swipes or arrow keys without accidentally o
  await page.emulateMedia({reducedMotion:'no-preference'});
  // Explicit Play resumes even while the initiating button retains keyboard/touch focus.
  await gallery.getByRole('button',{name:/Putar slideshow/}).click();
+ // Clicking the footer control can scroll the photo out of view. Restore the
+ // visible gallery and move the pointer away (hover pauses it), retaining focus.
+ await gallery.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));
+ await page.mouse.move(0,0);
+ await expect(gallery.getByRole('button',{name:/Jeda slideshow/})).toBeFocused();
  await expect(gallery).toHaveAttribute('data-gallery-running','true');
  await gallery.getByRole('button',{name:/Jeda slideshow/}).click();
  await expect(gallery).toHaveAttribute('data-gallery-running','false');

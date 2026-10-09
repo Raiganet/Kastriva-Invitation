@@ -707,14 +707,93 @@
 @keyframes invitation-photo-leave { from { opacity: 1; } to { opacity: 0; } }
 @keyframes invitation-photo-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes invitation-photo-detail { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Schedule cards: the date leads, the venue follows, and every action stays on
+   the front of the card. The existing card controller owns its entrance/tilt. */
+.invitation.inv-refined .inv-event-list { display: grid; gap: 38px; list-style: none; padding: 0; margin: 34px auto 0; max-width: 550px; }
+.invitation.inv-refined .inv-stationery .inv-event-list .inv-event-card { position: relative; width: 100%; max-width: none; padding: 0; margin: 0; text-align: left; }
+.invitation.inv-refined .inv-stationery .inv-event-list .inv-event-card + .inv-event-card { border: 0 !important; padding: 0; margin: 0; }
+.invitation.inv-refined .inv-event-paper { position: relative; isolation: isolate; overflow: hidden; padding: 28px; border: 1px solid var(--finish-line); border-radius: 22px; background: radial-gradient(ellipse at 100% 0%, color-mix(in srgb, var(--edition-petal) 14%, transparent), transparent 60%), var(--paper); box-shadow: 0 12px 30px color-mix(in srgb, var(--tone) 6%, transparent); }
+.invitation.inv-refined .inv-event-paper::before { content: ''; position: absolute; inset: 7px; border: 1px solid color-mix(in srgb, var(--edition-foil) 18%, transparent); border-radius: 16px; pointer-events: none; }
+.invitation.inv-refined .inv-event-paper::after { content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: linear-gradient(110deg, transparent 30%, color-mix(in srgb, var(--edition-foil) 13%, transparent) 48%, transparent 65%); transform: translateX(-100%); }
+.invitation.inv-refined:is(.theme-modern-minimalist, .theme-corporate-event, .theme-adat-minang, .theme-rustic-wood) .inv-event-paper { border-radius: 10px; }
+.invitation.inv-refined:is(.theme-modern-minimalist, .theme-corporate-event, .theme-adat-minang, .theme-rustic-wood) .inv-event-paper::before { border-radius: 4px; }
+.invitation.inv-refined .inv-event-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.invitation.inv-refined .inv-event-emblem { color: var(--edition-foil); }
+.invitation.inv-refined .inv-event-emblem .theme-motif { display: block; width: 40px; height: 40px; margin: 0; }
+.invitation.inv-refined .inv-stationery .inv-event-card h3 { margin: 20px 0 24px; font-size: clamp(28px, 4.5vw, 38px); text-align: left; }
+.invitation.inv-refined .inv-event-when { padding-bottom: 22px; border-bottom: 1px solid var(--finish-line); }
+.invitation.inv-refined .inv-event-date { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; line-height: 1.3; }
+.invitation.inv-refined .inv-event-day { font: 500 64px/1 var(--font-mm-display), Georgia, serif; font-variant-numeric: lining-nums tabular-nums; letter-spacing: -.05em; }
+.invitation.inv-refined .inv-event-date b { display: block; margin-bottom: 5px; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: .16em; }
+.invitation.inv-refined .inv-event-date small { display: block; font-size: 13px; }
+.invitation.inv-refined .inv-event-card .inv-event-time { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 18px 0 0; font-size: 12px; }
+.invitation.inv-refined .inv-event-time svg { flex: 0 0 18px; width: 18px; height: 18px; }
+.invitation.inv-refined .inv-event-time abbr { text-decoration: none; white-space: nowrap; }
+.invitation.inv-refined .inv-event-connector { position: absolute; left: 50%; top: -38px; width: 1px; height: 38px; background: var(--finish-line); transform-origin: top; }
+.invitation.inv-refined .inv-event-connector i { position: absolute; top: 15px; left: -3px; width: 7px; height: 7px; rotate: 45deg; border: 1px solid var(--edition-foil); background: var(--paper); }
+.invitation.inv-refined .inv-event-card:first-child .inv-event-connector { display: none; }
+.invitation.inv-refined .inv-event-paper .inv-location { text-align: left; margin: 22px 0 6px; }
+.invitation.inv-refined .inv-stationery .inv-event-paper .location-heading { display: flex; align-items: flex-start; gap: 12px; }
+.invitation.inv-refined .inv-stationery .inv-event-paper .location-symbol { flex: 0 0 32px; width: 32px; height: 32px; margin: 3px 0 0; }
+.invitation.inv-refined .inv-stationery .inv-event-paper .location-label { display: block; font-size: 8px; letter-spacing: .15em; margin-bottom: 7px; }
+.invitation.inv-refined .inv-stationery .inv-event-paper .inv-location h4 { margin: 0; font-size: 25px; }
+.invitation.inv-refined .inv-event-paper .location-address { margin: 14px 0; line-height: 1.9; white-space: pre-line; }
+.invitation.inv-refined .inv-event-paper .location-demo { font-size: 9px; opacity: .7; margin: 10px 0 16px; }
+.invitation.inv-refined .inv-event-paper .location-actions { display: grid; grid-template-columns: 1fr; gap: 9px; margin-top: 18px; }
+.invitation.inv-refined .inv-event-paper :is(.location-actions, .inv-event-actions) .inv-button { width: 100%; max-width: none; min-width: 0; font-size: 11px; }
+.invitation.inv-refined .location-actions svg, .invitation.inv-refined .inv-event-actions svg { flex: 0 0 18px; width: 18px; height: 18px; }
+.invitation.inv-refined .inv-stationery .inv-event-paper .location-status { display: block; min-height: 18px; margin: 8px 0 0; font-size: 10px; line-height: 1.8; }
+.invitation.inv-refined .inv-event-actions { padding-top: 14px; border-top: 1px dashed var(--finish-line); }
+.invitation.inv-refined .inv-event-card .inv-event-status { min-height: 18px; margin: 8px 0 0; font-size: 10px; line-height: 1.8; text-align: center; }
+
+/* Split-flap numerals stay local to the countdown; only changed values animate. */
+.invitation.inv-refined .inv-stationery .inv-countdown { --flap-height: 62px; --flap-base: 40px; max-width: 400px; gap: 10px; margin: 12px auto 28px; }
+.invitation.inv-refined .inv-stationery .inv-countdown > .inv-countdown-cell { display: block; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; transform: none; translate: none; }
+.invitation.inv-refined .inv-flap-face { position: relative; isolation: isolate; width: 100%; height: var(--flap-height); border: 1px solid var(--finish-line); border-radius: 9px; background: var(--soft); perspective: 600px; font: 500 clamp(14px, calc(var(--flap-base) * 2 / var(--digit-count)), var(--flap-base))/var(--flap-height) var(--font-mm-display), Georgia, serif; font-variant-numeric: lining-nums tabular-nums; }
+.invitation.inv-refined .inv-stationery .inv-countdown .inv-flap-face strong { display: grid; place-items: center; position: absolute; inset: 0; font: inherit; color: inherit; animation: none; transform: none; }
+.invitation.inv-refined .inv-flap-face::after { content: ''; position: absolute; left: 0; right: 0; top: 50%; height: 1px; z-index: 4; background: color-mix(in srgb, var(--tone) 14%, transparent); pointer-events: none; }
+.invitation.inv-refined .inv-countdown-cell > small { display: block; text-align: center; margin-top: 12px; }
+.invitation.inv-refined .inv-flap-motion { position: absolute; inset: 0; perspective: 600px; }
+.invitation.inv-refined .inv-flap-half { position: absolute; left: 0; width: 100%; height: 50%; overflow: hidden; background: var(--soft); backface-visibility: hidden; }
+.invitation.inv-refined .inv-flap-half > span { position: absolute; left: 0; right: 0; height: var(--flap-height); display: grid; place-items: center; }
+.invitation.inv-refined .inv-flap-old { top: 0; z-index: 2; border-radius: 8px 8px 0 0; transform-origin: bottom; }
+.invitation.inv-refined .inv-flap-old > span { top: -1px; }
+.invitation.inv-refined :is(.inv-flap-under, .inv-flap-new) { bottom: 0; border-radius: 0 0 8px 8px; }
+.invitation.inv-refined :is(.inv-flap-under, .inv-flap-new) > span { bottom: -1px; }
+.invitation.inv-refined .inv-flap-new { z-index: 3; transform-origin: top; }
+.invitation.inv-refined .inv-countdown-note { max-width: 360px; margin: -8px auto 28px; font-size: 11px; line-height: 1.8; }
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined .inv-flap-old { animation: invitation-flap-close 280ms ease-in both; }
+  .invitation.inv-refined .inv-flap-new { animation: invitation-flap-open 320ms ease-out 280ms both; }
+  .invitation.inv-refined .inv-event-card[data-inv-card-state="shown"] .inv-event-paper::after { animation: invitation-event-foil 1500ms ease 200ms both; }
+  .invitation.inv-refined .inv-event-connector { transition: transform 700ms var(--finish-ease); }
+  .invitation.inv-refined .inv-event-card.inv-reveal-pending .inv-event-connector { transform: scaleY(0); }
+}
+@keyframes invitation-flap-close { from { transform: rotateX(0); } to { transform: rotateX(-90deg); } }
+@keyframes invitation-flap-open { from { transform: rotateX(90deg); } to { transform: rotateX(0); } }
+@keyframes invitation-event-foil { from { transform: translateX(-100%); } to { transform: translateX(100%); } }
+@media (max-width: 600px) {
+  .invitation.inv-refined .inv-event-paper { padding: 24px 18px; }
+  .invitation.inv-refined .inv-stationery .inv-countdown { --flap-height: 54px; --flap-base: 34px; gap: 8px; }
+}
+@media (max-width: 360px) {
+  .invitation.inv-refined .inv-event-paper { padding: 22px 14px; }
+  .invitation.inv-refined .inv-event-day { font-size: 52px; }
+  .invitation.inv-refined .inv-event-date { gap: 12px; }
+  .invitation.inv-refined .inv-event-date small { font-size: 11px; }
+  .invitation.inv-refined .inv-stationery .inv-countdown { --flap-height: 48px; --flap-base: 30px; gap: 6px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .invitation.inv-refined *, .invitation.inv-refined *::before, .invitation.inv-refined *::after { animation: none !important; transition: none !important; }
   .invitation.inv-refined .inv-gallery-slide.is-leaving { display: none; }
+  .invitation.inv-refined .inv-flap-motion { display: none; }
   .invitation.inv-refined .pm-section.inv-reveal-pending { opacity: 1; transform: none; filter: none; }
   .invitation.inv-refined .pm-section .inv-moment.inv-reveal-pending { opacity: 1; transform: none; }
   .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal { opacity: 1 !important; transform: none !important; translate: none !important; scale: none !important; }
 }
 @media print {
+  .invitation.inv-refined .inv-flap-motion, .invitation.inv-refined .inv-event-paper::after { display: none; }
   .invitation.inv-refined .inv-cover-panels { display: none; }
   .invitation.inv-refined .inv-scenes > .inv-cover.is-opening { display: none; }
   .invitation.inv-refined .inv-auto-scroll { display: none; }

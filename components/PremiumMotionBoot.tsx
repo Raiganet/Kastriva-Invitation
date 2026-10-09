@@ -73,7 +73,7 @@ export default function PremiumMotionBoot(){
 
   const restartDigit=(node:Node)=>{
    const element=(node.nodeType===Node.TEXT_NODE?node.parentElement:node) as HTMLElement|null;
-   const digit=element?.closest?.('.countdown strong') as HTMLElement|null;
+   const digit=element?.closest?.('.countdown:not([data-inv-countdown]) strong') as HTMLElement|null;
    if(!digit)return;
    digit.classList.remove('rm-digit-flip');
    // Force a reflow so a changed countdown value replays the 3D flip.
@@ -145,7 +145,7 @@ export default function PremiumMotionBoot(){
    root.querySelectorAll<HTMLElement>(INTERACTIVE_SELECTOR).forEach(item=>item.classList.add('pm-interactive'));
    root.querySelectorAll<HTMLElement>(DEPTH_SELECTOR).forEach(item=>item.classList.add('pm-depth-card'));
    root.querySelectorAll<HTMLElement>('.inv-bottom-nav,.inv-music').forEach(item=>item.classList.add('pm-floating-control'));
-   root.querySelectorAll<HTMLElement>('.countdown strong').forEach(item=>item.classList.add('rm-digit-flip'));
+   root.querySelectorAll<HTMLElement>('.countdown:not([data-inv-countdown]) strong').forEach(item=>item.classList.add('rm-digit-flip'));
   };
 
   const scan=()=>document.querySelectorAll<HTMLElement>('.invitation').forEach(enhanceRoot);
@@ -210,7 +210,7 @@ export default function PremiumMotionBoot(){
   mutations=new MutationObserver(records=>{
    // Countdown text changes every second. Only new element trees need enhancement.
    if(records.some(record=>record.type==='childList'&&Array.from(record.addedNodes).some(node=>
-    node instanceof Element&&(node.closest('.invitation')||node.querySelector('.invitation'))
+    node instanceof Element&&!node.closest('[data-inv-countdown]')&&(node.closest('.invitation')||node.querySelector('.invitation'))
    )))schedule();
    if(reduced.matches)return;
    for(const record of records){
