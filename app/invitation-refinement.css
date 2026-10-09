@@ -373,7 +373,7 @@
 .invitation.inv-refined .inv-stationery .inv-section > h2::after { display: none !important; }
 .invitation.inv-refined .inv-stationery .inv-section > .overline { box-shadow: none; }
 .invitation.inv-refined .inv-stationery .inv-section-divider { margin: 20px auto 34px; }
-.invitation.inv-refined .inv-stationery :is(.event-box, .inv-location, .couple-grid > div, .rsvp-form) {
+.invitation.inv-refined .inv-stationery :is(.event-box, .inv-location, .couple-grid > div) {
   border: 0;
   border-radius: 0;
   background: none !important;
@@ -707,6 +707,67 @@
 @keyframes invitation-photo-leave { from { opacity: 1; } to { opacity: 0; } }
 @keyframes invitation-photo-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes invitation-photo-detail { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Keepsakes: a native disclosure opens the envelope; readable bank details stay
+   on its face. The animation belongs to an inner surface, not the copy control. */
+.invitation.inv-refined .inv-stationery .gift-disclosure { max-width: 470px; border: 0; background: none; box-shadow: none; backdrop-filter: none; translate: none; scale: 1; }
+.invitation.inv-refined .inv-stationery .gift-disclosure > summary { display: flex; flex-direction: column; gap: 14px; padding: 34px 18px 20px; border: 1px solid var(--finish-line); border-radius: 18px; background: radial-gradient(ellipse at top, color-mix(in srgb, var(--edition-petal) 16%, transparent), transparent 75%), var(--paper); cursor: pointer; transform: none; }
+.invitation.inv-refined .gift-disclosure-label { display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 44px; font-size: 12px; }
+.invitation.inv-refined .inv-stationery .gift-toggle-icon { transform: none; }
+.invitation.inv-refined .gift-label-open, .invitation.inv-refined .gift-disclosure[open] .gift-label-closed { display: none; }
+.invitation.inv-refined .gift-disclosure[open] .gift-label-open { display: inline; }
+.invitation.inv-refined .gift-envelope { position: relative; display: block; width: 176px; height: 108px; margin-top: 32px; perspective: 600px; isolation: isolate; }
+.invitation.inv-refined .gift-envelope-back { position: absolute; inset: 0; border: 1px solid var(--finish-line); border-radius: 5px; background: color-mix(in srgb, var(--edition-leaf) 24%, var(--paper)); box-shadow: 0 16px 24px color-mix(in srgb, var(--tone) 12%, transparent); }
+.invitation.inv-refined .gift-envelope-letter { position: absolute; z-index: 1; inset: 7px 13px 9px; display: grid; place-items: start center; padding: 9px; border: 1px solid var(--finish-line); border-radius: 4px; background: var(--soft); transform: translateY(5px); }
+.invitation.inv-refined .gift-envelope-letter .theme-motif { display: block; width: 44px; height: 44px; color: var(--edition-foil); margin: 0; }
+.invitation.inv-refined .gift-envelope-front { position: absolute; inset: 0; z-index: 2; border: 1px solid var(--finish-line); border-radius: 4px; clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%); background: linear-gradient(150deg, color-mix(in srgb, var(--edition-petal) 22%, var(--paper)), var(--soft)); }
+.invitation.inv-refined .gift-envelope-flap { position: absolute; inset: 0 0 30%; z-index: 3; transform-origin: center top; clip-path: polygon(0 0, 100% 0, 50% 90%); background: color-mix(in srgb, var(--edition-leaf) 26%, var(--soft)); }
+.invitation.inv-refined .gift-envelope-seal { position: absolute; z-index: 4; left: calc(50% - 19px); top: 45px; display: grid; place-items: center; width: 38px; height: 38px; border: 3px double color-mix(in srgb, var(--paper) 65%, transparent); border-radius: 50%; background: var(--tone); color: var(--paper); font: 22px Georgia, serif; box-shadow: 0 3px 8px #0002; }
+.invitation.inv-refined .gift-disclosure[open] .gift-envelope-flap { transform: rotateX(180deg); z-index: 0; }
+.invitation.inv-refined .gift-disclosure[open] .gift-envelope-letter { transform: translateY(-30px); }
+.invitation.inv-refined .gift-disclosure[open] .gift-envelope-seal { opacity: 0; transform: translateY(12px) scale(.8); }
+.invitation.inv-refined .inv-stationery .gift-accounts { gap: 18px; margin-top: 22px; animation: none; }
+.invitation.inv-refined .inv-stationery .gift-disclosure[open] .gift-accounts { animation: none; }
+.invitation.inv-refined .inv-stationery .gift-account { padding: 0; border: 0; border-radius: 18px; background: none; box-shadow: none; }
+.invitation.inv-refined .gift-account::after { display: none; }
+.invitation.inv-refined .gift-account-surface { position: relative; padding: 26px; border: 1px solid var(--finish-line); border-radius: inherit; background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--edition-petal) 15%, transparent), transparent 70%), var(--soft); }
+.invitation.inv-refined .gift-account-surface::before { content: ''; position: absolute; inset: 7px; border: 1px solid color-mix(in srgb, var(--edition-foil) 18%, transparent); border-radius: 12px; pointer-events: none; }
+.invitation.inv-refined .gift-account-heading { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--finish-line); margin-bottom: 23px; }
+.invitation.inv-refined .gift-account-heading h3 { font: 500 15px/1.5 var(--font-mm-body), Arial, sans-serif; letter-spacing: .03em; margin: 0; text-transform: none; }
+.invitation.inv-refined .gift-account-heading > span { font: italic 26px/1 var(--font-mm-display), Georgia, serif; color: var(--tone); opacity: .65; }
+.invitation.inv-refined .gift-account-label, .invitation.inv-refined .gift-holder small { display: block; font-size: 9px; letter-spacing: .14em; }
+.invitation.inv-refined .gift-account .gift-number { margin: 8px 0 22px; font: 500 clamp(20px, 4vw, 28px)/1.6 var(--font-mm-body), Arial, sans-serif; font-variant-numeric: tabular-nums; letter-spacing: .1em; overflow-wrap: anywhere; }
+.invitation.inv-refined .gift-holder { margin: 0 0 22px; }
+.invitation.inv-refined .gift-holder span { display: block; margin-top: 8px; font: 24px/1.4 var(--font-mm-display), Georgia, serif; }
+.invitation.inv-refined .gift-account .inv-button { width: 100%; margin-top: 0; }
+.invitation.inv-refined .gift-account .inv-button svg { flex: 0 0 18px; width: 18px; height: 18px; margin: 0; filter: none; }
+.invitation.inv-refined .gift-account .gift-copy-status { min-height: 36px; margin: 12px 0 0; font-size: 11px; line-height: 1.65; }
+.invitation.inv-refined .gift-account[data-copy-state=copied] .inv-button { background: color-mix(in srgb, var(--edition-leaf) 15%, var(--soft)); }
+
+/* Guest messages share the same paper treatment in previews and published pages. */
+.invitation.inv-refined .inv-stationery .wish-card { position: relative; padding: 26px; background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--edition-petal) 12%, transparent), transparent 68%), var(--paper); border: 1px solid var(--finish-line); border-radius: 16px 16px 4px 16px; box-shadow: 0 8px 24px color-mix(in srgb, var(--tone) 5%, transparent); }
+.invitation.inv-refined .inv-stationery .wish-card::before { content: ''; position: absolute; left: 10px; top: 24px; bottom: 24px; width: 2px; background: linear-gradient(transparent, var(--edition-foil), transparent); opacity: .5; pointer-events: none; }
+.invitation.inv-refined .inv-stationery .wish-card::after { display: none; }
+.invitation.inv-refined .inv-demo-wish-list .wish-card:nth-child(even) { border-radius: 16px 16px 16px 4px; }
+.invitation.inv-refined .inv-wish-avatar { border-radius: 50% 50% 6px 6px; background: color-mix(in srgb, var(--edition-petal) 14%, var(--soft)); }
+.invitation.inv-refined .inv-wish-signature { display: flex; justify-content: flex-end; align-items: center; gap: 8px; margin-top: 18px; color: var(--tone); font-size: 15px; opacity: .55; }
+.invitation.inv-refined .inv-wish-signature i { width: 23px; height: 1px; background: var(--finish-line); }
+.invitation.inv-refined .inv-stationery .rsvp-form { position: relative; padding: 26px; border: 1px solid var(--finish-line); border-radius: 16px; background: linear-gradient(145deg, color-mix(in srgb, var(--edition-petal) 8%, var(--paper)), var(--paper)); box-shadow: 0 10px 26px color-mix(in srgb, var(--tone) 5%, transparent); }
+.invitation.inv-refined .inv-stationery .rsvp-form label { line-height: 1.7; }
+.invitation.inv-refined .inv-stationery .rsvp-form :is(input:not([type=checkbox]), select, textarea) { background: var(--soft); border: 1px solid var(--finish-line); }
+.invitation.inv-refined .inv-stationery .rsvp-form :is(input, select, textarea):focus-visible { outline: 2px solid var(--tone); outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined .gift-envelope-flap { transition: transform 650ms var(--finish-ease); }
+  .invitation.inv-refined .gift-envelope-letter { transition: transform 650ms var(--finish-ease) 160ms; }
+  .invitation.inv-refined .gift-envelope-seal { transition: opacity 180ms ease, transform 300ms ease; }
+  .invitation.inv-refined .gift-disclosure[open] .gift-account-surface { animation: invitation-gift-unfold 700ms var(--finish-ease) calc(var(--gift-order) * 100ms) backwards; }
+  .invitation.inv-refined .gift-account:focus-within .gift-account-surface { animation: none; }
+  .invitation.inv-refined .rsvp-form :is(input, select, textarea) { transition: background 180ms ease, border-color 180ms ease; }
+}
+@keyframes invitation-gift-unfold { from { opacity: 0; transform: perspective(900px) translateY(18px) rotateX(-8deg); } to { opacity: 1; transform: none; } }
+@media (max-width: 420px) {
+  .invitation.inv-refined .gift-account-surface, .invitation.inv-refined .inv-stationery .rsvp-form, .invitation.inv-refined .inv-stationery .wish-card { padding: 22px 18px; }
+}
 
 /* Schedule cards: the date leads, the venue follows, and every action stays on
    the front of the card. The existing card controller owns its entrance/tilt. */

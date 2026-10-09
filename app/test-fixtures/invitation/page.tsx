@@ -8,7 +8,7 @@ import type {DraftContent} from '@/lib/types';
 export const dynamic='force-dynamic';
 export const metadata={title:'Fixture undangan lokal',robots:{index:false,follow:false}};
 
-export default async function InvitationFixture({searchParams}:{searchParams:Promise<{theme?:string;embedded?:string;broken?:string;mode?:string;aspect?:string;schedule?:string}>}){
+export default async function InvitationFixture({searchParams}:{searchParams:Promise<{theme?:string;embedded?:string;broken?:string;mode?:string;aspect?:string;schedule?:string;gifts?:string}>}){
  if(process.env.KI_E2E_DEMO!=='true'||process.env.VERCEL==='1'||process.env.NEXT_PUBLIC_SITE_URL!=='http://127.0.0.1:3000'||publicBackend())notFound();
  const query=await searchParams;
  const template=getTemplate(query.theme||'tropical-paradise');
@@ -26,6 +26,12 @@ export default async function InvitationFixture({searchParams}:{searchParams:Pro
  }
  if(query.schedule==='incomplete')content={...content,eventDate:'',eventTime:'',venue:'',address:'',mapUrl:''};
  if(query.schedule==='invalid-time')content={...content,eventTime:''};
+ if(query.gifts==='multi')content={...content,gifts:[
+  {bank:'Bank Contoh',account:'0000000000',holder:'Penerima Contoh'},
+  {bank:'Bank Dengan Nama Sangat Panjang Untuk Pengujian',account:'000000000000000000000000000000',holder:'Nama Penerima Contoh yang Panjang untuk Menguji Tampilan pada Layar Kecil'},
+  {bank:'Rekening belum lengkap',account:'',holder:''},
+ ]};
+ if(query.gifts==='empty')content={...content,gifts:[{bank:'Belum lengkap',account:'',holder:''}]};
  if(query.broken==='true')photoUrls[0]='data:image/png;base64,invalid';
  return <InvitationView mode={query.mode==='public'?'public':query.mode==='draft'?'draft':'demo'} template={template} content={content} guest="Keluarga Bapak Muhammad Abdurrahman" photoUrls={photoUrls} coverUrl="" embedded={query.embedded==='true'}/>;
 }

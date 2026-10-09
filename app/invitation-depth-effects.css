@@ -74,11 +74,11 @@
  cursor:pointer;
  transition:background 280ms ease,letter-spacing 280ms ease;
 }
-.invitation.inv-premium-motion .gift-disclosure summary span[aria-hidden]{
+.invitation.inv-premium-motion .gift-disclosure summary .gift-toggle-icon{
  display:inline-block;
  transition:rotate 420ms cubic-bezier(.16,1,.3,1),scale 320ms ease;
 }
-.invitation.inv-premium-motion .gift-disclosure[open] summary span[aria-hidden]{
+.invitation.inv-premium-motion .gift-disclosure[open] summary .gift-toggle-icon{
  rotate:45deg;
  scale:1.08;
 }

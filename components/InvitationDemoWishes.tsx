@@ -8,7 +8,7 @@ export default function InvitationDemoWishes({id,slug,category}:{id:string;slug:
   <p className="inv-caption">Ucapan ilustrasi untuk mencoba tema.</p>
   <div className="inv-demo-wish-list">{demoWishes(category).map(wish=><article className="wish-card" data-demo-wish key={wish.name}>
    <header><span className="inv-wish-avatar" aria-hidden="true">{wish.name.slice(0,1)}</span><div><strong>{wish.name}</strong><small>Contoh ucapan</small></div><span className="inv-wish-heart" aria-hidden="true">♡</span></header>
-   <p>{wish.message}</p>
+   <p>{wish.message}</p><span className="inv-wish-signature" aria-hidden="true"><i/>♡<i/></span>
   </article>)}</div>
  </section>;
 }

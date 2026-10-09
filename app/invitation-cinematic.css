@@ -78,7 +78,7 @@
 .gift-disclosure { max-width:470px; margin:30px auto 0; text-align:left; }
 .gift-disclosure>summary { display:flex; justify-content:space-between; align-items:center; gap:15px; padding:18px 22px; color:var(--tone); border:1px solid color-mix(in srgb,var(--tone) 40%,transparent); list-style:none; font-size:12px; }
 .gift-disclosure>summary::-webkit-details-marker { display:none; }
-.gift-disclosure[open]>summary span { transform:rotate(45deg); }
+.gift-disclosure[open]>summary .gift-toggle-icon { transform:rotate(45deg); }
 .gift-disclosure summary:focus-visible { outline:2px solid var(--tone); outline-offset:4px; }
 .gift-accounts { display:grid; gap:16px; margin-top:18px; }
 .gift-account { padding:26px; border:1px solid color-mix(in srgb,var(--tone) 25%,transparent); background:linear-gradient(135deg,color-mix(in srgb,var(--tone) 8%,transparent),transparent),var(--soft); border-radius:4px; overflow-wrap:anywhere; }
