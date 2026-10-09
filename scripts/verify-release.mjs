@@ -10,10 +10,14 @@ console.log('Gerbang kode/build demo. Tidak mengubah Supabase dan tidak mengesah
 writeFileSync(path.join(out,'report.json'),JSON.stringify({passed:false,state:'running',productionApproved:false}));
 const report=await executeRelease(async id=>{
  console.log('Memeriksa: '+id);
- const result=await runNode([npmCli,'run',id],{cwd:root,env:demoEnvironment(process.env)});
- writeFileSync(path.join(out,id.replaceAll(':','-')+'.log'),result.output);
- process.stdout.write(result.output);
- return {status:result.status};
+ // The full desktop/mobile suite exceeds ten minutes on a single CI worker.
+ // Keep a finite limit within the 25-minute CI job; other commands retain ten minutes.
+ const timeoutMs=id==='test:e2e'?20*60*1000:10*60*1000;
+ const result=await runNode([npmCli,'run',id],{cwd:root,env:demoEnvironment(process.env),timeoutMs});
+ const output=result.output+(result.timedOut?'\nTIMEOUT: '+id+' exceeded '+timeoutMs/60000+' minutes (exit 124).\n':'');
+ writeFileSync(path.join(out,id.replaceAll(':','-')+'.log'),output);
+ process.stdout.write(output);
+ return {status:result.status,timedOut:result.timedOut};
 });
 report.checkedAt=new Date().toISOString();writeFileSync(path.join(out,'report.json'),JSON.stringify(report,null,2)+'\n');
 console.log(report.passed?'PASS gerbang kode demo. Uji SQL/staging/backup tetap wajib.':'STOP: ada pemeriksaan yang gagal/belum tersedia. Baca .release/report.json.');process.exitCode=report.passed?0:1;

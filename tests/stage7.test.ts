@@ -2,6 +2,14 @@ import test from 'node:test';import assert from 'node:assert/strict';import {rea
 const read=(f:string)=>readFileSync(new URL('../'+f,import.meta.url),'utf8');const sql=read('supabase/migrations/007_release_hardening.sql');
 test('release runner stops at the first actual command failure',async()=>{const calls:string[]=[];const result=await executeRelease(async(id:string)=>{calls.push(id);return{status:id==='typecheck'?2:0};});assert.equal(result.passed,false);assert.equal(result.steps.at(-1)?.id,'typecheck');assert.ok(!calls.includes('build'));});
 test('null process exit is failure, not success',async()=>{const r=await executeRelease(async()=>({status:null}));assert.equal(r.steps.length,1);assert.equal(r.passed,false);});
+test('release report identifies a timeout and stops even when termination reports exit zero',async()=>{
+ const calls:string[]=[];
+ const report=await executeRelease(async id=>{calls.push(id);return{status:0,timedOut:id==='typecheck'};});
+ assert.equal(report.passed,false);
+ assert.deepEqual(report.steps.at(-1),{id:'typecheck',exitCode:124,timedOut:true,passed:false});
+ assert.ok(!calls.includes('build'));
+ assert.ok(report.steps.slice(0,-1).every(step=>step.passed&&!step.timedOut));
+});
 test('all code steps still do not attest live Supabase or production',async()=>{const r=await executeRelease(async()=>({status:0}));assert.equal(r.steps.length,RELEASE_STEPS.length);assert.equal(r.passed,true);assert.equal(r.liveSupabaseVerified,false);assert.equal(r.productionApproved,false);});
 test('isolated build environment strips secrets and all active service flags',()=>{const x=demoEnvironment({SUPABASE_SECRET_KEY:'private',RATE_LIMIT_HMAC_KEY:'key',NEXT_PUBLIC_SUPABASE_URL:'https://real.supabase.co',ENABLE_PUBLIC_INVITATIONS:'true',VERCEL:'1'});assert.equal(x.SUPABASE_SECRET_KEY,'');assert.equal(x.NEXT_PUBLIC_SUPABASE_URL,'');assert.equal(x.ENABLE_PUBLIC_INVITATIONS,'false');assert.equal(x.KI_E2E_DEMO,'true');assert.equal(x.VERCEL,'0');});
 test('007 transactional, ordered and additive',()=>{assert.match(sql,/\nbegin;/);assert.match(sql,/commit;\s*$/);assert.ok(sql.includes('not in (6,7)'));assert.ok(!/(?:^|;)\s*(?:drop table|truncate(?:\s+table)?|update public\.ki_sales|update public\.ki_cms|update public\.ki_invitations)\b/im.test(sql));});
