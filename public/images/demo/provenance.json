@@ -1,0 +1,37 @@
+{
+  "source": "Generated with the built-in image_gen tool for Kastriva demo invitations. Fictional people; no customer photos.",
+  "assets": [
+    {
+      "file": "wedding-couple.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: premium wedding invitation demo photograph, portrait 4:5 composition. Create one natural editorial photograph of a fictional Indonesian couple, both adults around 28 years old, standing close together in a beautiful sunlit garden with delicate white blossoms. Groom short neat black hair and warm smile, clean-shaven, wears ivory formal suit. Bride oval face and warm smile, wears an elegant ivory hijab and modest long-sleeved white wedding dress, holding small bouquet of white roses. Waist-up framing, both faces centered within middle 60% of frame, eyes visible, warm beige and sage tones, soft morning light, real skin texture, elegant and joyful, shallow depth of field. No lettering, no watermark, no collage, no logos."
+    },
+    {
+      "file": "birthday.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: birthday invitation demo photograph, portrait 4:5 composition. One warm joyful editorial photo of a fictional Indonesian little girl age 6, in a modest pink party dress, smiling beside a small ivory birthday cake with six candles, pastel peach and dusty rose balloons softly blurred in background. Wholesome family birthday celebration, face centered and cake visible, natural lighting, candid expression, high quality photography, generous breathing room. No text, no logos, no watermark, no collage."
+    },
+    {
+      "file": "aqiqah.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: aqiqah newborn celebration invitation demo photograph, portrait 4:5 composition. One gentle natural editorial photograph of a fictional sleeping Indonesian baby in a soft fully clothed cream cotton onesie and cream blanket, resting safely on their back on a firm flat baby mattress. Close composition with face and tiny hands visible, muted sage green and ivory fabrics, soft natural window light, peaceful family atmosphere, realistic skin texture. No accessories on face, no unsafe sleep props around face, no text, no logos, no watermark, no collage."
+    },
+    {
+      "file": "corporate.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: corporate annual gathering invitation demo photograph, landscape 4:3 composition. One editorial event photograph of a small group of six fictional Indonesian adult colleagues in tasteful smart casual clothing sharing a relaxed conversation and laughter at a stylish indoor garden reception. Warm wood, sage plants and soft light, candid natural expressions, a welcoming professional celebration, authentic photographic texture. No recognizable brands, no text, no watermark, no collage."
+    },
+    {
+      "file": "wedding-groom.webp",
+      "prompt": "Create a new individual editorial portrait of the fictional adult groom from the reference photo. Preserve his face, short black hairstyle, clean-shaven appearance, ivory suit, same soft garden light. Only the groom in frame, chest-up centered with full head and shoulders visible, looking warmly toward the camera. Portrait 4:5 composition with generous breathing room around head suitable for circular crop. Natural skin texture, elegant sage garden bokeh. No bride or other person, no text, no watermark."
+    },
+    {
+      "file": "wedding-bride.webp",
+      "prompt": "Create a new individual editorial portrait of the fictional adult bride from the reference photo. Preserve her face, ivory hijab, modest ivory lace dress, same soft garden light. Only the bride in frame, chest-up centered with full head and shoulders visible, looking warmly toward the camera. Portrait 4:5 composition with generous breathing room around head suitable for circular crop. Natural skin texture, elegant sage garden bokeh. No groom or other person, no text, no watermark."
+    },
+    {
+      "file": "wedding-walk.webp",
+      "prompt": "Create a new editorial wedding photo of the same two fictional adults from the reference image, preserving both faces, attire and ivory hijab. The couple walking gently side by side on a garden pathway under a leafy arbor, sharing a quiet laugh and holding hands. Full-length environmental portrait with both subjects centered in middle of frame, portrait 4:5 composition, soft light, warm cream and muted green palette, romantic realistic photographic texture. No text, no logos, no watermark."
+    },
+    {
+      "file": "celebration-details.webp",
+      "prompt": "Use case: photorealistic-natural. One premium editorial close-up photograph of a beautiful small celebration table arrangement: white and ivory roses with eucalyptus in a ceramic vase, folded ivory linen napkins and a few pale sage decorative ribbons, on a light wood table, luminous airy garden venue in background. No people, no alcohol, no candles, no signage, no religious symbols. Suitable for wedding, birthday, baby and corporate gathering invitation demo galleries. Portrait 4:5 composition, natural textures, gentle morning sunlight, soft focus background. No text, logos, watermark or collage."
+    }
+  ]
+}

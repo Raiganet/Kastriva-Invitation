@@ -15,9 +15,14 @@ for (const slug of ALL_THEME_SLUGS) {
     const root = page.locator('.invitation');
     const fits = () => root.evaluate(element => element.scrollWidth <= element.clientWidth + 1);
     await expect(page.getByRole('heading', {level: 1})).toBeVisible();
+    await expect.poll(()=>page.locator('.inv-cover img').first().evaluate((element)=>(element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
     expect(await fits()).toBe(true);
     await page.getByRole('button', {name: /Buka undangan/}).click();
     await expect(page.locator('.inv-content')).toBeFocused();
+    await expect(page.locator('.inv-music .music-toggle')).toHaveAttribute('aria-pressed','true');
+    await expect(page.locator('[data-demo-wish]')).toHaveCount(3);
+    await expect(page.locator('.inv-gallery')).toHaveCount(1);
+    await expect(page.locator('.photo-placeholders')).toHaveCount(0);
     const nav = page.getByRole('navigation', {name: 'Bagian undangan'});
     await nav.getByRole('button', {name: 'Acara', exact: true}).click();
     const heading = page.getByRole('heading', {name: 'Waktu & tempat', exact: true});

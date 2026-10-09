@@ -69,5 +69,6 @@ test('embedded invitations keep their card layout without adding a navigation do
  await page.goto('/test-fixtures/invitation?theme=botanical-blush&embedded=true');
  await page.getByRole('button',{name:/Buka undangan/}).click();
  await expect(page.locator('.inv-bottom-nav')).toHaveCount(0);
+ await expect(page.locator('.inv-auto-scroll')).toHaveCount(0);
  expect(await page.locator('.invitation').evaluate(e=>e.scrollWidth<=e.clientWidth+1)).toBe(true);
 });

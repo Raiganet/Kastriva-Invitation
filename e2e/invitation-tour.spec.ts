@@ -1,0 +1,73 @@
+import {test,expect} from '@playwright/test';
+
+test('automatic tour starts gently, yields to manual scrolling, resumes and stops at the end',async({page,isMobile})=>{
+ await page.clock.install();
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await page.goto('/demo/modern-minimalist');
+ await expect(page.locator('.inv-auto-scroll')).toHaveCount(0);
+ await page.getByRole('button',{name:/Buka undangan/}).click();
+ await expect(page.locator('.inv-content')).toBeFocused();
+ const control=page.locator('.inv-auto-scroll');
+ await expect(control).toHaveAttribute('data-scroll-state','running');
+ const start=await page.evaluate(()=>window.scrollY);
+ await page.clock.runFor(4500);
+ const distance=await page.evaluate(()=>window.scrollY)-start;
+ expect(distance).toBeGreaterThan(45);expect(distance).toBeLessThan(180);
+ if(isMobile)await page.locator('.inv-opening').tap();else await page.mouse.wheel(0,180);
+ await expect(control).toHaveAttribute('data-scroll-state','paused');
+ await page.evaluate(()=>window.scrollTo({top:500,behavior:'instant'}));
+ await page.clock.runFor(1500);
+ expect(await page.evaluate(()=>window.scrollY)).toBe(500);
+ await page.getByRole('button',{name:'Lanjut gulir',exact:true}).click();
+ await page.clock.runFor(4000);
+ expect(await page.evaluate(()=>window.scrollY)).toBeGreaterThan(530);
+ await page.getByRole('button',{name:'Jeda gulir',exact:true}).click();
+ await page.locator('.inv-content').evaluate(content=>window.scrollTo({top:window.scrollY+content.getBoundingClientRect().bottom-window.innerHeight-20,behavior:'instant'}));
+ await page.getByRole('button',{name:'Lanjut gulir',exact:true}).click();
+ await page.clock.runFor(4000);
+ await expect(control).toHaveAttribute('data-scroll-state','complete');
+ const end=await page.evaluate(()=>window.scrollY);
+ await page.clock.runFor(1500);
+ expect(await page.evaluate(()=>window.scrollY)).toBe(end);
+ await page.getByRole('button',{name:'Ulangi tur',exact:true}).click();
+ expect(await page.evaluate(()=>window.scrollY)).toBeLessThan(200);
+ await expect(control).toHaveAttribute('data-scroll-state','running');
+});
+
+test('tour respects reduced motion and pauses for keyboard, forms and gallery',async({page})=>{
+ await page.clock.install();
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto('/demo/sweet-birthday');
+ await page.getByRole('button',{name:/Buka undangan/}).click();
+ const control=page.locator('.inv-auto-scroll');
+ await expect(control).toHaveAttribute('data-scroll-state','paused');
+ const start=await page.evaluate(()=>window.scrollY);
+ await page.clock.runFor(4000);
+ expect(await page.evaluate(()=>window.scrollY)).toBe(start);
+ await page.emulateMedia({reducedMotion:'no-preference'});
+ await page.getByRole('button',{name:'Lanjut gulir',exact:true}).click();
+ await page.keyboard.press('PageDown');
+ await expect(control).toHaveAttribute('data-scroll-state','paused');
+ await page.getByRole('button',{name:'Lanjut gulir',exact:true}).click();
+ await page.locator('.rsvp-form input[name=name]').focus();
+ await expect(control).toHaveAttribute('data-scroll-state','paused');
+ await page.locator('.rsvp-form input[name=name]').blur();
+ await page.getByRole('button',{name:'Lanjut gulir',exact:true}).click();
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await expect(control).toHaveAttribute('data-scroll-state','paused');
+ await page.getByRole('button',{name:'Lanjut gulir',exact:true}).click();
+ await page.locator('.inv-gallery').getByRole('button',{name:'Perbesar foto 1',exact:true}).click();
+ await expect(page.getByRole('dialog',{name:'Galeri kenangan'})).toBeVisible();
+ await expect(control).toHaveAttribute('data-scroll-state','paused');
+});
+
+for(const mode of ['draft','public'])test(`demo samples stay out of customer ${mode} invitations`,async({page})=>{
+ await page.emulateMedia({reducedMotion:'reduce'});
+ await page.goto(`/test-fixtures/invitation?mode=${mode}`);
+ await page.getByRole('button',{name:/Buka undangan/}).click();
+ await expect(page.locator('.inv-auto-scroll')).toBeVisible();
+ await expect(page.locator('[data-demo-wish]')).toHaveCount(0);
+ await expect(page.locator('.inv-demo-media-note')).toHaveCount(0);
+ await expect(page.locator('.inv-music')).toHaveCount(0);
+ await expect(page.locator('img[src^="/images/demo/"]')).toHaveCount(0);
+});
