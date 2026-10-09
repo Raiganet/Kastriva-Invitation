@@ -26,5 +26,7 @@ export function sqlTestPlan(actualNames) {
   m(expected[18]),t('019_occasion_verify.sql'),
   t('020_premium_seed.sql'),m(expected[19]),t('020_premium_verify.sql'),
   m(expected[19]),t('020_premium_verify.sql'),
+  m(expected[20]),t('021_non_wedding_orders.sql'),
+  m(expected[20]),t('021_non_wedding_orders.sql'),
  ];
 }

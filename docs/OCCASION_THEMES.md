@@ -17,4 +17,4 @@ Setiap tema memiliki SVG orisinal, palet, bentuk kartu, motif katalog dan transi
 
 Migrasi menambahkan empat baris tanpa menimpa harga/status lama, menambahkan tema yang belum ada ke draft dan published CMS secara terpisah, mempertahankan seluruh generasi backup, serta aman dijalankan ulang. Tidak mengubah undangan, pesanan, foto atau ucapan pelanggan. Pengujian SQL berada pada `019_occasion_seed.sql` dan `019_occasion_verify.sql` dalam rencana fixture lokal.
 
-Pernikahan menggunakan alur editor/pemesanan yang tersedia. Kategori non-pernikahan tetap mengikuti mode demo tambahan aplikasi; koleksi ini tidak mengaktifkan checkout non-pernikahan.
+Seluruh kategori kini dapat dipesan setelah migrasi `20261009141633_non_wedding_orders.sql`. Lihat [aktivasi kategori](NON_WEDDING_ORDERS.md).

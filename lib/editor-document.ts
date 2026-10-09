@@ -1,4 +1,5 @@
-import { asRecord, parseDraft, parseSave, invitationEvents, withEvents, validDate, safeMapHref, UUID, ValidationError } from './domain.ts';
+import {categoryForTheme,fieldsForCategory} from './invitation-category.ts';
+import { asRecord, parseDraft, parseSave, blankContent, invitationEvents, withEvents, validDate, safeMapHref, UUID, ValidationError } from './domain.ts';
 import type { DraftContent } from './types.ts';
 export type EditorDocument = { theme: string; content: DraftContent };
 export type SavePayload = ReturnType<typeof parseSave>;
@@ -11,13 +12,14 @@ export type EditorJournal = {
 import {WEDDING_THEME_SLUGS} from './theme-registry.ts';
 export const WEDDING_SLUGS = WEDDING_THEME_SLUGS;
 export function editableDocument(content: DraftContent, theme: string): EditorDocument {
-  return {theme,content:withEvents(structuredClone(content),invitationEvents(content))};
+  return {theme,content:withEvents(structuredClone(content),invitationEvents(content,categoryForTheme(theme)))};
 }
 export function documentKey(document: EditorDocument | null): string { return JSON.stringify(document); }
 export function parseDocument(value: unknown, owner: string, editing = false): EditorDocument {
   const x = asRecord(value);
-  if (Object.keys(x).some(key => !['theme','content'].includes(key)) || typeof x.theme !== 'string' || !WEDDING_SLUGS.includes(x.theme)) throw new ValidationError('Tema pada salinan tidak didukung.');
+  if (Object.keys(x).some(key => !['theme','content'].includes(key)) || typeof x.theme !== 'string' || !categoryForTheme(x.theme)) throw new ValidationError('Tema pada salinan tidak didukung.');
   const parsed = parseDraft(x.content,owner,editing);
+  if(categoryForTheme(x.theme)!=='pernikahan' && (parsed.bride || parsed.brideParents)) throw new ValidationError('Kategori ini hanya memakai satu nama utama. Kosongkan kolom mempelai wanita dan keluarganya.');
   return {theme:x.theme,content:editing ? structuredClone(x.content) as DraftContent : parsed};
 }
 export function sessionKey(owner: string, id: string): string { return `ki-editor:v3:${owner}:${id}`; }
@@ -47,10 +49,10 @@ export function readBackup(raw: string, owner: string): EditorDocument {
   const d = parseDocument({theme:x.theme,content:x.content},owner,true);
   return editableDocument(d.content,d.theme);
 }
-export function completion(content: DraftContent) {
-  const events = invitationEvents(content);
+export function completion(content: DraftContent, category = 'pernikahan') {
+  const events = invitationEvents(content,category);
   return [
-    {key:'pasangan',label:'Nama kedua mempelai',done:!!content.groom.trim() && !!content.bride.trim(),required:true},
+    {key:'pasangan',label:category==='pernikahan'?'Nama kedua mempelai':fieldsForCategory(category).name,done:!!content.groom.trim() && (category!=='pernikahan'||!!content.bride.trim()),required:true},
     {key:'acara',label:'Nama dan tanggal setiap acara',done:events.every(e => !!e.label.trim() && validDate(e.eventDate)),required:true},
     {key:'acara',label:'Jam dan tempat setiap acara',done:events.every(e => /^([01]\d|2[0-3]):[0-5]\d$/.test(e.eventTime) && /^([01]\d|2[0-3]):[0-5]\d$/.test(e.endTime) && e.endTime>e.eventTime && !!e.venue.trim()),required:true},
     {key:'acara',label:'Alamat lengkap setiap acara',done:events.every(e => !!e.address.trim()),required:true},
@@ -62,4 +64,8 @@ export function completion(content: DraftContent) {
 export function movePhoto(paths: string[], from: number, to: number): string[] {
   if (![from,to].every(n => Number.isInteger(n) && n>=0 && n<paths.length)) return paths;
   const next = [...paths]; const [path] = next.splice(from,1); next.splice(to,0,path); return next;
+}
+
+export function blankContentForTheme(theme:string):DraftContent {
+  return {...blankContent,opening:fieldsForCategory(categoryForTheme(theme)||'pernikahan').opening,photoPaths:[]};
 }

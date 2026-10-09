@@ -22,7 +22,8 @@
     "017_music_volume.sql",
     "018_imported_music.sql",
     "20261009115018_occasion_collection.sql",
-    "20261009135319_premium_editions.sql"
+    "20261009135319_premium_editions.sql",
+    "20261009141633_non_wedding_orders.sql"
   ],
   "openWishesProtocol": 1,
   "openWishesAutoPublishProtocol": 1

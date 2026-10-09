@@ -1,7 +1,7 @@
 /** Keep the full names readable by assistive technology while arranging the display. */
 export default function InvitationNames({groom,bride,wedding,as:Heading='h1'}:{groom:string;bride:string;wedding:boolean;as?:'h1'|'h2'}){
- const first=groom.trim(),second=bride.trim();
- const label=[first,second].filter(Boolean).join(' & ')||'Nama pasangan';
+ const first=groom.trim(),second=wedding?bride.trim():'';
+ const label=[first,second].filter(Boolean).join(' & ')||(wedding?'Nama pasangan':'Nama acara');
  const length=Math.max(first.length,second.length);
  const long=length>18;
  const extended=length>36;

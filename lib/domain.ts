@@ -1,3 +1,4 @@
+import {fieldsForCategory} from './invitation-category.ts';
 import type { DraftContent, InvitationEvent } from './types.ts';
 import {isInvitationMusic} from './music-library.ts';
 export const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -104,9 +105,9 @@ export function parseEvents(value: unknown, editing = false): InvitationEvent[] 
   });
 }
 /** Backwards-compatible projection; does not mutate or persist an old draft on read. */
-export function invitationEvents(content: DraftContent): InvitationEvent[] {
+export function invitationEvents(content: DraftContent, category = 'pernikahan'): InvitationEvent[] {
   if (content.events?.length) return content.events;
-  return [{ id: 'main-event', label: 'Akad & resepsi', ...Object.fromEntries(EVENT_FIELDS.map(key => [key,content[key]])) } as InvitationEvent];
+  return [{ id: 'main-event', label: fieldsForCategory(category).event, ...Object.fromEntries(EVENT_FIELDS.map(key => [key,content[key]])) } as InvitationEvent];
 }
 export function withEvents(content: DraftContent, events: InvitationEvent[]): DraftContent {
   if (!events.length || events.length > 3) throw new ValidationError('Isi 1 sampai 3 acara.');

@@ -10,6 +10,7 @@ export type InvitationEvent = {
 import type {InvitationMusic} from './music-library';
 
 export type DraftContent = {
+  /** Non-wedding: groom is the primary name/title; groomParents is the host. Bride fields stay empty. */
   groom: string; bride: string; groomParents: string; brideParents: string;
   eventDate: string; eventTime: string; endTime: string;
   timezone: 'Asia/Jakarta' | 'Asia/Makassar' | 'Asia/Jayapura';

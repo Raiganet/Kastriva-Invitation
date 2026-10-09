@@ -11,4 +11,4 @@ Semua ilustrasi adalah SVG lokal orisinal; tidak ada aset eksternal atau depende
 
 Rilis kode aplikasi lebih dahulu, lalu jalankan `20261009135319_premium_editions.sql` setelah `occasion_collection`. Kode menerima katalog historis 20 tema maupun katalog 24 tema; jangan menambahkan baris produksi sebelum kode siap. Migrasi mempertahankan metadata/harga/status seluruh tema lama, draft CMS yang belum diterbitkan, serta seluruh generasi backup. Fixture SQL 020 memeriksa penambahan dan replay tanpa perubahan ulang.
 
-Seraphine Garden tersedia pada editor dan pemesanan pernikahan. Tiga kategori lainnya mengikuti mode demo tambahan aplikasi; checkout nonpernikahan tidak diaktifkan oleh koleksi ini.
+Keempat tema premium kini mendukung editor dan pemesanan sesuai kategorinya. Lihat [aktivasi kategori](NON_WEDDING_ORDERS.md) untuk migrasi dan verifikasi.

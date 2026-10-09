@@ -908,3 +908,5 @@
   .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal { opacity: 1 !important; transform: none !important; translate: none !important; scale: none !important; }
   .invitation.inv-refined .inv-ornaments { display: none; }
 }
+/* The optional parent/host name is shared by non-wedding invitations. */
+.inv-host{max-width:32rem;margin:0 auto 1.25rem;padding:0 1.25rem;font-size:clamp(.9rem,2.3vw,1.1rem);line-height:1.7;white-space:pre-line;overflow-wrap:anywhere;color:inherit}
