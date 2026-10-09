@@ -16,7 +16,7 @@ test('Every historical catalog generation restores the missing botanical price f
   const old={...current(),catalog:current().catalog.slice(0,length)};old.content.heroTitle='Teks dari riwayat';old.catalog[0].price=160000;
   const live=current();live.catalog[14].price=210000;live.catalog[14].active=false;
   const restored=restoreCmsDocument(old,live.catalog);
-  assert.equal(restored.catalog.length,20);assert.equal(restored.catalog[14].price,length===15?200000:210000);assert.equal(restored.catalog[14].active,length===15?true:false);assert.equal(restored.catalog[0].price,160000);assert.equal(restored.content.heroTitle,'Teks dari riwayat');
+  assert.equal(restored.catalog.length,24);assert.equal(restored.catalog[14].price,length===15?200000:210000);assert.equal(restored.catalog[14].active,length===15?true:false);assert.equal(restored.catalog[0].price,160000);assert.equal(restored.content.heroTitle,'Teks dari riwayat');
  }
  assert.throws(()=>parseCmsCatalog(current().catalog.slice(1))); // Invalid fourteen-row subset.
  assert.equal(parseCmsCatalog([current().catalog[14]],false).length,1);

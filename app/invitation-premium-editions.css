@@ -1,0 +1,125 @@
+/* A separate, illustrated premium collection. Existing editions retain their styling. */
+.theme-seraphine-garden,.invitation.inv-refined.theme-seraphine-garden { --paper:#f4ebe5; --soft:#fffaf4; --tone:#663d4a; --edition-petal:#c68891; --edition-leaf:#758675; --edition-foil:#ae8750; --pe-deep:#994b64; --pe-pale:#edc8c3; --pe-sage:#a9b6a0; }
+.theme-jubilee-carousel,.invitation.inv-refined.theme-jubilee-carousel { --paper:#f6eaf0; --soft:#fff8ee; --tone:#71485e; --edition-petal:#d18caa; --edition-leaf:#84b5b1; --edition-foil:#b18a4c; --pe-deep:#a085ad; --pe-pale:#f2cbd4; --pe-sage:#aed5c6; }
+.theme-nur-eden,.invitation.inv-refined.theme-nur-eden { --paper:#e7eee3; --soft:#fffdf2; --tone:#365a4b; --edition-petal:#e1ccac; --edition-leaf:#708e6a; --edition-foil:#aa864b; --pe-deep:#ba9764; --pe-pale:#f3e7ce; --pe-sage:#abc0a2; }
+.theme-nocturne-gala,.invitation.inv-refined.theme-nocturne-gala { --paper:#181724; --soft:#242332; --tone:#f5e7cb; --edition-petal:#9c7954; --edition-leaf:#7b828b; --edition-foil:#d5b47a; --pe-deep:#897452; --pe-pale:#e7d4ae; --pe-sage:#b0a28b; }
+.invitation.inv-refined.inv-premium-edition {
+ --pt-accent:var(--edition-foil); --pt-accent-2:var(--edition-petal); --pt-card:var(--soft); --pt-card-2:var(--paper);
+ --pt-line:var(--finish-line); --folio-surface:var(--soft); --folio-shadow:0 20px 64px #3b253017;
+ --folio-radius:100px 100px 24px 24px; --signature-card-radius:28px 28px 10px 10px;
+}
+.pe-bloom { fill:var(--edition-petal); stroke:var(--pe-deep); stroke-width:.55; }
+.pe-bloom-deep { fill:var(--pe-deep); stroke:var(--edition-petal); stroke-width:.6; }
+.pe-petal { fill:var(--pe-pale); stroke:var(--edition-petal); stroke-width:.6; }
+.pe-cream { fill:var(--soft); }
+.pe-leaf { fill:var(--edition-leaf); }
+.pe-sage { fill:var(--pe-sage); }
+.pe-gold { fill:var(--edition-foil); }
+.pe-fine { fill:none; stroke:var(--edition-foil); stroke-width:1.05; stroke-linecap:round; stroke-linejoin:round; }
+.pe-stem { fill:none; stroke:var(--edition-leaf); stroke-width:1.6; }
+.pe-leaf-vein { fill:none; stroke:var(--soft); stroke-width:.65; opacity:.4; }
+.pe-deco { fill:var(--edition-petal); opacity:.22; }
+.premium-edition-art,.premium-frame-art { position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; border-radius:inherit; }
+.premium-scene { width:100%; height:100%; opacity:.55; }
+.premium-frame-corner { position:absolute; width:210px; aspect-ratio:1; transform-origin:30% 30%; }
+.premium-frame-start { top:-19px; left:-24px; }
+.premium-frame-end { bottom:-20px; right:-24px; rotate:180deg; }
+.premium-edition-corner { width:100%; height:100%; }
+.premium-glint { position:absolute; width:5px; height:5px; rotate:45deg; background:var(--edition-foil); opacity:.5; }
+.glint-one { top:21%; left:9%; }.glint-two { top:62%; right:6%; }.glint-three { bottom:10%; left:13%; }
+.invitation.inv-refined.inv-premium-edition :is(.inv-cover,.inv-hero) { background:radial-gradient(ellipse at 10% 12%,color-mix(in srgb,var(--edition-petal) 24%,transparent),transparent 65%),var(--paper); }
+.invitation.inv-refined.inv-premium-edition .cover-frame {
+ max-width:540px; padding:72px 42px 66px; border:1px solid color-mix(in srgb,var(--edition-foil) 56%,transparent);
+ border-radius:var(--folio-radius); background:var(--soft); box-shadow:0 28px 80px #39232a24;
+}
+.invitation.inv-refined.inv-premium-edition .cover-frame::before { inset:13px; border:1px solid color-mix(in srgb,var(--edition-foil) 38%,transparent); border-radius:inherit; }
+.invitation.inv-refined.inv-premium-edition .cover-frame > :not(.premium-frame-art) { position:relative; z-index:1; }
+.invitation.inv-refined.inv-premium-edition .inv-cover .cover-frame > .cover-motif { display:none; }
+.invitation.inv-refined.inv-premium-edition .cover-frame > .cover-motif .theme-motif { width:100%; height:100%; }
+.invitation.inv-refined.inv-premium-edition .cover-frame .cover-photo { margin-top:12px !important; border-color:var(--edition-foil); box-shadow:0 12px 32px #4c283017; }
+.invitation.inv-refined.inv-premium-edition .guest-card { background:color-mix(in srgb,var(--soft) 95%,var(--edition-petal)); border:1px solid var(--finish-line); border-radius:18px; }
+.invitation.inv-refined.inv-premium-edition .inv-button:not(.outline) { color:var(--soft); background:var(--tone); border-color:var(--tone); box-shadow:0 8px 22px #39232a20; }
+.invitation.inv-refined.inv-premium-edition .inv-button { border-radius:30px; }
+.invitation.inv-refined.inv-premium-edition .inv-hero > :not(.premium-edition-art,.inv-atmosphere,.inv-ornaments) { position:relative; z-index:1; }
+.invitation.inv-refined.inv-premium-edition .inv-ornament-corner { width:240px; opacity:.76; }
+.invitation.inv-refined.inv-premium-edition .inv-ornaments-section .inv-ornament-corner { width:185px; opacity:.36; }
+.invitation.inv-refined.inv-premium-edition .inv-stationery > .inv-section { background:var(--soft); border-color:var(--finish-line); box-shadow:var(--folio-shadow); }
+.invitation.inv-refined.inv-premium-edition .inv-stationery .inv-event-paper { background:linear-gradient(145deg,var(--soft),color-mix(in srgb,var(--paper) 72%,var(--soft))); border:3px double var(--finish-line); }
+.invitation.inv-refined.inv-premium-edition .inv-section-divider { color:var(--edition-foil); gap:15px; }
+.invitation.inv-refined.inv-premium-edition .inv-section-divider .theme-motif { width:56px; height:48px; opacity:1; }
+.invitation.inv-refined.inv-premium-edition .inv-closing { background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--edition-petal) 24%,transparent),transparent 65%),var(--soft); }
+.invitation.inv-refined.inv-premium-edition .inv-closing-seal { border:3px double var(--edition-foil); background:var(--soft); }
+.invitation.inv-refined.inv-premium-edition .inv-story-card { border-radius:24px 24px 9px 9px; }
+
+/* Seraphine: garden gates, layered peonies and a champagne stationery edge. */
+.invitation.inv-refined.theme-seraphine-garden { --folio-radius:125px 125px 18px 18px; }
+.invitation.inv-refined.theme-seraphine-garden .cover-frame::after { content:''; position:absolute; inset:23px; border:1px dashed #ae875033; border-radius:inherit; pointer-events:none; }
+.invitation.inv-refined.theme-seraphine-garden .inv-names:not(.inv-names-long) { font-family:'Luxury Script',var(--font-mm-display),Georgia,serif; font-weight:400; letter-spacing:0; }
+.invitation.inv-refined.theme-seraphine-garden .inv-stationery .couple-grid > div { border-radius:100px 100px 20px 20px; border:1px solid var(--finish-line); }
+.invitation.inv-refined.theme-seraphine-garden .inv-event-date-day { color:#984f67; }
+
+/* Jubilee: an illustrated carousel and balloons, with scalloped party paper. */
+.invitation.inv-refined.theme-jubilee-carousel { --folio-radius:110px 110px 32px 32px; --signature-card-radius:30px; }
+.invitation.inv-refined.theme-jubilee-carousel .cover-frame { box-shadow:9px 10px 0 #d18caa22,0 22px 65px #71485e17; }
+.invitation.inv-refined.theme-jubilee-carousel .cover-frame::before { border:2px dashed #d18caa55; }
+.invitation.inv-refined.theme-jubilee-carousel :is(.inv-names,.inv-section > h2) { font-weight:600; }
+.invitation.inv-refined.theme-jubilee-carousel .countdown > div:nth-child(even) { background:#e8f1e7; }
+.invitation.inv-refined.theme-jubilee-carousel .inv-stationery .inv-event-paper { border-top:7px solid #e3b1c5; }
+.invitation.inv-refined.theme-jubilee-carousel .inv-closing-seal { border-style:dashed; }
+.invitation.inv-refined:is(.theme-jubilee-carousel,.theme-nur-eden) .premium-frame-end { rotate:0deg; scale:-1 1; right:-45px; bottom:-27px; }
+.invitation.inv-refined:is(.theme-jubilee-carousel,.theme-nur-eden) .inv-ornament-end { rotate:0deg; scale:-1 1; }
+
+/* Nur Eden: garden foliage, ivory lanterns, and pointed architectural arches. */
+.invitation.inv-refined.theme-nur-eden { --folio-radius:48% 48% 24px 24px / 105px 105px 24px 24px; }
+.invitation.inv-refined.theme-nur-eden .cover-frame { border-top:4px double var(--edition-foil); }
+.invitation.inv-refined.theme-nur-eden .cover-frame::before { border-radius:inherit; }
+.invitation.inv-refined.theme-nur-eden .guest-card { border-radius:36px 36px 12px 12px; }
+.invitation.inv-refined.theme-nur-eden .inv-stationery .inv-event-paper { border-radius:50px 50px 14px 14px; border-top:4px double var(--edition-foil); }
+.invitation.inv-refined.theme-nur-eden .inv-atmosphere { opacity:.3; }
+
+/* Nocturne: a dark gala invitation framed by gilded fans and hanging crystals. */
+.invitation.inv-refined.theme-nocturne-gala { --folio-radius:8px; --signature-card-radius:6px; }
+.invitation.inv-refined.theme-nocturne-gala .cover-frame { background:linear-gradient(140deg,#2c2939,#201f2c); border:3px double var(--edition-foil); }
+.invitation.inv-refined.theme-nocturne-gala .cover-frame::before { border-radius:0; border-width:0 1px 1px 0; }
+.invitation.inv-refined.theme-nocturne-gala :is(.inv-button,.guest-card) { border-radius:5px; }
+.invitation.inv-refined.theme-nocturne-gala .inv-button:not(.outline) { color:#201f2c; background:#ddc293; border-color:#ddc293; }
+.invitation.inv-refined.theme-nocturne-gala :is(input,textarea,select) { color:var(--tone); background:var(--paper); border-color:var(--finish-line); }
+.invitation.inv-refined.theme-nocturne-gala :is(input,textarea)::placeholder { color:#d2c6b4; }
+.invitation.inv-refined.theme-nocturne-gala .notice { color:var(--tone); background:#292637; border-color:var(--finish-line); }
+.invitation.inv-refined.theme-nocturne-gala .inv-bottom-nav button[aria-current] { color:var(--paper); background:var(--edition-foil); }
+.invitation.inv-refined.theme-nocturne-gala .inv-atmosphere { opacity:.2; }
+.invitation.inv-refined.theme-nocturne-gala .inv-closing-seal { border-radius:8px; }
+
+/* The catalog presents exactly the same illustration language. */
+.theme-art.premium-edition-preview { background:var(--paper); }
+.theme-art.premium-edition-preview :is(.theme-orbit,.art-corner) { display:none; }
+.theme-art.premium-edition-preview .premium-frame-corner { width:150px; }
+.theme-art.premium-edition-preview .premium-scene { opacity:.3; }
+.theme-art.premium-edition-preview::before { border:1px solid var(--edition-foil); opacity:.5; border-radius:100px 100px 8px 8px; }
+.theme-art.premium-edition-preview .art-inner { position:relative; z-index:1; }
+.theme-art.premium-edition-preview .art-symbol { width:68px; height:62px; }
+.theme-art.premium-edition-preview .art-symbol .theme-motif { width:100%; height:100%; }
+.theme-art.theme-seraphine-garden .art-names { font-family:'Luxury Script',Georgia,serif; font-size:38px; }
+.theme-art.theme-nocturne-gala::before { border-radius:0; border:3px double var(--edition-foil); }
+.premium-collection-badge { display:inline-block; padding:5px 9px; margin:0 0 12px; color:#755522; background:#f6ecd9; border:1px solid #c7a77566; border-radius:4px; font-size:9px; font-weight:700; letter-spacing:.13em; }
+
+@media (prefers-reduced-motion:no-preference) {
+ .invitation.inv-refined.inv-premium-edition .premium-frame-corner { animation:premium-bouquet-sway 18s ease-in-out infinite alternate; }
+ .invitation.inv-refined.inv-premium-edition .premium-frame-end { animation-delay:-9s; }
+ .invitation.inv-refined.inv-premium-edition .premium-glint { animation:premium-glint 8s ease-in-out infinite; }
+ .invitation.inv-refined.inv-premium-edition .glint-two { animation-delay:-3s; }.invitation.inv-refined.inv-premium-edition .glint-three { animation-delay:-5s; }
+ .invitation.inv-refined.theme-jubilee-carousel .inv-ornament-corner { animation-name:signature-ribbon; animation-duration:20s; }
+ .invitation.inv-refined.theme-nur-eden .inv-ornament-corner { animation-name:signature-cradle; animation-duration:22s; }
+ .invitation.inv-refined.theme-nocturne-gala :is(.premium-frame-corner,.inv-ornament-corner) { animation:none; }
+}
+@keyframes premium-bouquet-sway { from { transform:rotate(-1.2deg) translateY(0); } to { transform:rotate(1.2deg) translateY(3px); } }
+@keyframes premium-glint { 0%,100% { opacity:.15; scale:.75; } 50% { opacity:.7; scale:1; } }
+@media (max-width:600px) {
+ .invitation.inv-refined.inv-premium-edition .cover-frame { padding-inline:28px; padding-top:70px; padding-bottom:60px; }
+ .invitation.inv-refined.inv-premium-edition .premium-frame-corner { width:160px; }
+ .invitation.inv-refined.inv-premium-edition .inv-ornament-corner { width:175px; opacity:.7; }
+ .invitation.inv-refined.inv-premium-edition .inv-ornaments-section .inv-ornament-corner { width:135px; opacity:.28; }
+ .invitation.inv-refined.inv-premium-edition .inv-stationery > .inv-section { margin-block:64px; }
+}
+@media (max-width:360px) { .invitation.inv-refined.inv-premium-edition .cover-frame { padding-inline:20px; }.invitation.inv-refined.inv-premium-edition .premium-frame-corner { width:138px; } }
+@media (prefers-reduced-motion:reduce) { .invitation.inv-premium-edition :is(.premium-frame-corner,.premium-glint,.inv-ornament-corner) { animation:none !important; } }

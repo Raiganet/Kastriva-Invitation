@@ -21,7 +21,8 @@
     "016_aurora_premium_music.sql",
     "017_music_volume.sql",
     "018_imported_music.sql",
-    "20261009115018_occasion_collection.sql"
+    "20261009115018_occasion_collection.sql",
+    "20261009135319_premium_editions.sql"
   ],
   "openWishesProtocol": 1,
   "openWishesAutoPublishProtocol": 1

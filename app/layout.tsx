@@ -25,6 +25,7 @@ import './invitation-controls.css';
 import './invitation-signatures.css';
 import './invitation-mobile-finish.css';
 import './invitation-occasions.css';
+import './invitation-premium-editions.css';
 import './invitation-typography.css';
 import './brand-identity.css';
 const modernDisplayFont = Cormorant_Garamond({

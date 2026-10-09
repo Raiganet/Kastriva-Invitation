@@ -380,5 +380,90 @@
     "colors": ["#071829", "#E4EFFC", "#91B7DF"],
     "features": ["Sampul arsitektural", "Transisi slide elegan", "Musik instrumental", "Detail waktu & lokasi", "Demo ucapan & RSVP"],
     "active": true
+  },
+  {
+    "slug": "seraphine-garden",
+    "name": "Seraphine Garden",
+    "category": "pernikahan",
+    "description": "Taman peony berlapis, gerbang floral, dan bingkai champagne untuk pernikahan bernuansa romantis yang mewah.",
+    "price": 250000,
+    "thumbnail": "🌸",
+    "colors": [
+      "#F4EBE5",
+      "#663D4A",
+      "#AE8750"
+    ],
+    "features": [
+      "Ornamen peony & foliage berlapis",
+      "Transisi sampul album",
+      "Animasi kartu bertahap",
+      "Musik & foto demo",
+      "Ucapan & RSVP",
+      "Amplop digital"
+    ],
+    "active": true
+  },
+  {
+    "slug": "jubilee-carousel",
+    "name": "Jubilee Carousel",
+    "category": "ulang-tahun",
+    "description": "Carousel pastel, rangkaian balon, dan kertas pesta berbingkai emas untuk perayaan yang penuh imajinasi.",
+    "price": 150000,
+    "thumbnail": "🎠",
+    "colors": [
+      "#F6EAF0",
+      "#71485E",
+      "#B18A4C"
+    ],
+    "features": [
+      "Ilustrasi carousel & balon",
+      "Ornamen pesta berlapis",
+      "Animasi kartu & sampul",
+      "Musik & foto demo",
+      "Demo ucapan & RSVP"
+    ],
+    "active": true
+  },
+  {
+    "slug": "nur-eden",
+    "name": "Nur Eden",
+    "category": "aqiqah",
+    "description": "Lentera ivory, taman sage, lengkung arsitektural, dan aksen bulan emas untuk menyambut anugerah keluarga.",
+    "price": 150000,
+    "thumbnail": "🏮",
+    "colors": [
+      "#E7EEE3",
+      "#365A4B",
+      "#AA864B"
+    ],
+    "features": [
+      "Lentera, bulan & taman sage",
+      "Bingkai lengkung premium",
+      "Animasi ornamen lembut",
+      "Musik piano & foto demo",
+      "Demo ucapan & RSVP"
+    ],
+    "active": true
+  },
+  {
+    "slug": "nocturne-gala",
+    "name": "Nocturne Gala",
+    "category": "acara-kantor",
+    "description": "Art deco midnight, kipas emas, dan rangkaian kristal gantung untuk gala serta perayaan pencapaian tim.",
+    "price": 250000,
+    "thumbnail": "✦",
+    "colors": [
+      "#181724",
+      "#F5E7CB",
+      "#D5B47A"
+    ],
+    "features": [
+      "Art deco & kristal emas",
+      "Sampul gala berlapis",
+      "Transisi slide & kartu",
+      "Musik & foto demo",
+      "Demo ucapan & RSVP"
+    ],
+    "active": true
   }
 ]

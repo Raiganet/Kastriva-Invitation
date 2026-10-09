@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { probeBackend, backendHeaders } from '../lib/readiness.ts';
 import {CAPABILITY_DEFINITIONS} from '../lib/database-capabilities.ts';
 const config = { url: 'https://test.supabase.co', key: 'sb_publishable_TEST_ONLY' };
-const features = {contract_version:1,base_schema_version:7,diagnostics_migration:16,known_templates:20,
+const features = {contract_version:1,base_schema_version:7,diagnostics_migration:16,known_templates:24,
  capabilities:Object.fromEntries(CAPABILITY_DEFINITIONS.map(x=>[x.key,true]))};
 const healthy = [{external:{email:true},disable_signup:false},7,[{slug:'elegant-rose'}],features,1,1];
 function mock(bodies:unknown[]=healthy,statuses=[200,200,200,200,200,200]) {

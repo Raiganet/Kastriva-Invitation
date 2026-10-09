@@ -24,6 +24,10 @@ const styles: Record<string, OrnamentStyle> = {
   'peach-confetti': 'celebration',
   'little-moon': 'celestial',
   'sapphire-summit': 'geometric',
+  'seraphine-garden': 'floral',
+  'jubilee-carousel': 'celebration',
+  'nur-eden': 'lattice',
+  'nocturne-gala': 'geometric',
 };
 
 /** Local vector artwork. Kept outside the text flow and hidden from assistive technology. */

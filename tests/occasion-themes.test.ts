@@ -20,7 +20,7 @@ test('restoring a 16-theme CMS backup retains the four current occasion rows and
  const old=parseCmsDocument({version:1,content:read('data/cms-defaults.json'),catalog:catalog.slice(0,16)});
  const current=structuredClone(catalog);current[16].price=225000;current[17].active=false;
  const restored=restoreCmsDocument(old,current);
- assert.equal(restored.catalog.length,20);assert.equal(restored.catalog[16].price,225000);assert.equal(restored.catalog[17].active,false);
+ assert.equal(restored.catalog.length,24);assert.equal(restored.catalog[16].price,225000);assert.equal(restored.catalog[17].active,false);
  const substituted=structuredClone(old.catalog);substituted[0]=current[16];
  assert.throws(()=>parseCmsCatalog(substituted));
  assert.throws(()=>parseCmsCatalog(current.slice(0,19)));

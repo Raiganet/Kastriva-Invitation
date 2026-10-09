@@ -7,9 +7,12 @@ export const BOTANICAL_CATALOG_SLUGS=[...LUXURY_CATALOG_SLUGS,'botanical-blush']
 export const IMPORTED_THEME_SLUGS=['elementor-luxury-1','botanical-blush','aurora-modern'] as const;
 export const AURORA_CATALOG_SLUGS=[...BOTANICAL_CATALOG_SLUGS,'aurora-modern'] as const;
 export const OCCASION_THEME_SLUGS=['velvet-vow','peach-confetti','little-moon','sapphire-summit'] as const;
-export const ALL_THEME_SLUGS=[...AURORA_CATALOG_SLUGS,...OCCASION_THEME_SLUGS] as const;
+export const OCCASION_CATALOG_SLUGS=[...AURORA_CATALOG_SLUGS,...OCCASION_THEME_SLUGS] as const;
+export const PREMIUM_EDITION_SLUGS=['seraphine-garden','jubilee-carousel','nur-eden','nocturne-gala'] as const;
+export const ALL_THEME_SLUGS=[...OCCASION_CATALOG_SLUGS,...PREMIUM_EDITION_SLUGS] as const;
 /** Only complete historical generations are valid backups; arbitrary subsets are not. */
-export const CMS_CATALOG_GENERATIONS:readonly (readonly string[])[]=[LEGACY_THEME_SLUGS,HERITAGE_CATALOG_SLUGS,LUXURY_CATALOG_SLUGS,BOTANICAL_CATALOG_SLUGS,AURORA_CATALOG_SLUGS,ALL_THEME_SLUGS];
-export const WEDDING_THEME_SLUGS:readonly string[]=[...LEGACY_THEME_SLUGS.slice(0,5),...HERITAGE_THEME_SLUGS,...IMPORTED_THEME_SLUGS,'velvet-vow'];
+export const CMS_CATALOG_GENERATIONS:readonly (readonly string[])[]=[LEGACY_THEME_SLUGS,HERITAGE_CATALOG_SLUGS,LUXURY_CATALOG_SLUGS,BOTANICAL_CATALOG_SLUGS,AURORA_CATALOG_SLUGS,OCCASION_CATALOG_SLUGS,ALL_THEME_SLUGS];
+export const WEDDING_THEME_SLUGS:readonly string[]=[...LEGACY_THEME_SLUGS.slice(0,5),...HERITAGE_THEME_SLUGS,...IMPORTED_THEME_SLUGS,'velvet-vow','seraphine-garden'];
+export function isPremiumEditionTheme(slug:string){return (PREMIUM_EDITION_SLUGS as readonly string[]).includes(slug);}
 export function isOccasionTheme(slug:string){return (OCCASION_THEME_SLUGS as readonly string[]).includes(slug);}
 export function isHeritageTheme(slug:string){return (HERITAGE_THEME_SLUGS as readonly string[]).includes(slug);}

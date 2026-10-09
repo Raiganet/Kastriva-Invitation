@@ -1,10 +1,12 @@
 import {BlushRose} from './BotanicalBlushArtwork';
 import {HeritageMotif} from './HeritageArtwork';
-import {isHeritageTheme,isOccasionTheme} from '@/lib/theme-registry';
+import {isHeritageTheme,isOccasionTheme,isPremiumEditionTheme} from '@/lib/theme-registry';
 import {OccasionMotif} from './OccasionArtwork';
+import {PremiumEditionMotif} from './PremiumEditionArtwork';
 import {LuxuryRosette} from './ElementorLuxuryArtwork';
 /** Decorative vector artwork, shared by catalog previews and invitation covers. */
 export default function ThemeMotif({slug}:{slug:string}) {
+ if(isPremiumEditionTheme(slug))return <PremiumEditionMotif slug={slug}/>;
  if(isOccasionTheme(slug))return <OccasionMotif slug={slug}/>;
  if(slug==='botanical-blush')return <BlushRose className="theme-motif"/>;
  if(isHeritageTheme(slug))return <HeritageMotif slug={slug}/>;

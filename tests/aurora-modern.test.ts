@@ -8,7 +8,7 @@ import {blankContent,parseDraft} from '../lib/domain.ts';
 const read=(p:string)=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const templates=JSON.parse(read('data/templates.json'));
 const owner='00000000-0000-4000-8000-000000000001';
-test('Aurora Luxe Motion is a premium wedding renderer with full registry identity',()=>{const theme=templates.find((x:{slug:string})=>x.slug==='aurora-modern');assert.ok(theme);assert.equal(theme.active,true);assert.equal(theme.category,'pernikahan');assert.equal(theme.price,250000);assert.ok(ALL_THEME_SLUGS.includes('aurora-modern'));assert.ok(WEDDING_THEME_SLUGS.includes('aurora-modern'));assert.equal(ALL_THEME_SLUGS.length,20);});
+test('Aurora Luxe Motion is a premium wedding renderer with full registry identity',()=>{const theme=templates.find((x:{slug:string})=>x.slug==='aurora-modern');assert.ok(theme);assert.equal(theme.active,true);assert.equal(theme.category,'pernikahan');assert.equal(theme.price,250000);assert.ok(ALL_THEME_SLUGS.includes('aurora-modern'));assert.ok(WEDDING_THEME_SLUGS.includes('aurora-modern'));assert.equal(ALL_THEME_SLUGS.length,24);});
 test('premium music library keeps eight original built-in choices and supports imported tracks plus none',()=>{
  assert.equal(ORIGINAL_MUSIC_TRACKS.length,8);
  assert.equal(MUSIC_TRACK_IDS.length,MUSIC_TRACKS.length+1);
