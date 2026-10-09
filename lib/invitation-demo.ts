@@ -7,6 +7,7 @@ const music:Record<string,SynthMusicTrackKey>={
  'aqiqah-blessing':'moonlight','corporate-event':'ocean-vows','islami-sakinah':'moonlight',
  'adat-sunda':'serenade','adat-minang':'cinematic-bloom','adat-jawa':'celestial-waltz',
  'adat-bali':'ever-after','elementor-luxury-1':'cinematic-bloom','botanical-blush':'serenade','aurora-modern':'starlight',
+ 'velvet-vow':'ever-after','peach-confetti':'sakura-promise','little-moon':'moonlight','sapphire-summit':'ocean-vows',
 };
 export function demoMusic(slug:string):SynthMusicTrackKey{return music[slug]??'serenade';}
 

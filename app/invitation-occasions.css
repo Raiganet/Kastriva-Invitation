@@ -1,0 +1,126 @@
+/* Four occasion editions. The shared reading, media and motion controllers apply. */
+.theme-velvet-vow {
+  --paper: #291a30; --tone: #f8e4d1; --soft: #3a273f;
+  --edition-petal: #b583a4; --edition-leaf: #a2a890; --edition-foil: #d6b28a;
+}
+.theme-peach-confetti {
+  --paper: #fff1e7; --tone: #aa482f; --soft: #fffaf3;
+  --edition-petal: #e8a089; --edition-leaf: #73a6a5; --edition-foil: #c39247;
+}
+.theme-little-moon {
+  --paper: #e8f1f5; --tone: #345976; --soft: #f9fcfd;
+  --edition-petal: #9fbdd1; --edition-leaf: #b6c8c2; --edition-foil: #ae864c;
+}
+.theme-sapphire-summit {
+  --paper: #071829; --tone: #e4effc; --soft: #102b44;
+  --edition-petal: #638ec4; --edition-leaf: #4dced0; --edition-foil: #91b7df;
+}
+.invitation.inv-refined.theme-velvet-vow { --edition-petal: #b583a4; --edition-leaf: #a2a890; --edition-foil: #d6b28a; --folio-radius: 40px 40px 12px 12px; --signature-card-radius: 24px 24px 8px 8px; }
+.invitation.inv-refined.theme-peach-confetti { --edition-petal: #e8a089; --edition-leaf: #73a6a5; --edition-foil: #c39247; --folio-radius: 36px; --signature-card-radius: 26px; }
+.invitation.inv-refined.theme-little-moon { --edition-petal: #9fbdd1; --edition-leaf: #b6c8c2; --edition-foil: #ae864c; --folio-radius: 70px 70px 22px 22px; --signature-card-radius: 28px; }
+.invitation.inv-refined.theme-sapphire-summit { --edition-petal: #638ec4; --edition-leaf: #4dced0; --edition-foil: #91b7df; --folio-radius: 8px; --signature-card-radius: 6px; }
+.invitation.inv-refined.inv-occasion {
+  --pt-accent: var(--edition-foil); --pt-accent-2: var(--edition-petal);
+  --pt-card: var(--soft); --pt-card-2: var(--paper);
+  --pt-line: var(--finish-line); --folio-surface: var(--soft);
+  --folio-shadow: 0 18px 48px color-mix(in srgb, var(--paper) 42%, transparent);
+}
+.occasion-artwork { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; color: var(--edition-foil); }
+.occasion-scene { width: 100%; height: 100%; opacity: .22; }
+.occasion-petal { fill: var(--edition-petal); fill-opacity: .5; }
+.occasion-leaf { fill: var(--edition-leaf); fill-opacity: .6; }
+.occasion-foil { fill: var(--edition-foil); fill-opacity: .75; }
+.occasion-cloud { fill: var(--soft); stroke: var(--edition-petal); }
+.occasion-ribbon { stroke: var(--edition-petal); stroke-width: 25; opacity: .3; }
+.occasion-rainbow { stroke-width: 16; stroke: var(--edition-petal); opacity: .4; }
+.occasion-beam { stroke-width: 18; stroke: var(--edition-leaf); opacity: .14; }
+.occasion-grid { opacity: .22; }
+.invitation.inv-refined.inv-occasion :is(.inv-cover, .inv-hero) {
+  background: radial-gradient(ellipse at 10% 5%, color-mix(in srgb, var(--edition-petal) 20%, transparent), transparent 58%), var(--paper);
+}
+.invitation.inv-refined.inv-occasion .cover-frame {
+  max-width: 520px; padding: 40px 38px; border-radius: var(--folio-radius);
+  background: linear-gradient(145deg, color-mix(in srgb, var(--soft) 94%, transparent), var(--soft));
+  border: 1px solid color-mix(in srgb, var(--edition-foil) 48%, transparent);
+  box-shadow: 0 28px 75px #07182920;
+}
+.invitation.inv-refined.inv-occasion .cover-frame::before { border-radius: inherit; inset: 12px; border-color: color-mix(in srgb, var(--edition-foil) 28%, transparent); }
+.invitation.inv-refined.inv-occasion .cover-frame .cover-photo { margin-top: 14px !important; }
+.invitation.inv-refined.inv-occasion .inv-cover .cover-frame > .cover-motif {
+  display: block; position: absolute; top: 34px; right: 12px; width: 62px; height: 54px;
+  margin: 0; color: var(--edition-foil); opacity: .85; rotate: 6deg;
+}
+.invitation.inv-refined.inv-occasion .cover-frame > .cover-motif .theme-motif { width: 100%; height: 100%; }
+.invitation.inv-refined.inv-occasion .guest-card { border: 1px solid var(--finish-line); border-radius: var(--signature-card-radius); background: color-mix(in srgb, var(--paper) 55%, var(--soft)); }
+.invitation.inv-refined.inv-occasion .inv-section-divider { color: var(--edition-foil); }
+.invitation.inv-refined.inv-occasion .inv-closing { background: radial-gradient(ellipse at 50% 0, color-mix(in srgb, var(--edition-petal) 14%, transparent), transparent 68%), var(--soft); }
+.invitation.inv-refined.inv-occasion :is(.inv-button, .gallery-control) { border-radius: 8px; }
+.invitation.inv-refined.inv-occasion .inv-hero > :not(.occasion-artwork, .inv-atmosphere, .inv-ornaments) { position: relative; z-index: 1; }
+.invitation.inv-refined.inv-occasion .inv-ornament-corner { opacity: .7; }
+
+/* Velvet: a folded silk invitation with a fine champagne double rule. */
+.invitation.inv-refined.theme-velvet-vow .cover-frame { border-radius: 110px 110px 14px 14px; padding-top: 48px; }
+.invitation.inv-refined.theme-velvet-vow .cover-frame::after { content: ''; position: absolute; inset: 22px; border: 1px dashed #d6b28a26; border-radius: 95px 95px 6px 6px; pointer-events: none; }
+.invitation.inv-refined.theme-velvet-vow .inv-names:not(.inv-names-long) { font-family: 'Luxury Script', var(--font-mm-display), Georgia, serif; font-weight: 400; letter-spacing: 0; }
+.invitation.inv-refined.theme-velvet-vow .inv-button:not(.outline) { background: #e4c9a7; color: #332036; border-color: #e4c9a7; box-shadow: 0 8px 24px #0002; }
+.invitation.inv-refined.theme-velvet-vow .inv-stationery .couple-grid > div { border-radius: 100px 100px 20px 20px; }
+.invitation.inv-refined.theme-velvet-vow .inv-stationery .inv-event-paper { border-style: double; border-width: 3px; }
+.invitation.inv-refined.theme-velvet-vow .inv-closing-seal { border-style: double; border-width: 3px; }
+
+/* Peach: soft arches, party ribbons and tactile rounded paper cards. */
+.invitation.inv-refined.theme-peach-confetti .cover-frame { border-radius: 90px 90px 30px 30px; border-color: #df9c8155; box-shadow: 9px 10px 0 #e8b09430, 0 24px 65px #aa482f15; }
+.invitation.inv-refined.theme-peach-confetti :is(.inv-names, .inv-section > h2) { font-weight: 600; }
+.invitation.inv-refined.theme-peach-confetti :is(.inv-button, .guest-card, .gallery-control) { border-radius: 26px; }
+.invitation.inv-refined.theme-peach-confetti .inv-button:not(.outline) { background: #b24c35; color: #fffaf3; border-color: #b24c35; }
+.invitation.inv-refined.theme-peach-confetti .inv-stationery .inv-event-paper { border-top: 5px solid #dfa68b; }
+.invitation.inv-refined.theme-peach-confetti .countdown > div:nth-child(even) { background: #e8f0e8; }
+.invitation.inv-refined.theme-peach-confetti .inv-closing-seal { background: #ffe2ca; border-style: dashed; }
+
+/* Little Moon: open blue skies, hanging stars and rounded cloud-white stationery. */
+.invitation.inv-refined.theme-little-moon .cover-frame { border-radius: 140px 140px 30px 30px; padding-top: 46px; }
+.invitation.inv-refined.theme-little-moon .inv-button:not(.outline) { background: #345976; color: #f9fcfd; border-color: #345976; border-radius: 30px; }
+.invitation.inv-refined.theme-little-moon .inv-stationery .inv-event-paper { border-top: 3px solid #b8cad7; }
+.invitation.inv-refined.theme-little-moon .inv-closing-seal { background: #edf4f7; border-color: #ae864c66; }
+.invitation.inv-refined.theme-little-moon .inv-atmosphere { opacity: .4; }
+.invitation.inv-refined.theme-little-moon .occasion-scene { opacity: .55; }
+
+/* Sapphire: architectural rails and a restrained, high-contrast event folio. */
+.invitation.inv-refined.theme-sapphire-summit { font-family: var(--font-mm-body), Arial, sans-serif; }
+.invitation.inv-refined.theme-sapphire-summit :is(.inv-names, .inv-section > h2, .art-names) { font-family: var(--font-mm-body), Arial, sans-serif; font-weight: 600; letter-spacing: -.03em; }
+.invitation.inv-refined.theme-sapphire-summit .cover-frame { border-radius: 6px; border-top: 4px solid #91b7df; background: linear-gradient(145deg, #163650, #0d2237); }
+.invitation.inv-refined.theme-sapphire-summit .cover-frame::before { border-radius: 0; border-width: 0 1px 1px 0; }
+.invitation.inv-refined.theme-sapphire-summit .inv-button:not(.outline) { background: #b7d8f1; border-color: #b7d8f1; color: #102b44; }
+.invitation.inv-refined.theme-sapphire-summit .inv-stationery .inv-event-paper { border-left: 4px solid #91b7df; }
+.invitation.inv-refined.theme-sapphire-summit .inv-atmosphere { opacity: .25; }
+.invitation.inv-refined.theme-sapphire-summit .inv-closing-seal { border-radius: 8px; }
+.invitation.inv-refined:is(.theme-velvet-vow, .theme-sapphire-summit) :is(input, textarea, select) { color: var(--tone); background: var(--paper); border-color: var(--finish-line); }
+.invitation.inv-refined:is(.theme-velvet-vow, .theme-sapphire-summit) :is(input, textarea)::placeholder { color: color-mix(in srgb, var(--tone) 66%, transparent); }
+.invitation.inv-refined:is(.theme-velvet-vow, .theme-sapphire-summit) .notice { color: var(--tone); background: color-mix(in srgb, var(--edition-foil) 10%, var(--paper)); border-color: var(--finish-line); }
+.invitation.inv-refined:is(.theme-velvet-vow, .theme-sapphire-summit) .inv-bottom-nav button[aria-current] { color: var(--paper); background: var(--edition-foil); }
+
+/* Catalog previews use the same inks and original artwork as their full demos. */
+.theme-art:is(.theme-velvet-vow, .theme-peach-confetti, .theme-little-moon, .theme-sapphire-summit) { background: radial-gradient(ellipse at 0 0, color-mix(in srgb, var(--edition-petal) 20%, transparent), transparent 70%), var(--paper); }
+.theme-art:is(.theme-velvet-vow, .theme-peach-confetti, .theme-little-moon, .theme-sapphire-summit) :is(.theme-orbit, .art-corner) { display: none; }
+.theme-art.theme-velvet-vow::before { border-radius: 110px 110px 8px 8px; border-color: var(--edition-foil); opacity: .5; }
+.theme-art.theme-velvet-vow .art-names { font-family: 'Luxury Script', Georgia, serif; font-size: 38px; }
+.theme-art.theme-peach-confetti::before { border: 2px dashed var(--edition-petal); border-radius: 90px 90px 24px 24px; opacity: .55; }
+.theme-art.theme-little-moon::before { border-radius: 150px 150px 20px 20px; border-color: var(--edition-foil); }
+.theme-art.theme-sapphire-summit::before { border-radius: 0; border-width: 3px 1px 1px; border-color: var(--edition-foil); opacity: .55; }
+.theme-art.theme-sapphire-summit .art-names { font-family: var(--font-mm-body), Arial, sans-serif; font-size: 26px; font-weight: 600; letter-spacing: -.04em; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined.theme-velvet-vow .inv-ornament-corner { animation-duration: 22s; }
+  .invitation.inv-refined.theme-peach-confetti .inv-ornament-corner { animation-name: signature-ribbon; animation-duration: 16s; }
+  .invitation.inv-refined.theme-little-moon .inv-ornament-corner { animation-name: signature-cradle; animation-duration: 18s; }
+  .invitation.inv-refined.theme-sapphire-summit .inv-ornament-corner { animation: none; }
+  .invitation.inv-refined.inv-occasion .inv-motion-visible > .occasion-artwork .occasion-scene { animation: occasion-arrive 1300ms var(--finish-ease) both; }
+}
+@keyframes occasion-arrive { from { opacity: 0; transform: translateY(10px); } }
+@media (max-width: 600px) {
+  .invitation.inv-refined.inv-occasion .cover-frame { padding-inline: 24px; }
+  .invitation.inv-refined.inv-occasion .inv-stationery > .inv-section { margin-block: 64px; }
+  .invitation.inv-refined.inv-occasion .inv-ornament-corner { width: 145px; opacity: .55; }
+  .invitation.inv-refined.theme-sapphire-summit .inv-section > h2 { font-size: 28px; }
+}
+@media (max-width: 360px) { .invitation.inv-refined.inv-occasion .cover-frame { padding-inline: 18px; } }
+@media (prefers-reduced-motion: reduce) { .occasion-artwork *, .occasion-corner { animation: none !important; } }

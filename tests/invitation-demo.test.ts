@@ -5,7 +5,7 @@ import {demoPhotos,demoMusic,demoWishes} from '../lib/invitation-demo.ts';
 import {ALL_THEME_SLUGS} from '../lib/theme-registry.ts';
 import {isSynthMusicTrack} from '../lib/music-library.ts';
 
-test('all 16 demo themes have an original music track',()=>{
+test('all registered demo themes have an original music track',()=>{
  for(const slug of ALL_THEME_SLUGS)assert.ok(isSynthMusicTrack(demoMusic(slug)),slug);
 });
 test('demo photo sets are local, optimized and suitable for each event category',()=>{

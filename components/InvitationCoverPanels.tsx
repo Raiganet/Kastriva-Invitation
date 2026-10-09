@@ -1,8 +1,8 @@
 import ThemeMotif from './ThemeMotif';
 
 export function invitationOpeningStyle(slug:string){
- if(['modern-minimalist','corporate-event'].includes(slug))return 'slide';
- if(['galaxy-night','aurora-modern'].includes(slug))return 'light';
+ if(['modern-minimalist','corporate-event','sapphire-summit','peach-confetti'].includes(slug))return 'slide';
+ if(['galaxy-night','aurora-modern','little-moon'].includes(slug))return 'light';
  return 'album';
 }
 

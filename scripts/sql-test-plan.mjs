@@ -22,5 +22,7 @@ export function sqlTestPlan(actualNames) {
   m(expected[15]),t('016_aurora_premium_music.sql'),m(expected[15]),t('016_aurora_premium_music.sql'),
   m(expected[16]),t('017_music_volume.sql'),m(expected[16]),t('017_music_volume.sql'),
   m(expected[17]),t('018_imported_music.sql'),m(expected[17]),t('018_imported_music.sql'),
+  t('019_occasion_seed.sql'),m(expected[18]),t('019_occasion_verify.sql'),
+  m(expected[18]),t('019_occasion_verify.sql'),
  ];
 }

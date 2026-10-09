@@ -20,6 +20,10 @@ const styles: Record<string, OrnamentStyle> = {
   'elementor-luxury-1': 'geometric',
   'botanical-blush': 'floral',
   'aurora-modern': 'orbit',
+  'velvet-vow': 'floral',
+  'peach-confetti': 'celebration',
+  'little-moon': 'celestial',
+  'sapphire-summit': 'geometric',
 };
 
 /** Local vector artwork. Kept outside the text flow and hidden from assistive technology. */

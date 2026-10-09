@@ -336,5 +336,49 @@
       "Preview sebelum pesan"
     ],
     "active": true
+  },
+  {
+    "slug": "velvet-vow",
+    "name": "Velvet Vow",
+    "category": "pernikahan",
+    "description": "Plum beludru, pita champagne, dan bingkai mutiara untuk pernikahan yang intim dan anggun.",
+    "price": 200000,
+    "thumbnail": "🎀",
+    "colors": ["#291A30", "#F8E4D1", "#D6B28A"],
+    "features": ["Sampul pita champagne", "Animasi album & kartu", "Musik instrumental", "Galeri foto utuh", "Ucapan & RSVP", "Amplop digital"],
+    "active": true
+  },
+  {
+    "slug": "peach-confetti",
+    "name": "Peach Confetti",
+    "category": "ulang-tahun",
+    "description": "Lengkung peach, confetti pastel, dan kartu pesta yang ceria untuk merayakan pertambahan usia.",
+    "price": 75000,
+    "thumbnail": "🎉",
+    "colors": ["#FFF1E7", "#AA482F", "#73A6A5"],
+    "features": ["Sampul lengkung pastel", "Animasi confetti lembut", "Musik instrumental", "Galeri foto utuh", "Demo ucapan & RSVP"],
+    "active": true
+  },
+  {
+    "slug": "little-moon",
+    "name": "Little Moon",
+    "category": "aqiqah",
+    "description": "Biru berawan, bulan keemasan, dan bintang gantung untuk menyambut buah hati dengan penuh syukur.",
+    "price": 75000,
+    "thumbnail": "☁️",
+    "colors": ["#E8F1F5", "#345976", "#AE864C"],
+    "features": ["Sampul bulan & awan", "Animasi bintang lembut", "Musik piano", "Galeri foto utuh", "Demo ucapan & RSVP"],
+    "active": true
+  },
+  {
+    "slug": "sapphire-summit",
+    "name": "Sapphire Summit",
+    "category": "acara-kantor",
+    "description": "Navy sapphire, garis arsitektural, dan aksen perak untuk gathering, gala, atau perayaan pencapaian tim.",
+    "price": 200000,
+    "thumbnail": "◈",
+    "colors": ["#071829", "#E4EFFC", "#91B7DF"],
+    "features": ["Sampul arsitektural", "Transisi slide elegan", "Musik instrumental", "Detail waktu & lokasi", "Demo ucapan & RSVP"],
+    "active": true
   }
 ]

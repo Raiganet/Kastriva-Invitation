@@ -7,7 +7,7 @@ try {
  const plan=sqlTestPlan(names);
  for(const file of plan)readFileSync(new URL('../'+file,import.meta.url)); // Missing fixtures must not pass plan checks.
  const catalog=JSON.parse(readFileSync(new URL('../data/templates.json',import.meta.url),'utf8'));
- if(catalog.length!==16||new Set(catalog.map(t=>t.slug)).size!==16)throw new Error('Expected 16 unique renderer references');
+ if(catalog.length!==20||new Set(catalog.map(t=>t.slug)).size!==20)throw new Error('Expected 20 unique renderer references');
  for(const name of contract.migrations)if(!plan.includes('supabase/migrations/'+name))throw new Error('A migration was omitted from the SQL plan');
  console.log(`PASS release contract ${manifest.version}: ${names.length} migrations, ${catalog.length} renderer references, ${plan.length} SQL steps.`);
  console.log('Plan validation only, not SQL execution, dependency audit or production approval.');

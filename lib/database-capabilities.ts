@@ -12,7 +12,7 @@ export const CAPABILITY_DEFINITIONS = [
   { key: 'luxury_theme', label: 'Luxury Emerald (010)', fix: 'Periksa 010_luxury_emerald.sql dan keberadaan tema di katalog database.' },
   { key: 'botanical_theme', label: 'Botanical Blush (011)', fix: 'Periksa 011_botanical_blush.sql dan keberadaan tema di katalog database.' },
   { key: 'aurora_premium_music', label: 'Aurora Luxe Motion & koleksi musik (016)', fix: 'Periksa 016_aurora_premium_music.sql, katalog Aurora, dan validator pilihan musik.' },
-  { key: 'cms_catalog_complete', label: 'CMS dan registry 16 tema', fix: 'Periksa katalog, validator CMS, dan dokumen draft/published. Tema nonaktif tetap dihitung; jangan mereset harga.' },
+  { key: 'cms_catalog_complete', label: `CMS dan registry ${ALL_THEME_SLUGS.length} tema`, fix: 'Periksa katalog, validator CMS, dokumen draft/published, dan migrasi occasion_collection. Tema nonaktif tetap dihitung; jangan mereset harga.' },
 ] as const;
 type CapabilityKey = typeof CAPABILITY_DEFINITIONS[number]['key'];
 export type FeatureReadiness = {

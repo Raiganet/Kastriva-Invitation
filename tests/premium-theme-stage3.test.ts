@@ -4,7 +4,7 @@ import {readFileSync} from 'node:fs';
 import {ALL_THEME_SLUGS} from '../lib/theme-registry.ts';
 
 const read=(p:string)=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
-const css=read('app/invitation-theme-polish.css');
+const css=read('app/invitation-theme-polish.css')+read('app/invitation-occasions.css');
 const layout=read('app/layout.tsx');
 
 test('stage3 polish layer is loaded after stage2 premium layer',()=>{
@@ -12,7 +12,7 @@ test('stage3 polish layer is loaded after stage2 premium layer',()=>{
 });
 test('stage3 polish covers all registered themes',()=>{
  for(const slug of ALL_THEME_SLUGS)assert.ok(css.includes(`.theme-${slug}`),slug);
- assert.equal(ALL_THEME_SLUGS.length,16);
+ assert.equal(ALL_THEME_SLUGS.length,20);
 });
 test('stage3 refines headings, overlines, guest card, nav and music controls',()=>{
  for(const term of ['.inv-section>.overline','.inv-section>h2','.guest-card','.inv-bottom-nav button[aria-current]','.music-toggle[aria-pressed=true]'])assert.ok(css.includes(term),term);

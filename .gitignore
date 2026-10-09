@@ -20,3 +20,4 @@ playwright-report/
 .next-test/
 
 .diagnostics/
+supabase/.temp/

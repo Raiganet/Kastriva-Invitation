@@ -1,3 +1,5 @@
+import {isOccasionTheme} from '@/lib/theme-registry';
+import {OccasionCorner} from './OccasionArtwork';
 /** Original vector compositions. Colors come from the invitation's three decorative inks. */
 function Ink({d}:{d:string}){return <path className="inv-ornament-ink" pathLength="1" d={d}/>;}
 function Flower({x,y,size=1,petals=5}:{x:number;y:number;size?:number;petals?:number}){
@@ -18,6 +20,7 @@ function Diamond({x,y,size=1}:{x:number;y:number;size?:number}){
 }
 
 export default function InvitationCornerArtwork({slug}:{slug:string}){
+ if(isOccasionTheme(slug))return <OccasionCorner slug={slug}/>;
  let artwork;
  switch(slug){
   case 'elegant-rose': artwork=<>
