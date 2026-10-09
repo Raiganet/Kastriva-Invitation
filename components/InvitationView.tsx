@@ -121,7 +121,7 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
     {mode==='public'&&rsvpSlug&&<PublicRsvp slug={rsvpSlug}/>}
     {!!content.gifts?.length&&<InvitationGifts id={giftId} accounts={content.gifts} demo={mode==='demo'} slug={template.slug}/> }
     {message&&<p role="status" className="inv-status">{message}</p>}
-    <InvitationClosing slug={template.slug} names={names} date={date} eventDate={content.eventDate} wedding={wedding} showThemeLink={mode==='demo'&&wedding&&!previewOnly}/>
+    <InvitationClosing slug={template.slug} groom={content.groom} bride={content.bride} date={date} eventDate={content.eventDate} wedding={wedding} showThemeLink={mode==='demo'&&wedding&&!previewOnly}/>
   </div>}
   </div>
   {opened&&<InvitationControls contentId={contentId} items={navigation} embedded={embedded} music={content.music&&content.music!=='none'?music:undefined}/>}
