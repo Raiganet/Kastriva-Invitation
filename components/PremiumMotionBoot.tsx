@@ -107,6 +107,7 @@ export default function PremiumMotionBoot(){
    root.classList.add('inv-premium-motion','inv-reference-motion');
    cardMotion.prune();
    root.dataset.invPageHidden=String(document.hidden);
+   root.dataset.invMotionObserved=String(!!ambientObserver);
    for(const element of ambientTargets){
     if(!element.isConnected){ambientObserver?.unobserve(element);ambientTargets.delete(element);}
    }

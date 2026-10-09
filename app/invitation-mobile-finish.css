@@ -1,0 +1,51 @@
+/* Sleep every theme's legacy loops as well as the shared ornaments. The observer
+   flag keeps progressive enhancement readable when IntersectionObserver is absent. */
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined[data-inv-motion-observed="true"] :is(.inv-cover:not(.is-opening), .inv-hero, .inv-section, .inv-closing):not(.inv-motion-visible),
+  .invitation.inv-refined[data-inv-motion-observed="true"] :is(.inv-cover:not(.is-opening), .inv-hero, .inv-section, .inv-closing):not(.inv-motion-visible)::before,
+  .invitation.inv-refined[data-inv-motion-observed="true"] :is(.inv-cover:not(.is-opening), .inv-hero, .inv-section, .inv-closing):not(.inv-motion-visible)::after,
+  .invitation.inv-refined[data-inv-motion-observed="true"] :is(.inv-cover:not(.is-opening), .inv-hero, .inv-section, .inv-closing):not(.inv-motion-visible) *,
+  .invitation.inv-refined[data-inv-motion-observed="true"] :is(.inv-cover:not(.is-opening), .inv-hero, .inv-section, .inv-closing):not(.inv-motion-visible) *::before,
+  .invitation.inv-refined[data-inv-motion-observed="true"] :is(.inv-cover:not(.is-opening), .inv-hero, .inv-section, .inv-closing):not(.inv-motion-visible) *::after { animation-play-state: paused !important; }
+}
+.invitation.inv-refined[data-inv-page-hidden="true"],
+.invitation.inv-refined[data-inv-page-hidden="true"]::before,
+.invitation.inv-refined[data-inv-page-hidden="true"]::after,
+.invitation.inv-refined[data-inv-page-hidden="true"] *,
+.invitation.inv-refined[data-inv-page-hidden="true"] *::before,
+.invitation.inv-refined[data-inv-page-hidden="true"] *::after { animation-play-state: paused !important; }
+
+/* Individual cards already own the entrance; avoid filtering the entire long page. */
+.invitation.inv-refined .inv-content { animation: none; filter: none; }
+.invitation.inv-refined .pm-section:not(.inv-motion-visible) { will-change: auto; }
+
+@media (max-width: 600px) {
+  /* Opaque paper needs no repeated backdrop sampling while the page scrolls. */
+  .invitation.inv-refined :is(.cover-frame, .guest-card, .inv-stationery > .inv-section, .inv-closing, .inv-toolbar, .inv-controls, .inv-controls *, .event-sequence, .inv-button.outline, .gallery-photo-hint) {
+    -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+  .invitation.inv-refined .inv-controls { background: var(--soft); }
+  .invitation.inv-refined, .invitation.inv-refined :is(.inv-cover, .inv-hero) { animation: none; }
+  .invitation.inv-refined .inv-atmosphere :is(.inv-sprig, .inv-orbit, .inv-glint) { animation: none; filter: none; }
+  .invitation.inv-refined.theme-modern-minimalist .theme-motif :is(path, circle, line) { animation: none; }
+  /* Soft gradients retain the aurora without large moving blur surfaces. */
+  .invitation.inv-refined .aurora-ribbons span { filter: none; will-change: auto; background: radial-gradient(ellipse, var(--aurora-violet), transparent 70%); }
+  .invitation.inv-refined .aurora-ribbons span:nth-child(2) { background: radial-gradient(ellipse, var(--aurora-pink), transparent 70%); }
+  .invitation.inv-refined .aurora-ribbons span:nth-child(3) { background: radial-gradient(ellipse, var(--aurora-cyan), transparent 70%); }
+  .invitation.inv-refined .aurora-orbs i { filter: none; animation: none; opacity: .35; background: radial-gradient(ellipse, var(--aurora-violet), transparent 70%); }
+  .invitation.inv-refined .aurora-orbs i:nth-child(2) { background: radial-gradient(ellipse, var(--aurora-pink), transparent 70%); }
+  .invitation.inv-refined .aurora-orbs i:nth-child(3) { background: radial-gradient(ellipse, var(--aurora-cyan), transparent 70%); }
+  .invitation.inv-refined .aurora-orbs i:nth-child(4) { background: radial-gradient(ellipse, var(--aurora-blue), transparent 70%); }
+  .invitation.inv-refined .aurora-particles b:nth-child(n+9) { display: none; }
+
+  /* Keep supporting information readable at actual phone size. */
+  .invitation.inv-refined .inv-stationery :is(.person-label, .event-sequence, .location-label, .timeline-year, .gift-account-label, .gift-holder small) { font-size: 11px; letter-spacing: .1em; opacity: 1; }
+  .invitation.inv-refined .inv-stationery .countdown small { font-size: 10px; letter-spacing: .08em; }
+  .invitation.inv-refined .inv-stationery :is(.inv-caption, .inv-gallery-feedback, .location-demo, .location-status, .inv-event-status, .inv-countdown-note, .inv-gallery-play) { font-size: 12px; line-height: 1.75; opacity: 1; }
+  .invitation.inv-refined .inv-stationery :is(.inv-story-copy, .modern-story-copy, .elegant-story-copy, .wish-card) p { font-size: 14px; line-height: 1.85; }
+  .invitation.inv-refined .inv-demo-wish-list strong { font-size: 14px; }
+  .invitation.inv-refined .inv-demo-wish-list small { font-size: 11px; }
+  .invitation.inv-refined .inv-controls :is(.inv-auto-scroll button, .music-toggle) { font-size: 12px; }
+  .invitation.inv-refined .inv-controls .music-track-label { font-size: 10px; opacity: .9; }
+  .invitation.inv-refined .inv-controls .inv-bottom-nav button { flex-basis: 60px; min-width: 60px; font-size: 11px; }
+}
