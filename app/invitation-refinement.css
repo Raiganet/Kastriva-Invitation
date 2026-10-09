@@ -584,14 +584,47 @@
 @keyframes edition-leaves { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(3deg) translateY(5px); } }
 @keyframes edition-foil { 0%, 100% { opacity: .35; } 50% { opacity: .68; } }
 @keyframes edition-stars { 0%, 100% { transform: rotate(-1deg); opacity: .42; } 50% { transform: rotate(2deg); opacity: .8; } }
+/* Album motion, stage one. One transform owns both entry and pointer depth.
+   Sections themselves keep their simple reveal; photos retain the full-frame mat. */
+.invitation.inv-refined { --card-duration: 860ms; }
+.invitation.inv-refined:is(.theme-modern-minimalist, .theme-corporate-event) { --card-duration: 740ms; }
+.invitation.inv-refined:is(.theme-elegant-rose, .theme-botanical-blush, .inv-heritage) { --card-duration: 920ms; }
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal {
+    --card-enter-x: 0deg; --card-enter-y: calc(var(--card-side, 1) * 16deg);
+    transform-origin: 50% 20%;
+    transform: perspective(1200px) rotateX(var(--card-hover-x, 0deg)) rotateY(var(--card-hover-y, 0deg));
+    translate: none; scale: none; filter: none; outline-color: transparent;
+    transition: opacity var(--card-duration) var(--finish-ease), transform var(--card-duration) var(--finish-ease);
+    transition-delay: calc(var(--pm-order, 0) * 70ms);
+    backface-visibility: hidden;
+  }
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal[data-inv-card-kind="event"] { --card-enter-x: 17deg; --card-enter-y: 0deg; transform-origin: 50% 10%; }
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal[data-inv-card-kind="portrait"] { --card-enter-y: calc(var(--card-side, 1) * 20deg); }
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal.inv-card-long { --card-enter-x: 0deg; --card-enter-y: 0deg; }
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal.inv-reveal-pending {
+    opacity: 0;
+    transform: perspective(1200px) translateY(28px) rotateX(var(--card-enter-x)) rotateY(var(--card-enter-y));
+    transition-delay: 0ms;
+  }
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal:focus-within { opacity: 1; transform: none; transition-delay: 0ms; }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal[data-inv-tilt="true"] { transition-duration: 220ms; transition-delay: 0ms; }
+  .invitation.inv-refined .inv-card-reveal[data-inv-tilt="true"] :is(.inv-story-card, .modern-story-card, .elegant-story-card) { box-shadow: 0 16px 36px color-mix(in srgb, var(--tone) 13%, transparent), 0 0 0 1px color-mix(in srgb, var(--edition-foil) 32%, transparent); }
+  .invitation.inv-refined .inv-card-reveal[data-inv-tilt="true"] :is(.inv-portrait-halo, .elegant-portrait-frame) { box-shadow: 0 14px 34px color-mix(in srgb, var(--edition-petal) 30%, transparent); }
+  .invitation.inv-refined .inv-card-reveal[data-inv-tilt="true"] :is(.inv-story-copy, .modern-story-copy, .elegant-story-copy) { background-image: radial-gradient(ellipse at var(--card-light-x, 50%) var(--card-light-y, 30%), color-mix(in srgb, var(--edition-foil) 10%, transparent), transparent 75%); }
+}
 @media (prefers-reduced-motion: reduce) {
   .invitation.inv-refined *, .invitation.inv-refined *::before, .invitation.inv-refined *::after { animation: none !important; transition: none !important; }
   .invitation.inv-refined .pm-section.inv-reveal-pending { opacity: 1; transform: none; filter: none; }
   .invitation.inv-refined .pm-section .inv-moment.inv-reveal-pending { opacity: 1; transform: none; }
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal { opacity: 1 !important; transform: none !important; translate: none !important; scale: none !important; }
 }
 @media print {
   .invitation.inv-refined .inv-auto-scroll { display: none; }
   .invitation.inv-refined .pm-section.inv-reveal-pending { opacity: 1; transform: none; filter: none; }
   .invitation.inv-refined .pm-section .inv-moment.inv-reveal-pending { opacity: 1; transform: none; }
+  .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal { opacity: 1 !important; transform: none !important; translate: none !important; scale: none !important; }
   .invitation.inv-refined .inv-ornaments { display: none; }
 }

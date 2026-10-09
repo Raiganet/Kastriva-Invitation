@@ -1,5 +1,6 @@
 'use client';
 import {useEffect} from 'react';
+import {CARD_SELECTOR,createInvitationCardMotion} from './invitation-card-motion';
 
 const SECTION_SELECTOR='.inv-section,.inv-closing';
 const AMBIENT_SELECTOR='.inv-cover,.inv-hero,.inv-section,.inv-closing';
@@ -51,6 +52,7 @@ export default function PremiumMotionBoot(){
  useEffect(()=>{
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   const fine=window.matchMedia('(hover:hover) and (pointer:fine)');
+  const cardMotion=createInvitationCardMotion({reduced,fine});
   let observer:IntersectionObserver|null=null;
   let ambientObserver:IntersectionObserver|null=null;
   const ambientTargets=new Set<HTMLElement>();
@@ -59,6 +61,7 @@ export default function PremiumMotionBoot(){
   let pointerFrame=0;
 
   const reveal=(section:HTMLElement)=>{
+   if(cardMotion.has(section)){cardMotion.reveal(section);return;}
    section.classList.remove('inv-reveal-pending');
    section.classList.add('inv-revealed','pm-section-live');
   };
@@ -97,6 +100,7 @@ export default function PremiumMotionBoot(){
    // Its effect signals when imperative decoration is safe for this root.
    if(root.dataset.invHydrated!=='true')return;
    root.classList.add('inv-premium-motion','inv-reference-motion');
+   cardMotion.prune();
    root.dataset.invPageHidden=String(document.hidden);
    for(const element of ambientTargets){
     if(!element.isConnected){ambientObserver?.unobserve(element);ambientTargets.delete(element);}
@@ -124,7 +128,8 @@ export default function PremiumMotionBoot(){
     staggered.forEach((item,itemIndex)=>{
      item.classList.add('pm-stagger','inv-moment');
      item.style.setProperty('--pm-order',String(itemIndex%3));
-     watch(item);
+     if(item.matches(CARD_SELECTOR))cardMotion.watch(item,itemIndex);
+     else watch(item);
     });
     section.querySelectorAll<HTMLElement>(INTERACTIVE_SELECTOR).forEach(item=>item.classList.add('pm-interactive'));
     section.querySelectorAll<HTMLElement>(DEPTH_SELECTOR).forEach(item=>item.classList.add('pm-depth-card'));
@@ -146,9 +151,10 @@ export default function PremiumMotionBoot(){
   };
   const preferenceChanged=()=>{
    rebuildObserver();
+   cardMotion.refresh();
    document.querySelectorAll<HTMLElement>('.invitation .inv-reveal-pending').forEach(element=>{
     if(reduced.matches)reveal(element);
-    else observer?.observe(element);
+    else if(!cardMotion.has(element))observer?.observe(element);
    });
    schedule();
   };
@@ -215,6 +221,7 @@ export default function PremiumMotionBoot(){
   return()=>{
    if(frame)window.cancelAnimationFrame(frame);
    if(pointerFrame)window.cancelAnimationFrame(pointerFrame);
+   cardMotion.dispose();
    observer?.disconnect();ambientObserver?.disconnect();ambientTargets.clear();mutations?.disconnect();
    reduced.removeEventListener('change',preferenceChanged);
    document.removeEventListener('pointermove',pointerMove);
