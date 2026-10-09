@@ -1,12 +1,14 @@
 'use client';
 import {useCallback,useEffect,useRef,useState} from 'react';
-import {DEFAULT_MUSIC_VOLUME,isSynthMusicTrack,musicLabel,musicTrack,type InvitationMusic,type SynthMusicTrackKey} from '@/lib/music-library';
+import {DEFAULT_MUSIC_VOLUME,isSynthMusicTrack,musicLabel,musicTrack,type InvitationMusic,type SynthMusicTrackKey,type OriginalMusicTrackKey} from '@/lib/music-library';
+import {isHeritageMusicTrack} from '@/lib/heritage-music';
+import {heritageSpacing,scheduleHeritageStep} from '@/lib/heritage-audio';
 
 type SynthConfig={
  bpm:number; chords:readonly (readonly number[])[]; pattern:readonly number[]; waveform:OscillatorType;
  volume:number; release:number; octave?:number; filter:number; sparkle?:boolean; bass?:boolean; waltz?:boolean;
 };
-const TRACKS:Record<SynthMusicTrackKey,SynthConfig>={
+const TRACKS:Record<OriginalMusicTrackKey,SynthConfig>={
  serenade:{bpm:78,chords:[[60,64,67,71],[57,60,64,67],[53,57,60,64],[55,59,62,67]],pattern:[0,1,2,3,2,1,3,2],waveform:'sine',volume:.105,release:2.8,filter:3200,bass:true},
  starlight:{bpm:92,chords:[[57,60,64,69],[53,57,60,64],[60,64,67,71],[55,59,62,67]],pattern:[0,2,1,3,2,3,1,2],waveform:'sine',volume:.09,release:2.3,filter:5200,sparkle:true},
  moonlight:{bpm:68,chords:[[57,60,64,69],[52,55,59,64],[53,57,60,64],[55,59,62,67]],pattern:[0,1,2,1,3,2,1,2],waveform:'triangle',volume:.085,release:3.4,filter:2500,bass:true},
@@ -23,7 +25,7 @@ export function useInvitationMusic(track:InvitationMusic,active=true,volumePerce
  const context=useRef<AudioContext|null>(null),masterGain=useRef<GainNode|null>(null),timer=useRef<number|null>(null);
  const fileAudio=useRef<HTMLAudioElement|null>(null),generation=useRef(0);
  const volume=Math.max(0,Math.min(100,Number.isFinite(volumePercent)?Math.round(volumePercent):DEFAULT_MUSIC_VOLUME));
- const gainFor=(id:SynthMusicTrackKey)=>TRACKS[id].volume*(volume/50);
+ const gainFor=(id:SynthMusicTrackKey)=>(isHeritageMusicTrack(id)?.24:TRACKS[id].volume)*(volume/50);
  const [playing,setPlaying]=useState(false),[error,setError]=useState('');
 
  const stop=useCallback(()=>{
@@ -56,15 +58,31 @@ export function useInvitationMusic(track:InvitationMusic,active=true,volumePerce
    return;
   }
   if(!isSynthMusicTrack(track)){setError('Pilihan musik tidak didukung.');return;}
-  const config=TRACKS[track];
+  const heritage=isHeritageMusicTrack(track)?track:null;
+  const config=isHeritageMusicTrack(track)?null:TRACKS[track];
   let audio:AudioContext|null=null;
   try{
    audio=new AudioContext();context.current=audio;await audio.resume();
    if(token!==generation.current||context.current!==audio)return;
    if(audio.state!=='running')throw new Error('Audio not running');
    const master=audio.createGain();master.gain.value=gainFor(track);masterGain.current=master;
-   const filter=audio.createBiquadFilter();filter.type='lowpass';filter.frequency.value=config.filter;filter.Q.value=.5;
+   const filter=audio.createBiquadFilter();filter.type='lowpass';filter.frequency.value=config?.filter??4600;filter.Q.value=.5;
    filter.connect(master);master.connect(audio.destination);
+   if(heritage){
+    const delay=audio.createDelay(.5),wet=audio.createGain();delay.delayTime.value=.23;wet.gain.value=.14;
+    filter.connect(delay);delay.connect(wet);wet.connect(master);
+    let step=0,next=audio.currentTime+.06;
+    const schedule=()=>{
+     if(!audio||audio.state!=='running')return;
+     // Never catch up minutes of notes after a throttled timer or suspended device.
+     if(next<audio.currentTime-.1)next=audio.currentTime+.04;
+     while(next<audio.currentTime+.4){scheduleHeritageStep(audio,filter,heritage,step++,next);next+=heritageSpacing(heritage);}
+    };
+    schedule();timer.current=window.setInterval(schedule,120);setError('');setPlaying(true);
+    audio.onstatechange=()=>{if(context.current===audio&&audio?.state!=='running')stop();};
+    return;
+   }
+   if(!config)throw new Error('Missing score');
    let step=0,next=audio.currentTime+.06;
    const beat=60/config.bpm,spacing=config.waltz?beat/3:beat/2,pattern=config.pattern.length?config.pattern:ARP_NORMAL;
    const tone=(midi:number,at:number,level:number,release:number,wave:OscillatorType,detune=0)=>{

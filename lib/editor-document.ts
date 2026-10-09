@@ -1,4 +1,5 @@
 import {categoryForTheme,fieldsForCategory} from './invitation-category.ts';
+import {weddingMusic} from './theme-music.ts';
 import { asRecord, parseDraft, parseSave, blankContent, invitationEvents, withEvents, validDate, safeMapHref, UUID, ValidationError } from './domain.ts';
 import type { DraftContent } from './types.ts';
 export type EditorDocument = { theme: string; content: DraftContent };
@@ -67,5 +68,5 @@ export function movePhoto(paths: string[], from: number, to: number): string[] {
 }
 
 export function blankContentForTheme(theme:string):DraftContent {
-  return {...blankContent,opening:fieldsForCategory(categoryForTheme(theme)||'pernikahan').opening,photoPaths:[]};
+  return {...blankContent,opening:fieldsForCategory(categoryForTheme(theme)||'pernikahan').opening,photoPaths:[],...(weddingMusic(theme)?{music:'theme' as const,musicVolume:45}:{})};
 }

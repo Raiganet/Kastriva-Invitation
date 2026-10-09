@@ -146,6 +146,8 @@
 .music-picker{margin:18px 0 26px;padding:22px;border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#fff,#fbf7f8);box-shadow:var(--shadow)}
 .music-picker-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;margin-bottom:18px}
 .music-picker-heading h3{margin:0 0 7px;font:500 21px/1.3 Georgia,serif}.music-picker-heading p{margin:0;max-width:520px;font-size:12px;line-height:1.8}
+.music-theme-recommendation{display:grid;gap:7px;margin:0 0 20px;padding:18px;border:1px solid #cfdbce;border-radius:14px;background:linear-gradient(120deg,#edf3e9,#faf5eb);color:#304c3e}
+.music-theme-recommendation .eyebrow{font-size:9px;letter-spacing:1.6px;color:#526b58}.music-theme-recommendation strong{font:500 22px/1.3 Georgia,serif}.music-theme-recommendation p{margin:0;font-size:12px;line-height:1.7}.music-theme-recommendation small{font-size:11px;color:#3c5945}.music-theme-recommendation .button{justify-self:start;margin-top:4px}
 .music-selection-card{display:flex;gap:15px;align-items:center;padding:15px;border:1px solid #eadde1;border-radius:14px;background:#fff;margin-top:12px}
 .music-selection-card strong{display:block;font-size:14px}.music-selection-card small{display:block;color:var(--brand);font-size:10px;letter-spacing:.8px;margin-top:2px}.music-selection-card p{margin:5px 0 0;font-size:11px;line-height:1.7}
 .music-selection-icon{display:flex;align-items:center;justify-content:center;gap:3px;width:48px;height:48px;flex:0 0 48px;border-radius:50%;background:#f3e8ed;color:var(--brand)}

@@ -33,6 +33,7 @@ import type { DraftContent, Template } from '@/lib/types';
 import { calendarFile, eventInstant, invitationEvents, eventDateLabel } from '@/lib/domain';
 import { categories } from '@/lib/templates';
 import {DEFAULT_MUSIC_VOLUME} from '@/lib/music-library';
+import {resolveThemeMusic} from '@/lib/theme-music';
 export default function InvitationView({template,content,guest='Tamu Undangan',mode='demo',photoUrls=[],coverUrl,embedded=false,expiresAt,rsvpSlug,openWishesSlug,previewOnly=false}:{template:Template;content:DraftContent;guest?:string;mode?:'demo'|'draft'|'public';photoUrls?:string[];coverUrl?:string;embedded?:boolean;expiresAt?:string;rsvpSlug?:string;openWishesSlug?:string;previewOnly?:boolean}) {
  const rootRef=useRef<HTMLElement|null>(null);
  useEffect(()=>{
@@ -53,7 +54,8 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
  const auroraModern=template.slug==='aurora-modern';
  const elegantRose=template.slug==='elegant-rose';
  const modernMinimalist=template.slug==='modern-minimalist';
- const music=useInvitationMusic(content.music||'none',!expired,content.musicVolume??DEFAULT_MUSIC_VOLUME);
+ const selectedMusic=resolveThemeMusic(template.slug,content.music);
+ const music=useInvitationMusic(selectedMusic,!expired,content.musicVolume??DEFAULT_MUSIC_VOLUME);
  const wedding=template.category==='pernikahan'; const names=[content.groom,content.bride].filter(Boolean).join(' & ')||(wedding?'Nama pasangan':'Nama acara');
  const target=eventInstant(content), events=invitationEvents(content,template.category);
  const galleryPhotos=mode==='demo'&&wedding&&photoUrls.length>2?[...photoUrls.slice(2),...photoUrls.slice(0,2)]:photoUrls;
@@ -126,6 +128,6 @@ export default function InvitationView({template,content,guest='Tamu Undangan',m
     <InvitationClosing slug={template.slug} groom={content.groom} bride={content.bride} date={date} eventDate={content.eventDate} wedding={wedding} showThemeLink={mode==='demo'&&!previewOnly}/>
   </div>}
   </div>
-  {opened&&<InvitationControls contentId={contentId} items={navigation} embedded={embedded} music={content.music&&content.music!=='none'?music:undefined}/>}
+  {opened&&<InvitationControls contentId={contentId} items={navigation} embedded={embedded} music={selectedMusic!=='none'?music:undefined}/>}
  </Root>;
 }

@@ -1,16 +1,13 @@
 import type {SynthMusicTrackKey} from './music-library';
+import {weddingMusic} from './theme-music.ts';
 
 const image=(name:string)=>`/images/demo/${name}.webp`;
 const music:Record<string,SynthMusicTrackKey>={
- 'elegant-rose':'serenade','modern-minimalist':'moonlight','tropical-paradise':'ocean-vows',
- 'rustic-wood':'ever-after','galaxy-night':'celestial-waltz','sweet-birthday':'sakura-promise',
- 'aqiqah-blessing':'moonlight','corporate-event':'ocean-vows','islami-sakinah':'moonlight',
- 'adat-sunda':'serenade','adat-minang':'cinematic-bloom','adat-jawa':'celestial-waltz',
- 'adat-bali':'ever-after','elementor-luxury-1':'cinematic-bloom','botanical-blush':'serenade','aurora-modern':'starlight',
- 'seraphine-garden':'serenade','jubilee-carousel':'sakura-promise','nur-eden':'moonlight','nocturne-gala':'cinematic-bloom',
- 'velvet-vow':'ever-after','peach-confetti':'sakura-promise','little-moon':'moonlight','sapphire-summit':'ocean-vows',
+ 'sweet-birthday':'sakura-promise','aqiqah-blessing':'moonlight','corporate-event':'ocean-vows',
+ 'jubilee-carousel':'sakura-promise','nur-eden':'moonlight','nocturne-gala':'cinematic-bloom',
+ 'peach-confetti':'sakura-promise','little-moon':'moonlight','sapphire-summit':'ocean-vows',
 };
-export function demoMusic(slug:string):SynthMusicTrackKey{return music[slug]??'serenade';}
+export function demoMusic(slug:string):SynthMusicTrackKey{return weddingMusic(slug)?.track??music[slug]??'serenade';}
 
 /** Public marketing samples only. Never persisted as customer media or messages. */
 export function demoPhotos(category:string){
