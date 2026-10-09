@@ -2,6 +2,7 @@
 import {useEffect} from 'react';
 
 const SECTION_SELECTOR='.inv-section,.inv-closing';
+const AMBIENT_SELECTOR='.inv-cover,.inv-hero,.inv-section,.inv-closing';
 const STAGGER_SELECTOR=[
   ':scope>.overline',
   ':scope>h2',
@@ -51,6 +52,8 @@ export default function PremiumMotionBoot(){
   const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
   const fine=window.matchMedia('(hover:hover) and (pointer:fine)');
   let observer:IntersectionObserver|null=null;
+  let ambientObserver:IntersectionObserver|null=null;
+  const ambientTargets=new Set<HTMLElement>();
   let mutations:MutationObserver|null=null;
   let frame=0;
   let pointerFrame=0;
@@ -72,7 +75,14 @@ export default function PremiumMotionBoot(){
 
   const rebuildObserver=()=>{
    observer?.disconnect();observer=null;
+   ambientObserver?.disconnect();ambientObserver=null;
+   ambientTargets.forEach(element=>element.classList.remove('inv-motion-visible'));
+   ambientTargets.clear();
    if(reduced.matches||!('IntersectionObserver' in window))return;
+   // Decorative loops run only around the viewport; reveal animations remain one-shot.
+   ambientObserver=new IntersectionObserver(entries=>{
+    for(const entry of entries)(entry.target as HTMLElement).classList.toggle('inv-motion-visible',entry.isIntersecting);
+   },{threshold:0,rootMargin:'80px 0px'});
    observer=new IntersectionObserver(entries=>{
     for(const entry of entries){
      if(!entry.isIntersecting)continue;
@@ -87,6 +97,14 @@ export default function PremiumMotionBoot(){
    // Its effect signals when imperative decoration is safe for this root.
    if(root.dataset.invHydrated!=='true')return;
    root.classList.add('inv-premium-motion','inv-reference-motion');
+   root.dataset.invPageHidden=String(document.hidden);
+   for(const element of ambientTargets){
+    if(!element.isConnected){ambientObserver?.unobserve(element);ambientTargets.delete(element);}
+   }
+   if(ambientObserver)root.querySelectorAll<HTMLElement>(AMBIENT_SELECTOR).forEach(element=>{
+    if(ambientTargets.has(element))return;
+    ambientTargets.add(element);ambientObserver?.observe(element);
+   });
    const watch=(element:HTMLElement)=>{
     if(reduced.matches||!observer||element.classList.contains('inv-revealed'))reveal(element);
     else if(!element.classList.contains('inv-reveal-pending')){
@@ -121,6 +139,7 @@ export default function PremiumMotionBoot(){
   };
 
   const scan=()=>document.querySelectorAll<HTMLElement>('.invitation').forEach(enhanceRoot);
+  const visibilityChanged=()=>document.querySelectorAll<HTMLElement>('.invitation').forEach(root=>{root.dataset.invPageHidden=String(document.hidden);});
   const schedule=()=>{
    if(frame)return;
    frame=window.requestAnimationFrame(()=>{frame=0;scan();});
@@ -176,6 +195,7 @@ export default function PremiumMotionBoot(){
   rebuildObserver();
   schedule();
   document.addEventListener('invitation:ready',schedule);
+  document.addEventListener('visibilitychange',visibilityChanged);
   mutations=new MutationObserver(records=>{
    // Countdown text changes every second. Only new element trees need enhancement.
    if(records.some(record=>record.type==='childList'&&Array.from(record.addedNodes).some(node=>
@@ -195,12 +215,13 @@ export default function PremiumMotionBoot(){
   return()=>{
    if(frame)window.cancelAnimationFrame(frame);
    if(pointerFrame)window.cancelAnimationFrame(pointerFrame);
-   observer?.disconnect();mutations?.disconnect();
+   observer?.disconnect();ambientObserver?.disconnect();ambientTargets.clear();mutations?.disconnect();
    reduced.removeEventListener('change',preferenceChanged);
    document.removeEventListener('pointermove',pointerMove);
    document.removeEventListener('pointerout',pointerOut);
    document.removeEventListener('focusin',focusSection);
    document.removeEventListener('invitation:ready',schedule);
+   document.removeEventListener('visibilitychange',visibilityChanged);
   };
  },[]);
  return null;

@@ -2,6 +2,10 @@ import {elegantStoryChapters} from '@/lib/invitation-extras';
 
 type StoryVariant='default'|'elegant-rose'|'modern-minimalist';
 
+function StoryPhoto({photo,title,className}:{photo:string;title:string;className:string}){
+ return <div className={`${className} inv-story-media`}><img className="inv-story-image" src={photo} alt={`Foto cerita — ${title}`} loading="lazy" decoding="async" referrerPolicy="no-referrer"/></div>;
+}
+
 export default function InvitationStory({
  story,cinematic,variant='default',photos=[],
 }:{story:string;cinematic:boolean;variant?:StoryVariant;photos?:string[]}) {
@@ -12,7 +16,7 @@ export default function InvitationStory({
    return <li key={i}>
     <span className="timeline-dot elegant-story-dot" aria-hidden="true">{'\u2665'}</span>
     <article className="elegant-story-card">
-     {photo?<div className="elegant-story-photo"><img src={photo} alt="" loading="lazy" referrerPolicy="no-referrer"/><span aria-hidden="true"/></div>:<div className="elegant-story-placeholder" aria-hidden="true"><span>{'\u2665'}</span></div>}
+     {photo?<StoryPhoto photo={photo} title={chapter.title} className="elegant-story-photo"/>:<div className="elegant-story-placeholder" aria-hidden="true"><span>{'\u2665'}</span></div>}
      <div className="elegant-story-copy">
       <span className="timeline-year">{chapter.label}</span>
       <h3>{chapter.title}</h3>
@@ -29,7 +33,7 @@ export default function InvitationStory({
    return <li key={i}>
     <span className="modern-story-marker" aria-hidden="true">{chapter.label}</span>
     <article className="modern-story-card">
-     {photo&&<div className="modern-story-media"><img src={photo} alt="" loading="lazy" referrerPolicy="no-referrer"/></div>}
+     {photo&&<StoryPhoto photo={photo} title={chapter.title} className="modern-story-media"/>}
      <div className="modern-story-copy">
       <small>{chapter.label}</small>
       <h3>{chapter.title}</h3>
@@ -43,7 +47,7 @@ export default function InvitationStory({
   {elegantStoryChapters(story).map((chapter,i)=><li key={i}>
    <span className="inv-story-marker" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
    <article className="inv-story-card">
-    {photos[i]&&<div className="inv-story-photo"><img src={photos[i]} alt="" loading="lazy" referrerPolicy="no-referrer"/></div>}
+    {photos[i]&&<StoryPhoto photo={photos[i]} title={chapter.title} className="inv-story-photo"/>}
     <div className="inv-story-copy"><span className="timeline-year">{chapter.label}</span><h3>{chapter.title}</h3>{chapter.body&&<p>{chapter.body}</p>}</div>
    </article>
   </li>)}

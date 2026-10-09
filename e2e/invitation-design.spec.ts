@@ -13,6 +13,13 @@ for (const slug of ALL_THEME_SLUGS) {
     });
     await page.goto(`/demo/${slug}?to=Keluarga%20Bapak%20Muhammad%20Abdurrahman`);
     const root = page.locator('.invitation');
+    // Every catalog theme has its own complementary decorative inks.
+    const palette=await root.evaluate(element=>{
+      const style=getComputedStyle(element);
+      return ['--edition-petal','--edition-leaf','--edition-foil'].map(name=>style.getPropertyValue(name).trim());
+    });
+    expect(palette.every(Boolean)).toBe(true);
+    expect(new Set(palette).size).toBe(3);
     const fits = () => root.evaluate(element => element.scrollWidth <= element.clientWidth + 1);
     await expect(page.getByRole('heading', {level: 1})).toBeVisible();
     await expect.poll(()=>page.locator('.inv-cover img').first().evaluate((element)=>(element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0);
@@ -23,6 +30,7 @@ for (const slug of ALL_THEME_SLUGS) {
     await expect(page.locator('[data-demo-wish]')).toHaveCount(3);
     await expect(page.locator('.inv-gallery')).toHaveCount(1);
     await expect(page.locator('.photo-placeholders')).toHaveCount(0);
+    for(const photo of await page.locator('.inv-story-image').all())await expect(photo).toHaveCSS('object-fit','contain');
     const nav = page.getByRole('navigation', {name: 'Bagian undangan'});
     await nav.getByRole('button', {name: 'Acara', exact: true}).click();
     const heading = page.getByRole('heading', {name: 'Waktu & tempat', exact: true});

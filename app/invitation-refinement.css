@@ -5,8 +5,28 @@
   --finish-ink: var(--tone);
   --finish-ease: cubic-bezier(.22, 1, .36, 1);
   --finish-ornament: var(--pt-accent, var(--tone));
+  --edition-petal: #c596a1;
+  --edition-leaf: #809984;
+  --edition-foil: #b89560;
   font-family: var(--font-mm-body), Arial, sans-serif;
 }
+/* Three inks per invitation: botanical/petal, a complementary hue, and foil. */
+.invitation.inv-refined.theme-elegant-rose { --edition-petal: #ce7f96; --edition-leaf: #708a77; --edition-foil: #b88a53; }
+.invitation.inv-refined.theme-modern-minimalist { --edition-petal: #cd9585; --edition-leaf: #789baf; --edition-foil: #9c825a; }
+.invitation.inv-refined.theme-tropical-paradise { --edition-petal: #eb9472; --edition-leaf: #4c8068; --edition-foil: #bd9b54; }
+.invitation.inv-refined.theme-rustic-wood { --edition-petal: #c09565; --edition-leaf: #8f976c; --edition-foil: #a87942; }
+.invitation.inv-refined.theme-galaxy-night { --edition-petal: #9784cf; --edition-leaf: #6e9ac2; --edition-foil: #d8bb79; }
+.invitation.inv-refined.theme-sweet-birthday { --edition-petal: #ea9db2; --edition-leaf: #82bbc6; --edition-foil: #d5a44e; }
+.invitation.inv-refined.theme-aqiqah-blessing { --edition-petal: #c6b893; --edition-leaf: #85ad99; --edition-foil: #b69a57; }
+.invitation.inv-refined.theme-corporate-event { --edition-petal: #6898ba; --edition-leaf: #62a7a2; --edition-foil: #a79260; }
+.invitation.inv-refined.theme-islami-sakinah { --edition-petal: #659a87; --edition-leaf: #abc299; --edition-foil: #dfbd72; }
+.invitation.inv-refined.theme-adat-sunda { --edition-petal: #c8a995; --edition-leaf: #739879; --edition-foil: #ae915b; }
+.invitation.inv-refined.theme-adat-minang { --edition-petal: #bc727d; --edition-leaf: #786871; --edition-foil: #e2b968; }
+.invitation.inv-refined.theme-adat-jawa { --edition-petal: #b38a64; --edition-leaf: #a79a78; --edition-foil: #be9b5d; }
+.invitation.inv-refined.theme-adat-bali { --edition-petal: #ce9a84; --edition-leaf: #8f9d74; --edition-foil: #b18951; }
+.invitation.inv-refined.theme-elementor-luxury-1 { --edition-petal: #62a08b; --edition-leaf: #94b0a0; --edition-foil: #d5b56e; }
+.invitation.inv-refined.theme-botanical-blush { --edition-petal: #e9ae99; --edition-leaf: #829d89; --edition-foil: #bb9568; }
+.invitation.inv-refined.theme-aurora-modern { --edition-petal: #aa8ce4; --edition-leaf: #6dcecf; --edition-foil: #e4a6c7; }
 
 .invitation.inv-refined :is(.inv-cover, .inv-hero) { isolation: isolate; }
 .invitation.inv-refined .cover-frame { z-index: 1; }
@@ -86,6 +106,12 @@
   opacity: .46;
 }
 .invitation.inv-refined .inv-ornament-corner svg { display: block; width: 100%; height: auto; }
+.invitation.inv-refined .ornament-petal { fill: var(--edition-petal); stroke: var(--edition-petal); }
+.invitation.inv-refined .ornament-petal-inner { fill: color-mix(in srgb, var(--edition-petal) 40%, var(--soft)); stroke: var(--edition-petal); stroke-width: .6; }
+.invitation.inv-refined .ornament-leaf { fill: var(--edition-leaf); stroke: var(--edition-leaf); opacity: .7; }
+.invitation.inv-refined .ornament-leaf[fill="none"] { fill: none; }
+.invitation.inv-refined .ornament-foil { fill: var(--edition-foil); stroke: var(--edition-foil); }
+.invitation.inv-refined .inv-painted-flower { opacity: .86; }
 .invitation.inv-refined .inv-ornament-start { top: 18px; left: 18px; }
 .invitation.inv-refined .inv-ornament-end { right: 18px; bottom: 18px; rotate: 180deg; }
 .invitation.inv-refined .inv-ornaments-palm .inv-ornament-corner { width: clamp(145px, 25vw, 310px); opacity: .5; }
@@ -152,7 +178,7 @@
 .invitation.inv-refined .inv-section-divider > span {
   flex: 1;
   height: 1px;
-  background: linear-gradient(90deg, transparent, currentColor);
+  background: linear-gradient(90deg, transparent, var(--edition-leaf), var(--edition-foil));
   opacity: .55;
 }
 .invitation.inv-refined .inv-section-divider > span:last-child { rotate: 180deg; }
@@ -223,9 +249,9 @@
 .invitation.inv-refined .countdown strong.rm-digit-flip { animation: finish-digit 360ms var(--finish-ease) both; }
 .invitation.inv-refined .pm-section.inv-revealed > .inv-section-divider { animation: finish-rise 700ms var(--finish-ease) 100ms backwards; }
 @media (prefers-reduced-motion: no-preference) {
-  .invitation.inv-refined .inv-ornament-corner { animation: finish-sway 9s ease-in-out 2; transform-origin: top left; }
+  .invitation.inv-refined .inv-ornament-corner { animation: finish-sway 12s ease-in-out infinite; transform-origin: top left; }
   .invitation.inv-refined .inv-ornament-end { animation-delay: -4s; }
-  .invitation.inv-refined .inv-ornament-speck { animation: finish-spark 5s ease-in-out 3; }
+  .invitation.inv-refined .inv-ornament-speck { animation: finish-spark 7s ease-in-out infinite; }
   .invitation.inv-refined .speck-b { animation-delay: -2s; }
   .invitation.inv-refined .speck-c { animation-delay: -3s; }
 }
@@ -284,8 +310,8 @@
   max-width: 820px;
   margin-inline: auto;
   padding-top: 1px;
-  background: radial-gradient(ellipse at 0 15%, var(--folio-wash), transparent 45%) 0 0 / 100% 900px,
-    radial-gradient(ellipse at 100% 75%, var(--folio-wash), transparent 45%) 0 0 / 100% 1100px,
+  background: radial-gradient(ellipse at 0 15%, color-mix(in srgb, var(--edition-petal) 24%, transparent), transparent 55%) 0 0 / 100% 1400px,
+    radial-gradient(ellipse at 100% 75%, color-mix(in srgb, var(--edition-leaf) 21%, transparent), transparent 55%) 0 0 / 100% 1800px,
     var(--paper);
   overflow: clip;
 }
@@ -298,7 +324,9 @@
   padding: 66px 40px 52px;
   border: 1px solid var(--finish-line);
   border-radius: var(--folio-radius);
-  background: color-mix(in srgb, var(--folio-surface) 92%, transparent) !important;
+  background: radial-gradient(ellipse at 0 0, color-mix(in srgb, var(--edition-petal) 18%, transparent), transparent 48%),
+    radial-gradient(ellipse at 100% 100%, color-mix(in srgb, var(--edition-leaf) 13%, transparent), transparent 45%),
+    color-mix(in srgb, var(--folio-surface) 96%, transparent) !important;
   box-shadow: var(--folio-shadow);
   text-align: center;
   overflow: visible;
@@ -313,7 +341,8 @@
 }
 .invitation.inv-refined .inv-ornaments-section .inv-ornament-corner {
   width: 145px;
-  opacity: .28;
+  opacity: .62;
+  color: var(--edition-foil);
 }
 .invitation.inv-refined .inv-ornaments-section .inv-ornament-start { top: 0; left: 0; }
 .invitation.inv-refined .inv-ornaments-section .inv-ornament-end { right: 0; bottom: 0; }
@@ -330,6 +359,7 @@
   opacity: .42;
 }
 .invitation.inv-refined:is(.theme-elegant-rose, .theme-botanical-blush) .inv-ornaments-section svg { visibility: hidden; }
+.invitation.inv-refined .inv-section .inv-ornaments-section::before { content: ''; position: absolute; inset: 33px 22px; border: 1px solid color-mix(in srgb, var(--edition-foil) 20%, transparent); border-radius: var(--folio-radius); }
 .invitation.inv-refined:is(.theme-elegant-rose, .theme-botanical-blush) .inv-ornament-start { transform-origin: 20% 20%; }
 .invitation.inv-refined .inv-stationery .inv-section > .overline {
   color: var(--tone);
@@ -405,14 +435,30 @@
 .invitation.inv-refined .inv-story-timeline > li:last-child { padding-bottom: 0; border-color: transparent; }
 .invitation.inv-refined .inv-story-marker { position: absolute; z-index: 2; top: 20px; left: -19px; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--finish-line); border-radius: 50%; font-size: 10px; background: var(--folio-surface); }
 .invitation.inv-refined .inv-story-card { overflow: hidden; border-radius: 16px; background: color-mix(in srgb, var(--soft) 70%, transparent); border: 1px solid var(--finish-line); }
-.invitation.inv-refined .inv-story-photo { position: relative; aspect-ratio: 4/3; }
-.invitation.inv-refined .inv-story-photo img { width: 100%; height: 100%; object-fit: cover; }
+.invitation.inv-refined .inv-story-photo { position: relative; }
 .invitation.inv-refined .inv-story-copy { padding: 26px; }
 .invitation.inv-refined .inv-story-copy .timeline-year { display: block; width: fit-content; margin-bottom: 12px; font-size: 10px; letter-spacing: .2em; color: var(--tone); }
 .invitation.inv-refined .inv-story-copy h3 { font: 500 30px/1.2 var(--font-mm-display), Georgia, serif; margin: 0 0 16px; }
 .invitation.inv-refined :is(.inv-story-copy, .modern-story-copy, .elegant-story-copy) p { white-space: pre-line; font-size: 13px; line-height: 1.95; margin: 0; }
 .invitation.inv-refined .inv-stationery .modern-story-card { border-radius: 12px; }
 .invitation.inv-refined .inv-stationery .modern-story-copy { padding: 26px; }
+/* A full photograph on a tinted album mat, regardless of the source orientation.
+   Never crop or zoom story photos: a face can sit anywhere in a customer's image.
+   Reserve the mat before lazy images load so the reading tour does not jump. */
+.invitation.inv-refined .inv-stationery .inv-story-media { --story-mat: 12px; position: relative; display: block; width: 100%; height: auto; min-height: 0; max-height: 560px; aspect-ratio: 4/5; overflow: hidden; background: linear-gradient(145deg, color-mix(in srgb, var(--edition-petal) 19%, var(--soft)), color-mix(in srgb, var(--edition-leaf) 14%, var(--soft))); }
+.invitation.inv-refined .inv-stationery .inv-story-media::after { display: none; }
+.invitation.inv-refined .inv-stationery .inv-story-media > .inv-story-image { display: block; position: absolute; inset: var(--story-mat); width: calc(100% - var(--story-mat) * 2); height: calc(100% - var(--story-mat) * 2); min-height: 0; max-height: none; aspect-ratio: auto; object-fit: contain; object-position: center; border-radius: 7px; filter: none; transform: none; scale: none; animation: none; transition: none; }
+.invitation.inv-refined .inv-stationery :is(.inv-story-card, .modern-story-card, .elegant-story-card) { border-color: color-mix(in srgb, var(--edition-foil) 35%, transparent); box-shadow: 0 12px 32px color-mix(in srgb, var(--tone) 7%, transparent); }
+.invitation.inv-refined .inv-stationery :is(.inv-story-copy, .modern-story-copy, .elegant-story-copy) { border-top: 1px solid color-mix(in srgb, var(--edition-foil) 20%, transparent); }
+@media (max-width: 600px) {
+  .invitation.inv-refined .inv-stationery .inv-story-media { --story-mat: 8px; }
+  .invitation.inv-refined .modern-story-list > li { padding-left: 36px; }
+  .invitation.inv-refined .modern-story-marker { width: 28px; height: 28px; left: 0; border-width: 3px; }
+  .invitation.inv-refined .modern-story-list::before { left: 13px; }
+  .invitation.inv-refined .elegant-story-timeline > li { padding-left: 38px; }
+  .invitation.inv-refined .elegant-story-dot { width: 24px; height: 24px; left: 0; box-shadow: 0 0 0 4px var(--soft); }
+  .invitation.inv-refined .elegant-story-timeline::before { left: 12px; }
+}
 
 /* Large photo stage, tactile thumbnails and a user-controlled slideshow. */
 .invitation.inv-refined .inv-gallery { margin: 12px auto 0; max-width: 600px; }
@@ -455,7 +501,7 @@
 .invitation.inv-refined .inv-section:not(.inv-revealed) .inv-ornament-corner { animation-play-state: paused; }
 .invitation.inv-refined .inv-cover.is-opening > .inv-ornaments { transition: opacity 620ms ease, scale 620ms var(--finish-ease); opacity: 0; scale: 1.08; }
 .invitation.inv-refined .inv-closing.inv-revealed { animation: folio-photo 800ms var(--finish-ease) both; }
-.invitation.inv-refined .inv-stationery :is(.event-box, .inv-location, .couple-grid > div).pm-interactive:hover { translate: none; transform: none; }
+.invitation.inv-refined .inv-stationery :is(.event-box, .inv-location, .couple-grid > div).pm-interactive:hover { translate: none; transform: none; outline-color: transparent; }
 @keyframes folio-photo { from { opacity: .4; scale: 1.025; } to { opacity: 1; scale: 1; } }
 @media (max-width: 600px) {
   .invitation.inv-refined .inv-stationery > .inv-section { width: calc(100% - 32px); margin-block: 72px; padding: 55px 24px 40px; }
@@ -516,6 +562,28 @@
 .invitation.inv-refined .inv-demo-wish-list .wish-card p { font-size: 12px; line-height: 1.9; }
 .invitation.inv-refined .inv-demo-media-note { padding-top: 14px; border-top: 1px solid var(--finish-line); }
 @media(max-width:360px) { .invitation.inv-refined .inv-auto-scroll { left: 10px; } .invitation.inv-refined .inv-auto-scroll button { padding-inline: 12px; font-size: 10px; } }
+/* Color moves behind the paper; readable text and complete photographs stay still. */
+.invitation.inv-refined .inv-color-haze { position: absolute; display: block; width: 85%; height: 65%; border-radius: 50%; background: radial-gradient(ellipse, color-mix(in srgb, var(--haze-ink) 27%, transparent), transparent 68%); }
+.invitation.inv-refined .haze-petal { --haze-ink: var(--edition-petal); top: -16%; left: -28%; }
+.invitation.inv-refined .haze-leaf { --haze-ink: var(--edition-leaf); bottom: -15%; right: -28%; }
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined .inv-color-haze { animation: edition-light 18s ease-in-out infinite alternate; }
+  .invitation.inv-refined .haze-leaf { animation-delay: -9s; animation-direction: alternate-reverse; }
+  .invitation.inv-refined .inv-ornaments-palm .inv-ornament-corner { animation-name: edition-leaves; animation-duration: 14s; }
+  .invitation.inv-refined .inv-ornaments-wheat .inv-ornament-corner { animation-name: edition-leaves; animation-duration: 18s; }
+  .invitation.inv-refined :is(.inv-ornaments-geometric, .inv-ornaments-lattice) .inv-ornament-corner { animation-name: edition-foil; animation-duration: 10s; }
+  .invitation.inv-refined :is(.inv-ornaments-celestial, .inv-ornaments-orbit) .inv-ornament-corner { animation-name: edition-stars; animation-duration: 16s; }
+  .invitation.inv-refined :is(.inv-ornament-corner, .inv-ornament-speck, .inv-color-haze) { animation-play-state: paused; }
+  .invitation.inv-refined .inv-motion-visible > .inv-ornaments :is(.inv-ornament-corner, .inv-ornament-speck),
+  .invitation.inv-refined .inv-motion-visible > .inv-atmosphere .inv-color-haze { animation-play-state: running; }
+  .invitation.inv-refined .pm-section :is(.inv-story-timeline, .modern-story-list, .elegant-story-timeline) > .inv-moment.inv-reveal-pending { transform: translateY(26px) rotate(-.6deg); }
+  .invitation.inv-refined .pm-section :is(.inv-story-timeline, .modern-story-list, .elegant-story-timeline) > .inv-moment.inv-reveal-pending:nth-child(even) { transform: translateY(26px) rotate(.6deg); }
+}
+.invitation.inv-refined[data-inv-page-hidden="true"] :is(.inv-ornament-corner, .inv-ornament-speck, .inv-color-haze) { animation-play-state: paused !important; }
+@keyframes edition-light { from { transform: translate3d(0, 0, 0) scale(.95); opacity: .7; } to { transform: translate3d(18px, 26px, 0) scale(1.08); opacity: 1; } }
+@keyframes edition-leaves { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(3deg) translateY(5px); } }
+@keyframes edition-foil { 0%, 100% { opacity: .35; } 50% { opacity: .68; } }
+@keyframes edition-stars { 0%, 100% { transform: rotate(-1deg); opacity: .42; } 50% { transform: rotate(2deg); opacity: .8; } }
 @media (prefers-reduced-motion: reduce) {
   .invitation.inv-refined *, .invitation.inv-refined *::before, .invitation.inv-refined *::after { animation: none !important; transition: none !important; }
   .invitation.inv-refined .pm-section.inv-reveal-pending { opacity: 1; transform: none; filter: none; }
