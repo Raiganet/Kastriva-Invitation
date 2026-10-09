@@ -11,7 +11,7 @@ for (const slug of ALL_THEME_SLUGS) {
     page.on('console', message => {
       if(message.type() === 'error') errors.push(message.text());
     });
-    await page.goto(`/demo/${slug}?to=Keluarga%20Bapak%20Muhammad%20Abdurrahman`);
+    await page.goto(`/demo/${slug}?view=full&to=Keluarga%20Bapak%20Muhammad%20Abdurrahman`);
     const root = page.locator('.invitation');
     const artwork=page.locator('.inv-cover .inv-ornaments');
     await expect(artwork).toHaveAttribute('data-ornament-theme',slug);
@@ -64,7 +64,7 @@ for (const slug of ALL_THEME_SLUGS) {
 
 test('scroll reveal reaches tall sections and responds to reduced motion changes', async ({page}) => {
   await page.emulateMedia({reducedMotion: 'no-preference'});
-  await page.goto('/demo/elegant-rose');
+  await page.goto('/demo/elegant-rose?view=full');
   await page.getByRole('button', {name: /Buka undangan/}).click();
   await expect(page.locator('.inv-content')).toBeFocused();
   const sections = page.locator('.inv-section');

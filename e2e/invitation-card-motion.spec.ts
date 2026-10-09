@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 
-async function openTour(page:import('@playwright/test').Page,url='/demo/modern-minimalist'){
+async function openTour(page:import('@playwright/test').Page,url='/demo/modern-minimalist?view=full'){
  await page.emulateMedia({reducedMotion:'no-preference'});
  await page.goto(url);
  await page.getByRole('button',{name:/Buka undangan/}).click();
@@ -9,7 +9,7 @@ async function openTour(page:import('@playwright/test').Page,url='/demo/modern-m
 const enter=(card:import('@playwright/test').Locator)=>card.evaluate(e=>e.scrollIntoView({block:'start',behavior:'instant'}));
 
 for(const theme of ['modern-minimalist','elegant-rose','tropical-paradise'])test(`album cards flip on entry and re-arm only after leaving the reading area: ${theme}`,async({page})=>{
- await openTour(page,`/demo/${theme}`);
+ await openTour(page,`/demo/${theme}?view=full`);
  const story=page.locator('[data-inv-card-kind=story]').first();
  await expect(story).toHaveAttribute('data-inv-card-state','waiting');
  await expect.poll(()=>story.evaluate(e=>Math.abs(new DOMMatrix(getComputedStyle(e).transform).m13))).toBeGreaterThan(.1);

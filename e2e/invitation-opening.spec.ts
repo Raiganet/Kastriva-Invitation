@@ -4,7 +4,7 @@ for(const [theme,style] of [['modern-minimalist','slide'],['elegant-rose','album
  test(`opening choreography reveals the real invitation and starts its tour: ${theme}`,async({page})=>{
   await page.emulateMedia({reducedMotion:'no-preference'});
   const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
-  await page.goto(`/demo/${theme}`);
+  await page.goto(`/demo/${theme}?view=full`);
   const root=page.locator('.invitation');
   await expect(root).toHaveAttribute('data-inv-hydrated','true');
   await expect(root).toHaveAttribute('data-inv-opening-style',style);
@@ -36,7 +36,7 @@ for(const [theme,style] of [['modern-minimalist','slide'],['elegant-rose','album
 async function holdOpening(page:Page){
  await page.clock.install();
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto('/demo/modern-minimalist');
+ await page.goto('/demo/modern-minimalist?view=full');
  // Stop CSS completion and the timeout independently, then exercise each exit path.
  await page.addStyleTag({content:'.invitation .is-opening .inv-cover-leaf{animation-play-state:paused!important}'});
  await expect(page.locator('.invitation')).toHaveAttribute('data-inv-hydrated','true');
@@ -68,7 +68,7 @@ test('opening yields immediately to a live reduced-motion preference',async({pag
 
 test('chapter divider unfurls with its heading without hiding focused content',async({page})=>{
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto('/demo/modern-minimalist');
+ await page.goto('/demo/modern-minimalist?view=full');
  await page.getByRole('button',{name:/Buka undangan/}).click();
  await page.getByRole('button',{name:'Jeda gulir',exact:true}).click();
  const section=page.locator('.inv-section').filter({has:page.getByRole('heading',{name:'Cerita kami',exact:true})});

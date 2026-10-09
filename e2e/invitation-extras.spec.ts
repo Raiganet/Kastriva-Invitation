@@ -6,7 +6,7 @@ test('built-in music creates actual Web Audio only after opening and closes on p
   Object.assign(window,{__kiAudioContexts:contexts});
   window.AudioContext=class extends Native{constructor(options?:AudioContextOptions){super(options);contexts.push(this);}};
  });
- await page.goto('/demo/galaxy-night');
+ await page.goto('/demo/galaxy-night?view=full');
  const states=()=>page.evaluate(()=>{
   const contexts=(window as Window&{__kiAudioContexts?:AudioContext[]}).__kiAudioContexts;
   if(!contexts)throw new Error('Audio test instrumentation was not initialized.');
@@ -22,7 +22,7 @@ test('built-in music creates actual Web Audio only after opening and closes on p
  await expect.poll(states).toEqual(['closed']);
 });
 test('gift disclosure uses only the labelled demo account',async({page})=>{
- await page.goto('/demo/botanical-blush');
+ await page.goto('/demo/botanical-blush?view=full');
  await page.getByRole('button',{name:/Buka undangan/}).click();
  const details=page.locator('.gift-disclosure');
  await details.scrollIntoViewIfNeeded();

@@ -34,7 +34,7 @@ async function peak(page:Page){return page.evaluate(()=>{
 for(const theme of WEDDING_THEME_SLUGS)test('wedding demo plays the paired instrumental: '+theme,async({page})=>{
  const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
  await observeAudio(page);
- await page.goto('/demo/'+theme);
+ await page.goto('/demo/'+theme+'?view=full');
  await expect.poll(()=>page.evaluate(()=>(window as unknown as {musicTest:{contexts:AudioContext[]}}).musicTest.contexts.length)).toBe(0);
  await page.getByRole('button',{name:/Buka undangan/}).click();
  await expect(page.locator('.music-toggle')).toHaveAttribute('aria-pressed','true');

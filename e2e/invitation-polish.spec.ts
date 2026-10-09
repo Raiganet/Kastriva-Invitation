@@ -23,7 +23,7 @@ for(const theme of ['modern-minimalist','elegant-rose','tropical-paradise'])test
 
 test('ornament motion follows visibility and live reduced-motion preferences',async({page})=>{
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto('/demo/tropical-paradise');
+ await page.goto('/demo/tropical-paradise?view=full');
  const cover=page.locator('.inv-cover');
  await expect(cover).toHaveClass(/inv-motion-visible/);
  await expect(cover.locator('.inv-ornament-start').first()).toHaveCSS('animation-play-state','running');

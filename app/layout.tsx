@@ -28,6 +28,7 @@ import './invitation-occasions.css';
 import './invitation-premium-editions.css';
 import './invitation-typography.css';
 import './brand-identity.css';
+import './invitation-phone-preview.css';
 const modernDisplayFont = Cormorant_Garamond({
   subsets: ['latin'],
   weight: ['500','600','700'],

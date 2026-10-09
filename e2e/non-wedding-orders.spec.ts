@@ -6,7 +6,7 @@ test('all nine non-wedding demos lead to ordering and preserve the selected them
  test.setTimeout(180000);
  for(const slug of ALL_THEME_SLUGS.filter(s=>categoryForTheme(s)!=='pernikahan')){
   await page.goto('/demo/'+slug);
-  const choose=page.locator('.inv-toolbar').getByRole('link',{name:'Pilih tema ↗'});
+  const choose=page.getByRole('link',{name:'Pilih tema ↗',exact:true});
   await expect(choose).toHaveAttribute('href','/order/'+slug);
   await choose.click();
   await expect(page.getByRole('link',{name:'Lanjutkan ke draft ↗'})).toHaveAttribute('href','/dashboard/baru?template='+slug);

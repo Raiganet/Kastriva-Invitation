@@ -1,7 +1,7 @@
 import {test,expect,type Page} from '@playwright/test';
 import {ALL_THEME_SLUGS} from '../lib/theme-registry';
 
-async function open(page:Page,url='/demo/elegant-rose'){
+async function open(page:Page,url='/demo/elegant-rose?view=full'){
  await page.emulateMedia({reducedMotion:'reduce'});
  await page.goto(url);
  await expect(page.locator('.invitation')).toHaveAttribute('data-inv-hydrated','true');
@@ -13,7 +13,7 @@ async function open(page:Page,url='/demo/elegant-rose'){
 for(const theme of ALL_THEME_SLUGS)test(`reading dock keeps every chapter reachable: ${theme}`,async({page,isMobile})=>{
  if(isMobile)await page.setViewportSize({width:320,height:740});
  const errors:string[]=[];page.on('pageerror',e=>errors.push(e.message));
- await open(page,`/demo/${theme}`);
+ await open(page,`/demo/${theme}?view=full`);
  const dock=page.locator('.inv-controls'),nav=dock.getByRole('navigation',{name:'Bagian undangan'});
  await expect(dock).toBeInViewport({ratio:1});
  await expect(dock.locator('.music-track-label')).toBeVisible();

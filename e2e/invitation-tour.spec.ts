@@ -3,7 +3,7 @@ import {test,expect} from '@playwright/test';
 test('automatic tour starts gently, yields to manual scrolling, resumes and stops at the end',async({page,isMobile})=>{
  await page.clock.install();
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto('/demo/modern-minimalist');
+ await page.goto('/demo/modern-minimalist?view=full');
  await expect(page.locator('.inv-auto-scroll')).toHaveCount(0);
  await page.getByRole('button',{name:/Buka undangan/}).click();
  await expect(page.locator('.inv-content')).toBeFocused();
@@ -37,7 +37,7 @@ test('automatic tour starts gently, yields to manual scrolling, resumes and stop
 test('tour respects reduced motion and pauses for keyboard, forms and gallery',async({page})=>{
  await page.clock.install();
  await page.emulateMedia({reducedMotion:'reduce'});
- await page.goto('/demo/sweet-birthday');
+ await page.goto('/demo/sweet-birthday?view=full');
  await page.getByRole('button',{name:/Buka undangan/}).click();
  const control=page.locator('.inv-auto-scroll');
  await expect(control).toHaveAttribute('data-scroll-state','paused');

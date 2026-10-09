@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 for(const theme of ['elegant-rose','modern-minimalist','corporate-event','adat-jawa','aqiqah-blessing','aurora-modern'])test(`ornament ink reveals with its chapter and respects motion preferences: ${theme}`,async({page})=>{
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto(`/demo/${theme}`);
+ await page.goto(`/demo/${theme}?view=full`);
  await expect(page.locator('.invitation')).toHaveAttribute('data-inv-hydrated','true');
  await page.getByRole('button',{name:/Buka undangan/}).click();
  await expect(page.locator('.inv-content')).toBeFocused();
@@ -33,7 +33,7 @@ for(const theme of ['elegant-rose','modern-minimalist','corporate-event','adat-j
 test('ornament art remains complete before JavaScript enhancement',async({browser,baseURL})=>{
  const context=await browser.newContext({baseURL,javaScriptEnabled:false,viewport:{width:320,height:740}});
  try{
-  const page=await context.newPage();await page.goto('/demo/modern-minimalist');
+  const page=await context.newPage();await page.goto('/demo/modern-minimalist?view=full');
   const ink=page.locator('.inv-cover .inv-ornament-start .inv-ornament-ink');
   await expect(ink).toBeVisible();await expect(ink).toHaveCSS('stroke-dashoffset','0px');
   await expect(ink).toHaveCSS('animation-name','none');

@@ -3,7 +3,7 @@ import path from 'node:path';
 
 async function openGallery(page:Page,{motion=false,fixture=false}={}){
  await page.emulateMedia({reducedMotion:motion?'no-preference':'reduce'});
- await page.goto(fixture?'/test-fixtures/invitation?theme=modern-minimalist':'/demo/modern-minimalist',{waitUntil:'domcontentloaded'});
+ await page.goto(fixture?'/test-fixtures/invitation?theme=modern-minimalist':'/demo/modern-minimalist?view=full',{waitUntil:'domcontentloaded'});
  await expect(page.locator('.invitation')).toHaveAttribute('data-inv-hydrated','true');
  // Finish the cover's finite entrance animations and font layout before a pointer click.
  // These tests isolate gallery behavior, including intentionally pending image requests.

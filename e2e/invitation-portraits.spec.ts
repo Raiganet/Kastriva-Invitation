@@ -55,7 +55,7 @@ for(const aspect of ['portrait','square'])test(`portrait edition keeps the whole
 
 for(const theme of ['modern-minimalist','galaxy-night'])test(`portrait edition keeps the opening button within reach on a standard phone: ${theme}`,async({page})=>{
  await page.setViewportSize({width:390,height:844});await page.emulateMedia({reducedMotion:'reduce'});
- await page.goto(`/demo/${theme}`);await expect(page.locator('.invitation')).toHaveAttribute('data-inv-hydrated','true');
+ await page.goto(`/demo/${theme}?view=full`);await expect(page.locator('.invitation')).toHaveAttribute('data-inv-hydrated','true');
  await page.evaluate(()=>document.fonts.ready.then(()=>undefined));
  await expect(page.getByRole('button',{name:/Buka undangan/})).toBeInViewport({ratio:1});
 });

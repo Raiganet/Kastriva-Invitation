@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 
 for(const theme of ['modern-minimalist','elegant-rose','aurora-modern'])test(`legacy decoration sleeps outside the viewport and in background tabs: ${theme}`,async({page,isMobile})=>{
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto(`/demo/${theme}`);
+ await page.goto(`/demo/${theme}?view=full`);
  const root=page.locator('.invitation');
  await expect(root).toHaveAttribute('data-inv-motion-observed','true');
  // Regression: production CSS minification must preserve the unprefixed override.
@@ -34,7 +34,7 @@ for(const theme of ['modern-minimalist','elegant-rose','aurora-modern'])test(`le
 test('invitations remain readable without the visibility observer',async({page})=>{
  await page.addInitScript(()=>{delete (window as unknown as {IntersectionObserver?:unknown}).IntersectionObserver;});
  await page.emulateMedia({reducedMotion:'no-preference'});
- await page.goto('/demo/elegant-rose');
+ await page.goto('/demo/elegant-rose?view=full');
  await expect(page.locator('.invitation')).toHaveAttribute('data-inv-motion-observed','false');
  await page.getByRole('button',{name:/Buka undangan/}).click();
  await expect(page.locator('.inv-content')).toBeFocused();
