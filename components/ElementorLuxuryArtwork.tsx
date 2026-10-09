@@ -1,5 +1,6 @@
 'use client';
 import {useId} from 'react';
+import InvitationPhoto from './InvitationPhoto';
 
 /** Vector reconstruction from the supplied preview; no dependency on the retired asset host. */
 export function LuxuryRosette({className=''}:{className?:string}){
@@ -9,6 +10,6 @@ export function LuxuryRosette({className=''}:{className?:string}){
 
 export default function ElementorLuxuryArtwork({slug,portrait=false,photo,names}:{slug:string;portrait?:boolean;photo?:string;names?:string[]}){
  if(slug!=='elementor-luxury-1')return null;
- if(portrait)return <div className="luxury-portrait"><LuxuryRosette/>{photo?<img src={photo} alt="Foto sampul pasangan" referrerPolicy="no-referrer"/>:<div className="luxury-initials" aria-hidden="true"><span>{names?.[0]?.trim().slice(0,1)||'A'}</span><small>&</small><span>{names?.[1]?.trim().slice(0,1)||'H'}</span></div>}</div>;
+ if(portrait)return <div className="luxury-portrait"><LuxuryRosette/><InvitationPhoto src={photo} alt="Foto sampul pasangan" initials={(names||[]).map(name=>Array.from(name.trim())[0]).filter(Boolean).join(' · ')} className="luxury-portrait-image"/></div>;
  return <div className="luxury-scene" aria-hidden="true"><div className="luxury-ribbon"/><LuxuryRosette className="luxury-corner top"/><LuxuryRosette className="luxury-corner bottom"/></div>;
 }

@@ -416,7 +416,6 @@
 .invitation.inv-refined .inv-portrait-halo::after { content: ''; position: absolute; inset: -8px; border: 1px dashed var(--finish-line); border-radius: inherit; }
 .invitation.inv-refined .inv-portrait-sprig { position: absolute; width: 150px; left: 11px; bottom: -20px; color: var(--finish-ornament); }
 .invitation.inv-refined:is(.theme-corporate-event, .theme-modern-minimalist, .theme-elementor-luxury-1) .inv-portrait-sprig { display: none; }
-.invitation.inv-refined:is(.theme-modern-minimalist, .theme-elementor-luxury-1) :is(.inv-portrait-halo, .inv-portrait-initial, .inv-portrait > img) { border-radius: 90px 90px 12px 12px; }
 .invitation.inv-refined .inv-stationery .rsvp-form { padding: 0; }
 .invitation.inv-refined .inv-stationery .notice { border-radius: 12px; padding: 16px; line-height: 1.8; }
 .invitation.inv-refined .inv-stationery .elegant-couple-stack { border: 0; padding: 20px 0; box-shadow: none; background: none; }
@@ -707,6 +706,52 @@
 @keyframes invitation-photo-leave { from { opacity: 1; } to { opacity: 0; } }
 @keyframes invitation-photo-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 @keyframes invitation-photo-detail { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Cover and portraits preserve the complete uploaded frame. Decorative borders
+   surround the photograph instead of cutting faces into circles or moving masks. */
+.invitation.inv-refined .inv-framed-photo { object-fit: contain !important; object-position: center; background: var(--soft); }
+.invitation.inv-refined .inv-photo-fallback { display: grid; place-items: center; color: var(--tone); font: 500 42px/1.3 var(--font-mm-display), Georgia, serif; letter-spacing: .04em; }
+.invitation.inv-refined .inv-photo-fallback > span { display: block; padding: 12px; text-align: center; overflow-wrap: anywhere; }
+.invitation.inv-refined .inv-cover .cover-frame .cover-photo { display: block; width: clamp(140px, 20svh, 190px) !important; height: clamp(160px, 24svh, 228px) !important; padding: 8px; margin: 0 auto 22px !important; border: 1px solid var(--finish-line); border-radius: 12px !important; outline: 1px solid color-mix(in srgb, var(--edition-foil) 30%, transparent); outline-offset: 5px; box-shadow: 0 12px 32px color-mix(in srgb, var(--tone) 9%, transparent) !important; animation: none; }
+.invitation.inv-refined .inv-cover .cover-frame .inv-photo-fallback { display: grid; }
+.invitation.inv-refined .inv-cover .cover-frame .cover-motif:has(+ .cover-photo) { display: none; }
+.invitation.inv-refined .inv-hero .inv-hero-photo { width: min(240px, 80%); height: 300px; padding: 12px; border: 1px solid var(--finish-line); border-radius: 16px; outline-color: color-mix(in srgb, var(--edition-foil) 30%, transparent); }
+.invitation.inv-refined .inv-names { max-width: 100%; min-width: 0; }
+.invitation.inv-refined .inv-names-long .inv-names-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 4px; width: 100%; }
+.invitation.inv-refined .inv-names-extended { font-size: clamp(27px, 4.5vw, 44px) !important; line-height: 1.18; letter-spacing: -.02em; }
+.invitation.inv-refined .inv-names-long .inv-name-join { font-size: .65em; line-height: 1; margin: 4px auto; }
+.invitation.inv-refined .cover-frame .guest-card { max-width: 100%; }
+.invitation.inv-refined .cover-frame .guest-card strong { overflow-wrap: anywhere; text-wrap: balance; }
+.invitation.inv-refined .inv-portrait { width: min(220px, 90%); height: 280px; aspect-ratio: auto; margin: 12px auto 34px; }
+.invitation.inv-refined .inv-portrait .inv-framed-photo { position: absolute; inset: 11px; width: calc(100% - 22px); height: calc(100% - 22px); padding: 5px; border: 0; border-radius: 4px; }
+.invitation.inv-refined .inv-portrait .inv-portrait-halo { border-radius: 18px; background: color-mix(in srgb, var(--edition-petal) 9%, var(--paper)); }
+.invitation.inv-refined .inv-portrait-halo::after { inset: -6px; border-style: solid; opacity: .5; }
+.invitation.inv-refined .inv-portrait-sprig { width: 138px; left: calc(50% - 69px); bottom: -18px; }
+.invitation.inv-refined .inv-stationery .elegant-portrait-frame { width: min(220px, 90%); height: 280px; padding: 12px; margin: 12px auto 34px; border: 1px solid var(--finish-line); border-radius: 18px; background: var(--soft); box-shadow: 0 12px 30px color-mix(in srgb, var(--tone) 9%, transparent), 0 0 0 6px var(--paper), 0 0 0 7px var(--finish-line); }
+.invitation.inv-refined .elegant-portrait-frame .inv-framed-photo { width: 100%; height: 100%; padding: 4px; border-radius: 4px; }
+.invitation.inv-refined .elegant-portrait-flower { width: 44px; height: 44px; }
+.invitation.inv-refined .elegant-flower-top { top: -16px; right: -18px; }
+.invitation.inv-refined .elegant-flower-bottom { bottom: -16px; left: -18px; }
+.invitation.inv-refined .inv-stationery :is(.couple-grid > div, .elegant-couple-person) { min-width: 0; }
+.invitation.inv-refined .inv-stationery :is(.couple-grid > div, .elegant-couple-person) :is(h3, p) { max-width: 100%; overflow-wrap: anywhere; text-wrap: balance; }
+.invitation.inv-refined .inv-stationery [data-name-long=true] h3 { font: 500 clamp(25px, 4.5vw, 34px)/1.25 var(--font-mm-display), Georgia, serif; letter-spacing: -.02em; }
+.invitation.inv-refined .blush-portrait-window { border-radius: 18px; padding: 10px; overflow: visible; }
+.invitation.inv-refined .blush-portrait-window .inv-framed-photo { width: 100%; height: 100%; min-height: 0; border-radius: 3px; }
+.invitation.inv-refined .blush-portrait-rose { width: 70%; left: 43%; bottom: -16px; }
+.invitation.inv-refined .luxury-portrait .inv-framed-photo { position: absolute; width: 43%; height: 49%; left: 28.5%; top: 25.5%; padding: 6px; border: 1px solid var(--finish-line); border-radius: 8px; font-size: 25px; }
+.invitation.inv-refined .aurora-photo-shell { padding: 10px; border-radius: 18px; transform: none; }
+.invitation.inv-refined .aurora-photo-shell .inv-framed-photo { width: 100%; height: 100%; border-radius: 3px; filter: none; font-size: 28px; }
+.invitation.inv-refined .aurora-photo-glint { display: none; }
+@media (max-width: 600px) {
+  .invitation.inv-refined.inv-cinematic .cover-frame { min-height: 0; }
+  .invitation.inv-refined.inv-cinematic .cover-frame .inv-names { font-size: clamp(40px, 5svh, 46px); margin-block: 12px; }
+  .invitation.inv-refined.inv-cinematic .cover-frame .inv-rule { margin-block: 10px; }
+}
+@media (max-width: 360px) {
+  .invitation.inv-refined .inv-cover .cover-frame .cover-photo { width: 124px !important; height: 146px !important; margin-bottom: 18px !important; }
+  .invitation.inv-refined .inv-names-extended { font-size: 26px !important; }
+  .invitation.inv-refined .inv-portrait, .invitation.inv-refined .inv-stationery .elegant-portrait-frame { width: min(190px, 88%); height: 248px; }
+}
 
 /* Keepsakes: a native disclosure opens the envelope; readable bank details stay
    on its face. The animation belongs to an inner surface, not the copy control. */

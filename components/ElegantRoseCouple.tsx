@@ -1,17 +1,16 @@
 import type {DraftContent} from '@/lib/types';
+import InvitationPhoto from './InvitationPhoto';
 
 function Portrait({
   photo,name,parents,initial,side,
 }:{photo?:string;name:string;parents:string;initial:string;side:'bride'|'groom'}){
- return <article className={`elegant-couple-person elegant-couple-${side}`}>
+ return <article className={`elegant-couple-person elegant-couple-${side}`} data-name-long={name.length>24}>
   <div className="elegant-portrait-frame">
    <span className="elegant-portrait-flower elegant-flower-top" aria-hidden="true"/>
    <span className="elegant-portrait-flower elegant-flower-bottom" aria-hidden="true"/>
-   {photo
-    ? <img src={photo} alt={`Foto ${name}`} loading="lazy" referrerPolicy="no-referrer"/>
-    : <span className="elegant-portrait-fallback" aria-hidden="true">{initial}</span>}
+   <InvitationPhoto src={photo} alt={`Foto ${name}`} initials={initial} className="elegant-portrait-image" loading="lazy"/>
   </div>
-  <h3>{name}</h3>
+  <span className="person-label">{side==='bride'?'Mempelai wanita':'Mempelai pria'}</span><h3>{name}</h3>
   <p>{parents}</p>
  </article>;
 }

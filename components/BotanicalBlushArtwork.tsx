@@ -1,3 +1,4 @@
+import InvitationPhoto from './InvitationPhoto';
 const ROSE='/images/themes/botanical-blush/peach-roses.webp';
 
 /** One reviewed local ornament, shared by the catalog, editor and public renderer. */
@@ -6,6 +7,6 @@ export function BlushRose({className=''}:{className?:string}){
 }
 export default function BotanicalBlushArtwork({slug,portrait=false,photo,names}:{slug:string;portrait?:boolean;photo?:string;names?:string[]}){
  if(slug!=='botanical-blush')return null;
- if(portrait)return <div className="blush-portrait"><div className="blush-portrait-window">{photo?<img src={photo} alt="Foto sampul pasangan" referrerPolicy="no-referrer"/>:<span className="blush-initials" aria-hidden="true">{names?.[0]?.trim().slice(0,1)||'A'}<i>&</i>{names?.[1]?.trim().slice(0,1)||'S'}</span>}</div><BlushRose className="blush-portrait-rose"/></div>;
+ if(portrait)return <div className="blush-portrait"><div className="blush-portrait-window"><InvitationPhoto src={photo} alt="Foto sampul pasangan" initials={(names||[]).map(name=>Array.from(name.trim())[0]).filter(Boolean).join(' · ')} className="blush-portrait-image"/></div><BlushRose className="blush-portrait-rose"/></div>;
  return <div className="blush-scene" aria-hidden="true"><span className="blush-paper-frame"/><BlushRose className="blush-corner blush-top"/><BlushRose className="blush-corner blush-bottom"/></div>;
 }

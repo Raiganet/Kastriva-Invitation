@@ -8,7 +8,7 @@ import type {DraftContent} from '@/lib/types';
 export const dynamic='force-dynamic';
 export const metadata={title:'Fixture undangan lokal',robots:{index:false,follow:false}};
 
-export default async function InvitationFixture({searchParams}:{searchParams:Promise<{theme?:string;embedded?:string;broken?:string;mode?:string;aspect?:string;schedule?:string;gifts?:string}>}){
+export default async function InvitationFixture({searchParams}:{searchParams:Promise<{theme?:string;embedded?:string;broken?:string;mode?:string;aspect?:string;schedule?:string;gifts?:string;cover?:string;photos?:string;names?:string}>}){
  if(process.env.KI_E2E_DEMO!=='true'||process.env.VERCEL==='1'||process.env.NEXT_PUBLIC_SITE_URL!=='http://127.0.0.1:3000'||publicBackend())notFound();
  const query=await searchParams;
  const template=getTemplate(query.theme||'tropical-paradise');
@@ -32,6 +32,9 @@ export default async function InvitationFixture({searchParams}:{searchParams:Pro
   {bank:'Rekening belum lengkap',account:'',holder:''},
  ]};
  if(query.gifts==='empty')content={...content,gifts:[{bank:'Belum lengkap',account:'',holder:''}]};
+ if(query.names==='extended')content={...content,groom:'MuhammadAbdurrahmanFirmansyahPratamaWiratama',bride:'Nadia Putri Ayuningtyas Kusumawardani',groomParents:'Putra dari Bapak Muhammad Abdurrahman Firmansyah dan Ibu Siti Nurhaliza Kusumawardani',brideParents:'Putri dari Bapak Pratama Wiratama dan Ibu Ayuningtyas Kusumawardani'};
  if(query.broken==='true')photoUrls[0]='data:image/png;base64,invalid';
- return <InvitationView mode={query.mode==='public'?'public':query.mode==='draft'?'draft':'demo'} template={template} content={content} guest="Keluarga Bapak Muhammad Abdurrahman" photoUrls={photoUrls} coverUrl="" embedded={query.embedded==='true'}/>;
+ if(query.photos==='empty')photoUrls.length=0;
+ const cover=query.cover==='photo'?photoUrls[2]:query.cover==='broken'?'data:image/png;base64,invalid':'';
+ return <InvitationView mode={query.mode==='public'?'public':query.mode==='draft'?'draft':'demo'} template={template} content={content} guest="Keluarga Bapak Muhammad Abdurrahman" photoUrls={photoUrls} coverUrl={cover} embedded={query.embedded==='true'}/>;
 }

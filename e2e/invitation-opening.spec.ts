@@ -9,6 +9,10 @@ for(const [theme,style] of [['modern-minimalist','slide'],['elegant-rose','album
   await expect(root).toHaveAttribute('data-inv-hydrated','true');
   await expect(root).toHaveAttribute('data-inv-opening-style',style);
   await expect(page.locator('.inv-content')).toHaveCount(0);
+  // Isolate the door choreography from font loading and the cover's entrance.
+  // The separate fallback tests exercise opening without a CSS completion event.
+  await page.evaluate(()=>document.fonts.ready.then(()=>undefined));
+  await page.locator('.inv-cover').evaluate(element=>Promise.allSettled(element.getAnimations({subtree:true}).filter(animation=>animation.effect?.getTiming().iterations!==Infinity).map(animation=>animation.finished)));
   await page.evaluate(()=>{
    const root=document.querySelector('.invitation')!;
    document.addEventListener('animationend',event=>{
