@@ -13,6 +13,11 @@ for (const slug of ALL_THEME_SLUGS) {
     });
     await page.goto(`/demo/${slug}?to=Keluarga%20Bapak%20Muhammad%20Abdurrahman`);
     const root = page.locator('.invitation');
+    const artwork=page.locator('.inv-cover .inv-ornaments');
+    await expect(artwork).toHaveAttribute('data-ornament-theme',slug);
+    await expect(artwork.locator(`svg[data-ornament-art="${slug}"]`)).toHaveCount(2);
+    await expect(artwork).toHaveCSS('pointer-events','none');
+    await expect(artwork).toHaveAttribute('aria-hidden','true');
     // Every catalog theme has its own complementary decorative inks.
     const palette=await root.evaluate(element=>{
       const style=getComputedStyle(element);
@@ -35,6 +40,10 @@ for (const slug of ALL_THEME_SLUGS) {
     await nav.getByRole('button', {name: 'Acara', exact: true}).click();
     const heading = page.getByRole('heading', {name: 'Waktu & tempat', exact: true});
     await expect(heading).toBeInViewport();
+    const ink=page.locator('.inv-section').filter({has:heading}).locator('.inv-ornament-ink').first();
+    await expect(ink).toBeVisible();
+    await expect(ink).toHaveCSS('stroke-dashoffset','0px');
+    expect(await ink.evaluate(element=>(element as SVGGraphicsElement).getBBox().width)).toBeGreaterThan(0);
     await expect(nav.getByRole('button', {name: 'Acara', exact: true})).toHaveAttribute('aria-current', 'location');
     expect(await fits()).toBe(true);
     const download = page.waitForEvent('download');

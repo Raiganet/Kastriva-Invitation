@@ -1,0 +1,50 @@
+/* Theme-specific stationery edges; photos keep their complete rectangular frame. */
+.invitation.inv-refined { --signature-card-radius: 18px; --signature-corner-size: 145px; }
+.invitation.inv-refined.theme-elegant-rose { --signature-card-radius: 26px 26px 8px 26px; --signature-corner-size: 176px; }
+.invitation.inv-refined.theme-modern-minimalist { --signature-card-radius: 10px; }
+.invitation.inv-refined.theme-tropical-paradise { --signature-card-radius: 32px 8px 32px 8px; --signature-corner-size: 156px; }
+.invitation.inv-refined.theme-rustic-wood { --signature-card-radius: 8px; }
+.invitation.inv-refined.theme-galaxy-night { --signature-card-radius: 22px; }
+.invitation.inv-refined.theme-sweet-birthday { --signature-card-radius: 28px; }
+.invitation.inv-refined.theme-aqiqah-blessing { --signature-card-radius: 30px 30px 14px 14px; }
+.invitation.inv-refined.theme-corporate-event { --signature-card-radius: 6px; }
+.invitation.inv-refined.theme-islami-sakinah { --signature-card-radius: 30px 30px 8px 8px; }
+.invitation.inv-refined.theme-adat-sunda { --signature-card-radius: 22px 8px 22px 8px; }
+.invitation.inv-refined.theme-adat-minang { --signature-card-radius: 4px; }
+.invitation.inv-refined.theme-adat-jawa { --signature-card-radius: 12px; }
+.invitation.inv-refined.theme-adat-bali { --signature-card-radius: 28px 8px 28px 8px; }
+.invitation.inv-refined.theme-elementor-luxury-1 { --signature-card-radius: 6px; }
+.invitation.inv-refined.theme-botanical-blush { --signature-card-radius: 28px 28px 8px 28px; --signature-corner-size: 164px; }
+.invitation.inv-refined.theme-aurora-modern { --signature-card-radius: 24px; }
+.invitation.inv-refined .inv-stationery :is(.inv-event-paper, .wish-card) { border-radius: var(--signature-card-radius); }
+.invitation.inv-refined .inv-event-paper::before { border-radius: inherit; }
+.invitation.inv-refined .inv-stationery > .inv-section > .inv-ornaments-section .inv-ornament-corner { width: var(--signature-corner-size); }
+.invitation.inv-refined .inv-corner-art .ornament-petal[fill="none"] { fill: none; }
+.invitation.inv-refined .inv-ornament-ink { fill: none; stroke: var(--edition-foil); stroke-width: 1.25; stroke-dasharray: 1; stroke-dashoffset: 0; }
+/* Keep the established watercolor clusters, adding only their fine gold stems. */
+.invitation.inv-refined .inv-ornaments-section .inv-ornament-ink { visibility: visible; }
+.invitation.inv-refined :is(.inv-ornaments-lattice, .inv-ornaments-geometric) .inv-corner-art { shape-rendering: geometricPrecision; }
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined .inv-motion-visible > .inv-ornaments .inv-ornament-ink {
+    animation: signature-ink 1800ms var(--finish-ease) 120ms both;
+  }
+  .invitation.inv-refined .inv-motion-visible > .inv-ornaments .inv-ornament-end .inv-ornament-ink { animation-delay: 360ms; }
+  .invitation.inv-refined .inv-ornaments[data-ornament-theme="aqiqah-blessing"] .inv-ornament-corner { animation-name: signature-cradle; animation-duration: 14s; }
+  .invitation.inv-refined .inv-ornaments[data-ornament-theme="sweet-birthday"] .inv-ornament-corner { animation-name: signature-ribbon; animation-duration: 16s; }
+  .invitation.inv-refined .inv-ornaments[data-ornament-theme="aurora-modern"] .inv-ornament-corner { animation-name: signature-orbit; animation-duration: 20s; transform-origin: center; }
+  .invitation.inv-refined .inv-ornaments[data-ornament-theme="corporate-event"] .inv-ornament-corner { animation-name: none; }
+  .invitation.inv-refined .inv-ornaments[data-ornament-theme="adat-sunda"] .inv-ornament-corner { animation-duration: 18s; }
+  .invitation.inv-refined .inv-ornaments[data-ornament-theme="adat-bali"] .inv-ornament-corner { animation-duration: 22s; }
+}
+.invitation.inv-refined[data-inv-page-hidden="true"] .inv-ornament-ink { animation-play-state: paused !important; }
+@keyframes signature-ink { from { stroke-dashoffset: 1; opacity: .2; } to { stroke-dashoffset: 0; opacity: 1; } }
+@keyframes signature-cradle { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(1.5deg) translateY(2px); } }
+@keyframes signature-ribbon { 0%, 100% { transform: translateY(0) rotate(-1deg); } 50% { transform: translateY(-6px) rotate(1deg); } }
+@keyframes signature-orbit { 0%, 100% { transform: rotate(-2deg) scale(.99); opacity: .5; } 50% { transform: rotate(2deg) scale(1.015); opacity: .8; } }
+@media (max-width: 600px) {
+  .invitation.inv-refined .inv-stationery > .inv-section > .inv-ornaments-section .inv-ornament-corner { width: min(var(--signature-corner-size), 116px); }
+  .invitation.inv-refined:is(.theme-elegant-rose, .theme-botanical-blush) .inv-stationery > .inv-section > .inv-ornaments-section .inv-ornament-corner { width: 132px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .invitation.inv-refined .inv-ornament-ink { animation: none !important; stroke-dashoffset: 0; opacity: 1; }
+}
