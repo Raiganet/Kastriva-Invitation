@@ -2,6 +2,7 @@ import type {SynthMusicTrackKey} from './music-library';
 import {weddingMusic} from './theme-music.ts';
 
 const image=(name:string)=>`/images/demo/${name}.webp`;
+const regionalPhotoThemes=new Set(['adat-bali','adat-sunda','adat-minang','adat-jawa']);
 const music:Record<string,SynthMusicTrackKey>={
  'sweet-birthday':'sakura-promise','aqiqah-blessing':'moonlight','corporate-event':'ocean-vows',
  'jubilee-carousel':'sakura-promise','nur-eden':'moonlight','nocturne-gala':'cinematic-bloom',
@@ -10,7 +11,13 @@ const music:Record<string,SynthMusicTrackKey>={
 export function demoMusic(slug:string):SynthMusicTrackKey{return weddingMusic(slug)?.track??music[slug]??'serenade';}
 
 /** Public marketing samples only. Never persisted as customer media or messages. */
-export function demoPhotos(category:string){
+export function demoPhotos(category:string,slug?:string){
+ if(category==='pernikahan'&&slug&&regionalPhotoThemes.has(slug)){
+  return {
+   coverUrl:image(`${slug}-couple`),
+   photoUrls:[`${slug}-groom`,`${slug}-bride`,`${slug}-couple`,`${slug}-walk`,'celebration-details'].map(image),
+  };
+ }
  const cover=category==='ulang-tahun'?'birthday':category==='aqiqah'?'aqiqah':category==='acara-kantor'?'corporate':'wedding-couple';
  return {
   coverUrl:image(cover),

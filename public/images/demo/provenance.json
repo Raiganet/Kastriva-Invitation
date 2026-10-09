@@ -32,6 +32,162 @@
     {
       "file": "celebration-details.webp",
       "prompt": "Use case: photorealistic-natural. One premium editorial close-up photograph of a beautiful small celebration table arrangement: white and ivory roses with eucalyptus in a ceramic vase, folded ivory linen napkins and a few pale sage decorative ribbons, on a light wood table, luminous airy garden venue in background. No people, no alcohol, no candles, no signage, no religious symbols. Suitable for wedding, birthday, baby and corporate gathering invitation demo galleries. Portrait 4:5 composition, natural textures, gentle morning sunlight, soft focus background. No text, logos, watermark or collage."
+    },
+    {
+      "file": "adat-bali-couple.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: premium Indonesian digital wedding invitation demo, fictional adults, not actual customer photos. Create ONE beautiful editorial photograph in a portrait 4:5 composition. Two fictional Indonesian adults around 28 years old, groom left and bride right, standing close with gentle natural smiles. Three-quarter portrait from headpieces to below knees, both looking at camera, both full faces and entire headdresses clearly visible. Leave 12% empty space above tallest headpiece and generous side margins; no cut-off hair, crowns or hands. Realistic skin, beautiful detailed textiles, soft natural daylight and refined photographic color. No text, logos, watermarks, borders, collages, other people or costume blending. Scene: softly blurred warm Balinese carved sandstone courtyard, frangipani and tropical foliage. Traditional BALINESE Payas Agung bridal attire in antique gold and deep wine red: bride wears gold prada woven wrapped kemben and kamen, elaborate layered gold necklaces and arm ornaments, tall upward gold floral gelungan headpiece, black hair dressed in a visible bun with flowers, Balinese srinata hairline and subtle ceremonial forehead detail; no hijab, no veil. Groom in complementary gold prada kamen and saput, traditional gold accessories and a Balinese male ceremonial headpiece. Both distinctly Balinese attire, not Minang fan crowns, not Javanese blangkon, not Indian bridal clothes. Warm ivory, gold, terracotta and wine tones; elegant wedding portrait.",
+      "theme": "adat-bali",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://disbudpar.bulelengkab.go.id/informasi/detail/artikel/69-payas-agung"
+      ]
+    },
+    {
+      "file": "adat-sunda-couple.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: premium Indonesian digital wedding invitation demo, fictional adults, not actual customer photos. Create ONE beautiful editorial photograph in a portrait 4:5 composition. Two fictional Indonesian adults around 28 years old, groom left and bride right, standing close with gentle natural smiles. Three-quarter portrait from headpieces to below knees, both looking at camera, both full faces and entire headdresses clearly visible. Leave 12% empty space above tallest headpiece and generous side margins; no cut-off hair, crowns or hands. Realistic skin, beautiful detailed textiles, soft natural daylight and refined photographic color. No text, logos, watermarks, borders, collages, other people or costume blending. Scene: softly blurred West Java garden beside an elegant wooden Sundanese pavilion, lush sage foliage and white jasmine. Traditional SUNDANESE wedding attire in pearl ivory and gold: bride in fitted modest long-sleeved ivory embroidered kebaya over a brown batik skirt, distinctive low curved silver-gold Sunda SIGER crown, black hair in a neat traditional sanggul with delicate kembang goyang and long jasmine garlands around her shoulders, small diamond-shaped sirih forehead ornament; groom in ivory Sundanese beskap, batik sarong, matching traditional BENDO folded headcloth and jasmine garland. Fine understated jewelry. Recognizably Sundanese, not a huge Minang suntiang fan or tall Balinese crown. Soft ivory, sage and champagne palette.",
+      "theme": "adat-sunda",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/16254/"
+      ]
+    },
+    {
+      "file": "adat-minang-couple.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: premium Indonesian digital wedding invitation demo, fictional adults, not actual customer photos. Create ONE beautiful editorial photograph in a portrait 4:5 composition. Two fictional Indonesian adults around 28 years old, groom left and bride right, standing close with gentle natural smiles. Three-quarter portrait from headpieces to below knees, both looking at camera, both full faces and entire headdresses clearly visible. Leave 12% empty space above tallest headpiece and generous side margins; no cut-off hair, crowns or hands. Realistic skin, beautiful detailed textiles, soft natural daylight and refined photographic color. No text, logos, watermarks, borders, collages, other people or costume blending. Scene: softly blurred carved dark wood Minangkabau rumah gadang wedding interior, warm window light. Traditional MINANGKABAU wedding attire: bride in rich deep crimson long-sleeved baju kurung with intricate gold embroidery and gold-red woven songket skirt, ornate large fan-shaped tiered gold SUNTIANG bridal headdress with small dangling gold ornaments framing the cheeks, modest crimson head covering beneath suntiang; groom in matching crimson gold-embroidered traditional jacket, woven songket and intricately folded gold SALUAK headcloth, gold bridal accessories. Headdress complete and identifiable, leave especially ample space above and at sides. No Balinese tall narrow crowns or Sundanese siger. Rich garnet, burnished gold, dark wood, luminous skin.",
+      "theme": "adat-minang",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/24483/1/ARTI%20LAMBANG%20DAN%20FUNGSI%20TATA%20RIAS%20PENGANTIN%20DI%20PROVINSI%20SUMATERA%20BARAT.pdf"
+      ]
+    },
+    {
+      "file": "adat-jawa-couple.webp",
+      "prompt": "Use case: photorealistic-natural. Asset: premium Indonesian digital wedding invitation demo, fictional adults, not actual customer photos. Create ONE beautiful editorial photograph in a portrait 4:5 composition. Two fictional Indonesian adults around 28 years old, groom left and bride right, standing close with gentle natural smiles. Three-quarter portrait from headpieces to below knees, both looking at camera, both full faces and entire headdresses clearly visible. Leave 12% empty space above tallest headpiece and generous side margins; no cut-off hair, crowns or hands. Realistic skin, beautiful detailed textiles, soft natural daylight and refined photographic color. No text, logos, watermarks, borders, collages, other people or costume blending. Scene: softly blurred Javanese teak pendopo pavilion with warm natural side light. Traditional JAVANESE black-and-gold wedding attire: groom wearing formal black velvet beskap jacket with refined gold embroidery, brown-gold batik jarik, traditional folded brown batik blangkon, jasmine garland; bride wearing black velvet long-sleeved kebaya with delicate gold embroidery and matching batik jarik, classic shaped black paes forehead makeup, black hair in a smooth traditional sanggul bun adorned with elegant small gold cunduk mentul pins and jasmine strands, no hijab. Restrained gold jewelry. No huge fan-shaped Minang suntiang, no Balinese crown, no Western suit. Rich ebony, warm teak brown, antique gold, fine textile detail.",
+      "theme": "adat-jawa",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://www.kratonjogja.id/hajad-dalem/3-dhaup-ageng/"
+      ]
+    },
+    {
+      "file": "adat-bali-groom.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual groom portrait for a premium wedding invitation. Reference image: preserve the fictional adult groom on the left and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this groom, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-bali-couple.webp",
+      "theme": "adat-bali",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://disbudpar.bulelengkab.go.id/informasi/detail/artikel/69-payas-agung"
+      ]
+    },
+    {
+      "file": "adat-bali-bride.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual bride portrait for a premium wedding invitation. Reference image: preserve the fictional adult bride on the right and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this bride, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-bali-couple.webp",
+      "theme": "adat-bali",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://disbudpar.bulelengkab.go.id/informasi/detail/artikel/69-payas-agung"
+      ]
+    },
+    {
+      "file": "adat-bali-walk.webp",
+      "prompt": "Use case: identity-preserve. Asset: second editorial wedding demo photograph. Reference image: same fictional adult couple to preserve. Create one new full-length portrait 4:5 photograph of these SAME two adults sharing a gentle smile while walking side by side in the same venue courtyard. Preserve both faces, their exact regional bridal outfits, color, jewelry, hairstyles and complete headpieces, including any head covering or lack of it. Both looking slightly toward each other but both faces visible. Natural relaxed posture, hands anatomically correct. Show all of both headpieces and feet with generous 12% space above and below, centered subjects. Same elegant natural light and editorial photographic quality. Do not change the regional tradition, faces or attire. No other people, no text, no watermark, no collage.",
+      "reference": "adat-bali-couple.webp",
+      "theme": "adat-bali",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://disbudpar.bulelengkab.go.id/informasi/detail/artikel/69-payas-agung"
+      ]
+    },
+    {
+      "file": "adat-sunda-groom.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual groom portrait for a premium wedding invitation. Reference image: preserve the fictional adult groom on the left and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this groom, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-sunda-couple.webp",
+      "theme": "adat-sunda",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/16254/"
+      ]
+    },
+    {
+      "file": "adat-sunda-bride.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual bride portrait for a premium wedding invitation. Reference image: preserve the fictional adult bride on the right and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this bride, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-sunda-couple.webp",
+      "theme": "adat-sunda",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/16254/"
+      ]
+    },
+    {
+      "file": "adat-sunda-walk.webp",
+      "prompt": "Use case: identity-preserve. Asset: second editorial wedding demo photograph. Reference image: same fictional adult couple to preserve. Create one new full-length portrait 4:5 photograph of these SAME two adults sharing a gentle smile while walking side by side in the same venue courtyard. Preserve both faces, their exact regional bridal outfits, color, jewelry, hairstyles and complete headpieces, including any head covering or lack of it. Both looking slightly toward each other but both faces visible. Natural relaxed posture, hands anatomically correct. Show all of both headpieces and feet with generous 12% space above and below, centered subjects. Same elegant natural light and editorial photographic quality. Do not change the regional tradition, faces or attire. No other people, no text, no watermark, no collage.",
+      "reference": "adat-sunda-couple.webp",
+      "theme": "adat-sunda",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/16254/"
+      ]
+    },
+    {
+      "file": "adat-minang-groom.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual groom portrait for a premium wedding invitation. Reference image: preserve the fictional adult groom on the left and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this groom, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-minang-couple.webp",
+      "theme": "adat-minang",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/24483/1/ARTI%20LAMBANG%20DAN%20FUNGSI%20TATA%20RIAS%20PENGANTIN%20DI%20PROVINSI%20SUMATERA%20BARAT.pdf"
+      ]
+    },
+    {
+      "file": "adat-minang-bride.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual bride portrait for a premium wedding invitation. Reference image: preserve the fictional adult bride on the right and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this bride, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-minang-couple.webp",
+      "theme": "adat-minang",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/24483/1/ARTI%20LAMBANG%20DAN%20FUNGSI%20TATA%20RIAS%20PENGANTIN%20DI%20PROVINSI%20SUMATERA%20BARAT.pdf"
+      ]
+    },
+    {
+      "file": "adat-minang-walk.webp",
+      "prompt": "Use case: identity-preserve. Asset: second editorial wedding demo photograph. Reference image: same fictional adult couple to preserve. Create one new full-length portrait 4:5 photograph of these SAME two adults sharing a gentle smile while walking side by side in the same venue courtyard. Preserve both faces, their exact regional bridal outfits, color, jewelry, hairstyles and complete headpieces, including any head covering or lack of it. Both looking slightly toward each other but both faces visible. Natural relaxed posture, hands anatomically correct. Show all of both headpieces and feet with generous 12% space above and below, centered subjects. Same elegant natural light and editorial photographic quality. Do not change the regional tradition, faces or attire. No other people, no text, no watermark, no collage.",
+      "reference": "adat-minang-couple.webp",
+      "theme": "adat-minang",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://repositori.kemendikdasmen.go.id/24483/1/ARTI%20LAMBANG%20DAN%20FUNGSI%20TATA%20RIAS%20PENGANTIN%20DI%20PROVINSI%20SUMATERA%20BARAT.pdf"
+      ]
+    },
+    {
+      "file": "adat-jawa-groom.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual groom portrait for a premium wedding invitation. Reference image: preserve the fictional adult groom on the left and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this groom, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-jawa-couple.webp",
+      "theme": "adat-jawa",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://www.kratonjogja.id/hajad-dalem/3-dhaup-ageng/"
+      ]
+    },
+    {
+      "file": "adat-jawa-bride.webp",
+      "prompt": "Use case: identity-preserve. Asset: individual bride portrait for a premium wedding invitation. Reference image: preserve the fictional adult bride on the right and the exact regional wedding attire. Create ONE new portrait photograph of ONLY this bride, centered facing the camera with a gentle natural smile. Preserve face, skin tone, exact clothing color, gold embroidery, all jewelry, hairstyle and traditional headpiece, including any head covering or lack of it. Waist-up 4:5 portrait, the ENTIRE headdress plus full head and both shoulders visible with generous 12% space ABOVE its tallest ornament and around the sides. Softly blurred same venue background and identical natural lighting, realistic skin, elegant editorial photography. No second person or partial person, no cut-off headpiece, no new different costume, no text, logos, watermark, or collage.",
+      "reference": "adat-jawa-couple.webp",
+      "theme": "adat-jawa",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://www.kratonjogja.id/hajad-dalem/3-dhaup-ageng/"
+      ]
+    },
+    {
+      "file": "adat-jawa-walk.webp",
+      "prompt": "Use case: identity-preserve. Asset: second editorial wedding demo photograph. Reference image: same fictional adult couple to preserve. Create one new full-length portrait 4:5 photograph of these SAME two adults sharing a gentle smile while walking side by side in the same venue courtyard. Preserve both faces, their exact regional bridal outfits, color, jewelry, hairstyles and complete headpieces, including any head covering or lack of it. Both looking slightly toward each other but both faces visible. Natural relaxed posture, hands anatomically correct. Show all of both headpieces and feet with generous 12% space above and below, centered subjects. Same elegant natural light and editorial photographic quality. Do not change the regional tradition, faces or attire. No other people, no text, no watermark, no collage.",
+      "reference": "adat-jawa-couple.webp",
+      "theme": "adat-jawa",
+      "source": "Built-in image_gen; fictional adult models",
+      "references": [
+        "https://www.kratonjogja.id/hajad-dalem/3-dhaup-ageng/"
+      ]
     }
   ]
 }

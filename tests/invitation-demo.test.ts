@@ -25,3 +25,27 @@ test('demo photo sets are local, optimized and suitable for each event category'
  assert.match(demoPhotos('aqiqah').coverUrl,/aqiqah/);
  assert.match(demoPhotos('acara-kantor').coverUrl,/corporate/);
 });
+
+test('regional wedding demos use matching attire throughout their photo sets',()=>{
+ const covers=new Set<string>();
+ for(const slug of ['adat-bali','adat-sunda','adat-minang','adat-jawa']){
+  const {coverUrl,photoUrls}=demoPhotos('pernikahan',slug);
+  covers.add(coverUrl);
+  assert.equal(coverUrl,`/images/demo/${slug}-couple.webp`);
+  assert.deepEqual(photoUrls.slice(0,4),['groom','bride','couple','walk'].map(role=>`/images/demo/${slug}-${role}.webp`));
+  assert.ok(!photoUrls.some(url=>url.includes('/wedding-')),'No generic couple mixed into regional demos');
+  for(const url of [coverUrl,...photoUrls]){
+   const file=new URL('../public'+url,import.meta.url);
+   assert.ok(existsSync(file),url);
+   assert.ok(statSync(file).size<220000,`${url} must remain lightweight`);
+  }
+ }
+ assert.equal(covers.size,4);
+});
+
+test('regional samples do not change other wedding styles or event categories',()=>{
+ for(const slug of ['islami-sakinah','modern-minimalist','unknown-theme']){
+  assert.deepEqual(demoPhotos('pernikahan',slug),demoPhotos('pernikahan'));
+ }
+ assert.deepEqual(demoPhotos('aqiqah','adat-bali'),demoPhotos('aqiqah'));
+});
