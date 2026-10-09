@@ -40,6 +40,8 @@ test('long story chapters reveal individually and gallery honors a live motion p
  await page.emulateMedia({reducedMotion:'no-preference'});
  await page.goto('/test-fixtures/invitation');
  await page.getByRole('button',{name:/Buka undangan/}).click();
+ // The first page is now mounted behind the opening cover before it becomes interactive.
+ await expect(page.locator('.inv-content')).toBeFocused();
  const story=page.locator('.inv-story-timeline');
  const ornaments=page.locator('.inv-section').filter({has:story}).locator('.inv-ornament-corner');
  await expect(ornaments.first()).toHaveCSS('animation-play-state','paused');

@@ -584,6 +584,57 @@
 @keyframes edition-leaves { 0%, 100% { transform: rotate(-1deg); } 50% { transform: rotate(3deg) translateY(5px); } }
 @keyframes edition-foil { 0%, 100% { opacity: .35; } 50% { opacity: .68; } }
 @keyframes edition-stars { 0%, 100% { transform: rotate(-1deg); opacity: .42; } 50% { transform: rotate(2deg); opacity: .8; } }
+/* Opening choreography: the real first page is revealed behind two paper leaves. */
+.invitation.inv-refined .inv-scenes { position: relative; isolation: isolate; }
+.invitation.inv-refined.inv-cinematic > .inv-scenes { width: 100%; max-width: 560px; margin-inline: auto; background-color: var(--paper); box-shadow: 0 0 100px #0009; }
+.invitation.inv-refined .inv-scenes > .inv-cover { position: relative; }
+.invitation.inv-refined .inv-cover-panels { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: clip; perspective: 1600px; }
+.invitation.inv-refined .inv-cover-leaf { position: absolute; inset-block: 0; width: calc(50% + 1px); color: var(--edition-foil); background: radial-gradient(ellipse at 20% 25%, color-mix(in srgb, var(--edition-petal) 16%, transparent), transparent 65%), linear-gradient(145deg, var(--paper), color-mix(in srgb, var(--paper) 94%, var(--edition-leaf))); backface-visibility: hidden; }
+.invitation.inv-refined .inv-cover-leaf[data-inv-door="start"] { left: 0; transform-origin: left center; --door-direction: -1; border-right: 1px solid var(--finish-line); }
+.invitation.inv-refined .inv-cover-leaf[data-inv-door="end"] { right: 0; transform-origin: right center; --door-direction: 1; border-left: 1px solid var(--finish-line); }
+.invitation.inv-refined .inv-cover-leaf-frame { position: absolute; inset: 22px; border: 1px solid color-mix(in srgb, var(--edition-foil) 28%, transparent); border-radius: 160px 160px 8px 8px; }
+.invitation.inv-refined .inv-cover-leaf-motif { position: absolute; inset: 25% 10% auto; display: grid; place-items: center; opacity: .13; }
+.invitation.inv-refined .inv-cover-leaf-motif .theme-motif { width: min(200px, 70%); height: auto; }
+.invitation.inv-refined[data-inv-opening-style="slide"] .inv-cover-leaf-frame { border-radius: 2px; inset: 24px; }
+.invitation.inv-refined[data-inv-opening-style="light"] .inv-cover-leaf { background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--edition-petal) 32%, var(--paper)), var(--paper) 80%); }
+.invitation.inv-refined[data-inv-opening-style="light"] .inv-cover-leaf-frame { border-radius: 50%; opacity: .5; }
+.invitation.inv-refined .inv-scenes > .inv-cover.is-opening { position: absolute; inset: 0 0 auto; z-index: 5; background: transparent !important; pointer-events: none; }
+.invitation.inv-refined .inv-cover.is-opening::before,
+.invitation.inv-refined .inv-cover.is-opening::after { opacity: 0; }
+.invitation.inv-refined .inv-cover.is-opening > :not(.cover-frame, .inv-cover-panels) { opacity: 0; transition: opacity 300ms ease; }
+@media (prefers-reduced-motion: no-preference) {
+  .invitation.inv-refined .inv-cover.is-opening .cover-frame { animation: invitation-cover-away 360ms var(--finish-ease) both; transition: none; filter: none; }
+  .invitation.inv-refined .inv-cover.is-opening .inv-cover-leaf { animation: invitation-door-album var(--inv-opening-duration) cubic-bezier(.4, 0, .2, 1) both; }
+  .invitation.inv-refined[data-inv-opening-style="slide"] .inv-cover.is-opening .inv-cover-leaf { animation-name: invitation-door-slide; }
+  .invitation.inv-refined[data-inv-opening-style="light"] .inv-cover.is-opening .inv-cover-leaf { animation-name: invitation-door-light; }
+  /* The photo leads; names and details follow. Ambient artwork keeps its own loops. */
+  .invitation.inv-refined .inv-hero > * { animation: none; }
+  .invitation.inv-refined .inv-hero > :is(.cover-motif, .overline, h1, .inv-date, .inv-rule, .inv-opening, .inv-button, .inv-scroll-cue),
+  .invitation.inv-refined .inv-hero :is(.inv-hero-photo, .blush-portrait, .luxury-portrait, .aurora-portrait-stage) { animation: invitation-page-arrive 1000ms var(--finish-ease) both; animation-delay: 180ms; }
+  .invitation.inv-refined .inv-hero > .overline { animation-delay: 240ms; }
+  .invitation.inv-refined .inv-hero > h1 { animation-delay: 340ms; }
+  .invitation.inv-refined .inv-hero > :is(.inv-date, .inv-rule) { animation-delay: 420ms; }
+  .invitation.inv-refined .inv-hero > :is(.inv-opening, .inv-button, .inv-scroll-cue) { animation-delay: 520ms; }
+  /* Chapter headings introduce the cards; divider lines unfurl from the motif. */
+  .invitation.inv-refined .pm-section > h2.inv-moment { transform-origin: center bottom; }
+  .invitation.inv-refined .pm-section > h2.inv-moment.inv-reveal-pending { transform: perspective(900px) translateY(18px) rotateX(12deg); }
+  .invitation.inv-refined .pm-section > .inv-section-divider > span { transform-origin: right center; transition: transform 950ms var(--finish-ease) 100ms; }
+  .invitation.inv-refined .pm-section > .inv-section-divider > span:last-child { transform-origin: right center; }
+  .invitation.inv-refined .pm-section > .inv-section-divider.inv-reveal-pending > span { transform: scaleX(0); }
+  .invitation.inv-refined .pm-section > .inv-section-divider.inv-revealed > span { transform: scaleX(1); }
+  .invitation.inv-refined .pm-section > .inv-section-divider > .theme-motif { transition: opacity 800ms ease, scale 900ms var(--finish-ease); }
+  .invitation.inv-refined .pm-section > .inv-section-divider.inv-reveal-pending > .theme-motif { opacity: 0; scale: .7; }
+  .invitation.inv-refined .pm-section > .inv-section-divider.inv-revealed > .theme-motif { opacity: 1; scale: 1; }
+  .invitation.inv-refined .pm-section > .inv-ornaments { transition: opacity 1000ms ease 160ms; }
+  .invitation.inv-refined .pm-section.inv-reveal-pending > .inv-ornaments { opacity: 0; }
+  .invitation.inv-refined .pm-section.inv-revealed > .inv-ornaments { opacity: 1; }
+}
+@keyframes invitation-cover-away { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-16px) scale(.98); } }
+@keyframes invitation-door-album { 0%, 12% { transform: rotateY(0deg); opacity: 1; } 85% { opacity: 1; } 100% { transform: rotateY(calc(var(--door-direction) * 100deg)); opacity: 0; } }
+@keyframes invitation-door-slide { 0%, 10% { transform: translateX(0); } 100% { transform: translateX(calc(var(--door-direction) * 101%)); } }
+@keyframes invitation-door-light { 0%, 10% { opacity: 1; transform: translateX(0) scaleX(1); } 100% { opacity: 0; transform: translateX(calc(var(--door-direction) * 65%)) scaleX(.4); } }
+@keyframes invitation-page-arrive { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: none; } }
+
 /* Album motion, stage one. One transform owns both entry and pointer depth.
    Sections themselves keep their simple reveal; photos retain the full-frame mat. */
 .invitation.inv-refined { --card-duration: 860ms; }
@@ -622,6 +673,8 @@
   .invitation.inv-refined .pm-section .inv-moment.inv-card-reveal { opacity: 1 !important; transform: none !important; translate: none !important; scale: none !important; }
 }
 @media print {
+  .invitation.inv-refined .inv-cover-panels { display: none; }
+  .invitation.inv-refined .inv-scenes > .inv-cover.is-opening { display: none; }
   .invitation.inv-refined .inv-auto-scroll { display: none; }
   .invitation.inv-refined .pm-section.inv-reveal-pending { opacity: 1; transform: none; filter: none; }
   .invitation.inv-refined .pm-section .inv-moment.inv-reveal-pending { opacity: 1; transform: none; }
