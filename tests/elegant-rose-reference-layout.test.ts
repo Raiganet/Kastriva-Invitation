@@ -13,7 +13,7 @@ const templates=read('lib/templates.ts');
 
 test('Elegant Rose renderer owns portrait couple, story timeline and thumbnail gallery variants',()=>{
  assert.ok(view.includes("ElegantRoseCouple"));
- assert.ok(view.includes("elegantRose?'elegant-rose':'default'"));
+ assert.ok(view.includes("elegantRose?'elegant-rose':'story'"));
  assert.ok(couple.includes('elegant-couple-stack'));
  assert.ok(story.includes('elegant-story-timeline'));
  assert.ok(gallery.includes('elegant-gallery-thumbs'));
@@ -25,7 +25,7 @@ test('Elegant Rose portrait enhancement requires no new draft schema fields',()=
  assert.ok(!couple.includes('instagram'));
 });
 test('Elegant Rose gallery keeps dialog accessibility and adds reduced-motion-aware autoplay',()=>{
- for(const term of ["aria-haspopup=\"dialog\"","prefers-reduced-motion: reduce","role=\"tablist\"","aria-selected"])assert.ok(gallery.includes(term),term);
+ for(const term of ["aria-haspopup=\"dialog\"","prefers-reduced-motion: reduce","role=\"group\"","aria-pressed","Jeda slideshow"])assert.ok(gallery.includes(term),term);
 });
 test('reference composition CSS includes floral card, circular portraits, story connection and responsive gallery',()=>{
  for(const term of ['elegant-portrait-frame','elegant-story-timeline::before','elegant-gallery-main','elegant-gallery-thumb.is-active','.inv-closing','@media(max-width:600px)','@media(prefers-reduced-motion:reduce)'])assert.ok(css.includes(term),term);

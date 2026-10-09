@@ -1,12 +1,6 @@
-import {elegantStoryChapters,storyChapters} from '@/lib/invitation-extras';
+import {elegantStoryChapters} from '@/lib/invitation-extras';
 
 type StoryVariant='default'|'elegant-rose'|'modern-minimalist';
-
-function modernCopy(text:string,index:number){
- const lines=text.split(/\n+/).map(line=>line.trim()).filter(Boolean);
- if(lines.length>1&&lines[0].length<=90)return {title:lines[0],body:lines.slice(1).join('\n')};
- return {title:`Chapter ${String(index+1).padStart(2,'0')}`,body:text};
-}
 
 export default function InvitationStory({
  story,cinematic,variant='default',photos=[],
@@ -29,22 +23,29 @@ export default function InvitationStory({
   })}</ol>;
  }
  if(variant==='modern-minimalist'){
-  const chapters=storyChapters(story),storyPhotos=photos.filter(Boolean);
+  const chapters=elegantStoryChapters(story),storyPhotos=photos.filter(Boolean);
   return <ol className="modern-story-list">{chapters.map((chapter,i)=>{
-   const copy=modernCopy(chapter.text,i),photo=storyPhotos[i];
+   const photo=storyPhotos[i];
    return <li key={i}>
     <span className="modern-story-marker" aria-hidden="true">{chapter.label}</span>
     <article className="modern-story-card">
-     {photo?<div className="modern-story-media"><img src={photo} alt="" loading="lazy" referrerPolicy="no-referrer"/></div>:<div className="modern-story-placeholder" aria-hidden="true"/>}
+     {photo&&<div className="modern-story-media"><img src={photo} alt="" loading="lazy" referrerPolicy="no-referrer"/></div>}
      <div className="modern-story-copy">
       <small>{chapter.label}</small>
-      <h3>{copy.title}</h3>
-      {copy.body&&<p>{copy.body}</p>}
+      <h3>{chapter.title}</h3>
+      {chapter.body&&<p>{chapter.body}</p>}
      </div>
     </article>
    </li>;
   })}</ol>;
  }
- if(!cinematic)return <p className="story-text">{story}</p>;
- return <ol className="inv-timeline">{storyChapters(story).map((chapter,i)=><li key={i}><span className="timeline-dot" aria-hidden="true"/><span className="timeline-year">{chapter.label}</span><p>{chapter.text}</p></li>)}</ol>;
+ return <ol className={`inv-story-timeline${cinematic?' inv-story-cinematic':''}`}>
+  {elegantStoryChapters(story).map((chapter,i)=><li key={i}>
+   <span className="inv-story-marker" aria-hidden="true">{String(i+1).padStart(2,'0')}</span>
+   <article className="inv-story-card">
+    {photos[i]&&<div className="inv-story-photo"><img src={photos[i]} alt="" loading="lazy" referrerPolicy="no-referrer"/></div>}
+    <div className="inv-story-copy"><span className="timeline-year">{chapter.label}</span><h3>{chapter.title}</h3>{chapter.body&&<p>{chapter.body}</p>}</div>
+   </article>
+  </li>)}
+ </ol>;
 }

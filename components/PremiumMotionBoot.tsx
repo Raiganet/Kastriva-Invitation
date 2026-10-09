@@ -3,7 +3,11 @@ import {useEffect} from 'react';
 
 const SECTION_SELECTOR='.inv-section,.inv-closing';
 const STAGGER_SELECTOR=[
+  ':scope>.overline',
+  ':scope>h2',
+  ':scope>.inv-section-divider',
   '.couple-grid>div',
+  '.elegant-couple-person',
   '.event-box',
   '.photo-grid>:is(a,button)',
   '.photo-placeholders>div',
@@ -11,9 +15,11 @@ const STAGGER_SELECTOR=[
   '.general-wishes .wish-card',
   '.gift-disclosure',
   '.gift-account',
-  '.countdown>div',
-  '.inv-location',
+  '.countdown',
   '.inv-timeline>li',
+  '.inv-story-timeline>li',
+  '.modern-story-list>li',
+  '.inv-gallery',
   '.story-text',
   '.rsvp-form',
 ].join(',');
@@ -81,6 +87,13 @@ export default function PremiumMotionBoot(){
    // Its effect signals when imperative decoration is safe for this root.
    if(root.dataset.invHydrated!=='true')return;
    root.classList.add('inv-premium-motion','inv-reference-motion');
+   const watch=(element:HTMLElement)=>{
+    if(reduced.matches||!observer||element.classList.contains('inv-revealed'))reveal(element);
+    else if(!element.classList.contains('inv-reveal-pending')){
+     element.classList.add('inv-reveal-pending');
+     observer.observe(element);
+    }
+   };
    const sections=Array.from(root.querySelectorAll<HTMLElement>(SECTION_SELECTOR));
    sections.forEach((section,index)=>{
     section.classList.add('pm-section');
@@ -91,22 +104,14 @@ export default function PremiumMotionBoot(){
     }
     const staggered=Array.from(section.querySelectorAll<HTMLElement>(STAGGER_SELECTOR));
     staggered.forEach((item,itemIndex)=>{
-     item.classList.add('pm-stagger');
-     item.style.setProperty('--pm-order',String(Math.min(itemIndex,12)));
+     item.classList.add('pm-stagger','inv-moment');
+     item.style.setProperty('--pm-order',String(itemIndex%3));
+     watch(item);
     });
     section.querySelectorAll<HTMLElement>(INTERACTIVE_SELECTOR).forEach(item=>item.classList.add('pm-interactive'));
     section.querySelectorAll<HTMLElement>(DEPTH_SELECTOR).forEach(item=>item.classList.add('pm-depth-card'));
 
-    if(reduced.matches||!observer){
-     reveal(section);
-    }else if(section.classList.contains('inv-revealed')){
-     section.classList.remove('inv-reveal-pending');
-    }else if(section.getBoundingClientRect().top<=window.innerHeight*.82){
-     reveal(section);
-    }else{
-     section.classList.add('inv-reveal-pending');
-     observer.observe(section);
-    }
+    watch(section);
    });
 
    root.querySelectorAll<HTMLElement>(INTERACTIVE_SELECTOR).forEach(item=>item.classList.add('pm-interactive'));
@@ -122,14 +127,20 @@ export default function PremiumMotionBoot(){
   };
   const preferenceChanged=()=>{
    rebuildObserver();
-   if(reduced.matches)document.querySelectorAll<HTMLElement>('.invitation .pm-section').forEach(reveal);
+   document.querySelectorAll<HTMLElement>('.invitation .inv-reveal-pending').forEach(element=>{
+    if(reduced.matches)reveal(element);
+    else observer?.observe(element);
+   });
    schedule();
   };
 
   // Keyboard navigation must never land in a visually hidden section.
   const focusSection=(event:FocusEvent)=>{
-   const section=(event.target as Element|null)?.closest?.('.invitation .inv-reveal-pending') as HTMLElement|null;
-   if(section){reveal(section);observer?.unobserve(section);}
+   let element=event.target as HTMLElement|null;
+   while(element?.closest('.invitation')){
+    if(element.classList.contains('inv-reveal-pending')){reveal(element);observer?.unobserve(element);}
+    element=element.parentElement;
+   }
   };
 
   const pointerMove=(event:PointerEvent)=>{

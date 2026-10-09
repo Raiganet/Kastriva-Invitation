@@ -77,9 +77,9 @@ function CornerDrawing({style}: {style: OrnamentStyle}) {
 }
 
 /** Local vector artwork. Kept outside the text flow and hidden from assistive technology. */
-export default function InvitationOrnaments({slug}: {slug: string}) {
+export default function InvitationOrnaments({slug,section=false}: {slug: string;section?:boolean}) {
   const style = styles[slug] ?? 'floral';
-  return <div className={`inv-ornaments inv-ornaments-${style}`} aria-hidden="true">
+  return <div className={`inv-ornaments inv-ornaments-${style}${section?' inv-ornaments-section':''}`} aria-hidden="true">
     <span className="inv-ornament-corner inv-ornament-start"><CornerDrawing style={style}/></span>
     <span className="inv-ornament-corner inv-ornament-end"><CornerDrawing style={style}/></span>
     <span className="inv-ornament-speck speck-a"/><span className="inv-ornament-speck speck-b"/><span className="inv-ornament-speck speck-c"/>
