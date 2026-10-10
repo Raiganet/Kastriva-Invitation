@@ -10,9 +10,9 @@ test('mobile menu opens, navigates, closes',async({page,isMobile})=>{test.skip(!
 for(const slug of ALL_THEME_SLUGS)test('demo opens with actual React '+slug,async({page})=>{
  await page.goto('/demo/'+slug+'?to=Undangan%20Uji');
  const frame=page.locator('.demo-device-content'),demo=frame.contentFrame();
- await expect(frame).toHaveAttribute('title',/^Demo mobile /);
+ await expect(frame).toHaveAttribute('title',/^Demo undangan /);
  await expect(demo.getByText('Undangan Uji',{exact:true})).toBeVisible();
- expect(await demo.locator('html').evaluate(el=>el.ownerDocument.defaultView!.innerWidth)).toBeLessThanOrEqual(480);
+ expect(await demo.locator('html').evaluate(el=>el.ownerDocument.defaultView!.innerWidth)).toBeLessThanOrEqual(640);
  await demo.getByRole('button',{name:/Buka undangan/}).click();
  await expect(demo.locator('.inv-content')).toBeVisible();
  await expect(demo.getByRole('heading',{name:/^Waktu & tempat/}).first()).toBeAttached();

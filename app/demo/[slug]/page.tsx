@@ -1,6 +1,6 @@
 import {notFound} from 'next/navigation';
 import InvitationView from '@/components/InvitationView';
-import InvitationPhoneDemo from '@/components/InvitationPhoneDemo';
+import InvitationDemo from '@/components/InvitationDemo';
 import {publicSite} from '@/lib/cms-server';
 import {demoContent} from '@/lib/templates';
 import {demoPhotos} from '@/lib/invitation-demo';
@@ -14,7 +14,7 @@ export default async function Demo({params,searchParams}:{params:Promise<{slug:s
  const template=site.catalog.find(t=>t.slug===slug&&t.active);
  if(!template)notFound();
  const query=await searchParams,guest=safeGuest(query.to);
- if(query.view!=='screen'&&query.view!=='full')return <InvitationPhoneDemo template={template} guest={guest}/>;
+ if(query.view!=='screen'&&query.view!=='full')return <InvitationDemo template={template} guest={guest}/>;
  const invitation=<InvitationView template={template} content={demoContent(template)} guest={guest} previewOnly={query.view==='screen'} {...demoPhotos(template.category,template.slug)}/>;
  return query.view==='screen'?<div className="inv-device-screen">{invitation}</div>:invitation;
 }

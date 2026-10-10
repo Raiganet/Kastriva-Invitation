@@ -25,7 +25,7 @@ test('all collection themes use lightweight phone artwork with complete photos',
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });
 
-test('phone demo plays music, scrolls its own screen, opens photos and leads to ordering',async({page,isMobile})=>{
+test('demo plays music, scrolls its own screen, opens photos and leads to ordering',async({page,isMobile})=>{
  await page.addInitScript(()=>{
   const meters:AnalyserNode[]=[];
   Object.assign(window,{phoneAudioMeters:meters});
@@ -71,10 +71,10 @@ test('phone demo plays music, scrolls its own screen, opens photos and leads to 
  await expect(page.getByRole('link',{name:'Lanjutkan ke draft ↗'})).toHaveAttribute('href','/dashboard/baru?template=adat-bali');
 });
 
-test('desktop demo can open without its device frame and keeps the guest name',async({page,isMobile})=>{
- test.skip(isMobile,'The optional unframed link belongs to the desktop preview sidebar.');
+test('desktop demo can open directly and keeps the guest name',async({page,isMobile})=>{
+ test.skip(isMobile,'The optional direct link belongs to the desktop preview toolbar.');
  await page.goto('/demo/adat-sunda?to=Keluarga%20Nadia');
- await page.getByRole('link',{name:'Lihat tanpa bingkai ↗'}).click();
+ await page.getByRole('link',{name:'Buka langsung ↗'}).click();
  await expect(page.locator('.demo-device-content')).toHaveCount(0);
  await expect(page.locator('.invitation')).toBeVisible();
  await expect(page.getByText('Keluarga Nadia',{exact:true})).toBeVisible();
