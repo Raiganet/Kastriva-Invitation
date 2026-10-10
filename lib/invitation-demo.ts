@@ -7,6 +7,7 @@ const music:Record<string,SynthMusicTrackKey>={
  'sweet-birthday':'sakura-promise','aqiqah-blessing':'moonlight','corporate-event':'ocean-vows',
  'jubilee-carousel':'sakura-promise','nur-eden':'moonlight','nocturne-gala':'cinematic-bloom',
  'peach-confetti':'sakura-promise','little-moon':'moonlight','sapphire-summit':'ocean-vows',
+ 'citrus-reverie':'sakura-promise','safiya-orbit':'moonlight','atlas-salon':'cinematic-bloom',
 };
 export function demoMusic(slug:string):SynthMusicTrackKey{return weddingMusic(slug)?.track??music[slug]??'serenade';}
 

@@ -17,6 +17,7 @@ export const WEDDING_MUSIC:Readonly<Record<string,{track:SynthMusicTrackKey;desc
  'aurora-modern':{track:'starlight',description:'Nada berkilau mengikuti aurora dan orbit cahaya.'},
  'velvet-vow':{track:'ever-after',description:'Melodi intim untuk plum beludru dan pita champagne.'},
  'seraphine-garden':{track:'serenade',description:'Melodi lembut untuk taman peony dan bingkai floral.'},
+ 'celeste-atelier':{track:'celestial-waltz',description:'Waltz berkilau untuk lengkung ivory, magnolia, dan bintang yang tenang.'},
 };
 export function weddingMusic(slug:string){return Object.hasOwn(WEDDING_MUSIC,slug)?WEDDING_MUSIC[slug]:undefined;}
 export function resolveThemeMusic(slug:string,selected:InvitationMusic|undefined):Exclude<InvitationMusic,'theme'>{

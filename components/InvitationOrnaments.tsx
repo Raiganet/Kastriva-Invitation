@@ -28,6 +28,10 @@ const styles: Record<string, OrnamentStyle> = {
   'jubilee-carousel': 'celebration',
   'nur-eden': 'lattice',
   'nocturne-gala': 'geometric',
+  'celeste-atelier': 'celestial',
+  'citrus-reverie': 'celebration',
+  'safiya-orbit': 'celestial',
+  'atlas-salon': 'geometric',
 };
 
 /** Local vector artwork. Kept outside the text flow and hidden from assistive technology. */

@@ -24,7 +24,8 @@
     "20261009115018_occasion_collection.sql",
     "20261009135319_premium_editions.sql",
     "20261009141633_non_wedding_orders.sql",
-    "20261009204300_wedding_instrumentals.sql"
+    "20261009204300_wedding_instrumentals.sql",
+    "20261010110000_signature_theme_collection.sql"
   ],
   "openWishesProtocol": 1,
   "openWishesAutoPublishProtocol": 1

@@ -16,7 +16,7 @@ test('Legacy CMS generations restore missing luxury metadata using current live 
   backup.content.heroTitle='Judul dalam backup';backup.catalog[0].price=155000;
   const live=current();live.catalog[13].price=215000;live.catalog[13].active=false;
   const restored=restoreCmsDocument(backup,live.catalog);
-  assert.equal(restored.catalog.length,24);assert.equal(restored.catalog[13].price,215000);assert.equal(restored.catalog[13].active,false);assert.equal(restored.catalog[0].price,155000);assert.equal(restored.content.heroTitle,backup.content.heroTitle);
+  assert.equal(restored.catalog.length,28);assert.equal(restored.catalog[13].price,215000);assert.equal(restored.catalog[13].active,false);assert.equal(restored.catalog[0].price,155000);assert.equal(restored.content.heroTitle,backup.content.heroTitle);
   assert.equal(backup.catalog.length,length);assert.deepEqual(parseCmsCatalog([...backup.catalog].reverse()),[...backup.catalog].reverse());
  }
 });

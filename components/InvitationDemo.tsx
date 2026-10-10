@@ -7,7 +7,7 @@ import {categories,demoContent} from '@/lib/templates';
 import {demoPhotos} from '@/lib/invitation-demo';
 import {currency,eventDateLabel} from '@/lib/domain';
 
-const centeredThemes=new Set(['elegant-rose','tropical-paradise','galaxy-night','islami-sakinah','botanical-blush','seraphine-garden','sweet-birthday','peach-confetti','jubilee-carousel','aqiqah-blessing','little-moon','nur-eden']);
+const centeredThemes=new Set(['elegant-rose','tropical-paradise','galaxy-night','islami-sakinah','botanical-blush','seraphine-garden','sweet-birthday','peach-confetti','jubilee-carousel','aqiqah-blessing','little-moon','nur-eden','celeste-atelier','citrus-reverie','safiya-orbit']);
 
 export default function InvitationDemo({template,guest}:{template:Template;guest:string}){
  const query=new URLSearchParams({view:'screen',to:guest});

@@ -12,7 +12,7 @@ test('stage3 polish layer is loaded after stage2 premium layer',()=>{
 });
 test('stage3 polish covers all registered themes',()=>{
  for(const slug of ALL_THEME_SLUGS)assert.ok(css.includes(`.theme-${slug}`),slug);
- assert.equal(ALL_THEME_SLUGS.length,24);
+ assert.equal(ALL_THEME_SLUGS.length,28);
 });
 test('stage3 refines headings, overlines, guest card, nav and music controls',()=>{
  for(const term of ['.inv-section>.overline','.inv-section>h2','.guest-card','.inv-bottom-nav button[aria-current]','.music-toggle[aria-pressed=true]'])assert.ok(css.includes(term),term);

@@ -6,7 +6,7 @@ const css=readFileSync(new URL('../app/invitation-theme-premium.css',import.meta
 const editionCss=readFileSync(new URL('../app/invitation-premium-editions.css',import.meta.url),'utf8');
 const layout=readFileSync(new URL('../app/layout.tsx',import.meta.url),'utf8');
 test('premium stage2 stylesheet covers every registered theme',()=>{
- assert.equal(ALL_THEME_SLUGS.length,24);
+ assert.equal(ALL_THEME_SLUGS.length,28);
  for(const slug of ALL_THEME_SLUGS)assert.ok((css+editionCss).includes(`.theme-${slug}`),slug);
 });
 test('premium theme layer is loaded after shared premium motion',()=>{

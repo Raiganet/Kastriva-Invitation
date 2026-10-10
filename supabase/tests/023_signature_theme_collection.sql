@@ -1,0 +1,16 @@
+begin;
+select plan(12);
+select is(jsonb_array_length(public.ki_cms_catalog()),28,'signature catalog has twenty-eight themes');
+select is((select count(*)::integer from public.ki_templates where slug=any(array['celeste-atelier','citrus-reverie','safiya-orbit','atlas-salon'])),4,'all signature templates installed');
+select is((select category from public.ki_templates where slug='celeste-atelier'),'pernikahan','celeste is wedding');
+select is((select category from public.ki_templates where slug='citrus-reverie'),'ulang-tahun','citrus is birthday');
+select is((select category from public.ki_templates where slug='safiya-orbit'),'aqiqah','safiya is aqiqah');
+select is((select category from public.ki_templates where slug='atlas-salon'),'acara-kantor','atlas is corporate');
+select ok(public.ki_cms_valid_document((select draft from public.ki_cms where id=1)),'current CMS draft remains valid');
+select ok(public.ki_cms_valid_document((select published from public.ki_cms where id=1)),'current CMS publication remains valid');
+select is((select (public.ki_feature_readiness()->>'known_templates')::integer),28,'feature readiness sees complete collection');
+select is((select public.ki_feature_readiness()->'capabilities'->>'cms_catalog_complete'),'true','feature readiness accepts complete collection');
+select ok((select not exists(select 1 from public.ki_cms_history where not public.ki_cms_valid_document(document))),'historical CMS documents remain valid');
+select ok((select position('celeste-atelier' in pg_get_functiondef('public.ki_cms_catalog()'::regprocedure))>0),'catalog RPC exposes celeste');
+select * from finish();
+rollback;

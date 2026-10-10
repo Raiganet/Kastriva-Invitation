@@ -12,9 +12,9 @@ export const categoryFields = {
 /** Theme identity is code-owned; a CMS name/description cannot change a draft's category. */
 export function categoryForTheme(slug:string):InvitationCategory | undefined {
   if (!(ALL_THEME_SLUGS as readonly string[]).includes(slug)) return undefined;
-  if (['sweet-birthday','peach-confetti','jubilee-carousel'].includes(slug)) return 'ulang-tahun';
-  if (['aqiqah-blessing','little-moon','nur-eden'].includes(slug)) return 'aqiqah';
-  if (['corporate-event','sapphire-summit','nocturne-gala'].includes(slug)) return 'acara-kantor';
+  if (['sweet-birthday','peach-confetti','jubilee-carousel','citrus-reverie'].includes(slug)) return 'ulang-tahun';
+  if (['aqiqah-blessing','little-moon','nur-eden','safiya-orbit'].includes(slug)) return 'aqiqah';
+  if (['corporate-event','sapphire-summit','nocturne-gala','atlas-salon'].includes(slug)) return 'acara-kantor';
   return 'pernikahan';
 }
 export function fieldsForCategory(category:string) {

@@ -3,6 +3,10 @@
 .theme-jubilee-carousel,.invitation.inv-refined.theme-jubilee-carousel { --paper:#f6eaf0; --soft:#fff8ee; --tone:#71485e; --edition-petal:#d18caa; --edition-leaf:#84b5b1; --edition-foil:#b18a4c; --pe-deep:#a085ad; --pe-pale:#f2cbd4; --pe-sage:#aed5c6; }
 .theme-nur-eden,.invitation.inv-refined.theme-nur-eden { --paper:#e7eee3; --soft:#fffdf2; --tone:#365a4b; --edition-petal:#e1ccac; --edition-leaf:#708e6a; --edition-foil:#aa864b; --pe-deep:#ba9764; --pe-pale:#f3e7ce; --pe-sage:#abc0a2; }
 .theme-nocturne-gala,.invitation.inv-refined.theme-nocturne-gala { --paper:#181724; --soft:#242332; --tone:#f5e7cb; --edition-petal:#9c7954; --edition-leaf:#7b828b; --edition-foil:#d5b47a; --pe-deep:#897452; --pe-pale:#e7d4ae; --pe-sage:#b0a28b; }
+.theme-celeste-atelier,.invitation.inv-refined.theme-celeste-atelier { --paper:#f4f0ea; --soft:#fdfbf7; --tone:#314c6b; --edition-petal:#9baeca; --edition-leaf:#73879c; --edition-foil:#c9a565; --pe-deep:#526a91; --pe-pale:#d8e2ed; --pe-sage:#aebbb4; }
+.theme-citrus-reverie,.invitation.inv-refined.theme-citrus-reverie { --paper:#fff2df; --soft:#fffaf1; --tone:#a9523d; --edition-petal:#e78b63; --edition-leaf:#2f7380; --edition-foil:#d5a14f; --pe-deep:#bd5b42; --pe-pale:#ffd6b7; --pe-sage:#8ab1a3; }
+.theme-safiya-orbit,.invitation.inv-refined.theme-safiya-orbit { --paper:#eef1fa; --soft:#fbfcff; --tone:#4d5e91; --edition-petal:#9ca9d1; --edition-leaf:#8095bd; --edition-foil:#be9d64; --pe-deep:#6577ad; --pe-pale:#dbe1f4; --pe-sage:#b2bfda; }
+.theme-atlas-salon,.invitation.inv-refined.theme-atlas-salon { --paper:#211a1c; --soft:#302628; --tone:#f3e7da; --edition-petal:#c27954; --edition-leaf:#a46e59; --edition-foil:#d2a16f; --pe-deep:#a65742; --pe-pale:#e9bf96; --pe-sage:#c6987b; }
 .invitation.inv-refined.inv-premium-edition {
  --pt-accent:var(--edition-foil); --pt-accent-2:var(--edition-petal); --pt-card:var(--soft); --pt-card-2:var(--paper);
  --pt-line:var(--finish-line); --folio-surface:var(--soft); --folio-shadow:0 20px 64px #3b253017;
@@ -89,6 +93,23 @@
 .invitation.inv-refined.theme-nocturne-gala .inv-bottom-nav button[aria-current] { color:var(--paper); background:var(--edition-foil); }
 .invitation.inv-refined.theme-nocturne-gala .inv-atmosphere { opacity:.2; }
 .invitation.inv-refined.theme-nocturne-gala .inv-closing-seal { border-radius:8px; }
+.invitation.inv-refined.theme-celeste-atelier { --folio-radius:150px 150px 20px 20px; }
+.invitation.inv-refined.theme-celeste-atelier .cover-frame { background:linear-gradient(150deg,#fdfbf7,#e6edf1); border:1px solid #c9a56599; }
+.invitation.inv-refined.theme-celeste-atelier .inv-names:not(.inv-names-long) { font-family:'Luxury Script',var(--font-mm-display),Georgia,serif; font-weight:400; letter-spacing:0; }
+.invitation.inv-refined.theme-citrus-reverie { --folio-radius:38px; --signature-card-radius:38px 12px 38px 12px; }
+.invitation.inv-refined.theme-citrus-reverie .cover-frame { background:radial-gradient(circle at 82% 14%,#ffd7af 0 10%,transparent 10.4%),linear-gradient(145deg,#fff9ef,#ffe6c7); border:2px solid #d5a14f99; }
+.invitation.inv-refined.theme-citrus-reverie :is(.inv-button,.guest-card) { border-radius:999px; }
+.invitation.inv-refined.theme-safiya-orbit { --folio-radius:58% 58% 24px 24px / 100px 100px 24px 24px; }
+.invitation.inv-refined.theme-safiya-orbit .cover-frame { background:linear-gradient(150deg,#fcfdff,#dfe5f6); border:1px solid #be9d6499; }
+.invitation.inv-refined.theme-safiya-orbit .inv-event-date-day { color:#6577ad; }
+.invitation.inv-refined.theme-atlas-salon { --folio-radius:5px; --signature-card-radius:5px; }
+.invitation.inv-refined.theme-atlas-salon .cover-frame { background:linear-gradient(135deg,#382a2b,#211a1c); border:3px double #d2a16f; }
+.invitation.inv-refined.theme-atlas-salon :is(.inv-button,.guest-card) { border-radius:5px; }
+.invitation.inv-refined.theme-atlas-salon .inv-button:not(.outline) { color:#211a1c; background:#e4b687; border-color:#e4b687; }
+.invitation.inv-refined.theme-atlas-salon :is(input,textarea,select) { color:var(--tone); background:#2b2224; border-color:var(--finish-line); }
+.invitation.inv-refined.theme-atlas-salon :is(input,textarea)::placeholder { color:#d9c1af; }
+.invitation.inv-refined.theme-atlas-salon .notice { color:var(--tone); background:#2b2224; border-color:var(--finish-line); }
+.invitation.inv-refined.theme-atlas-salon .inv-bottom-nav button[aria-current] { color:var(--paper); background:var(--edition-foil); }
 
 /* The catalog presents exactly the same illustration language. */
 .theme-art.premium-edition-preview { background:var(--paper); }

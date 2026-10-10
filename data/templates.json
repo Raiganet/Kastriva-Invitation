@@ -465,5 +465,49 @@
       "Demo ucapan & RSVP"
     ],
     "active": true
+  },
+  {
+    "slug": "celeste-atelier",
+    "name": "Celeste Atelier",
+    "category": "pernikahan",
+    "description": "Atelier ivory di bawah langit senja, dengan lengkung sapphire, magnolia, dan kilau konstelasi yang anggun.",
+    "price": 275000,
+    "thumbnail": "✧",
+    "colors": ["#F4F0EA", "#314C6B", "#C9A565"],
+    "features": ["Lengkung celestial & magnolia", "Sampul cahaya berlapis", "Kartu cerita elegan", "Musik waltz & foto demo", "Demo ucapan & RSVP"],
+    "active": true
+  },
+  {
+    "slug": "citrus-reverie",
+    "name": "Citrus Reverie",
+    "category": "ulang-tahun",
+    "description": "Perayaan hangat dengan roset kertas, warna citrus, pita artistik, dan kilau lilin untuk pesta yang penuh tawa.",
+    "price": 150000,
+    "thumbnail": "◌",
+    "colors": ["#FFF2DF", "#A9523D", "#2F7380"],
+    "features": ["Roset pesta & pita ilustratif", "Sampul slide penuh warna", "Animasi kartu bertahap", "Musik & foto demo", "Demo ucapan & RSVP"],
+    "active": true
+  },
+  {
+    "slug": "safiya-orbit",
+    "name": "Safiya Orbit",
+    "category": "aqiqah",
+    "description": "Langit periwinkle, bulan sabit, awan lembut, dan orbit bintang yang menenangkan untuk menyambut buah hati.",
+    "price": 150000,
+    "thumbnail": "☾",
+    "colors": ["#EEF1FA", "#4D5E91", "#BE9D64"],
+    "features": ["Bulan, awan & orbit bintang", "Sampul cahaya lembut", "Animasi menenangkan", "Musik piano & foto demo", "Demo ucapan & RSVP"],
+    "active": true
+  },
+  {
+    "slug": "atlas-salon",
+    "name": "Atlas Salon",
+    "category": "acara-kantor",
+    "description": "Salon editorial bernuansa espresso dan copper, lengkap dengan kompas, grid arsitektural, dan detail untuk perayaan prestasi.",
+    "price": 250000,
+    "thumbnail": "✦",
+    "colors": ["#211A1C", "#F3E7DA", "#C27954"],
+    "features": ["Kompas & grid editorial", "Sampul slide bertekstur", "Kartu agenda premium", "Musik & foto demo", "Demo ucapan & RSVP"],
+    "active": true
   }
 ]

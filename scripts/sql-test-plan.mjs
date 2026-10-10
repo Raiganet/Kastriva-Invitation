@@ -30,5 +30,7 @@ export function sqlTestPlan(actualNames) {
   m(expected[20]),t('021_non_wedding_orders.sql'),
   m(expected[21]),t('022_wedding_instrumentals.sql'),
   m(expected[21]),t('022_wedding_instrumentals.sql'),
+  m(expected[22]),t('023_signature_theme_collection.sql'),
+  m(expected[22]),t('023_signature_theme_collection.sql'),
  ];
 }
